@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --color-primary: #0056d2;
+  /* Soft blue */
+  --color-primary-hover: #004198;
+  --color-secondary: #fb7185;
+  /* Pink */
+  --color-secondary-hover: #ec4899;
+  --color-background: #f8fafc;
+  /* Soft Gray/White */
+  --color-foreground: #0f172a;
+  /* Dark Slate */
+}
+
+/* Custom Utilities if needed, though Tailwind v4 handles most via theme */
+@layer utilities {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), sans-serif;
+}
