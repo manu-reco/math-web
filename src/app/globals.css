@@ -2,15 +2,15 @@
 
 @theme {
   --font-sans: var(--font-inter);
-  --color-primary: #0056d2;
-  /* Soft blue */
-  --color-primary-hover: #004198;
-  --color-secondary: #fb7185;
-  /* Pink */
-  --color-secondary-hover: #ec4899;
-  --color-background: #f8fafc;
+  --color-primary: #2A9D8F;
+  /* Teal */
+  --color-primary-hover: #1E8F89;
+  --color-secondary: #E6C31B;
+  /* Mustard Yellow */
+  --color-secondary-hover: #D5B619;
+  --color-background: #F6F7F8;
   /* Soft Gray/White */
-  --color-foreground: #0f172a;
+  --color-foreground: #0F172A;
   /* Dark Slate */
 }
 
