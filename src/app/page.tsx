@@ -9,7 +9,7 @@ export default function Home() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Domina las Matemáticas para <span className="text-secondary">Infantil y Primaria</span>
+              Domina las Matemáticas para Infantil y Primaria
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-10">
               Formación especializada para profesores. Recursos, estrategias y ejercicios para inspirar a tus alumnos.
