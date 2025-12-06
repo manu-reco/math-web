@@ -1,22 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, User } from "lucide-react";
-import { clsx } from "clsx";
+import { Menu, X, User } from "lucide-react";
+import NavDropdownButton from "./NavDropdownButton";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const toggleMenu = () => setIsOpen(!isOpen);
     const toggleDropdown = (name: string) => {
-        if (activeDropdown === name) {
-            setActiveDropdown(null);
-        } else {
-            setActiveDropdown(name);
-        }
+        setActiveDropdown(activeDropdown === name ? null : name);
     };
+
+    // Cerrar dropdown al hacer clic fuera
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setActiveDropdown(null);
+            }
+        };
+
+        if (activeDropdown) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [activeDropdown]);
 
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -30,39 +44,37 @@ export default function Navbar() {
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex space-x-8 items-center">
+                    <div ref={dropdownRef} className="hidden md:flex space-x-8 items-center">
                         {/* Formación Dropdown */}
                         <div className="relative group">
-                            <button
-                                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1 focus:outline-none"
+                            <NavDropdownButton
+                                label="Formación"
                                 onClick={() => toggleDropdown("formacion")}
-                                onMouseEnter={() => setActiveDropdown("formacion")}
-                                onMouseLeave={() => setActiveDropdown(null)}
-                            >
-                                Formmmmmmmmmma <ChevronDown size={16} />
-                            </button>
+                                variant="desktop"
+                            />
                             {activeDropdown === "formacion" && (
                                 <div
                                     className="absolute left-0 mt-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                    onMouseEnter={() => setActiveDropdown("formacion")}
-                                    onMouseLeave={() => setActiveDropdown(null)}
                                 >
                                     <div className="py-1">
                                         <Link
                                             href="/formacion/online"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Formación Online
                                         </Link>
                                         <Link
                                             href="/formacion/presencial"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Formación Presencial
                                         </Link>
                                         <Link
                                             href="/formacion/pildoras"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Píldoras de formación (Gratis)
                                         </Link>
@@ -74,43 +86,41 @@ export default function Navbar() {
                         {/* Juegos */}
                         <Link
                             href="/juegos"
-                            className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
+                            className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium box-border border-2 border-transparent rounded-xl hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
                         >
                             Juegos
                         </Link>
 
                         {/* Información Dropdown */}
                         <div className="relative group">
-                            <button
-                                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1 focus:outline-none"
+                            <NavDropdownButton
+                                label="Información"
                                 onClick={() => toggleDropdown("informacion")}
-                                onMouseEnter={() => setActiveDropdown("informacion")}
-                                onMouseLeave={() => setActiveDropdown(null)}
-                            >
-                                Información <ChevronDown size={16} />
-                            </button>
+                                variant="desktop"
+                            />
                             {activeDropdown === "informacion" && (
                                 <div
                                     className="absolute left-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                    onMouseEnter={() => setActiveDropdown("informacion")}
-                                    onMouseLeave={() => setActiveDropdown(null)}
                                 >
                                     <div className="py-1">
                                         <Link
                                             href="/precios"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Plan de precios
                                         </Link>
                                         <Link
                                             href="/nosotros"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Sobre nosotros
                                         </Link>
                                         <Link
                                             href="/contacto"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setActiveDropdown(null)}
                                         >
                                             Contacto
                                         </Link>
@@ -148,29 +158,31 @@ export default function Navbar() {
                 <div className="md:hidden bg-white border-t border-gray-200">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <div className="space-y-1">
-                            <button
+                            <NavDropdownButton
+                                label="Formación"
                                 onClick={() => toggleDropdown("mobile-formacion")}
-                                className="w-full text-left text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium flex justify-between items-center"
-                            >
-                                Formación <ChevronDown size={16} />
-                            </button>
+                                variant="mobile"
+                            />
                             {activeDropdown === "mobile-formacion" && (
                                 <div className="pl-4 space-y-1">
                                     <Link
                                         href="/formacion/online"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Online
                                     </Link>
                                     <Link
                                         href="/formacion/presencial"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Presencial
                                     </Link>
                                     <Link
                                         href="/formacion/pildoras"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Píldoras
                                     </Link>
@@ -186,29 +198,31 @@ export default function Navbar() {
                         </Link>
 
                         <div className="space-y-1">
-                            <button
+                            <NavDropdownButton
+                                label="Información"
                                 onClick={() => toggleDropdown("mobile-informacion")}
-                                className="w-full text-left text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium flex justify-between items-center"
-                            >
-                                Información <ChevronDown size={16} />
-                            </button>
+                                variant="mobile"
+                            />
                             {activeDropdown === "mobile-informacion" && (
                                 <div className="pl-4 space-y-1">
                                     <Link
                                         href="/precios"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Precios
                                     </Link>
                                     <Link
                                         href="/nosotros"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Sobre nosotros
                                     </Link>
                                     <Link
                                         href="/contacto"
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                        onClick={() => setActiveDropdown(null)}
                                     >
                                         Contacto
                                     </Link>
