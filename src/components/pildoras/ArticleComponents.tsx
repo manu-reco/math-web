@@ -1,0 +1,106 @@
+
+import { clsx } from "clsx";
+import { Lightbulb, Pencil, Info, CheckCircle2 } from "lucide-react";
+
+interface ArticleHeaderProps {
+    title: string;
+    subtitle?: string;
+    description: string;
+    category: string;
+    level: string;
+}
+
+export function ArticleHeader({ title, subtitle, description, category, level }: ArticleHeaderProps) {
+    return (
+        <header className="mb-12 border-b border-gray-100 pb-8">
+            <div className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider">
+                <span>{category}</span>
+                <span className="text-gray-300">•</span>
+                <span>{level}</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+                {title}
+            </h1>
+            {subtitle && (
+                <h2 className="text-2xl text-gray-600 font-medium mb-6">
+                    {subtitle}
+                </h2>
+            )}
+            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
+                {description}
+            </p>
+        </header>
+    );
+}
+
+export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
+    return (
+        <section className="mb-12">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span className="w-1.5 h-8 bg-primary rounded-full"></span>
+                {title}
+            </h3>
+            <div className="text-lg text-gray-700 leading-relaxed space-y-6">
+                {children}
+            </div>
+        </section>
+    );
+}
+
+export function ActivityBox({ title, children }: { title?: string; children: React.ReactNode }) {
+    return (
+        <div className="my-8 bg-secondary/5 border-l-4 border-secondary rounded-r-xl p-6 md:p-8">
+            <div className="flex items-start gap-4">
+                <div className="p-2 bg-white rounded-lg shadow-sm text-secondary shrink-0">
+                    <Pencil size={24} />
+                </div>
+                <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">
+                        {title || "Actividad Propuesta"}
+                    </h4>
+                    <div className="text-gray-700 space-y-4">
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function TipBox({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="my-8 bg-amber-50 border border-amber-100 rounded-xl p-6 flex gap-4">
+            <Lightbulb className="text-amber-500 shrink-0" size={24} />
+            <div className="text-gray-800 italic">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+export function InfoBox({ title, children }: { title: string; children: React.ReactNode }) {
+    return (
+        <div className="my-8 bg-blue-50 rounded-xl p-6 md:p-8">
+            <h4 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+                <Info size={20} />
+                {title}
+            </h4>
+            <div className="text-blue-800/80">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+export function KeyPoints({ points }: { points: string[] }) {
+    return (
+        <ul className="grid gap-3 my-6">
+            {points.map((point, i) => (
+                <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
+                    <span className="text-gray-700">{point}</span>
+                </li>
+            ))}
+        </ul>
+    );
+}
