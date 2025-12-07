@@ -46,7 +46,7 @@ export default async function SaberPage({ params }: PageProps) {
     return (
         <div className="min-h-screen bg-slate-50 pb-20">
             {/* Header */}
-            <div className={clsx("w-full py-12 px-4 sm:px-6 lg:px-8 shadow-sm", saber.color.replace("text-", "bg-").replace("100", "50"))}>
+            <div className={clsx("w-full py-8 md:py-12 px-6 sm:px-8 lg:px-12 shadow-sm", saber.color.replace("text-", "bg-").replace("100", "50"))}>
                 <div className="max-w-5xl mx-auto">
                     <Link
                         href="/formacion/pildoras"
@@ -80,7 +80,7 @@ export default async function SaberPage({ params }: PageProps) {
             </div>
 
             {/* Content */}
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+            <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 mt-8 md:mt-12">
                 {!chapters ? (
                     <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
                         <div className="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -99,10 +99,10 @@ export default async function SaberPage({ params }: PageProps) {
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid gap-8">
+                    <div className="grid gap-6 md:gap-8">
                         {chapters.map((chapter, index) => (
                             <div key={chapter.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                                <div className="p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
+                                <div className="p-4 md:p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
                                     <h2 className="text-xl font-bold text-gray-800 flex items-center gap-3">
                                         <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold">
                                             {index + 1}
@@ -115,18 +115,18 @@ export default async function SaberPage({ params }: PageProps) {
                                         <Link
                                             key={concept.id}
                                             href={`/formacion/pildoras/${saberId}/${nivelId}/${concept.id}`}
-                                            className="block p-6 hover:bg-slate-50 transition-colors group"
+                                            className="block p-4 md:p-6 hover:bg-slate-50 transition-colors group"
                                         >
-                                            <div className="flex justify-between items-center">
-                                                <div>
-                                                    <h3 className="text-lg font-semibold text-gray-800 group-hover:text-primary transition-colors mb-1">
+                                            <div className="flex justify-between items-center gap-3">
+                                                <div className="flex-1">
+                                                    <h3 className="text-base md:text-lg font-semibold text-gray-800 group-hover:text-primary transition-colors mb-1">
                                                         {concept.title}
                                                     </h3>
                                                     <p className="text-gray-500 text-sm">
                                                         {concept.description}
                                                     </p>
                                                 </div>
-                                                <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors" size={20} />
+                                                <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors flex-shrink-0" size={20} />
                                             </div>
                                         </Link>
                                     ))}
