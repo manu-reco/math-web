@@ -5,11 +5,13 @@ import { ArrowLeft } from "lucide-react";
 import { SABERES, NIVELES, COURSE_CONTENT } from "@/lib/pildorasData";
 import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
+import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "mayor-menor": MayorMenorContent,
     "conteo-recitativo": ConteoRecitativoContent,
+    "actividades-conceptos-basicos": ArticuloPruebaActividades,
 };
 
 interface PageProps {

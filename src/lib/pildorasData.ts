@@ -98,6 +98,11 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                     title: "Izquierda - Derecha",
                     description: "Orientación espacial básica.",
                 },
+                {
+                    id: "actividades-conceptos-basicos",
+                    title: "Actividades Aritmética - Conceptos básicos",
+                    description: "Para practicar lo aprendido.",
+                }
             ],
         },
         {
