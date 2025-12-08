@@ -7,6 +7,7 @@ import {
     TooltipPanel,
     type TooltipPanelProps,
 } from '@/components/animate-ui/components/base/tooltip';
+import React from "react";
 
 interface ArticleHeaderProps {
     title: string;
@@ -98,7 +99,7 @@ export function InfoBox({ title, children }: { title: string; children: React.Re
     );
 }
 
-export function KeyPoints({ points }: { points: string[] }) {
+export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) {
     return (
         <ul className="grid gap-3 my-6">
             {points.map((point, i) => (
