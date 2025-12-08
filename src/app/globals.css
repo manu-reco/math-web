@@ -3,12 +3,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Algunos están sobrescritos más abajo */
 @theme {
   --font-sans: var(--font-inter);
-  --color-primary: #2A9D8F;
+  --color-primary: var(--color-primary);
   /* Teal */
-  --color-primary-hover: #1E8F89;
-  --color-secondary: #E6C31B;
+  --color-primary-hover: var(--color-primary-hover);
+  --color-secondary: var(--color-secondary);
   /* Mustard Yellow */
   --color-secondary-hover: #D5B619;
   --color-background: #F6F7F8;
@@ -76,10 +77,12 @@ body {
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.63 0.1 183.072); /* Teal */
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+  --primary-hover: oklch(0.56 0.1645 195.536);
+  --secondary: oklch(0.823 0.1645 95.464); /* Mustard Yellow */
   --secondary-foreground: oklch(0.205 0 0);
+  --secondary-hover: oklch(0.78 0.156 96.252);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
