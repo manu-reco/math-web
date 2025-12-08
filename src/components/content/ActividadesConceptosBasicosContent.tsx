@@ -2,10 +2,10 @@
 import {
     ArticleHeader,
     ArticleSection,
-    KeyPoints
+    KeyPoints,
+    ConceptTooltip
 } from "@/components/pildoras/ArticleComponents";
 
-import ConceptTooltip from "../ConceptTooltip"
 
 export default function ActividadesConceptosBasicosContent() {
     return (
