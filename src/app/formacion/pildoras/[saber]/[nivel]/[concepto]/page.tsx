@@ -1,17 +1,19 @@
 
 import Link from "next/link";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { SABERES, NIVELES, COURSE_CONTENT } from "@/lib/pildorasData";
 import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
+import DescubriendoRectaContent from "@/components/content/DescubriendoRectaContent";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "mayor-menor": MayorMenorContent,
     "conteo-recitativo": ConteoRecitativoContent,
     "actividades-conceptos-basicos": ArticuloPruebaActividades,
+    "descubriendo-recta": DescubriendoRectaContent, 
 };
 
 interface PageProps {

@@ -126,6 +126,18 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                 },
             ],
         },
+        {
+            id: "recta-numerica",
+            title: "1. Introducción a la Recta Numérica",
+            concepts: [
+                {
+                    id: "descubriendo-recta",
+                    title: "Descubriendo la Recta Numérica",
+                    description: "Cómo crear una conversación en el aula para que los niños/as descubran el concepto",
+                }
+            ],
+        },
+
     ],
     // Add more mock data as needed
 };
