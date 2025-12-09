@@ -75,7 +75,7 @@ export default function PricingPage() {
                                     Más Popular
                                 </div>
                             )}
-                            <div className="p-8 flex-grow">
+                            <div className="p-8 grow">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
                                     {plan.name}
                                 </h3>
@@ -89,7 +89,7 @@ export default function PricingPage() {
                                 <ul className="space-y-4 mb-8">
                                     {plan.features.map((feature) => (
                                         <li key={feature} className="flex items-start">
-                                            <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                                            <Check className="h-5 w-5 text-green-500 mr-2 shrink-0" />
                                             <span className="text-gray-600 text-sm">{feature}</span>
                                         </li>
                                     ))}

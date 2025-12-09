@@ -126,7 +126,7 @@ export default async function SaberPage({ params }: PageProps) {
                                                         {concept.description}
                                                     </p>
                                                 </div>
-                                                <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors flex-shrink-0" size={20} />
+                                                <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors shrink-0" size={20} />
                                             </div>
                                         </Link>
                                     ))}

@@ -65,7 +65,7 @@ function TooltipPanel({
           style={style}
         >
           {children}
-          <TooltipArrowPrimitive className="bg-primary fill-primary z-50 size-2.5 data-[side='bottom']:-top-[4px] data-[side='right']:-left-[4px] data-[side='left']:-right-[4px] data-[side='inline-start']:-right-[4px] data-[side='inline-end']:-left-[4px] rotate-45 rounded-[2px]" />
+          <TooltipArrowPrimitive className="bg-primary fill-primary z-50 size-2.5 data-[side='bottom']:-top-1 data-[side='right']:-left-1 data-[side='left']:-right-1 data-[side='inline-start']:-right-1 data-[side='inline-end']:-left-1 rotate-45 rounded-[2px]" />
         </TooltipPopupPrimitive>
       </TooltipPositionerPrimitive>
     </TooltipPortalPrimitive>

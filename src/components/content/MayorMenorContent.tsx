@@ -27,7 +27,7 @@ export default function MayorMenorContent() {
                     Es crucial introducir los signos matemáticos <strong>{'>'}</strong>, <strong>{'<'}</strong> y <strong>{'='}</strong> solo cuando el concepto de cantidad y comparación verbal esté bien asentado.
                 </p>
                 <TipBox>
-                    Una regla mnemotécnica clásica es "el cocodrilo siempre se come al número mayor". La boca abierta apunta a la cantidad más grande.
+                    Una regla mnemotécnica clásica es “el cocodrilo siempre se come al número mayor”. La boca abierta apunta a la cantidad más grande.
                 </TipBox>
             </ArticleSection>
 
@@ -45,7 +45,7 @@ export default function MayorMenorContent() {
                 <ActivityBox title="El Monstruo Glotón">
                     <p className="mb-2"><strong>Materiales:</strong> Una marioneta de calcetín o un dibujo de una boca abierta, fichas o caramelos.</p>
                     <p>
-                        Coloca dos montones de fichas sobre la mesa. Pide al alumno que haga que el "Monstruo Glotón" se coma el montón que tiene más comida.
+                        Coloca dos montones de fichas sobre la mesa. Pide al alumno que haga que el Monstruo Glotón se coma el montón que tiene más comida.
                         Esto refuerza la idea de que la apertura se orienta hacia la cantidad mayor.
                     </p>
                 </ActivityBox>
@@ -59,7 +59,7 @@ export default function MayorMenorContent() {
 
             <ArticleSection title="Errores Comunes">
                 <InfoBox title="Confusión de signos">
-                    Es muy común que los niños confundan la dirección del signo. No te preocupes por la escritura formal del signo hasta que entiendan perfectamente el concepto verbalmente ("3 es más que 2").
+                    Es muy común que los niños confundan la dirección del signo. No te preocupes por la escritura formal del signo hasta que entiendan perfectamente el concepto verbalmente (“3 es más que 2”).
                 </InfoBox>
             </ArticleSection>
         </>
