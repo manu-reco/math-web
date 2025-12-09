@@ -134,7 +134,7 @@ export function ConceptTooltip({
 }: ConceptTooltipProps) {
     return (
         <>
-            <Tooltip followCursor={followCursor}>
+            <Tooltip followCursor={followCursor} delay={100}>
                 <TooltipTrigger render={<span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none'
                     aria-describedby={`tooltip-${title}`}>{title}</span>
                 } />
