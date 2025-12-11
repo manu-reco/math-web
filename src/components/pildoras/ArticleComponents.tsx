@@ -1,5 +1,5 @@
 
-import { Lightbulb, Pencil, Info, CheckCircle2 } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User } from "lucide-react";
 
 import {
     Tooltip,
@@ -109,6 +109,61 @@ export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) 
                 </li>
             ))}
         </ul>
+    );
+}
+
+type DialogColor = 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
+type DialogSpeaker = 'teacher' | 'student';
+
+interface DialogBubbleProps {
+    speaker?: DialogSpeaker;
+    color?: DialogColor;
+    children: React.ReactNode;
+}
+
+const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
+    blue: { bg: 'bg-blue-50', text: 'text-blue-900' },
+    green: { bg: 'bg-green-50', text: 'text-green-900' },
+    purple: { bg: 'bg-purple-50', text: 'text-purple-900' },
+    orange: { bg: 'bg-orange-50', text: 'text-orange-900' },
+    pink: { bg: 'bg-pink-50', text: 'text-pink-900' },
+    gray: { bg: 'bg-gray-50', text: 'text-gray-900' },
+};
+
+export function DialogBubble({ speaker = 'teacher', color, children }: DialogBubbleProps) {
+    const isTeacher = speaker === 'teacher';
+    
+    // Si no se especifica color, usar purple para teacher y green para student
+    const defaultColor = isTeacher ? 'purple' : 'pink';
+    const finalColor = color || defaultColor;
+    const colors = colorClasses[finalColor];
+    
+    // Iconos según el speaker
+    const Icon = isTeacher ? GraduationCap : User;
+    
+    return (
+        <div className={`my-4 flex items-start gap-3 ${isTeacher ? 'flex-row' : 'flex-row-reverse'}`}>
+            {/* Icono del speaker */}
+            <div className={`
+                shrink-0 w-10 h-10 rounded-full flex items-center justify-center
+                ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}
+            `}>
+                <Icon size={20} />
+            </div>
+            
+            {/* Burbuja de diálogo */}
+            <div 
+                className={`
+                    max-w-[90%] md:max-w-[85%] 
+                    ${colors.bg} ${colors.text}
+                    rounded-2xl px-5 py-4 
+                    shadow-sm border border-opacity-20
+                    ${isTeacher ? 'rounded-tl-sm' : 'rounded-tr-sm'}
+                `}
+            >
+                {children}
+            </div>
+        </div>
     );
 }
 
