@@ -63,7 +63,9 @@ export default function ActividadesConceptosBasicosContent() {
             </ArticleSection>
 
             <ArticleSection title="Ejemplo: Plantillas">
-                <Image src="/recta-numerica/0-buhos-rojos.png" alt="Plantilla de 5 casillas; debajo 5 búhos de color rojo" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/0-buhos-rojos.png" alt="Plantilla de 5 casillas; debajo 5 búhos de color rojo" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
                 <p>Hay una plantilla grande en la pared para ir dirigiendo. Vamos a adoptar la dinámica de comprobar <strong>primero todos juntos la plantilla de la pared</strong>, y <strong>después cada uno su propia plantilla</strong>.</p>
 
                 <DialogBubble speaker="teacher">
@@ -80,9 +82,21 @@ export default function ActividadesConceptosBasicosContent() {
 
                 <p>Durante todo el proceso les recordamos continuamente que siempre colocaremos los objetos de esta manera, es decir, seguidos sin dejar ningún cuadrito vacío y empezando por la izquierda (tendrán en la <strong>parte superior izquierda de la pared</strong> una <strong>mano izquierda</strong> en un color y en la <strong>parte superior derecha de la pared</strong> una <strong>mano derecha</strong> de otro color diferente, para que las puedan distinguir sin la necesidad de leer la palabra).</p>
 
-                <div className="flex gap-4 my-6">
-                    <Image src="/izquierda-derecha/mano-izquierda.png" alt="Silueta de mano izquierda en cartulina de color azul, con la palabra 'izquierda'" width={300} height={300} />
-                    <Image src="/izquierda-derecha/mano-derecha.png" alt="Silueta de mano derecha en cartulina de color rojo, con la palabra 'derecha'" width={300} height={300} />
+                <div className="flex flex-row gap-3 md:gap-4 my-6 items-center justify-center">
+                    <Image 
+                        src="/izquierda-derecha/mano-izquierda.png" 
+                        alt="Silueta de mano izquierda en cartulina de color azul, con la palabra 'izquierda'" 
+                        width={300} 
+                        height={300}
+                        className="w-auto max-w-[45%] md:max-w-[250px] h-auto"
+                    />
+                    <Image 
+                        src="/izquierda-derecha/mano-derecha.png" 
+                        alt="Silueta de mano derecha en cartulina de color rojo, con la palabra 'derecha'" 
+                        width={300} 
+                        height={300}
+                        className="w-auto max-w-[45%] md:max-w-[250px] h-auto"
+                    />
                 </div>
 
                 <p>Esto les va a ayudar a construir la recta numérica.</p>
@@ -107,7 +121,9 @@ export default function ActividadesConceptosBasicosContent() {
                     <p><strong>“¡Uno!”</strong> </p>
                 </DialogBubble>
 
-                <Image src="/recta-numerica/1-buho-rojo.png" alt="Plantilla de 5 casillas, con 1 búho rojo dentro del primer cuadrito y 4 fuera de la plantilla" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/1-buho-rojo.png" alt="Plantilla de 5 casillas, con 1 búho rojo dentro del primer cuadrito y 4 fuera de la plantilla" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
 
                 <p>Revisamos que todos hayan colocado el búho en el primer cuadrito y recordamos que siempre empezamos por la izquierda.</p>
 
@@ -119,7 +135,9 @@ export default function ActividadesConceptosBasicosContent() {
                     <p><strong>“¡Dos!”</strong>. </p>
                 </DialogBubble>
 
-                <Image src="/recta-numerica/2-buhos-rojos.png" alt="Plantilla de 5 casillas, con 2 búhos rojos dentro de los dos primeros cuadritos y 3 fuera de la plantilla" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/2-buhos-rojos.png" alt="Plantilla de 5 casillas, con 2 búhos rojos dentro de los dos primeros cuadritos y 3 fuera de la plantilla" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
 
                 <p>Revisamos que todos hayan colocado el búho en el segundo cuadrito y no hayan dejado ningún cuadrito en blanco.</p>
 
@@ -131,7 +149,9 @@ export default function ActividadesConceptosBasicosContent() {
                     <p><strong>“¡Tres!”</strong>. </p>
                 </DialogBubble>
 
-                <Image src="/recta-numerica/3-buhos-rojos.png" alt="Plantilla de 5 casillas, con 3 búhos rojos dentro de los tres primeros cuadritos y 2 fuera de la plantilla" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/3-buhos-rojos.png" alt="Plantilla de 5 casillas, con 3 búhos rojos dentro de los tres primeros cuadritos y 2 fuera de la plantilla" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
 
                 <p>Revisamos que todos hayan colocado el tercer búho seguido del segundo, sin dejar ningún cuadrito en blanco. </p>
 
@@ -143,7 +163,9 @@ export default function ActividadesConceptosBasicosContent() {
                     <p><strong>“¡Cuatro!”</strong>. </p>
                 </DialogBubble>
 
-                <Image src="/recta-numerica/4-buhos-rojos.png" alt="Plantilla de 5 casillas, con 4 búhos rojos dentro de los cuatro primeros cuadritos y 1 fuera de la plantilla" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/4-buhos-rojos.png" alt="Plantilla de 5 casillas, con 4 búhos rojos dentro de los cuatro primeros cuadritos y 1 fuera de la plantilla" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
 
                 <DialogBubble speaker="teacher">
                     <p>“¡Esto es muy fácil! Y ahora vamos a colocar otro búho en el siguiente cuadrito”. ¿Cuántos búhos hay dentro de la plantilla?”. </p>
@@ -153,7 +175,9 @@ export default function ActividadesConceptosBasicosContent() {
                     <p><strong>“¡Cinco!”</strong>. </p>
                 </DialogBubble>
 
-                <Image src="/recta-numerica/5-buhos-rojos.png" alt="Plantilla de 5 casillas, con 5 búhos rojos dentro de los cinco cuadritos" width={500} height={300} />
+                <div className="flex justify-center my-6">
+                    <Image src="/recta-numerica/5-buhos-rojos.png" alt="Plantilla de 5 casillas, con 5 búhos rojos dentro de los cinco cuadritos" width={500} height={300} className="w-full max-w-[500px] h-auto" />
+                </div>
 
                 <DialogBubble speaker="teacher">
                     <p>“Vamos a <strong>contar los búhos de la pared todos juntos</strong>. Uno, dos, tres, cuatro y cinco. Y ahora <strong>contamos cada uno en su plantilla</strong> señalando con el dedo a cada búho. Uno, dos tres, cuatro y cinco.”</p>
