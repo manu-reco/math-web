@@ -112,7 +112,7 @@ export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) 
     );
 }
 
-type DialogColor = 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
+type DialogColor = 'primary' | 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
 type DialogSpeaker = 'teacher' | 'student';
 
 interface DialogBubbleProps {
@@ -122,6 +122,7 @@ interface DialogBubbleProps {
 }
 
 const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
+    primary: { bg: 'bg-primary/10', text: 'text-primary' },
     blue: { bg: 'bg-blue-50', text: 'text-blue-900' },
     green: { bg: 'bg-green-50', text: 'text-green-900' },
     purple: { bg: 'bg-purple-50', text: 'text-purple-900' },
@@ -134,7 +135,7 @@ export function DialogBubble({ speaker = 'teacher', color, children }: DialogBub
     const isTeacher = speaker === 'teacher';
     
     // Si no se especifica color, usar purple para teacher y green para student
-    const defaultColor = isTeacher ? 'purple' : 'pink';
+    const defaultColor = isTeacher ? 'purple' : 'primary';
     const finalColor = color || defaultColor;
     const colors = colorClasses[finalColor];
     
@@ -144,24 +145,15 @@ export function DialogBubble({ speaker = 'teacher', color, children }: DialogBub
     return (
         <div className={`my-4 flex items-start gap-3 ${isTeacher ? 'flex-row' : 'flex-row-reverse'}`}>
             {/* Icono del speaker */}
-            <div className={`
-                shrink-0 w-10 h-10 rounded-full flex items-center justify-center
-                ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}
-            `}>
+            <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
                 <Icon size={20} />
             </div>
             
             {/* Burbuja de diálogo */}
             <div 
-                className={`
-                    max-w-[90%] md:max-w-[85%] 
-                    ${colors.bg} ${colors.text}
-                    rounded-2xl px-5 py-4 
-                    shadow-sm border border-opacity-20
-                    ${isTeacher ? 'rounded-tl-sm' : 'rounded-tr-sm'}
-                `}
+                className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl px-5 py-4 shadow-sm border border-opacity-20 ${isTeacher ? 'rounded-tl-sm' : 'rounded-tr-sm'}`}
             >
-                {children}
+                <span className="flex gap-1.5">{"—"}{children}</span>
             </div>
         </div>
     );
