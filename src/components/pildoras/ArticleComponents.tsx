@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react";
 
 import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User } from "lucide-react";
 
@@ -7,7 +10,12 @@ import {
     TooltipPanel,
     type TooltipPanelProps,
 } from '@/components/animate-ui/components/base/tooltip';
-import React from "react";
+
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverPanel,
+} from '@/components/animate-ui/components/base/popover';
 
 interface ArticleHeaderProps {
     title: string;
@@ -133,24 +141,24 @@ const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
 
 export function DialogBubble({ speaker = 'teacher', color, children }: DialogBubbleProps) {
     const isTeacher = speaker === 'teacher';
-    
+
     // Si no se especifica color, usar purple para teacher y green para student
-    const defaultColor = isTeacher ? 'purple' : 'primary';
+    const defaultColor = isTeacher ? 'orange' : 'primary';
     const finalColor = color || defaultColor;
     const colors = colorClasses[finalColor];
-    
+
     // Iconos según el speaker
     const Icon = isTeacher ? GraduationCap : User;
-    
+
     return (
         <div className={`my-4 flex items-start gap-3 ${isTeacher ? 'flex-row' : 'flex-row-reverse'}`}>
             {/* Icono del speaker */}
             <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
                 <Icon size={20} />
             </div>
-            
+
             {/* Burbuja de diálogo */}
-            <div 
+            <div
                 className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl px-5 py-4 shadow-sm border border-opacity-20 ${isTeacher ? 'rounded-tl-sm' : 'rounded-tr-sm'}`}
             >
                 <span className="flex gap-1.5">{"—"}{children}</span>
@@ -170,15 +178,16 @@ interface ConceptTooltipProps {
 }
 
 
-export function ConceptTooltip({ 
-    title, 
-    description, 
+export function ConceptTooltip({
+    title,
+    description,
     side = 'top',
     sideOffset = 8,
     align = 'center',
     alignOffset = 0,
-    followCursor = false 
+    followCursor = false
 }: ConceptTooltipProps) {
+
     return (
         <>
             <Tooltip followCursor={followCursor} delay={100}>
@@ -195,6 +204,48 @@ export function ConceptTooltip({
                     <p>{description}</p>
                 </TooltipPanel>
             </Tooltip>
+        </>
+    );
+}
+
+interface ConceptPopoverProps {
+    title: string;
+    description?: string;
+    side?: 'top' | 'bottom' | 'left' | 'right';
+    sideOffset?: number;
+    align?: 'start' | 'center' | 'end';
+    alignOffset?: number;
+}
+
+export function ConceptPopover({
+    title,
+    description,
+    side = 'top',
+    sideOffset = 8,
+    align = 'center',
+    alignOffset = 0,
+}: ConceptPopoverProps) {
+
+    return (
+        <>
+            <Popover>
+                <PopoverTrigger 
+                    render={<span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none' aria-describedby={`popover-${title}`}>{title}</span>}
+                    openOnHover={true}
+                    delay={100}
+                    closeDelay={50}
+                    nativeButton={false}
+                />
+                <PopoverPanel
+                    side={side}
+                    sideOffset={sideOffset}
+                    align={align}
+                    alignOffset={alignOffset}
+                    className="max-w-[200px] text-sm text-wrap wrap-break-word text-center"
+                >
+                    <p>{description}</p>
+                </PopoverPanel>
+            </Popover>
         </>
     );
 }

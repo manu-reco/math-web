@@ -4,7 +4,7 @@ import {
     ArticleSection,
     KeyPoints,
     DialogBubble,
-    ConceptTooltip
+    ConceptPopover,
 } from "@/components/pildoras/ArticleComponents";
 
 import { COURSE_CONTENT } from "@/lib/pildorasData";
@@ -24,37 +24,37 @@ export default function ActividadesConceptosBasicosContent() {
 
             <ArticleSection title="Actividades que entrenan: ">
                 <KeyPoints points={[
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Concepto de cantidad"}
                         title="Concepto de cantidad"
                         description="Entender la cantidad que representa un número."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Conteo"}
                         title="Conteo"
                         description="Ser capaz de contar objetos de manera ordenada y precisa."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Cardinalidad"}
                         title="Cardinalidad"
                         description="Comprender que el último número contado representa la cantidad total de objetos."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Subitización"}
                         title="Subitización"
                         description="La capacidad de reconocer la cantidad de objetos en un conjunto sin necesidad de contarlos uno a uno."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Composición y descomposición"}
                         title="Composición y descomposición"
                         description="Entender cómo los números se pueden descomponer en partes y recomponer."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Correspondencia uno a uno"}
                         title="Correspondencia uno a uno"
                         description="Emparejar cada objeto de un conjunto con un objeto de otro conjunto."
                     />,
-                    <ConceptTooltip
+                    <ConceptPopover
                         key={"Construcción de la recta numérica"}
                         title="Construcción de la recta numérica"
                         description="Comprender la representación visual de los números en una línea continua."
