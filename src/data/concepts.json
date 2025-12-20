@@ -1,0 +1,34 @@
+{
+    "concepto-de-cantidad": {
+        "name": "Concepto de cantidad",
+        "definition": "Comprensión de que los números representan cantidades en el mundo real."
+    },
+    "conteo": {
+        "name": "Conteo",
+        "definition": "Habilidad para enumerar objetos de manera ordenada y precisa."
+    },
+    "conteo-recitativo": {
+        "name": "Conteo recitativo",
+        "definition": "Proceso de recitar la secuencia numérica en orden sin necesidad de contar objetos concretos."
+    },
+    "cardinalidad": {
+        "name": "Cardinalidad",
+        "definition": "El último número pronunciado al contar representa la cantidad total de elementos."
+    },
+    "subitizacion": {
+        "name": "Subitización",
+        "definition": "Habilidad para reconocer rápidamente la cantidad de objetos en un grupo pequeño sin necesidad de contarlos individualmente."
+    },
+    "composicion-y-descomposicion": {
+        "name": "Composición y descomposición",
+        "definition": "Proceso de combinar y separar cantidades para entender mejor las relaciones numéricas."
+    },
+    "correspondencia-uno-a-uno": {
+        "name": "Correspondencia uno a uno",
+        "definition": "Asignación de un objeto a cada número al contar, asegurando que cada objeto se cuente una sola vez."
+    },
+    "construccion-recta-numerica": {
+        "name": "Construcción de la recta numérica",
+        "definition": "Representación visual de los números en una línea para entender su orden y relaciones."
+    }
+}

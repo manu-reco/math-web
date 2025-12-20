@@ -17,6 +17,8 @@ import {
     PopoverPanel,
 } from '@/components/animate-ui/components/base/popover';
 
+import conceptsData from '@/data/concepts.json';
+
 interface ArticleHeaderProps {
     title: string;
     subtitle?: string;
@@ -142,7 +144,7 @@ const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
 export function DialogBubble({ speaker = 'teacher', color, children }: DialogBubbleProps) {
     const isTeacher = speaker === 'teacher';
 
-    // Si no se especifica color, usar purple para teacher y green para student
+    // Si no se especifica color, usar orange para teacher y primary para student
     const defaultColor = isTeacher ? 'orange' : 'primary';
     const finalColor = color || defaultColor;
     const colors = colorClasses[finalColor];
@@ -208,9 +210,11 @@ export function ConceptTooltip({
     );
 }
 
+
 interface ConceptPopoverProps {
-    title: string;
-    description?: string;
+    conceptId: string;
+    text?: string;
+    definition?: string;
     side?: 'top' | 'bottom' | 'left' | 'right';
     sideOffset?: number;
     align?: 'start' | 'center' | 'end';
@@ -218,19 +222,30 @@ interface ConceptPopoverProps {
 }
 
 export function ConceptPopover({
-    title,
-    description,
+    conceptId,
+    text,
+    definition,
     side = 'top',
     sideOffset = 8,
     align = 'center',
     alignOffset = 0,
 }: ConceptPopoverProps) {
+    const concept = conceptsData[conceptId as keyof typeof conceptsData];
+
+    if (!concept) {
+        console.warn(`Concepto "${conceptId}" no encontrado en concepts.json`);
+        return <span className='font-semibold'>{conceptId}</span>;
+    }
 
     return (
         <>
             <Popover>
                 <PopoverTrigger 
-                    render={<span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none' aria-describedby={`popover-${title}`}>{title}</span>}
+                    render={
+                        <span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none cursor-help' aria-describedby={`popover-${conceptId}`}>
+                            {text ?? concept.name}
+                        </span>
+                    }
                     openOnHover={true}
                     delay={100}
                     closeDelay={50}
@@ -243,7 +258,7 @@ export function ConceptPopover({
                     alignOffset={alignOffset}
                     className="max-w-[200px] text-sm text-wrap wrap-break-word text-center"
                 >
-                    <p>{description}</p>
+                    <p>{definition ?? concept.definition}</p>
                 </PopoverPanel>
             </Popover>
         </>
