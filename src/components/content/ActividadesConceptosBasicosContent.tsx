@@ -3,7 +3,7 @@ import {
     ArticleHeader,
     ArticleSection,
     KeyPoints,
-    ConceptTooltip
+    ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
 
@@ -20,45 +20,38 @@ export default function ActividadesConceptosBasicosContent() {
 
             <ArticleSection title="Actividades que entrenan: ">
                 <KeyPoints points={[
-                    <ConceptTooltip
-                        key={"Concepto de cantidad"}
-                        title="Concepto de cantidad"
-                        description="Entender la cantidad que representa un número."
+                    <ConceptPopover
+                        key="concepto-de-cantidad"
+                        conceptId="concepto-de-cantidad"
                     />,
-                    <ConceptTooltip
-                        key={"Conteo"}
-                        title="Conteo"
-                        description="Ser capaz de contar objetos de manera ordenada y precisa."
+                    <ConceptPopover
+                        key="conteo"
+                        conceptId="conteo"
                     />,
-                    <ConceptTooltip
-                        key={"Cardinalidad"}
-                        title="Cardinalidad"
-                        description="Comprender que el último número contado representa la cantidad total de objetos."
+                    <ConceptPopover
+                        key="cardinalidad"
+                        conceptId="cardinalidad"
                     />,
-                    <ConceptTooltip
-                        key={"Subitización"}
-                        title="Subitización"
-                        description="La capacidad de reconocer la cantidad de objetos en un conjunto sin necesidad de contarlos uno a uno."
+                    <ConceptPopover
+                        key="subitizacion"
+                        conceptId="subitizacion"
                     />,
-                    <ConceptTooltip
-                        key={"Composición y descomposición"}
-                        title="Composición y descomposición"
-                        description="Entender cómo los números se pueden descomponer en partes y recomponer."
+                    <ConceptPopover
+                        key="composicion-y-descomposicion"
+                        conceptId="composicion-y-descomposicion"
                     />,
-                    <ConceptTooltip
-                        key={"Correspondencia uno a uno"}
-                        title="Correspondencia uno a uno"
-                        description="Emparejar cada objeto de un conjunto con un objeto de otro conjunto."
+                    <ConceptPopover
+                        key="correspondencia-uno-a-uno"
+                        conceptId="correspondencia-uno-a-uno"
                     />,
-                    <ConceptTooltip
-                        key={"Construcción de la recta numérica"}
-                        title="Construcción de la recta numérica"
-                        description="Comprender la representación visual de los números en una línea continua."
+                    <ConceptPopover
+                        key="construccion-recta-numerica"
+                        conceptId="construccion-recta-numerica"
                     />,
                 ]} />
-                <p>Con estas actividades podemos trabajar conceptos tan importantes como la <ConceptTooltip
-                    title="subitización"
-                    description="La capacidad de reconocer la cantidad de objetos en un conjunto sin necesidad de contarlos uno a uno."
+                <p>Con estas actividades podemos trabajar conceptos tan importantes como la <ConceptPopover
+                    conceptId="subitizacion"
+                    text="subitización"
                 />.
                 </p>
             </ArticleSection>
