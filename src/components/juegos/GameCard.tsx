@@ -10,36 +10,40 @@ interface GameCardProps {
 
 export default function GameCard({ game }: GameCardProps) {
     return (
-        <Link
-            key={game.id}
-            href={game.isAvailable ? game.path : "#"}
+        <article
             className={`group ${!game.isAvailable ? 'pointer-events-none' : ''}`}
+            role="listitem"
         >
-            <div className={`
-                                bg-white rounded-2xl shadow-lg overflow-hidden 
-                                transition-all duration-300 h-full flex flex-col
-                                ${game.isAvailable
-                    ? 'hover:shadow-2xl hover:-translate-y-1 cursor-pointer'
-                    : 'opacity-60 cursor-not-allowed'
-                }
-                            `}>
+            <Link
+                href={game.isAvailable ? game.path : "#"}
+                aria-label={`${game.title}${!game.isAvailable ? ' - Próximamente' : ''}`}
+                aria-disabled={!game.isAvailable}
+                className={`
+                    bg-white rounded-2xl shadow-lg overflow-hidden 
+                    transition-all duration-300 h-full flex flex-col
+                    ${game.isAvailable
+                        ? 'hover:shadow-2xl hover:-translate-y-1 cursor-pointer'
+                        : 'opacity-60 cursor-not-allowed'
+                    }
+                `}
+            >
                 {/* Imagen de portada */}
-                <div className="relative w-full h-64 bg-linear-to-br from-primary/10 to-secondary/10">
+                <figure className="relative w-full h-64 bg-linear-to-br from-primary/10 to-secondary/10">
                     <Image
                         src={game.image}
-                        alt={game.title}
+                        alt={`Portada del juego ${game.title}`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     {!game.isAvailable && (
-                        <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center" role="status">
                             <span className="text-white text-2xl font-bold">
                                 Próximamente
                             </span>
                         </div>
                     )}
-                </div>
+                </figure>
 
                 {/* Contenido */}
                 <div className="p-6 flex flex-col grow">
@@ -61,7 +65,7 @@ export default function GameCard({ game }: GameCardProps) {
                     </p>
 
                     {/* Habilidades */}
-                    <div className="flex flex-wrap gap-2">
+                    <footer className="flex flex-wrap gap-2">
                         {game.skills.map((habilidad, idx) => (
                             <span
                                 key={idx}
@@ -70,9 +74,9 @@ export default function GameCard({ game }: GameCardProps) {
                                 {habilidad}
                             </span>
                         ))}
-                    </div>
+                    </footer>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </article>
     );
 }
