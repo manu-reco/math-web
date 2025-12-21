@@ -22,7 +22,7 @@ export default function JuegosPage() {
 
             {/* Grid de juegos */}
             <div className="container-custom max-w-7xl mx-auto mt-12 px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {games.map((game) => (
                         <Link
                             key={game.id}
@@ -79,7 +79,7 @@ export default function JuegosPage() {
                                         {game.skills.map((habilidad, idx) => (
                                             <span
                                                 key={idx}
-                                                className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full border border-gray-200"
+                                                className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200"
                                             >
                                                 {habilidad}
                                             </span>
