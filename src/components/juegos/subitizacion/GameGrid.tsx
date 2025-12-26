@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react"
-import { Pattern } from "@/data/subitizacionLevels";
+import { Pattern, IconPosition } from "@/data/subitizacionLevels";
 
 const GRID_CONFIG = {
     rows: 3,
@@ -15,18 +15,33 @@ const STYLES = {
 
 interface GameGridProps {
     pattern: Pattern;
+    levelIcon?: string; // Icono predeterminado del nivel
     onNext: () => void;
 }
 
 interface GridCellProps {
-    hasIcon: boolean;
-    iconSrc: string;
+    position: IconPosition | null;
+    defaultIcon?: string;
 }
 
-function GridCell({ hasIcon, iconSrc }: GridCellProps) {
+interface GridCellProps {
+    position: IconPosition | null;
+    defaultIcon?: string;
+}
+
+/**
+ * Celda individual del grid
+ * Muestra un icono si la posición tiene uno (usando el icono específico de la posición o el predeterminado)
+ */
+function GridCell({ position, defaultIcon }: GridCellProps) {
+    if (!position) return <div className={STYLES.cell} />;
+
+    // Usar el icono de la posición si existe, sino el predeterminado del nivel
+    const iconSrc = position.icon || defaultIcon;
+
     return (
         <div className={STYLES.cell}>
-            {hasIcon && (
+            {iconSrc && (
                 <motion.div
                     className={STYLES.icon}
                     initial={{ opacity: 0, scale: 0 }}
@@ -65,16 +80,26 @@ function InstructionText() {
 }
 
 
-export default function GameGrid({ pattern, onNext }: GameGridProps) {
-    // Crear un set para búsqueda rápida de posiciones ocupadas
-    const occupiedPositions = new Set(
-        pattern.positions.map(pos => `${pos.row}-${pos.col}`)
-    );
+/**
+ * Componente principal que muestra el grid de subitización
+ */
+export default function GameGrid({ pattern, levelIcon, onNext }: GameGridProps) {
+    // Crear mapa de posiciones ocupadas para búsqueda rápida
+    const positionMap = new Map<string, IconPosition>();
+    pattern.positions.forEach(pos => {
+        positionMap.set(`${pos.row}-${pos.col}`, pos);
+    });
 
-    const isCellOccupied = (row: number, col: number): boolean => {
-        return occupiedPositions.has(`${row}-${col}`);
+    /**
+     * Obtiene la posición en coordenadas específicas, o null si está vacía
+     */
+    const getPosition = (row: number, col: number): IconPosition | null => {
+        return positionMap.get(`${row}-${col}`) || null;
     };
 
+    /**
+     * Renderiza una fila del grid
+     */
     const renderRow = (rowIndex: number) => (
         <div
             key={rowIndex}
@@ -84,8 +109,8 @@ export default function GameGrid({ pattern, onNext }: GameGridProps) {
             {Array.from({ length: GRID_CONFIG.cols }).map((_, colIndex) => (
                 <GridCell
                     key={`${rowIndex}-${colIndex}`}
-                    hasIcon={isCellOccupied(rowIndex, colIndex)}
-                    iconSrc={pattern.icon}
+                    position={getPosition(rowIndex, colIndex)}
+                    defaultIcon={levelIcon}
                 />
             ))}
         </div>

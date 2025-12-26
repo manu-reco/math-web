@@ -109,6 +109,7 @@ const nextPattern = useCallback(() => {
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
                     <GameGrid 
                         pattern={shuffledPatterns[currentPatternIndex]} 
+                        levelIcon={currentLevel?.icon}
                         onNext={nextPattern}
                     />
                 )}
