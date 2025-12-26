@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { subitizacionLevels, shuffleArray, Level, Pattern } from "@/data/subitizacionLevels";
 import InstructionsScreen from "@/components/juegos/subitizacion/InstructionsScreen";
@@ -33,15 +33,15 @@ export default function SubitizacionPage() {
     };
 
     // Al pulsar Espacio: avanzar al siguiente patrón si estamos jugando
-    useEffect(() => {    
-        const nextPattern = () => {
-            if (currentPatternIndex < shuffledPatterns.length - 1) {
-                setCurrentPatternIndex(prev => prev + 1);
-            } else {
-                setGameState('completed');
-            }
-        };
+const nextPattern = useCallback(() => {
+    if (currentPatternIndex < shuffledPatterns.length - 1) {
+        setCurrentPatternIndex(prev => prev + 1);
+    } else {
+        setGameState('completed');
+    }
+}, [currentPatternIndex, shuffledPatterns.length]);
 
+    useEffect(() => {    
         const handleKeyPress = (event: KeyboardEvent) => {
             if (event.code === 'Space' && gameState === 'playing') {
                 event.preventDefault();
@@ -52,7 +52,7 @@ export default function SubitizacionPage() {
         window.addEventListener('keydown', handleKeyPress);
         return () => window.removeEventListener('keydown', handleKeyPress); 
         // cleanup: quita el listener antes de desmontar el componente o actualizarlo
-    }, [gameState, shuffledPatterns, currentPatternIndex]);
+    }, [gameState, nextPattern]);
 
     const handleNextLevel = () => {
         if (!currentLevel) return;
@@ -107,7 +107,10 @@ export default function SubitizacionPage() {
                 )}
 
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
-                    <GameGrid pattern={shuffledPatterns[currentPatternIndex]} />
+                    <GameGrid 
+                        pattern={shuffledPatterns[currentPatternIndex]} 
+                        onNext={nextPattern}
+                    />
                 )}
 
                 {gameState === 'completed' && currentLevel && (
