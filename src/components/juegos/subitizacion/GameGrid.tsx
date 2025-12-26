@@ -8,7 +8,7 @@ const GRID_CONFIG = {
 } as const;
 
 const STYLES = {
-    cell: "w-14 h-14 md:w-24 md:h-24 lg:w-28 lg:h-28 flex items-center justify-center rounded-lg border-2 border-gray-200",
+    cell: "w-14 h-14 md:w-24 md:h-24 lg:w-28 lg:h-28 flex items-center justify-center",
     icon: "relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24",
     grid: "bg-white rounded-2xl shadow-2xl p-8 md:p-12 cursor-pointer hover:shadow-3xl transition-shadow duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30",
 } as const;
