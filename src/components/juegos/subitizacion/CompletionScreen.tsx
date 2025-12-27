@@ -1,3 +1,7 @@
+import { useEffect, useRef } from "react";
+
+import confetti from "canvas-confetti";
+
 interface CompletionScreenProps {
     levelName: string;
     hasNextLevel: boolean;
@@ -5,20 +9,27 @@ interface CompletionScreenProps {
     onRestart: () => void;
 }
 
-export default function CompletionScreen({ 
-    levelName, 
-    hasNextLevel, 
-    onNextLevel, 
-    onRestart 
+export default function CompletionScreen({
+    levelName,
+    hasNextLevel,
+    onNextLevel,
+    onRestart
 }: CompletionScreenProps) {
+
+    useEffect(() => {
+        confetti({
+            spread: 360,
+        })
+    }, []);
+
     return (
         <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
             <div className="text-6xl mb-6">🎉</div>
-            
+
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
                 ¡Felicidades!
             </h2>
-            
+
             <p className="text-xl text-gray-700 mb-8">
                 Has completado el <strong>{levelName}</strong>
             </p>
@@ -38,7 +49,7 @@ export default function CompletionScreen({
                         Siguiente nivel →
                     </button>
                 )}
-                
+
                 <button
                     onClick={onRestart}
                     className="px-8 py-4 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
