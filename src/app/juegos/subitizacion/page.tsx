@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { subitizacionLevels, shuffleArray, Level, Pattern } from "@/data/subitizacionLevels";
+import { subitizacionLevels, shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionLevels";
 import InstructionsScreen from "@/components/juegos/subitizacion/InstructionsScreen";
 import LevelSelector from "@/components/juegos/subitizacion/LevelSelector";
 import GameGrid from "@/components/juegos/subitizacion/GameGrid";
@@ -27,7 +27,9 @@ export default function SubitizacionPage() {
 
     const playLevel = (level: Level) => {
         setCurrentLevel(level);
-        setShuffledPatterns(shuffleArray(level.patterns));
+        // Construir patrones desde PatternTemplate a Pattern con iconos asignados
+        const builtPatterns = buildLevelPatterns(level);
+        setShuffledPatterns(shuffleArray(builtPatterns));
         setCurrentPatternIndex(0);
         setGameState('playing');
     };
@@ -109,7 +111,6 @@ const nextPattern = useCallback(() => {
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
                     <GameGrid 
                         pattern={shuffledPatterns[currentPatternIndex]} 
-                        levelIcon={currentLevel?.icon}
                         onNext={nextPattern}
                     />
                 )}

@@ -15,52 +15,38 @@ const STYLES = {
 
 interface GameGridProps {
     pattern: Pattern;
-    levelIcon?: string; // Icono predeterminado del nivel
     onNext: () => void;
 }
 
 interface GridCellProps {
     position: IconPosition | null;
-    defaultIcon?: string;
 }
 
-interface GridCellProps {
-    position: IconPosition | null;
-    defaultIcon?: string;
-}
-
-/**
- * Celda individual del grid
- * Muestra un icono si la posición tiene uno (usando el icono específico de la posición o el predeterminado)
- */
-function GridCell({ position, defaultIcon }: GridCellProps) {
+// Celda individual del grid
+// Muestra un icono si la posición tiene uno asignado
+function GridCell({ position }: GridCellProps) {
     if (!position) return <div className={STYLES.cell} />;
-
-    // Usar el icono de la posición si existe, sino el predeterminado del nivel
-    const iconSrc = position.icon || defaultIcon;
 
     return (
         <div className={STYLES.cell}>
-            {iconSrc && (
-                <motion.div
-                    className={STYLES.icon}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20
-                    }}
-                >
-                    <Image
-                        src={iconSrc}
-                        alt="Icono"
-                        fill
-                        className="object-contain"
-                    />
-                </motion.div>
-            )}
+            <motion.div
+                className={STYLES.icon}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                }}
+            >
+                <Image
+                    src={position.icon}
+                    alt="Icono"
+                    fill
+                    className="object-contain"
+                />
+            </motion.div>
         </div>
     );
 }
@@ -80,26 +66,21 @@ function InstructionText() {
 }
 
 
-/**
- * Componente principal que muestra el grid de subitización
- */
-export default function GameGrid({ pattern, levelIcon, onNext }: GameGridProps) {
+// Componente principal que muestra el grid de subitización
+export default function GameGrid({ pattern, onNext }: GameGridProps) {
+    
     // Crear mapa de posiciones ocupadas para búsqueda rápida
     const positionMap = new Map<string, IconPosition>();
     pattern.positions.forEach(pos => {
         positionMap.set(`${pos.row}-${pos.col}`, pos);
     });
 
-    /**
-     * Obtiene la posición en coordenadas específicas, o null si está vacía
-     */
+    // Obtiene la posición en coordenadas específicas, o null si está vacía
     const getPosition = (row: number, col: number): IconPosition | null => {
         return positionMap.get(`${row}-${col}`) || null;
     };
 
-    /**
-     * Renderiza una fila del grid
-     */
+    // Renderiza una fila del grid
     const renderRow = (rowIndex: number) => (
         <div
             key={rowIndex}
@@ -110,7 +91,6 @@ export default function GameGrid({ pattern, levelIcon, onNext }: GameGridProps) 
                 <GridCell
                     key={`${rowIndex}-${colIndex}`}
                     position={getPosition(rowIndex, colIndex)}
-                    defaultIcon={levelIcon}
                 />
             ))}
         </div>
