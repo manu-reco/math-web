@@ -41,12 +41,17 @@ export interface Level {
 // ============================================
 export const PATTERN_CATALOG: Record<string, Position[]> = {
     // Cantidad 1
+    "1-left": [{ row: 1, col: 0 }],
     "1-center": [{ row: 1, col: 2 }],
     "1-top-left": [{ row: 0, col: 0 }],
     "1-bottom-right": [{ row: 2, col: 4 }],
     "1-second-column": [{ row: 2, col: 1 }],
 
     // Cantidad 2
+    "2-left-to-right": [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 }
+    ],
     "2-horizontal": [
         { row: 1, col: 1 },
         { row: 1, col: 3 }
@@ -81,6 +86,10 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
     ],
 
     // Cantidad 3
+    "3-left-to-right": [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 }
+    ],
     "3-row": [
         { row: 1, col: 0 },
         { row: 1, col: 2 },
@@ -113,6 +122,12 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
     ],
 
     // Cantidad 4
+    "4-left-to-right": [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+        { row: 1, col: 2 },
+        { row: 1, col: 3 }
+    ],
     "4-corners": [
         { row: 0, col: 0 },
         { row: 0, col: 4 },
@@ -151,6 +166,13 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
     ],
 
     // Cantidad 5
+    "5-left-to-right": [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+        { row: 1, col: 2 },
+        { row: 1, col: 3 },
+        { row: 1, col: 4 }
+    ],
     "5-x": [
         { row: 0, col: 0 },
         { row: 0, col: 4 },
@@ -170,6 +192,62 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
         { row: 0, col: 3 },
         { row: 1, col: 2 },
         { row: 2, col: 0 },
+        { row: 2, col: 4 }
+    ],
+    "5-2left-3right": [
+        { row: 0, col: 0 },
+        { row: 1, col: 0 },
+        { row: 0, col: 3 },
+        { row: 1, col: 4 },
+        { row: 2, col: 4 }
+    ],
+    "5-3left-2right": [
+        { row: 0, col: 0 },
+        { row: 1, col: 0 },
+        { row: 2, col: 0 },
+        { row: 0, col: 4 },
+        { row: 1, col: 4 }
+    ],
+    "5-2top-3bottom": [
+        { row: 0, col: 1 },
+        { row: 0, col: 3 },
+        { row: 1, col: 0 },
+        { row: 1, col: 2 },
+        { row: 2, col: 0 }
+    ],
+    "5-3top-2bottom": [
+        { row: 0, col: 1 },
+        { row: 0, col: 2 },
+        { row: 0, col: 3 },
+        { row: 2, col: 1 },
+        { row: 2, col: 3 }
+    ],
+    "5-4-left-1right": [
+        { row: 0, col: 0 },
+        { row: 1, col: 0 },
+        { row: 2, col: 0 },
+        { row: 1, col: 1 },
+        { row: 1, col: 4 }
+    ],
+    "5-1left-4right": [
+        { row: 0, col: 4 },
+        { row: 1, col: 4 },
+        { row: 2, col: 4 },
+        { row: 1, col: 3 },
+        { row: 1, col: 0 }
+    ],
+    "5-4top-1bottom": [
+        { row: 0, col: 1 },
+        { row: 0, col: 2 },
+        { row: 0, col: 3 },
+        { row: 0, col: 4 },
+        { row: 2, col: 2 }
+    ],
+    "5-1top-4bottom": [
+        { row: 0, col: 2 },
+        { row: 2, col: 1 },
+        { row: 2, col: 2 },
+        { row: 2, col: 3 },
         { row: 2, col: 4 }
     ],
 };
@@ -223,12 +301,14 @@ export const subitizacionLevels: Level[] = [
         description: "Reconoce cantidades pequeñas del 1 al 4",
         patterns: [
             // Cantidad 1
+            { patternId: "1-left", icons: [ICONS.BUHO_ROJO] },
             { patternId: "1-center", icons: [ICONS.BUHO_ROJO] },
             { patternId: "1-top-left", icons: [ICONS.BUHO_ROJO] },
             { patternId: "1-bottom-right", icons: [ICONS.BUHO_ROJO] },
             { patternId: "1-second-column", icons: [ICONS.BUHO_ROJO] },
 
             // Cantidad 2
+            { patternId: "2-left-to-right", icons: [ICONS.BUHO_ROJO] },
             { patternId: "2-horizontal", icons: [ICONS.BUHO_ROJO] },
             { patternId: "2-vertical", icons: [ICONS.BUHO_ROJO] },
             { patternId: "2-diagonal", icons: [ICONS.BUHO_ROJO] },
@@ -239,6 +319,7 @@ export const subitizacionLevels: Level[] = [
             { patternId: "2-right", icons: [ICONS.BUHO_ROJO] },
 
             // Cantidad 3
+            { patternId: "3-left-to-right", icons: [ICONS.BUHO_ROJO] },
             { patternId: "3-row", icons: [ICONS.BUHO_ROJO] },
             { patternId: "3-column", icons: [ICONS.BUHO_ROJO] },
             { patternId: "3-triangle", icons: [ICONS.BUHO_ROJO] },
@@ -247,9 +328,7 @@ export const subitizacionLevels: Level[] = [
             { patternId: "3-leftdiagonal-1right", icons: [ICONS.BUHO_ROJO] },
 
             // Cantidad 4
-            { patternId: "4-corners", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-square", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-cross", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "4-left-to-right", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-2topleft-2bottomright", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-2topright-2bottomleft", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-triangleleft-1right", icons: [ICONS.BUHO_ROJO] },
@@ -261,20 +340,127 @@ export const subitizacionLevels: Level[] = [
         description: "Reconoce cantidades del 4 al 5",
         patterns: [
             // Cantidad 4
+            { patternId: "4-left-to-right", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-corners", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-square", icons: [ICONS.BUHO_ROJO] },
             { patternId: "4-cross", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "4-2topleft-2bottomright", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "4-2topright-2bottomleft", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "4-triangleleft-1right", icons: [ICONS.BUHO_ROJO] },
+
 
             // Cantidad 5
             { patternId: "5-x", icons: [ICONS.BUHO_ROJO] },
             { patternId: "5-plus", icons: [ICONS.BUHO_ROJO] },
             { patternId: "5-scattered", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-2left-3right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-3left-2right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-2top-3bottom", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-3top-2bottom", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-4-left-1right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-1left-4right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-4top-1bottom", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "5-1top-4bottom", icons: [ICONS.BUHO_ROJO] },
         ]
     },
     {
         id: 3,
-        name: "Nivel 3: Próximamente",
-        description: "Números del 6 al 10 (En desarrollo)",
-        patterns: []
+        name: "Nivel 3: Búhos de colores",
+        description: "Reconoce cantidades con búhos rojos y verdes",
+        patterns: [
+            // Cantidad 2
+            {
+                patternId: "2-horizontal",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
+            },
+            {
+                patternId: "2-vertical",
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
+            },
+            {
+                patternId: "2-diagonal",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
+            },
+
+            // Cantidad 3
+            {
+                patternId: "3-row",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
+            },
+            {
+                patternId: "3-triangle",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+
+            // Cantidad 4
+            {
+                patternId: "4-2topleft-2bottomright",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+            {
+                patternId: "4-triangleleft-1right",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
+            },
+            {
+                patternId: "4-triangleleft-1right",
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
+            },            
+            {
+                patternId: "4-corners",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+            {
+                patternId: "4-square",
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
+            },
+
+            // Cantidad 5
+            {
+                patternId: "5-x",
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO,ICONS.BUHO_ROJO]
+            },
+            {
+                patternId: "5-x",
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO,ICONS.BUHO_ROJO]
+            },
+            {
+                patternId: "5-plus",
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
+            },
+            { 
+                patternId: "5-2left-3right", 
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+            { 
+                patternId: "5-3left-2right", 
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+            { 
+                patternId: "5-2top-3bottom", 
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
+            },
+            { 
+                patternId: "5-3top-2bottom", 
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
+            },
+            { 
+                patternId: "5-4-left-1right", 
+                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
+            },
+            { 
+                patternId: "5-1left-4right", 
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
+            },
+            { 
+                patternId: "5-4top-1bottom", 
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
+            },
+            { 
+                patternId: "5-1top-4bottom", 
+                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
+            },
+
+        ]
     }
+
 ];
