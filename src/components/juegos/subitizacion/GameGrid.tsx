@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react"
-import { Pattern, IconPosition } from "@/data/subitizacionLevels";
+import { Pattern, IconPosition } from "@/data/subitizacionPatterns";
 
 const GRID_CONFIG = {
     rows: 3,
@@ -68,7 +68,7 @@ function InstructionText() {
 
 // Componente principal que muestra el grid de subitización
 export default function GameGrid({ pattern, onNext }: GameGridProps) {
-    
+
     // Crear mapa de posiciones ocupadas para búsqueda rápida
     const positionMap = new Map<string, IconPosition>();
     pattern.positions.forEach(pos => {

@@ -1,4 +1,4 @@
-import { Level } from "@/data/subitizacionLevels";
+import { Level } from "@/data/subitizacionPatterns";
 
 interface LevelSelectorProps {
     levels: Level[];

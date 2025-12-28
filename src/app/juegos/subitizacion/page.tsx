@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { subitizacionLevels, shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionLevels";
+import { subitizacionLevels } from "@/data/subitizacionLevels";
+import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
 import InstructionsScreen from "@/components/juegos/subitizacion/InstructionsScreen";
 import LevelSelector from "@/components/juegos/subitizacion/LevelSelector";
 import GameGrid from "@/components/juegos/subitizacion/GameGrid";
