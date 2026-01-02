@@ -2,11 +2,11 @@ import { Level } from "./subitizacionPatterns";
 
 
 // Constantes para iconos
-const ICONS = {
-    BUHO_ROJO: "/subitizacion/buho-rojo.png",
-    BUHO_AZUL: "/subitizacion/buho-azul.png",
-    BUHO_VERDE: "/subitizacion/buho-verde.png",
-    BUHO_AMARILLO: "/subitizacion/buho-amarillo.png",
+const BUHO = {
+    ROJO: "/subitizacion/buho-rojo.png",
+    AZUL: "/subitizacion/buho-azul.png",
+    VERDE: "/subitizacion/buho-verde.png",
+    AMARILLO: "/subitizacion/buho-amarillo.png",
 } as const;
 
 // ============================================
@@ -15,168 +15,141 @@ const ICONS = {
 export const subitizacionLevels: Level[] = [
     {
         id: 1,
-        name: "Nivel 1: Números del 1 al 4",
-        description: "Reconoce cantidades pequeñas del 1 al 4",
+        name: "Nivel 1: Números del 1 al 3",
+        description: "Para los más pequeños, reconocemos las cantidades más pequeñas.",
         patterns: [
             // Cantidad 1
-            { patternId: "1-left", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "1-center", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "1-top-left", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "1-bottom-right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "1-second-column", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "1-center", icons: [BUHO.ROJO] },
+            { patternId: "1-center", icons: [BUHO.VERDE] },
+            { patternId: "1-left", icons: [BUHO.ROJO] },
+            { patternId: "1-top-left", icons: [BUHO.VERDE] },
+            { patternId: "1-bottom-right", icons: [BUHO.ROJO] },
+            { patternId: "1-second-column", icons: [BUHO.VERDE] },
 
             // Cantidad 2
-            { patternId: "2-left-to-right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-horizontal", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-vertical", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-diagonal", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-diagonal-reverse", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-scattered", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-scattered-reverse", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-left", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "2-right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "2-left-to-right", icons: [BUHO.ROJO] },
+            { patternId: "2-horizontal", icons: [BUHO.ROJO] },
+            { patternId: "2-horizontal", icons: [BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "2-vertical", icons: [BUHO.ROJO] },
+            { patternId: "2-vertical", icons: [BUHO.VERDE, BUHO.ROJO] },
+            { patternId: "2-diagonal", icons: [BUHO.ROJO] },
+            { patternId: "2-diagonal-reverse", icons: [BUHO.VERDE] },
+            { patternId: "2-scattered", icons: [BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "2-scattered-reverse", icons: [BUHO.VERDE, BUHO.ROJO] },
+            { patternId: "2-vertical-left", icons: [BUHO.ROJO] },
+            { patternId: "2-vertical-right", icons: [BUHO.VERDE] },
 
             // Cantidad 3
-            { patternId: "3-left-to-right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-row", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-column", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-triangle", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-diagonal", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-1left-2right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "3-leftdiagonal-1right", icons: [ICONS.BUHO_ROJO] },
-
-            // Cantidad 4
-            { patternId: "4-left-to-right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-2topleft-2bottomright", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-2topright-2bottomleft", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-triangleleft-1right", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "3-left-to-right", icons: [BUHO.ROJO] },
+            { patternId: "3-left-to-right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "3-row", icons: [BUHO.VERDE] },
+            { patternId: "3-row", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.ROJO] },
+            { patternId: "3-row", icons: [BUHO.VERDE, BUHO.AZUL, BUHO.ROJO] },
+            { patternId: "3-column", icons: [BUHO.AZUL] },
+            { patternId: "3-column", icons: [BUHO.AZUL, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-column", icons: [BUHO.AZUL, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "3-column", icons: [BUHO.ROJO] },
+            { patternId: "3-triangle", icons: [BUHO.ROJO] },
+            { patternId: "3-triangle", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-diagonal", icons: [BUHO.ROJO] },
+            { patternId: "3-1left-2right", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-leftdiagonal-1right", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.VERDE] },
         ]
     },
     {
         id: 2,
-        name: "Nivel 2: Números del 4 al 5",
-        description: "Reconoce cantidades del 4 al 5",
+        name: "Nivel 2: Números del 1 al 4",
+        description: "Introducimos el número 4 y reconocemos distintas formas de componerlo (2+2, 3+1...).",
         patterns: [
+            // Cantidad 1
+            { patternId: "1-center", icons: [BUHO.VERDE] },
+            { patternId: "1-left", icons: [BUHO.ROJO] },
+            { patternId: "1-top-left", icons: [BUHO.VERDE] },
+            { patternId: "1-bottom-right", icons: [BUHO.ROJO] },
+
+            // Cantidad 2
+            { patternId: "2-left-to-right", icons: [BUHO.ROJO] },
+            { patternId: "2-horizontal", icons: [BUHO.VERDE] },
+            { patternId: "2-vertical", icons: [BUHO.ROJO] },
+            { patternId: "2-diagonal", icons: [BUHO.ROJO] },
+            { patternId: "2-diagonal-reverse", icons: [BUHO.VERDE] },
+            { patternId: "2-vertical-left", icons: [BUHO.ROJO] },
+            { patternId: "2-vertical-right", icons: [BUHO.VERDE] },
+
+            // Cantidad 3
+            { patternId: "3-left-to-right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "3-row", icons: [BUHO.VERDE] },
+            { patternId: "3-row", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.ROJO] },
+            { patternId: "3-column", icons: [BUHO.AMARILLO] },
+            { patternId: "3-column", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.VERDE] },
+            { patternId: "3-triangle", icons: [BUHO.ROJO] },
+            { patternId: "3-triangle", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-diagonal", icons: [BUHO.ROJO] },
+            { patternId: "3-1left-2right", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-leftdiagonal-1right", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.VERDE] },
+
             // Cantidad 4
-            { patternId: "4-left-to-right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-corners", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-square", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-cross", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-2topleft-2bottomright", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-2topright-2bottomleft", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "4-triangleleft-1right", icons: [ICONS.BUHO_ROJO] },
-
-
-            // Cantidad 5
-            { patternId: "5-x", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-plus", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-scattered", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-2left-3right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-3left-2right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-2top-3bottom", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-3top-2bottom", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-4-left-1right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-1left-4right", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-4top-1bottom", icons: [ICONS.BUHO_ROJO] },
-            { patternId: "5-1top-4bottom", icons: [ICONS.BUHO_ROJO] },
+            { patternId: "4-left-to-right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.AZUL, BUHO.AZUL] },
+            { patternId: "4-left-to-right", icons: [BUHO.ROJO, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AMARILLO] },
+            { patternId: "4-corners", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-square", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-square", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "4-cross", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.AZUL, BUHO.AZUL] },
+            { patternId: "4-2topleft-2bottomright", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-2topright-2bottomleft", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-triangleleft-1right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "4-triangleleft-1right", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.VERDE, BUHO.AZUL] },
         ]
     },
     {
         id: 3,
-        name: "Nivel 3: Búhos de colores",
-        description: "Reconoce cantidades con búhos rojos y verdes",
+        name: "Nivel 3: Números del 1 al 5",
+        description: "Reforzamos patrones anteriores e introducimos combinaciones con el número 5 (2+3, 4+1...).",
         patterns: [
+            // Cantidad 1
+            { patternId: "1-center", icons: [BUHO.AZUL] },
+            { patternId: "1-bottom-right", icons: [BUHO.AMARILLO] },
+
             // Cantidad 2
-            {
-                patternId: "2-horizontal",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
-            },
-            {
-                patternId: "2-vertical",
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
-            },
-            {
-                patternId: "2-diagonal",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
-            },
+            { patternId: "2-horizontal", icons: [BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "2-diagonal", icons: [BUHO.AZUL] },
+            { patternId: "2-vertical-right", icons: [BUHO.AMARILLO] },
 
             // Cantidad 3
-            {
-                patternId: "3-row",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
-            },
-            {
-                patternId: "3-triangle",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
+            { patternId: "3-row", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.AZUL] },
+            { patternId: "3-row", icons: [BUHO.VERDE] },
+            { patternId: "3-column", icons: [BUHO.AZUL, BUHO.ROJO, BUHO.VERDE] },
+            { patternId: "3-column", icons: [BUHO.AMARILLO] },
+            { patternId: "3-triangle", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-diagonal", icons: [BUHO.AZUL] },
+            { patternId: "3-1left-2right", icons: [BUHO.AMARILLO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "3-leftdiagonal-1right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.AZUL] },
 
             // Cantidad 4
-            {
-                patternId: "4-2topleft-2bottomright",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
-            {
-                patternId: "4-triangleleft-1right",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
-            },
-            {
-                patternId: "4-triangleleft-1right",
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
-            },            
-            {
-                patternId: "4-corners",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
-            {
-                patternId: "4-square",
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
-            },
+            { patternId: "4-left-to-right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-left-to-right", icons: [BUHO.AZUL, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AZUL] },
+            { patternId: "4-corners", icons: [BUHO.ROJO, BUHO.VERDE, BUHO.VERDE, BUHO.ROJO] },
+            { patternId: "4-square", icons: [BUHO.AZUL, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AZUL] },
+            { patternId: "4-square", icons: [BUHO.VERDE] },
+            { patternId: "4-cross", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.AZUL, BUHO.AZUL] },
+            { patternId: "4-2topleft-2bottomright", icons: [BUHO.AMARILLO, BUHO.AMARILLO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "4-2topright-2bottomleft", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.ROJO, BUHO.ROJO] },
+            { patternId: "4-triangleleft-1right", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.VERDE, BUHO.AMARILLO] },
+            { patternId: "4-triangleleft-1right", icons: [BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.ROJO] },
 
             // Cantidad 5
-            {
-                patternId: "5-x",
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO,ICONS.BUHO_ROJO]
-            },
-            {
-                patternId: "5-x",
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO,ICONS.BUHO_ROJO]
-            },
-            {
-                patternId: "5-plus",
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
-            },
-            { 
-                patternId: "5-2left-3right", 
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
-            { 
-                patternId: "5-3left-2right", 
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
-            { 
-                patternId: "5-2top-3bottom", 
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
-            },
-            { 
-                patternId: "5-3top-2bottom", 
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE]
-            },
-            { 
-                patternId: "5-4-left-1right", 
-                icons: [ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_VERDE]
-            },
-            { 
-                patternId: "5-1left-4right", 
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
-            },
-            { 
-                patternId: "5-4top-1bottom", 
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_VERDE, ICONS.BUHO_ROJO]
-            },
-            { 
-                patternId: "5-1top-4bottom", 
-                icons: [ICONS.BUHO_VERDE, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO, ICONS.BUHO_ROJO]
-            },
+            { patternId: "5-x", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.AZUL, BUHO.ROJO, BUHO.ROJO] },
+            { patternId: "5-x", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.AMARILLO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "5-plus", icons: [BUHO.AZUL, BUHO.VERDE, BUHO.VERDE, BUHO.VERDE, BUHO.AZUL] },
+            { patternId: "5-plus", icons: [BUHO.ROJO] },
+            { patternId: "5-2left-3right", icons: [BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AZUL, BUHO.AZUL, BUHO.AZUL] },
+            { patternId: "5-3left-2right", icons: [BUHO.ROJO, BUHO.ROJO, BUHO.ROJO, BUHO.VERDE, BUHO.VERDE] },
+            { patternId: "5-2top-3bottom", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AMARILLO] },
+            { patternId: "5-3top-2bottom", icons: [BUHO.AZUL, BUHO.AZUL, BUHO.AZUL, BUHO.ROJO, BUHO.ROJO] },
+            { patternId: "5-4left-1right", icons: [BUHO.VERDE, BUHO.VERDE, BUHO.VERDE, BUHO.VERDE, BUHO.AMARILLO] },
+            { patternId: "5-1left-4right", icons: [BUHO.AZUL, BUHO.ROJO, BUHO.AZUL, BUHO.AZUL, BUHO.AZUL] },
+            { patternId: "5-4top-1bottom", icons: [BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.AMARILLO, BUHO.VERDE] },
+            { patternId: "5-1top-4bottom", icons: [BUHO.AZUL, BUHO.ROJO, BUHO.ROJO, BUHO.ROJO, BUHO.ROJO] },
         ]
     }
 

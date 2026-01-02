@@ -72,11 +72,11 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
         { row: 0, col: 3 },
         { row: 2, col: 1 }
     ],
-    "2-left": [
+    "2-vertical-left": [
         { row: 0, col: 0 },
         { row: 2, col: 0 }
     ],
-    "2-right": [
+    "2-vertical-right": [
         { row: 0, col: 4 },
         { row: 2, col: 4 }
     ],
@@ -218,7 +218,7 @@ export const PATTERN_CATALOG: Record<string, Position[]> = {
         { row: 2, col: 1 },
         { row: 2, col: 3 }
     ],
-    "5-4-left-1right": [
+    "5-4left-1right": [
         { row: 0, col: 0 },
         { row: 1, col: 0 },
         { row: 2, col: 0 },

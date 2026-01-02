@@ -14,9 +14,12 @@ export default function InstructionsScreen({ onStart }: InstructionsScreenProps)
                     <h3 className="text-xl font-semibold text-primary mb-3">
                         ¿Qué es la subitización?
                     </h3>
-                    <p>
+                    <p className="mb-3">
                         La subitización es la capacidad de reconocer rápidamente la cantidad de elementos 
                         en un conjunto pequeño sin necesidad de contarlos uno por uno.
+                    </p>
+                    <p>
+                        De manera innata, las personas podemos identificar conjuntos de 1, 2 y 3 elementos de un solo vistazo. Esta habilidad se puede desarrollar, y con la práctica, los estudiantes podrán reconocer cantidades mayores de forma instantánea y aprender descomposiciones de números sin darse cuenta. 😉
                     </p>
                 </section>
 
@@ -38,9 +41,9 @@ export default function InstructionsScreen({ onStart }: InstructionsScreenProps)
                         Niveles disponibles
                     </h3>
                     <ul className="space-y-2 ml-4">
-                        <li><strong>Nivel 1:</strong> Números del 1 al 3 (9 patrones)</li>
-                        <li><strong>Nivel 2:</strong> Números del 4 al 5 (6 patrones)</li>
-                        <li><strong>Nivel 3:</strong> Próximamente</li>
+                        <li><strong>Nivel 1:</strong> Números del 1 al 3</li>
+                        <li><strong>Nivel 2:</strong> Números del 1 al 4</li>
+                        <li><strong>Nivel 3:</strong> Números del 1 al 5</li>
                     </ul>
                 </section>
 
