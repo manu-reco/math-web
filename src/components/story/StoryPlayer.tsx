@@ -1,0 +1,163 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
+import Page from "./Page";
+
+interface StoryPlayerProps {
+    story: StoryData;
+    onComplete?: () => void;
+}
+
+export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
+    const [currentPageIndex, setCurrentPageIndex] = useState(0);
+    const [actors, setActors] = useState<Map<string, ActorState>>(new Map());
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+    const currentPage = story.pages[currentPageIndex];
+
+    // Inicializar actores de todas las páginas
+    useEffect(() => {
+        const initialActors = new Map<string, ActorState>();
+        
+        story.pages.forEach(page => {
+            page.actors.forEach(item => {
+                // Solo procesar definiciones de actores, no acciones
+                if ('type' in item) {
+                    const actorDef = item as ActorDefinition;
+                    if (!initialActors.has(actorDef.id)) {
+                        initialActors.set(actorDef.id, {
+                            id: actorDef.id,
+                            definition: actorDef,
+                            currentPosition: { x: actorDef.x, y: actorDef.y },
+                            visible: false, // Empiezan invisibles
+                            isDragging: false,
+                            isAnimating: false,
+                        });
+                    }
+                }
+            });
+        });
+
+        setActors(initialActors);
+    }, [story]);
+
+    // Precargar imágenes
+    useEffect(() => {
+        const imagesToLoad: string[] = [];
+
+        // Recopilar todas las imágenes
+        story.pages.forEach(page => {
+            if (page.background) imagesToLoad.push(page.background);
+            page.actors.forEach(item => {
+                if ('type' in item && item.type === 'image' && item.src) {
+                    imagesToLoad.push(item.src);
+                }
+            });
+        });
+
+        // Precargar
+        let loadedCount = 0;
+        const totalImages = imagesToLoad.length;
+
+        if (totalImages === 0) {
+            setAssetsLoaded(true);
+            return;
+        }
+
+        imagesToLoad.forEach(src => {
+            const img = new Image();
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+            img.onerror = () => {
+                loadedCount++;
+                console.error(`Error loading image: ${src}`);
+                if (loadedCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+            img.src = src.startsWith('/') ? src : `/${src}`;
+        });
+    }, [story]);
+
+    // Avanzar a la siguiente página
+    const advancePage = useCallback(() => {
+        if (isTransitioning) return;
+
+        if (currentPageIndex < story.pages.length - 1) {
+            setIsTransitioning(true);
+            setCurrentPageIndex(prev => prev + 1);
+            setTimeout(() => setIsTransitioning(false), 100);
+        } else {
+            // Historia completada
+            onComplete?.();
+        }
+    }, [currentPageIndex, story.pages.length, isTransitioning, onComplete]);
+
+    // Manejador de teclado (Espacio)
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (event.code === 'Space' && currentPage.advanceOn === 'spaceOrClick') {
+                event.preventDefault();
+                advancePage();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+    }, [advancePage, currentPage.advanceOn]);
+
+    // Manejador de clic en el fondo
+    const handleBackgroundClick = useCallback(() => {
+        if (currentPage.advanceOn === 'spaceOrClick') {
+            advancePage();
+        }
+    }, [advancePage, currentPage.advanceOn]);
+
+    // Actualizar estado de actor
+    const updateActor = useCallback((actorId: string, updates: Partial<ActorState>) => {
+        setActors(prev => {
+            const newActors = new Map(prev);
+            const actor = newActors.get(actorId);
+            if (actor) {
+                newActors.set(actorId, { ...actor, ...updates });
+            }
+            return newActors;
+        });
+    }, []);
+
+    if (!assetsLoaded) {
+        return (
+            <div className="w-full h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-purple-50">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-xl text-gray-700 font-medium">Cargando cuento...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div 
+            className="w-full h-screen overflow-hidden relative"
+            onClick={handleBackgroundClick}
+        >
+            <Page
+                page={currentPage}
+                actors={actors}
+                updateActor={updateActor}
+                onAdvance={advancePage}
+            />
+
+            {/* Indicador de progreso */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm pointer-events-none">
+                {currentPageIndex + 1} / {story.pages.length}
+            </div>
+        </div>
+    );
+}
