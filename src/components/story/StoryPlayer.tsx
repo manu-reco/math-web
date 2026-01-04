@@ -152,6 +152,8 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                 actors={actors}
                 updateActor={updateActor}
                 onAdvance={advancePage}
+                globalBackground={story.background}
+                globalBackgroundColor={story.backgroundColor}
             />
 
             {/* Indicador de progreso */}

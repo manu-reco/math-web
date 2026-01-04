@@ -1,9 +1,9 @@
 {
     "title": "Búhos en el árbol",
+    "background": "/cuentos/bg-park.png",
     "pages": [
         {
             "id": "page-1",
-            "background": "/bg-park.png",
             "actors": [
                 {
                     "id": "owl-1",
@@ -21,10 +21,10 @@
                     "type": "image",
                     "src": "cuentos/tree.png",
                     "x": 70,
-                    "y": 40,
+                    "y": 60,
                     "zIndex": 5,
-                    "width": 200,
-                    "height": 300,
+                    "width": 850,
+                    "height": 850,
                     "interactive": false
                 }
             ],
@@ -42,14 +42,28 @@
         },
         {
             "id": "page-2",
-            "background": "/bg-park.png",
             "actors": [
                 {
                     "actor": "owl-1",
                     "action": "move",
                     "to": {
-                        "x": 72,
-                        "y": 30
+                        "x": 65,
+                        "y": 50
+                    },
+                    "duration": 2000
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        },
+        {
+            "id": "page-3",
+            "actors": [
+                {
+                    "actor": "owl-1",
+                    "action": "move",
+                    "to": {
+                        "x": 10,
+                        "y": 20
                     },
                     "duration": 2000
                 }

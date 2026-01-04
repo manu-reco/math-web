@@ -12,9 +12,11 @@ interface PageProps {
     actors: Map<string, ActorState>;
     updateActor: (actorId: string, updates: Partial<ActorState>) => void;
     onAdvance: () => void;
+    globalBackground?: string; // Background global de la historia
+    globalBackgroundColor?: string; // Color de fondo global de la historia
 }
 
-export default function Page({ page, actors, updateActor, onAdvance }: PageProps) {
+export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor }: PageProps) {
     // Ejecutar una acción
     const executeAction = useCallback((action: ActionDefinition) => {
         const actor = actors.get(action.actor);
@@ -66,19 +68,22 @@ export default function Page({ page, actors, updateActor, onAdvance }: PageProps
     // Encontrar actores y acciones de esta página
     const pageActions = page.actors.filter(item => 'action' in item) as ActionDefinition[];
 
+    // Usar background de la página o el global como fallback
+    const finalBackground = page.background ?? globalBackground;
+    const finalBackgroundColor = page.backgroundColor ?? globalBackgroundColor ?? '#e0f2fe';
+
     return (
         <motion.div
             className="w-full h-full relative"
+            animate={{
+                backgroundColor: finalBackgroundColor,
+            }}
             style={{
-                backgroundColor: page.backgroundColor || '#e0f2fe',
-                backgroundImage: page.background ? `url(${page.background})` : undefined,
+                backgroundImage: finalBackground ? `url(${finalBackground})` : undefined,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
         >
             {/* Drag Targets (zonas de soltar) */}
             {page.dragTargets?.map(target => (

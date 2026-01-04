@@ -61,6 +61,8 @@ export interface StoryData {
     title: string;
     author?: string;
     narrator?: string;
+    background?: string; // Background global (se usa si la página no define uno)
+    backgroundColor?: string; // Color de fondo global (se usa si la página no define uno)
     pages: PageDefinition[];
 }
 

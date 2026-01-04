@@ -57,6 +57,8 @@ const StoryDataSchema = z.object({
     title: z.string(),
     author: z.string().optional(),
     narrator: z.string().optional(),
+    background: z.string().optional(),
+    backgroundColor: z.string().optional(),
     pages: z.array(PageDefinitionSchema).min(1),
 });
 

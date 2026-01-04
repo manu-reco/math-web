@@ -30,6 +30,14 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
             zIndex: definition.zIndex || 10,
         },
         className: "absolute",
+        initial: {
+            opacity: 0,
+            scale: 0.3,
+            left: `${currentPosition.x}%`,
+            top: `${currentPosition.y}%`,
+            x: '-50%',
+            y: '-50%',
+        },
         animate: { 
             opacity: 1, 
             scale: definition.scale || 1,
@@ -40,8 +48,9 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
             y: '-50%',
         },
         transition: {
-            duration: durationInSeconds,
+            type: "tween" as const,
             ease: "easeInOut" as const,
+            duration: durationInSeconds,
         },
         layout: false,
     };
