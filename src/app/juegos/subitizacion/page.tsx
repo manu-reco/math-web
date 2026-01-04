@@ -42,7 +42,7 @@ export default function SubitizacionPage() {
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 100 });
         setCurrentLevel(level);
         setCurrentMode(mode);
         // Construir patrones desde PatternTemplate a Pattern con iconos asignados
