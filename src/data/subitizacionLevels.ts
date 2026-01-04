@@ -3,13 +3,13 @@ import { Level } from "./subitizacionPatterns";
 
 // Constantes para iconos
 const BUHO = {
-    ROJO: "/subitizacion/buho-rojo.png",
-    AZUL: "/subitizacion/buho-azul.png",
-    VERDE: "/subitizacion/buho-verde.png",
-    AMARILLO: "/subitizacion/buho-amarillo.png",
+    ROJO: "/icons/buho-rojo.png",
+    AZUL: "/icons/buho-azul.png",
+    VERDE: "/icons/buho-verde.png",
+    AMARILLO: "/icons/buho-amarillo.png",
 } as const;
 
-const PUNTO = "/subitizacion/punto.svg";
+const PUNTO = "/icons/punto.svg";
 
 // ============================================
 // NIVELES DEL JUEGO
