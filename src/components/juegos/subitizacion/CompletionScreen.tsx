@@ -7,13 +7,15 @@ interface CompletionScreenProps {
     hasNextLevel: boolean;
     onNextLevel: () => void;
     onRestart: () => void;
+    nextLevelMessage?: string;
 }
 
 export default function CompletionScreen({
     levelName,
     hasNextLevel,
     onNextLevel,
-    onRestart
+    onRestart,
+    nextLevelMessage
 }: CompletionScreenProps) {
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export default function CompletionScreen({
                         onClick={onNextLevel}
                         className="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
                     >
-                        Siguiente nivel →
+                        {nextLevelMessage || 'Siguiente nivel →'}
                     </button>
                 )}
 
