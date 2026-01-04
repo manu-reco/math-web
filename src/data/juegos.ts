@@ -21,14 +21,14 @@ export const games: Game[] = [
         path: "/juegos/subitizacion/"
     },
     {
-        id: "juego-2",
-        title: "Juego 2",
-        image: "/recta-numerica/5-buhos-rojos.png",
+        id: "buho-ejemplo",
+        title: "Búhos al árbol",
+        image: "/cuentos/tree.png",
         area: "Aritmética",
-        description: "Ejemplo de juego disponible próximamente.",
+        description: "Ejemplo de cuento interactivo con un búho que vuela al árbol.",
         skills: ["En desarrollo"],
         isAvailable: true,
-        path: "#"
+        path: "/juegos/cuentos/owl-tree"
     },
     {
         id: "juego-3",
