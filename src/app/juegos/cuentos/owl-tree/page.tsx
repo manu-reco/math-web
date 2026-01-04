@@ -5,10 +5,36 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import storyData from "@/data/cuentos/owl-tree.story.json";
+import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
 
 export default function OwlTreeStoryPage() {
     const [gameCompleted, setGameCompleted] = useState(false);
+
+    // Validar datos del cuento
+    let validatedStory: StoryData;
+    try {
+        validatedStory = validateStoryData(storyData) as StoryData;
+    } catch (error) {
+        console.error('Error validating story:', error);
+        return (
+            <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50 flex items-center justify-center">
+                <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md">
+                    <h1 className="text-2xl font-bold text-red-600 mb-4">Error al cargar el cuento</h1>
+                    <p className="text-gray-700 mb-6">
+                        Hubo un problema con los datos del cuento. Por favor, contacta al administrador.
+                    </p>
+                    <Link
+                        href="/juegos"
+                        className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                    >
+                        <ArrowLeft size={20} />
+                        Volver a Juegos
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     if (gameCompleted) {
         return (
