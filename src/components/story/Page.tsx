@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import type { PageDefinition, ActorState, ActionDefinition } from "@/types/story";
 import Actor from "./Actor";
 import TimelineAction from "./TimelineAction";
+import DragTarget from "./DragTarget";
 
 interface PageProps {
     page: PageDefinition;
@@ -79,6 +80,20 @@ export default function Page({ page, actors, updateActor, onAdvance }: PageProps
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
         >
+            {/* Drag Targets (zonas de soltar) */}
+            {page.dragTargets?.map(target => (
+                <DragTarget
+                    key={target.id}
+                    target={target}
+                    actors={actors}
+                    updateActor={updateActor}
+                    onComplete={() => {
+                        if (page.advanceOn === 'dragComplete') {
+                            onAdvance();
+                        }
+                    }}
+                />
+            ))}
 
             {/* Actores visibles en esta página */}
             {Array.from(actors.values()).map(actorState => (
