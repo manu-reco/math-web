@@ -1,5 +1,46 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import StoryPlayer from "@/components/story/StoryPlayer";
+import storyData from "@/data/cuentos/owl-tree.story.json";
+import type { StoryData } from "@/types/story";
 
 export default function OwlTreeStoryPage() {
+    const [gameCompleted, setGameCompleted] = useState(false);
+
+    if (gameCompleted) {
+        return (
+            <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
+                <div className="bg-white p-12 rounded-2xl shadow-2xl text-center max-w-md">
+                    <div className="text-6xl mb-6">🎉</div>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                        ¡Cuento completado!
+                    </h1>
+                    <p className="text-gray-600 mb-8">
+                        Has terminado de leer &quot;{validatedStory.title}&quot;
+                    </p>
+                    <div className="flex flex-col gap-4">
+                        <button
+                            onClick={() => setGameCompleted(false)}
+                            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                        >
+                            Leer de nuevo
+                        </button>
+                        <Link
+                            href="/juegos"
+                            className="inline-flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                        >
+                            <ArrowLeft size={20} />
+                            Volver a Juegos
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="relative">
             {/* Botón de retroceso flotante */}
@@ -10,6 +51,12 @@ export default function OwlTreeStoryPage() {
                 <ArrowLeft size={20} />
                 Salir
             </Link>
+
+            {/* Player del cuento */}
+            <StoryPlayer
+                story={storyData as StoryData}
+                onComplete={() => setGameCompleted(true)}
+            />
         </div>
     );
 }
