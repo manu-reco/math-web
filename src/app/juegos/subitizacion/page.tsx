@@ -14,22 +14,35 @@ type GameMode = 'concrete' | 'abstract';
 
 export default function SubitizacionPage() {
     // ESTADOS DEL JUEGO
-    // Controla qué pantalla se muestra actualmente
     const [gameState, setGameState] = useState<GameState>('instructions');
-    // Modo de juego actual (concreto o abstracto)
     const [currentMode, setCurrentMode] = useState<GameMode>('concrete');
-    // Almacena el nivel seleccionado
     const [currentLevel, setCurrentLevel] = useState<Level | null>(null);
+
     // Array de patrones randomizados para el nivel actual
     const [shuffledPatterns, setShuffledPatterns] = useState<Pattern[]>([]);
+
     // Índice del patrón actual dentro de shuffledPatterns
     const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
 
+    // FUNCIONES DEL JUEGO
+    const handleBack = () => {
+        window.scrollTo({ top: 0 });
+
+        if (gameState === 'levelSelect') {
+            setGameState('instructions');
+        } else if (gameState === 'playing' || gameState === 'completed') {
+            setGameState('levelSelect');
+        }
+        // Si gameState === 'instructions', no hacemos nada aquí (el Link redirigirá a /juegos)
+    };
+
     const goToSelectLevel = () => {
+        window.scrollTo({ top: 0 });
         setGameState('levelSelect');
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
+        window.scrollTo({ top: 0 });
         setCurrentLevel(level);
         setCurrentMode(mode);
         // Construir patrones desde PatternTemplate a Pattern con iconos asignados
@@ -40,15 +53,15 @@ export default function SubitizacionPage() {
     };
 
     // Al pulsar Espacio: avanzar al siguiente patrón si estamos jugando
-const nextPattern = useCallback(() => {
-    if (currentPatternIndex < shuffledPatterns.length - 1) {
-        setCurrentPatternIndex(prev => prev + 1);
-    } else {
-        setGameState('completed');
-    }
-}, [currentPatternIndex, shuffledPatterns.length]);
+    const nextPattern = useCallback(() => {
+        if (currentPatternIndex < shuffledPatterns.length - 1) {
+            setCurrentPatternIndex(prev => prev + 1);
+        } else {
+            setGameState('completed');
+        }
+    }, [currentPatternIndex, shuffledPatterns.length]);
 
-    useEffect(() => {    
+    useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
             if (event.code === 'Space' && gameState === 'playing') {
                 event.preventDefault();
@@ -57,20 +70,20 @@ const nextPattern = useCallback(() => {
         };
 
         window.addEventListener('keydown', handleKeyPress);
-        return () => window.removeEventListener('keydown', handleKeyPress); 
+        return () => window.removeEventListener('keydown', handleKeyPress);
         // cleanup: quita el listener antes de desmontar el componente o actualizarlo
     }, [gameState, nextPattern]);
 
     const handleNextLevel = () => {
         if (!currentLevel) return;
-        
+
         const currentLevels = subitizacionLevels[currentMode];
         const nextLevelInMode = currentLevels.find(l => l.id === currentLevel.id + 1);
-        
+
         // Si hay siguiente nivel en el modo actual
         if (nextLevelInMode && nextLevelInMode.patterns.length > 0) {
             playLevel(nextLevelInMode, currentMode);
-        } 
+        }
         // Si estamos en el último nivel de concrete, pasar al primer nivel de abstract
         else if (currentMode === 'concrete' && subitizacionLevels.abstract.length > 0) {
             const firstAbstractLevel = subitizacionLevels.abstract[0];
@@ -92,15 +105,15 @@ const nextPattern = useCallback(() => {
     const hasNextLevel = currentLevel ? (() => {
         const currentLevels = subitizacionLevels[currentMode];
         const nextLevelInMode = currentLevels.some(l => l.id === currentLevel.id + 1 && l.patterns.length > 0);
-        
+
         // Si hay siguiente nivel en el modo actual, retornar true
         if (nextLevelInMode) return true;
-        
+
         // Si estamos en concrete y no hay más niveles, verificar si hay niveles en abstract
         if (currentMode === 'concrete') {
             return subitizacionLevels.abstract.length > 0 && subitizacionLevels.abstract[0].patterns.length > 0;
         }
-        
+
         return false;
     })() : false;
 
@@ -108,9 +121,18 @@ const nextPattern = useCallback(() => {
         <div className="min-h-screen bg-linear-to-b from-purple-50 to-blue-50 pb-20">
             <header className="bg-white shadow-sm border-b border-gray-100">
                 <div className="container-custom py-6">
-                    <Link href="/juegos" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
-                        ← Volver a Juegos
-                    </Link>
+                    {gameState === 'instructions' ? (
+                        <Link href="/juegos" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
+                            ← Volver a Juegos
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={handleBack}
+                            className="text-primary hover:text-primary-hover font-medium mb-2 inline-block hover:cursor-pointer"
+                        >
+                            ← Volver a {gameState === 'levelSelect' ? 'Instrucciones' : 'Selección de Nivel'}
+                        </button>
+                    )}
                     <h1 className="text-4xl font-bold text-gray-900">
                         Subitización 🦉
                     </h1>
@@ -120,7 +142,7 @@ const nextPattern = useCallback(() => {
                         </p>
                     )}
                 </div>
-            </header>
+            </header >
 
             <main className="container-custom max-w-6xl mx-auto mt-12 px-6">
                 {gameState === 'instructions' && (
@@ -128,16 +150,16 @@ const nextPattern = useCallback(() => {
                 )}
 
                 {gameState === 'levelSelect' && (
-                    <LevelSelector 
+                    <LevelSelector
                         concreteLevels={subitizacionLevels.concrete}
                         abstractLevels={subitizacionLevels.abstract}
-                        onSelectLevel={playLevel} 
+                        onSelectLevel={playLevel}
                     />
                 )}
 
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
-                    <GameGrid 
-                        pattern={shuffledPatterns[currentPatternIndex]} 
+                    <GameGrid
+                        pattern={shuffledPatterns[currentPatternIndex]}
                         onNext={nextPattern}
                     />
                 )}
@@ -145,11 +167,11 @@ const nextPattern = useCallback(() => {
                 {gameState === 'completed' && currentLevel && (() => {
                     // Determinar si el siguiente nivel es el inicio de la sección abstracta
                     const currentLevels = subitizacionLevels[currentMode];
-                    const isLastConcreteLevel = currentMode === 'concrete' && 
+                    const isLastConcreteLevel = currentMode === 'concrete' &&
                         !currentLevels.some(l => l.id === currentLevel.id + 1 && l.patterns.length > 0);
-                    
-                    const nextLevelMessage = isLastConcreteLevel && hasNextLevel 
-                        ? '¡Pasar a Abstracto! ⚫' 
+
+                    const nextLevelMessage = isLastConcreteLevel && hasNextLevel
+                        ? '¡Pasar a Abstracto! ⚫'
                         : undefined;
 
                     return (
@@ -163,6 +185,6 @@ const nextPattern = useCallback(() => {
                     );
                 })()}
             </main>
-        </div>
+        </div >
     );
 }
