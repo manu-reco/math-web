@@ -99,18 +99,32 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         }
     }, [currentPageIndex, story.pages.length, isTransitioning, onComplete]);
 
-    // Manejador de teclado (Espacio)
+    // Retroceder a la página anterior
+    const goToPreviousPage = useCallback(() => {
+        if (isTransitioning) return;
+
+        if (currentPageIndex > 0) {
+            setIsTransitioning(true);
+            setCurrentPageIndex(prev => prev - 1);
+            setTimeout(() => setIsTransitioning(false), 100);
+        }
+    }, [currentPageIndex, isTransitioning]);
+
+    // Manejador de teclado (Espacio y flechas)
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.code === 'Space' && currentPage.advanceOn === 'spaceOrClick') {
+            if ((event.code === 'ArrowRight' || event.code === 'Space') && currentPage.advanceOn === 'spaceOrClick') {
                 event.preventDefault();
                 advancePage();
+            } else if (event.code === 'ArrowLeft') {
+                event.preventDefault();
+                goToPreviousPage();
             }
         };
 
         window.addEventListener('keydown', handleKeyPress);
         return () => window.removeEventListener('keydown', handleKeyPress);
-    }, [advancePage, currentPage.advanceOn]);
+    }, [advancePage, goToPreviousPage, currentPage.advanceOn]);
 
     // Manejador de clic en el fondo
     const handleBackgroundClick = useCallback(() => {
@@ -156,9 +170,39 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                 globalBackgroundColor={story.backgroundColor}
             />
 
-            {/* Indicador de progreso */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm pointer-events-none">
-                {currentPageIndex + 1} / {story.pages.length}
+            {/* Indicador de progreso con controles de navegación */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        goToPreviousPage();
+                    }}
+                    disabled={currentPageIndex === 0}
+                    className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                    aria-label="Página anterior"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                
+                <span className="min-w-12 text-center">
+                    {currentPageIndex + 1} / {story.pages.length}
+                </span>
+                
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        advancePage();
+                    }}
+                    disabled={currentPageIndex === story.pages.length - 1}
+                    className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                    aria-label="Página siguiente"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
         </div>
     );

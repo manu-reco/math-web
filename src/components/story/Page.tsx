@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import type { PageDefinition, ActorState, ActionDefinition } from "@/types/story";
+import { executeStoryAction } from "@/lib/storyActions";
 import Actor from "./Actor";
 import TimelineAction from "./TimelineAction";
 import DragTarget from "./DragTarget";
@@ -17,33 +18,12 @@ interface PageProps {
 }
 
 export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor }: PageProps) {
-    // Ejecutar una acción
+    // Ejecutar una acción usando la función centralizada
     const executeAction = useCallback((action: ActionDefinition) => {
         const actor = actors.get(action.actor);
         if (!actor) return;
-
-        switch (action.action) {
-            case 'appear':
-                updateActor(action.actor, { visible: true });
-                break;
-            case 'disappear':
-                updateActor(action.actor, { visible: false });
-                break;
-            case 'move':
-                if (action.to) {
-                    updateActor(action.actor, {
-                        isAnimating: true,
-                        currentPosition: action.to
-                    });
-                }
-                break;
-            case 'playSound':
-                if (action.sound) {
-                    const audio = new Audio(action.sound);
-                    audio.play().catch(err => console.error('Error playing sound:', err));
-                }
-                break;
-        }
+        
+        executeStoryAction(action, actor, updateActor);
     }, [actors, updateActor]);
 
     // Ejecutar acciones onEnter cuando se monta la página
