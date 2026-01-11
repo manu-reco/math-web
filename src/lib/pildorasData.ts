@@ -1,15 +1,12 @@
 
 export type Saber = {
     id: string;
-    title: string;
+    title: string; // e.g., "Aritmética"
+    icon: string; // Name of the icon to use
+    color: string; // Tailwind color class
     description: string;
 };
 
-export type Chapter = {
-    id: string;
-    title: string;
-    articles: Article[];
-};
 export type Nivel = {
     id: string;
     title: string; // e.g., "Primeros pasos"
@@ -122,12 +119,18 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                     title: "Conteo Resultativo",
                     subtitle: "Contar para saber cuántos hay.",
                 },
-                {
-                    id: "subitizacion",
-                    title: "Subitización",
-                    description: "Reconocer cantidades de un vistazo.",
-                },
             ],
+        },
+        {
+            id: "subitizacion",
+            title: "Subitización",
+            articles: [
+                {
+                    id: "subitizacion-tarjetas-puntos",
+                    title: "Subitización con Tarjetas de Puntos",
+                    subtitle: "Utilizamos tarjetas con puntos para identificar cantidades pequeñas de forma súbita, sin conteo."
+                },
+            ]
         },
         {
             id: "recta-numerica",
