@@ -1,5 +1,5 @@
 
-export type Concept = {
+export type Article = {
     id: string;
     title: string;
     description: string;
@@ -8,10 +8,10 @@ export type Concept = {
 export type Chapter = {
     id: string;
     title: string;
-    concepts: Concept[];
+    articles: Article[];
 };
 
-export type Level = {
+export type Nivel = {
     id: string;
     title: string; // e.g., "Primeros pasos"
     description: string;
@@ -63,7 +63,7 @@ export const SABERES: Saber[] = [
     },
 ];
 
-export const NIVELES: Level[] = [
+export const NIVELES: Nivel[] = [
     {
         id: "primeros-pasos",
         title: "Primeros Pasos",
@@ -87,7 +87,7 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
         {
             id: "conceptos-basicos",
             title: "1. Conceptos básicos",
-            concepts: [
+            articles: [
                 {
                     id: "mayor-menor",
                     title: "Mayor que / Menor que",
@@ -108,7 +108,7 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
         {
             id: "conteo",
             title: "2. Conteo",
-            concepts: [
+            articles: [
                 {
                     id: "conteo-recitativo",
                     title: "Conteo Recitativo",
@@ -129,7 +129,7 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
         {
             id: "recta-numerica",
             title: "1. Introducción a la Recta Numérica",
-            concepts: [
+            articles: [
                 {
                     id: "descubriendo-recta",
                     title: "Descubriendo la Recta Numérica",

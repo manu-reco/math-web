@@ -15,9 +15,9 @@ export default function ActividadesConceptosBasicosContent() {
     return (
         <>
             <ArticleHeader
-                title={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["concepts"][0].title}
+                title={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["articles"][0].title}
                 subtitle="Fomentando el descubrimiento en lugar de la instrucción directa"
-                description={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["concepts"][0].description}
+                description={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["articles"][0].description}
                 category="Aritmética"
                 level="Primeros Pasos"
             />

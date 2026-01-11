@@ -4,27 +4,26 @@ Guía para crear un nuevo artículo educativo en la sección de **Formación > P
 
 ## 📋 Pasos
 
-### 1. Definir la Ubicación del Artículo
+### 1. Decidir la Ubicación del Artículo
 
 - **Saber**: Aritmética, Geometría, Problemas, Medidas, o Probabilidad y Estadística
-- **Nivel**: Primeros Pasos, Segundo Ciclo, o Tercer Ciclo  
+- **Nivel**: Primeros Pasos (Infantil y Primer Ciclo), Segundo Ciclo, o Tercer Ciclo
 - **Capítulo**: Agrupación temática (ej: "Conceptos básicos", "Conteo")
-- **Concepto**: El slug único del artículo (ej: `mayor-menor`, `conteo-recitativo`)
 
-### 2. Agregar el Concepto a los Datos
+### 2. Agregar los datos básicos a "pildorasData.ts"
 
-Edita el archivo [`src/lib/pildorasData.ts`](src/lib/pildorasData.ts):
+Añade el nuevo artículo dentro de un capítulo nuevo o ya existente en la constante COURSE_CONTENT de [`src/lib/pildorasData.ts`](src/lib/pildorasData.ts). Así, ya aparecerá en la lista de artículos del saber y nivel seleccionado.
 
 ```typescript
-export const COURSE_CONTENT: Record<string, Chapter[]> = {
+export const COURSE_CONTENT: Record<string, Article[]> = {
     "aritmetica-primeros-pasos": [
         {
             id: "conceptos-basicos",
             title: "1. Conceptos básicos",
-            concepts: [
-                // ... conceptos existentes
+            articles: [
+                // ... artículos existentes
                 {
-                    id: "mi-nuevo-concepto",  // ← Tu slug único
+                    id: "mi-nuevo-concepto",  // ← slug único
                     title: "Título del Concepto",
                     description: "Breve descripción que aparecerá en la lista.",
                 },
@@ -49,7 +48,7 @@ Crea un nuevo archivo en [`src/components/content/`](src/components/content/):
 **Usar siempre ArticleHeader y ArticleSection, el resto son opcionales, estéticos**
 **Usar <Image> de Next para imágenes**. Se pueden encerrar en un div con className="flex justify-center my-6" para mantenerlas centradas.
 
-**Ejemplo:** `src/components/content/MiNuevoConceptoContent.tsx`
+**Ejemplo:** `src/components/content/MiNuevoArticuloContent.tsx`
 
 ```tsx
 import {
@@ -61,7 +60,7 @@ import {
     ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
-export default function MiNuevoConceptoContent() {
+export default function MiNuevoArticuloContent() {
     return (
         <>
             <ArticleHeader
@@ -110,17 +109,17 @@ export default function MiNuevoConceptoContent() {
 
 ### 4. Registrar el Componente
 
-Edita [`src/app/formacion/pildoras/[saber]/[nivel]/[concepto]/page.tsx`](src/app/formacion/pildoras/[saber]/[nivel]/[concepto]/page.tsx):
+Edita [`src/app/formacion/pildoras/[saber]/[nivel]/[articulo]/page.tsx`](src/app/formacion/pildoras/[saber]/[nivel]/[articulo]/page.tsx):
 
 ```typescript
 // 1. Importar tu componente
-import MiNuevoConceptoContent from "@/components/content/MiNuevoConceptoContent";
+import MiNuevoArticuloContent from "@/components/content/MiNuevoArticuloContent";
 
 // 2. Agregarlo al registro
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "mayor-menor": MayorMenorContent,
     "conteo-recitativo": ConteoRecitativoContent,
-    "mi-nuevo-concepto": MiNuevoConceptoContent,  // ← Agregar aquí
+    "mi-nuevo-articulo": MiNuevoArticuloContent,  // ← Agregar aquí
     // ... otros componentes
 };
 ```
@@ -173,7 +172,7 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
 Los artículos se acceden mediante esta estructura:
 
 ```
-/formacion/pildoras/[saber]/[nivel]/[concepto]
+/formacion/pildoras/[saber]/[nivel]/[articulo]
 ```
 
 **Ejemplo:**
@@ -185,7 +184,7 @@ Los artículos se acceden mediante esta estructura:
 
 Antes de considerar terminado tu artículo, verifica:
 
-- [ ] El concepto está agregado en `pildorasData.ts` con su `id`, `title` y `description`
+- [ ] El artículo está agregado en `pildorasData.ts` con su `id`, `title` y `description`
 - [ ] El componente de contenido está creado en `src/components/content/`
 - [ ] El componente está registrado en `CONTENT_REGISTRY`
 - [ ] El artículo tiene `ArticleHeader` con información correcta

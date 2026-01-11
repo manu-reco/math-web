@@ -111,7 +111,7 @@ export default async function SaberPage({ params }: PageProps) {
                                     </h2>
                                 </div>
                                 <div className="divide-y divide-gray-50">
-                                    {chapter.concepts.map((concept) => (
+                                    {chapter.articles.map((concept) => (
                                         <Link
                                             key={concept.id}
                                             href={`/formacion/pildoras/${saberId}/${nivelId}/${concept.id}`}

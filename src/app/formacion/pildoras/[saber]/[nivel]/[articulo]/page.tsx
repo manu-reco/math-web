@@ -7,12 +7,14 @@ import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
 import DescubriendoRectaContent from "@/components/content/DescubriendoRectaContent";
+import SubitizacionTarjetasPuntosContent from "@/components/content/SubitizacionTarjetasPuntosContent";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "mayor-menor": MayorMenorContent,
-    "conteo-recitativo": ConteoRecitativoContent,
     "actividades-conceptos-basicos": ArticuloPruebaActividades,
+    "conteo-recitativo": ConteoRecitativoContent,
+    "subitizacion-tarjetas-puntos": SubitizacionTarjetasPuntosContent,
     "descubriendo-recta": DescubriendoRectaContent, 
 };
 
@@ -20,45 +22,45 @@ interface PageProps {
     params: Promise<{
         saber: string;
         nivel: string;
-        concepto: string;
+        articulo: string;
     }>;
 }
 
-export default async function ConceptPage({ params }: PageProps) {
-    const { saber: saberId, nivel: nivelId, concepto: conceptoId } = await params;
+export default async function ArticlePage({ params }: PageProps) {
+    const { saber: saberId, nivel: nivelId, articulo: articuloId } = await params;
 
     // Validate existence
     const saber = SABERES.find((s) => s.id === saberId);
     const nivel = NIVELES.find((n) => n.id === nivelId);
 
-    // Find the concept in the data structure to get the title if needed, 
+    // Find the article in the data structure to get the title if needed, 
     // though the content component usually has it.
     // But we need to validate the URL.
     const contentKey = `${saberId}-${nivelId}`;
     const chapters = COURSE_CONTENT[contentKey];
 
-    let conceptFound = false;
+    let articleFound = false;
     if (chapters) {
         for (const chapter of chapters) {
-            if (chapter.concepts.find(c => c.id === conceptoId)) {
-                conceptFound = true;
+            if (chapter.articles.find(a => a.id === articuloId)) {
+                articleFound = true;
                 break;
             }
         }
     }
 
-    if (!saber || !nivel || !conceptFound) {
+    if (!saber || !nivel || !articleFound) {
         // We might want to allow rendering if we have the component even if not in the list,
         // but strict validation is better.
         // However, for this demo, if I missed adding it to the list but have the component, let's show it.
         // But I added them to the list in pildorasData.ts.
         // So strict check is fine.
-        if (!CONTENT_REGISTRY[conceptoId]) {
+        if (!CONTENT_REGISTRY[articuloId]) {
             // If we don't have the component, we show a generic placeholder
         }
     }
 
-    const ContentComponent = CONTENT_REGISTRY[conceptoId];
+    const ContentComponent = CONTENT_REGISTRY[articuloId];
 
     return (
         <div className="min-h-screen bg-white pb-20">
@@ -89,7 +91,7 @@ export default async function ConceptPage({ params }: PageProps) {
                         </p>
                         <div className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100 inline-block mx-4">
                             <p className="text-gray-500 italic">
-                                Slug: {conceptoId}
+                                Slug: {articuloId}
                             </p>
                         </div>
                     </div>
