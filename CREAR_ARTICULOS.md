@@ -23,8 +23,8 @@ export const COURSE_CONTENT: Record<string, Article[]> = {
             articles: [
                 // ... artículos existentes
                 {
-                    id: "mi-nuevo-concepto",  // ← slug único
-                    title: "Título del Concepto",
+                    id: "mi-nuevo-articulo",  // ← slug único
+                    title: "Título del Artículo",
                     description: "Breve descripción que aparecerá en la lista.",
                 },
             ],
@@ -44,6 +44,7 @@ Formato: `{saber-id}-{nivel-id}`
 
 Crea un nuevo archivo en [`src/components/content/`](src/components/content/):
 
+**Obtener los datos del artículo con la función** `findArticleById("id")`
 **Importar los componentes deseados de**: [`@/components/pildoras/ArticleComponents`](src/components/pildoras/ArticleComponents.tsx)
 **Usar siempre ArticleHeader y ArticleSection, el resto son opcionales, estéticos**
 **Usar <Image> de Next para imágenes**. Se pueden encerrar en un div con className="flex justify-center my-6" para mantenerlas centradas.
@@ -60,12 +61,17 @@ import {
     ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
+import { findArticleById } from "@/lib/pildorasData";
+
 export default function MiNuevoArticuloContent() {
+
+    const article = findArticleById("mi-nuevo-articulo");
+
     return (
         <>
             <ArticleHeader
-                title="Título Principal del Artículo"
-                subtitle="Subtítulo (opcional)"
+                title={article.title || "Título Principal del Artículo"}
+                subtitle={article.subtitle || "Subtítulo"}
                 description="Descripción introductoria del artículo que explica de qué trata."
                 category="Aritmética"  // Debe coincidir con el Saber
                 level="Primeros Pasos"  // Debe coincidir con el Nivel

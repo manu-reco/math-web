@@ -7,17 +7,19 @@ import {
     ConceptPopover,
 } from "@/components/pildoras/ArticleComponents";
 
-import { COURSE_CONTENT } from "@/lib/pildorasData";
+import { findArticleById } from "@/lib/pildorasData";
 import Image from "next/image";
 
 
 export default function ActividadesConceptosBasicosContent() {
+    const article = findArticleById("descubriendo-recta");
+
     return (
         <>
             <ArticleHeader
-                title={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["articles"][0].title}
-                subtitle="Fomentando el descubrimiento en lugar de la instrucción directa"
-                description={COURSE_CONTENT["aritmetica-primeros-pasos"][2]["articles"][0].description}
+                title={article?.title || "Descubriendo la Recta Numérica"}
+                subtitle={article?.subtitle || "Fomentando el descubrimiento en lugar de la instrucción directa"}
+                description="Aprender a construir la recta numérica es fundamental para el desarrollo del sentido numérico en los niños y niñas. Hoy lo enseñamos de manera sencilla, utilizando una conversación guiada en el aula y material manipulativo."
                 category="Aritmética"
                 level="Primeros Pasos"
             />

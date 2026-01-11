@@ -7,12 +7,16 @@ import {
     InfoBox,
 } from "@/components/pildoras/ArticleComponents";
 
+import { findArticleById } from "@/lib/pildorasData";
+
 export default function ConteoRecitativoContent() {
+    const article = findArticleById("conteo-recitativo");
+
     return (
         <>
             <ArticleHeader
-                title="Conteo Recitativo"
-                subtitle="La secuencia numérica verbal"
+                title={article?.title || "Conteo Recitativo"}
+                subtitle={article?.subtitle || "La secuencia numérica verbal"}
                 description="El conteo recitativo es la capacidad de recitar la secuencia de números de memoria, como una retahíla. Es el primer paso para aprender a contar de verdad."
                 category="Aritmética"
                 level="Primeros Pasos"

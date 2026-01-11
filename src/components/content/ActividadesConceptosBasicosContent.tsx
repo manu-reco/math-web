@@ -6,13 +6,17 @@ import {
     ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
+import { findArticleById } from "@/lib/pildorasData";
+
 
 export default function ActividadesConceptosBasicosContent() {
+    const article = findArticleById("actividades-conceptos-basicos");
+
     return (
         <>
             <ArticleHeader
-                title="Actividades Aritmética - Conceptos básicos"
-                subtitle="Para practicar lo aprendido"
+                title={article?.title || "Actividades Aritmética - Conceptos básicos"}
+                subtitle={article?.subtitle || "Para practicar lo aprendido"}
                 description="Una vez vistos los conceptos básicos, es importante reforzar con actividades prácticas."
                 category="Aritmética"
                 level="Primeros Pasos"

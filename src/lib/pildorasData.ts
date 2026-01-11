@@ -1,5 +1,5 @@
 
-export type Article = {
+export type Saber = {
     id: string;
     title: string;
     description: string;
@@ -10,19 +10,22 @@ export type Chapter = {
     title: string;
     articles: Article[];
 };
-
 export type Nivel = {
     id: string;
     title: string; // e.g., "Primeros pasos"
     description: string;
 };
 
-export type Saber = {
+export type Article = {
     id: string;
-    title: string; // e.g., "Aritmética"
-    icon: string; // Name of the icon to use
-    color: string; // Tailwind color class
-    description: string;
+    title: string;
+    subtitle: string;
+};
+
+export type Chapter = {
+    id: string;
+    title: string;
+    articles: Article[];
 };
 
 export const SABERES: Saber[] = [
@@ -91,17 +94,17 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                 {
                     id: "mayor-menor",
                     title: "Mayor que / Menor que",
-                    description: "Aprende a comparar cantidades.",
+                    subtitle: "Aprende a comparar cantidades.",
                 },
                 {
                     id: "izquierda-derecha",
                     title: "Izquierda - Derecha",
-                    description: "Orientación espacial básica.",
+                    subtitle: "Orientación espacial básica.",
                 },
                 {
                     id: "actividades-conceptos-basicos",
                     title: "Actividades Aritmética - Conceptos básicos",
-                    description: "Para practicar lo aprendido.",
+                    subtitle: "Para practicar lo aprendido.",
                 }
             ],
         },
@@ -112,12 +115,12 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                 {
                     id: "conteo-recitativo",
                     title: "Conteo Recitativo",
-                    description: "La secuencia numérica verbal.",
+                    subtitle: "La secuencia numérica verbal.",
                 },
                 {
                     id: "conteo-resultativo",
                     title: "Conteo Resultativo",
-                    description: "Contar para saber cuántos hay.",
+                    subtitle: "Contar para saber cuántos hay.",
                 },
                 {
                     id: "subitizacion",
@@ -133,7 +136,7 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                 {
                     id: "descubriendo-recta",
                     title: "Descubriendo la Recta Numérica",
-                    description: "Cómo crear una conversación en el aula para que los niños/as descubran el concepto",
+                    subtitle: "Cómo crear una conversación en el aula para que los niños/as descubran el concepto",
                 }
             ],
         },
@@ -141,3 +144,16 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
     ],
     // Add more mock data as needed
 };
+
+// Función helper para encontrar un artículo por su ID en saberes y niveles
+export function findArticleById(articleId: string): Article | undefined {
+    for (const chapters of Object.values(COURSE_CONTENT)) {
+        for (const chapter of chapters) {
+            const article = chapter.articles.find(a => a.id === articleId);
+            if (article) {
+                return article;
+            }
+        }
+    }
+    return undefined;
+}

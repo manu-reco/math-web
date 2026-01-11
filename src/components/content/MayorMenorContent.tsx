@@ -8,12 +8,16 @@ import {
     KeyPoints
 } from "@/components/pildoras/ArticleComponents";
 
+import { findArticleById } from "@/lib/pildorasData";
+
 export default function MayorMenorContent() {
+    const article = findArticleById("mayor-menor");
+
     return (
         <>
             <ArticleHeader
-                title="Mayor que, Menor que e Igual"
-                subtitle="Fundamentos de la comparación numérica"
+                title={article?.title || "Mayor que, Menor que e Igual"}
+                subtitle={article?.subtitle || "Fundamentos de la comparación numérica"}
                 description="La capacidad de comparar cantidades es fundamental para el desarrollo del sentido numérico. Antes de operar, los niños deben comprender las relaciones de magnitud."
                 category="Aritmética"
                 level="Primeros Pasos"
