@@ -111,19 +111,19 @@ export default async function SaberPage({ params }: PageProps) {
                                     </h2>
                                 </div>
                                 <div className="divide-y divide-gray-50">
-                                    {chapter.articles.map((concept) => (
+                                    {chapter.articles.map((article) => (
                                         <Link
-                                            key={concept.id}
-                                            href={`/formacion/pildoras/${saberId}/${nivelId}/${concept.id}`}
+                                            key={article.id}
+                                            href={`/formacion/pildoras/${saberId}/${nivelId}/${article.id}`}
                                             className="block p-4 md:p-6 hover:bg-slate-50 transition-colors group"
                                         >
                                             <div className="flex justify-between items-center gap-3">
                                                 <div className="flex-1">
                                                     <h3 className="text-base md:text-lg font-semibold text-gray-800 group-hover:text-primary transition-colors mb-1">
-                                                        {concept.title}
+                                                        {article.title}
                                                     </h3>
                                                     <p className="text-gray-500 text-sm">
-                                                        {concept.description}
+                                                        {article.subtitle}
                                                     </p>
                                                 </div>
                                                 <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors shrink-0" size={20} />
