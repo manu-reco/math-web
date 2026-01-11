@@ -1,23 +1,27 @@
 {
     "concepto-de-cantidad": {
         "name": "Concepto de cantidad",
-        "definition": "Comprensión de que los números representan cantidades en el mundo real."
+        "definition": "Comprender que los números representan cantidades en el mundo real."
     },
     "conteo": {
         "name": "Conteo",
         "definition": "Habilidad para enumerar objetos de manera ordenada y precisa."
     },
     "conteo-recitativo": {
-        "name": "Conteo recitativo",
+        "name": "Conteo recitativo o acústico",
         "definition": "Proceso de recitar la secuencia numérica en orden sin necesidad de contar objetos concretos."
     },
     "cardinalidad": {
         "name": "Cardinalidad",
-        "definition": "El último número pronunciado al contar representa la cantidad total de elementos."
+        "definition": "Comprensión de que el último número pronunciado al contar representa la cantidad total del conjunto."
+    },
+    "conteo-resultativo": {
+        "name": "Conteo resultativo",
+        "definition": "Es la acción de contar sabiendo que cada número que se pronuncia corresponde al conjunto de objetos que se han contado hasta ese momento."
     },
     "subitizacion": {
         "name": "Subitización",
-        "definition": "Habilidad para reconocer rápidamente la cantidad de objetos en un grupo pequeño sin necesidad de contarlos individualmente."
+        "definition": "Habilidad para reconocer de forma súbita la cantidad de objetos en un grupo sin necesidad de contarlos individualmente."
     },
     "composicion-y-descomposicion": {
         "name": "Composición y descomposición",
@@ -25,10 +29,11 @@
     },
     "correspondencia-uno-a-uno": {
         "name": "Correspondencia uno a uno",
-        "definition": "Asignación de un objeto a cada número al contar, asegurando que cada objeto se cuente una sola vez."
+        "definition": "Es la relación entre los elementos de dos conjuntos, donde cada elemento de un conjunto A está emparejado con exactamente un elemento de un conjunto B."
+
     },
     "construccion-recta-numerica": {
-        "name": "Construcción de la recta numérica",
-        "definition": "Representación visual de los números en una línea para entender su orden y relaciones."
+        "name": "Recta numérica",
+        "definition": "Representación visual de los números en una línea para entender su orden y relaciones. En nuestra cultura, se suele representar en horizontal y de izquierda a derecha."
     }
 }
