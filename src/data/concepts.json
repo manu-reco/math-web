@@ -30,10 +30,17 @@
     "correspondencia-uno-a-uno": {
         "name": "Correspondencia uno a uno",
         "definition": "Es la relación entre los elementos de dos conjuntos, donde cada elemento de un conjunto A está emparejado con exactamente un elemento de un conjunto B."
-
     },
     "construccion-recta-numerica": {
         "name": "Recta numérica",
         "definition": "Representación visual de los números en una línea para entender su orden y relaciones. En nuestra cultura, se suele representar en horizontal y de izquierda a derecha."
+    },
+    "propiedad-conmutativa-suma": {
+        "name": "Propiedad conmutativa de la suma",
+        "definition": "Propiedad matemática fundamental de la suma que establece que el orden de los sumandos no afecta el resultado de la suma."
+    },
+    "propiedad-asociativa-suma": {
+        "name": "Propiedad asociativa de la suma",
+        "definition": "Propiedad matemática que establece que la forma en que se agrupan los sumandos no afecta el resultado de la suma."
     }
 }
