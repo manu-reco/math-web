@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download } from "lucide-react";
 
 import {
     Tooltip,
@@ -16,6 +16,11 @@ import {
     PopoverTrigger,
     PopoverPanel,
 } from '@/components/animate-ui/components/base/popover';
+
+import {
+    Button,
+    type ButtonProps
+} from '@/components/animate-ui/components/buttons/button';
 
 import conceptsData from '@/data/concepts.json';
 
@@ -221,6 +226,12 @@ interface ConceptPopoverProps {
     alignOffset?: number;
 }
 
+/**
+ * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
+ * @param conceptId ID del concepto definido en concepts.json
+ * @param text Texto opcional para mostrar en lugar del nombre del concepto
+ * @param definition Definición opcional para mostrar en lugar de la definición del concepto
+ */
 export function ConceptPopover({
     conceptId,
     text,
@@ -240,7 +251,7 @@ export function ConceptPopover({
     return (
         <>
             <Popover>
-                <PopoverTrigger 
+                <PopoverTrigger
                     render={
                         <span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none cursor-help' aria-describedby={`popover-${conceptId}`}>
                             {text ?? concept.name}
@@ -262,5 +273,26 @@ export function ConceptPopover({
                 </PopoverPanel>
             </Popover>
         </>
+    );
+}
+
+interface DownloadButtonProps {
+    filePath: string;
+    label?: string;
+    variant?: ButtonProps['variant'];
+    size?: ButtonProps['size'];
+}
+
+export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
+    return (
+        <a href={filePath} download>
+            <Button
+                variant={variant} size={size}
+                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
+            >
+                <Download size={20} className="group-hover:animate-bounce" />
+                {label}
+            </Button>
+        </a>
     );
 }

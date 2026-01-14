@@ -6,7 +6,8 @@ import {
     InfoBox,
     KeyPoints,
     DialogBubble,
-    ConceptPopover
+    ConceptPopover,
+    DownloadButton,
 } from "@/components/pildoras/ArticleComponents";
 
 import { findArticleById } from "@/lib/pildorasData";
@@ -83,11 +84,19 @@ export default function SubitizacionTarjetasPuntosContent() {
                 <p>Se establece un orden de intervención. Cada niño/a <strong>tomará una tarjeta de puntos</strong>, mirará detenidamente la cantidad <strong>y la colocará debajo de la tarjeta del dígito correspondiente.</strong></p>
 
                 <p>Cuando todas las tarjetas estén colocadas, se hará una comprobación. Si alguna tarjeta ha quedado en un lugar incorrecto, <strong>se invitará a los niños/as a revisarlo contando los puntos uno por uno</strong>.</p>
-                
+
                 <p>En este juego <strong>no hay límite de tiempo y nadie gana ni pierde. Se trabaja en equipo</strong>.</p>
 
             </ArticleSection>
-                
+
+            <ArticleSection title="Descargar recursos">
+                <p>Puedes descargar los materiales necesarios para llevar a cabo esta actividad en el aula:</p>
+                <DownloadButton
+                    filePath="\subitizacion\subitización-puntos-1-5-pequeño.pdf"
+                    label="Descargar recurso"
+
+                />
+            </ArticleSection>
         </>
     );
 }
