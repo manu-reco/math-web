@@ -3,39 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Algunos están sobrescritos más abajo */
-@theme {
-  --font-sans: var(--font-inter);
-  --color-primary: var(--color-primary);
-  /* Teal */
-  --color-primary-hover: oklch(0.56 0.1645 195.536);
-  --color-secondary: var(--color-secondary);
-  /* Mustard Yellow */
-  --color-secondary-hover: #D5B619;
-  --color-background: #F6F7F8;
-  /* Soft Gray/White */
-  --color-foreground: #0F172A;
-  /* Dark Slate */
-}
-
-/* Custom Utilities if needed, though Tailwind v4 handles most via theme */
-@layer utilities {
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-}
-
-body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans), sans-serif;
-}
-
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --color-text: var(--text);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -43,8 +12,10 @@ body {
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -67,25 +38,29 @@ body {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --text: oklch(14.09% 0.013 195.76);
+  --background: oklch(97.33% 0.008 177.33);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(0.63 0.1 183.072); /* Teal */
+  --popover: oklch(63.07% 0.101 183.85);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.63 0.1 183.072); /* Teal */
+  --primary: oklch(63.07% 0.101 183.85);
   --primary-foreground: oklch(0.985 0 0);
-  --primary-hover: oklch(0.56 0.1645 195.536);
-  --secondary: oklch(0.823 0.1645 95.464); /* Mustard Yellow */
+  --primary-hover: oklch(46.00% 0.072 183.34);
+  --secondary: oklch(83.30% 0.119 88.35);
   --secondary-foreground: oklch(0.205 0 0);
   --secondary-hover: oklch(0.78 0.156 96.252);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(78.43% 0.126 59.00);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -104,6 +79,7 @@ body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
 }
 
 .dark {
@@ -140,11 +116,19 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Utilidades personalizadas (si Tailwind no cubre alguna) */
+@layer utilities {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans), sans-serif;
   }
 }

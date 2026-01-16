@@ -5,25 +5,25 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20 lg:py-32">
+      <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20 lg:py-32">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Domina las Matemáticas para Infantil y Primaria
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-10">
+            <p className="text-xl md:text-2xl mb-10">
               Formación especializada para profesores. Recursos, estrategias y ejercicios para inspirar a tus alumnos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/formacion/online"
-                className="bg-secondary hover:bg-secondary-hover text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+                className="bg-secondary hover:bg-secondary-hover px-8 py-4 rounded-lg text-text text-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 Ver Cursos <ArrowRight size={20} />
               </Link>
               <Link
                 href="/formacion/pildoras"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center"
+                className="bg-white/10 hover:bg-white/20 border border-white/30 px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center"
               >
                 Prueba Gratis
               </Link>
@@ -118,7 +118,7 @@ export default function Home() {
               <p className="text-gray-400 mb-6">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
               <Link
                 href="/register"
-                className="block w-full bg-secondary hover:bg-secondary-hover text-white text-center py-3 rounded-lg font-bold transition-colors mb-4"
+                className="block w-full bg-secondary hover:bg-secondary-hover text-text text-center py-3 rounded-lg font-bold transition-colors mb-4"
               >
                 Registrarme Gratis
               </Link>

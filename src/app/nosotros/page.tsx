@@ -4,7 +4,7 @@ export default function AboutPage() {
     return (
         <div className="bg-white">
             {/* Hero Section */}
-            <section className="bg-primary text-white py-20">
+            <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20">
                 <div className="container-custom text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Sobre Nosotros</h1>
                     <p className="text-xl text-blue-100 max-w-2xl mx-auto">

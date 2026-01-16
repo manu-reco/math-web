@@ -90,7 +90,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center">
                         <Link
                             href="/login"
-                            className="bg-secondary hover:bg-secondary-hover text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors"
+                            className="bg-secondary hover:bg-secondary-hover text-text px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors"
                         >
                             <User size={18} />
                             Iniciar Sesión

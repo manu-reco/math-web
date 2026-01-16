@@ -52,10 +52,10 @@ const plans = [
 
 export default function PricingPage() {
     return (
-        <div className="bg-gray-50 py-20">
+        <div className="bg-gray-50 py-20 text-text">
             <div className="container-custom">
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-4xl font-bold mb-4">
                         Planes de Precios
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -71,20 +71,20 @@ export default function PricingPage() {
                                 } flex flex-col`}
                         >
                             {plan.popular && (
-                                <div className="bg-secondary text-white text-center py-2 text-sm font-bold uppercase tracking-wide">
+                                <div className="bg-secondary text-center py-2 text-sm font-bold uppercase tracking-wide">
                                     Más Popular
                                 </div>
                             )}
                             <div className="p-8 grow">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                <h3 className="text-2xl font-bold mb-2">
                                     {plan.name}
                                 </h3>
-                                <p className="text-gray-500 mb-6">{plan.description}</p>
+                                <p className="mb-6">{plan.description}</p>
                                 <div className="flex items-baseline mb-8">
-                                    <span className="text-4xl font-extrabold text-gray-900">
+                                    <span className="text-4xl font-extrabold">
                                         {plan.price}
                                     </span>
-                                    <span className="text-gray-500 ml-1">{plan.period}</span>
+                                    <span className="ml-1">{plan.period}</span>
                                 </div>
                                 <ul className="space-y-4 mb-8">
                                     {plan.features.map((feature) => (
@@ -99,7 +99,7 @@ export default function PricingPage() {
                                 <Link
                                     href={plan.href}
                                     className={`block w-full text-center py-3 rounded-lg font-bold transition-colors ${plan.popular
-                                            ? "bg-secondary hover:bg-secondary-hover text-white"
+                                            ? "bg-secondary hover:bg-secondary-hover"
                                             : "bg-primary hover:bg-primary-hover text-white"
                                         }`}
                                 >
