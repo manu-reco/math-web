@@ -12,10 +12,11 @@ export default function JuegosPage() {
                         <Link href="/" className="text-primary hover:text-primary-hover font-medium mb-4 inline-block">
                             ← Volver al inicio
                         </Link>
-                    </nav>                    <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                    </nav>                    
+                    <h1 className="text-5xl font-bold mb-4">
                         Juegos Educativos
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-3xl">
+                    <p className="text-xl text-text-secondary max-w-3xl">
                         Aprende matemáticas de forma divertida e interactiva con nuestros juegos educativos
                     </p>
                 </div>

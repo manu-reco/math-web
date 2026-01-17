@@ -26,14 +26,14 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
                 <div className="text-center">
                     <div className={`
                         text-4xl font-bold mb-3
-                        ${isAvailable ? 'text-primary' : 'text-gray-400'}
+                        ${isAvailable ? 'text-primary' : 'text-muted-foreground'}
                     `}>
                         Nivel {level.id}
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">
+                    <h3 className="font-semibold mb-2">
                         {level.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-3">
+                    <p className="text-sm text-text-secondary mb-3">
                         {level.description}
                     </p>
                     {isAvailable && (
@@ -42,7 +42,7 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
                         </div>
                     )}
                     {!isAvailable && (
-                        <div className="text-xs text-gray-500 font-medium mt-2">
+                        <div className="text-xs text-muted-foreground font-medium mt-2">
                             Próximamente
                         </div>
                     )}
@@ -56,10 +56,10 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             {/* Sección Concreto */}
             <section>
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-3xl font-bold mb-2">
                         🦉 Concreto (Búhos)
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-text-secondary">
                         Reconoce cantidades con búhos de colores
                     </p>
                 </div>
@@ -71,10 +71,10 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             {/* Sección Abstracto */}
             <section>
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-3xl font-bold mb-2">
                         ⚫ Abstracto (Puntos)
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-text-secondary">
                         Reconoce cantidades con representación abstracta
                     </p>
                 </div>

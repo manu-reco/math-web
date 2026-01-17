@@ -32,18 +32,18 @@ const modules = [
 
 export default function OnlineTrainingPage() {
     return (
-        <div className="bg-gray-50 min-h-screen py-12">
+        <div className="min-h-screen py-12">
             <div className="container-custom">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                        <h1 className="text-3xl font-bold mb-2">
                             Formación Online
                         </h1>
-                        <p className="text-gray-600">
+                        <p className="text-text-secondary">
                             Aprende a tu ritmo con nuestros cursos especializados.
                         </p>
                     </div>
-                    <div className="mt-4 md:mt-0 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 text-sm text-gray-600">
+                    <div className="mt-4 md:mt-0 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 text-sm text-text-secondary">
                         <span className="font-bold text-primary">Progreso:</span> 2 / 25 Lecciones completadas
                     </div>
                 </div>
@@ -52,7 +52,7 @@ export default function OnlineTrainingPage() {
                     {modules.map((module) => (
                         <div key={module.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                             <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                                <h2 className="text-lg font-bold text-gray-800">
+                                <h2 className="text-lg font-bold">
                                     {module.title}
                                 </h2>
                                 <span className="text-xs font-medium bg-blue-100 text-primary px-2 py-1 rounded-full">
@@ -63,13 +63,13 @@ export default function OnlineTrainingPage() {
                                 {module.lessons.map((lesson) => (
                                     <div
                                         key={lesson.id}
-                                        className={`px-6 py-4 flex items-center justify-between transition-colors ${lesson.locked ? "opacity-75 bg-gray-50/50" : "hover:bg-blue-50 cursor-pointer"
+                                        className={`px-6 py-4 flex items-center justify-between transition-colors ${lesson.locked ? "opacity-75 bg-gray-50/50" : "hover:bg-primary/10 cursor-pointer"
                                             }`}
                                     >
                                         <div className="flex items-center gap-4">
                                             <div
                                                 className={`p-2 rounded-full ${lesson.locked
-                                                        ? "bg-gray-200 text-gray-500"
+                                                        ? "bg-muted text-muted-foreground"
                                                         : "bg-blue-100 text-primary"
                                                     }`}
                                             >
@@ -80,10 +80,10 @@ export default function OnlineTrainingPage() {
                                                 )}
                                             </div>
                                             <div>
-                                                <h3 className={`font-medium ${lesson.locked ? "text-gray-500" : "text-gray-900"}`}>
+                                                <h3 className={`font-medium ${lesson.locked ? "text-muted-foreground" : ""}`}>
                                                     {lesson.title}
                                                 </h3>
-                                                <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
+                                                <div className={`flex items-center gap-3 text-xs ${lesson.locked ? "text-muted-foreground" : "text-text-secondary"} mt-1`}>
                                                     <span className="flex items-center gap-1">
                                                         <Clock size={12} /> {lesson.duration}
                                                     </span>

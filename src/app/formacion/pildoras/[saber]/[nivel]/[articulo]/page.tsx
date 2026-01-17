@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 h-14 md:h-16 flex items-center">
                     <Link
                         href={`/formacion/pildoras/${saberId}/${nivelId}`}
-                        className="inline-flex items-center text-gray-500 hover:text-primary transition-colors font-medium"
+                        className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
                     >
                         <ArrowLeft size={20} className="mr-2" />
                         Volver al temario
@@ -83,14 +83,14 @@ export default async function ArticlePage({ params }: PageProps) {
                     <ContentComponent />
                 ) : (
                     <div className="text-center py-12 md:py-20">
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 px-4">
+                        <h1 className="text-2xl md:text-3xl font-bold mb-4 px-4">
                             Contenido en Construcción
                         </h1>
-                        <p className="text-base md:text-lg text-gray-600 mb-8 px-4">
+                        <p className="text-base md:text-lg text-text-secondary mb-8 px-4">
                             Estamos redactando este artículo para ti.
                         </p>
                         <div className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100 inline-block mx-4">
-                            <p className="text-gray-500 italic">
+                            <p className="text-text-secondary italic">
                                 Slug: {articuloId}
                             </p>
                         </div>

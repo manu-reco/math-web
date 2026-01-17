@@ -9,7 +9,7 @@ export default function InstructionsScreen({ onStart }: InstructionsScreenProps)
                 Instrucciones para el profesor
             </h2>
             
-            <div className="space-y-6 text-gray-700 text-lg">
+            <div className="space-y-6 text-lg">
                 <section>
                     <h3 className="text-xl font-semibold text-primary mb-3">
                         ¿Qué es la subitización?

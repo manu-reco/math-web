@@ -50,7 +50,7 @@ export default async function SaberPage({ params }: PageProps) {
                 <div className="max-w-5xl mx-auto">
                     <Link
                         href="/formacion/pildoras"
-                        className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+                        className="inline-flex items-center text-text-secondary hover:text-text mb-6 transition-colors"
                     >
                         <ArrowLeft size={20} className="mr-2" />
                         Volver a la selección
@@ -66,12 +66,12 @@ export default async function SaberPage({ params }: PageProps) {
                                     {nivel.title}
                                 </span>
                                 <span className="text-gray-400">•</span>
-                                <span className="text-gray-600 text-sm">{chapters ? `${chapters.length} Capítulos` : "Próximamente"}</span>
+                                <span className="text-text-secondary text-sm">{chapters ? `${chapters.length} Capítulos` : "Próximamente"}</span>
                             </div>
-                            <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
+                            <h1 className="text-4xl font-extrabold text-text mb-2">
                                 {saber.title}
                             </h1>
-                            <p className="text-lg text-gray-700 max-w-2xl">
+                            <p className="text-lg text-text-secondary max-w-2xl">
                                 {saber.description}
                             </p>
                         </div>
@@ -86,8 +86,8 @@ export default async function SaberPage({ params }: PageProps) {
                         <div className="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                             <BookOpen size={32} className="text-gray-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2">Contenido en desarrollo</h2>
-                        <p className="text-gray-500 max-w-md mx-auto">
+                        <h2 className="text-2xl font-bold text-text mb-2">Contenido en desarrollo</h2>
+                        <p className="text-text-secondary max-w-md mx-auto">
                             Estamos trabajando en las píldoras para {saber.title} ({nivel.title}).
                             ¡Vuelve pronto!
                         </p>
@@ -103,7 +103,7 @@ export default async function SaberPage({ params }: PageProps) {
                         {chapters.map((chapter, index) => (
                             <div key={chapter.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="p-4 md:p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
-                                    <h2 className="text-xl font-bold text-gray-800 flex items-center gap-3">
+                                    <h2 className="text-xl font-bold text-text flex items-center gap-3">
                                         <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold">
                                             {index + 1}
                                         </span>
@@ -119,14 +119,14 @@ export default async function SaberPage({ params }: PageProps) {
                                         >
                                             <div className="flex justify-between items-center gap-3">
                                                 <div className="flex-1">
-                                                    <h3 className="text-base md:text-lg font-semibold text-gray-800 group-hover:text-primary transition-colors mb-1">
+                                                    <h3 className="text-base md:text-lg font-semibold text-text group-hover:text-primary transition-colors mb-1">
                                                         {article.title}
                                                     </h3>
-                                                    <p className="text-gray-500 text-sm">
+                                                    <p className="text-text-secondary text-sm">
                                                         {article.subtitle}
                                                     </p>
                                                 </div>
-                                                <ChevronRight className="text-gray-300 group-hover:text-primary transition-colors shrink-0" size={20} />
+                                                <ChevronRight className="text-gray-400 group-hover:text-primary transition-colors shrink-0" size={20} />
                                             </div>
                                         </Link>
                                     ))}

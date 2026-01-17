@@ -133,11 +133,11 @@ export default function SubitizacionPage() {
                             ← Volver a {gameState === 'levelSelect' ? 'Instrucciones' : 'Selección de Nivel'}
                         </button>
                     )}
-                    <h1 className="text-4xl font-bold text-gray-900">
+                    <h1 className="text-4xl font-bold">
                         Subitización 🦉
                     </h1>
                     {currentLevel && gameState === 'playing' && (
-                        <p className="text-gray-600 mt-2">
+                        <p className="text-text-secondary mt-2">
                             {currentLevel.name} - Patrón {currentPatternIndex + 1} de {shuffledPatterns.length}
                         </p>
                     )}

@@ -37,18 +37,18 @@ export function ArticleHeader({ title, subtitle, description, category, level }:
         <header className="mb-12 border-b border-gray-100 pb-8">
             <div className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider">
                 <span>{category}</span>
-                <span className="text-gray-300">•</span>
+                <span className="text-gray-400">•</span>
                 <span>{level}</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
                 {title}
             </h1>
             {subtitle && (
-                <h2 className="text-2xl text-gray-600 font-medium mb-6">
+                <h2 className="text-2xl text-text-secondary font-medium mb-6">
                     {subtitle}
                 </h2>
             )}
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
+            <p className="text-xl text-text-secondary leading-relaxed max-w-3xl">
                 {description}
             </p>
         </header>
@@ -58,11 +58,11 @@ export function ArticleHeader({ title, subtitle, description, category, level }:
 export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <section className="mb-12">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+            <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
                 <span className="w-1.5 h-8 bg-primary rounded-full"></span>
                 {title}
             </h3>
-            <div className="text-lg text-gray-700 leading-relaxed space-y-6">
+            <div className="text-lg leading-relaxed space-y-6">
                 {children}
             </div>
         </section>
@@ -77,10 +77,10 @@ export function ActivityBox({ title, children }: { title?: string; children: Rea
                     <Pencil size={24} />
                 </div>
                 <div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-3">
+                    <h4 className="text-xl font-bold mb-3">
                         {title || "Actividad Propuesta"}
                     </h4>
-                    <div className="text-gray-700 space-y-4">
+                    <div className="text-text-secondary space-y-4">
                         {children}
                     </div>
                 </div>
@@ -92,8 +92,8 @@ export function ActivityBox({ title, children }: { title?: string; children: Rea
 export function TipBox({ children }: { children: React.ReactNode }) {
     return (
         <div className="my-8 bg-amber-50 border border-amber-100 rounded-xl p-6 flex gap-4">
-            <Lightbulb className="text-amber-500 shrink-0" size={24} />
-            <div className="text-gray-800 italic">
+            <Lightbulb className="text-secondary shrink-0" size={24} />
+            <div className="italic">
                 {children}
             </div>
         </div>

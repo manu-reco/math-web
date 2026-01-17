@@ -55,12 +55,12 @@ export default function GameCard({ game }: GameCardProps) {
                     </div>
 
                     {/* Título */}
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
                         {game.title}
                     </h3>
 
                     {/* Descripción */}
-                    <p className="text-gray-600 mb-4 grow">
+                    <p className="text-text-secondary mb-4 grow">
                         {game.description}
                     </p>
 
@@ -69,7 +69,7 @@ export default function GameCard({ game }: GameCardProps) {
                         {game.skills.map((habilidad, idx) => (
                             <span
                                 key={idx}
-                                className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200"
+                                className="px-3 py-1 bg-gray-100 text-text-secondary text-xs rounded-full border border-gray-200"
                             >
                                 {habilidad}
                             </span>

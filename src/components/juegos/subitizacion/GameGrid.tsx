@@ -54,7 +54,7 @@ function GridCell({ position }: GridCellProps) {
 function InstructionText() {
     return (
         <div className="mt-8 text-center">
-            <p className="text-gray-600 text-lg">
+            <p className="text-text-secondary text-lg">
                 Presiona{" "}
                 <kbd className="px-3 py-1 bg-gray-100 border border-gray-300 rounded text-sm font-mono mx-1">
                     Espacio
