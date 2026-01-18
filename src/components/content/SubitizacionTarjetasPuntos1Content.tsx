@@ -65,7 +65,7 @@ export default function SubitizacionTarjetasPuntosContent() {
                 </ul>
 
                 <div className="flex justify-center my-6">
-                    <Image src="/subitizacion/subitizacion-puntos-1-3.jpeg" alt="Juego de tarjetas con puntos con cantidades del 1 al 3, para agrupar bajo tarjetas con los dígitos 1, 2 y 3" width={250} height={400} />
+                    <Image src="/subitizacion/juego-puntos-1-3-desorden.jpeg" alt="Juego de tarjetas con puntos con cantidades del 1 al 3, para agrupar bajo tarjetas con los dígitos 1, 2 y 3" width={250} height={400} />
                 </div>
 
                 <InfoBox title="Consejo sobre el material">
@@ -79,11 +79,15 @@ export default function SubitizacionTarjetasPuntosContent() {
 
                 <p>Se establece un orden de intervención. Cada niño/a <strong>tomará una tarjeta de puntos</strong>, mirará detenidamente la cantidad <strong>y la colocará debajo de la tarjeta del dígito correspondiente.</strong></p>
 
+                <div className="flex flex-row gap-3 md:gap-4 my-6 items-center justify-center">
+                    <Image src="/subitizacion/juego-puntos-1-3-desorden.jpeg" alt="Juego de tarjetas con puntos con cantidades del 1 al 3, para agrupar bajo tarjetas con los dígitos 1, 2 y 3" width={250} height={350} />
+                    <Image src="/subitizacion/juego-puntos-1-3-orden.jpeg" alt="Juego de tarjetas con puntos con cantidades del 1 al 3, para agrupar bajo tarjetas con los dígitos 1, 2 y 3" width={330} height={350} />
+                </div>
+
                 <p>Cuando todas las tarjetas estén colocadas, se hará una comprobación. Si alguna tarjeta ha quedado en un lugar incorrecto, <strong>se invitará a los niños/as a revisarlo contando los puntos uno por uno</strong>.</p>
 
                 <p>En este juego <strong>no hay límite de tiempo y nadie gana ni pierde. Se trabaja en equipo</strong>.</p>
             </ArticleSection>
-
 
             <ArticleSection title="Descargar recursos">
                 <p>Puedes descargar los materiales necesarios para llevar a cabo esta actividad en el aula:</p>
@@ -107,7 +111,7 @@ export default function SubitizacionTarjetasPuntosContent() {
                     filePath="\subitizacion\Tarjetas números 1-12.pdf"
                     label="6 tarjetas por página"
                 />
-            
+
             </ArticleSection>
         </>
     );
