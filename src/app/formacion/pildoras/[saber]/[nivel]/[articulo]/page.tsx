@@ -7,14 +7,14 @@ import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
 import DescubriendoRectaContent from "@/components/content/DescubriendoRectaContent";
-import SubitizacionTarjetasPuntosContent from "@/components/content/SubitizacionTarjetasPuntosContent";
+import SubitizacionTarjetasPuntos1Content from "@/components/content/SubitizacionTarjetasPuntos1Content";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "mayor-menor": MayorMenorContent,
     "actividades-conceptos-basicos": ArticuloPruebaActividades,
     "conteo-recitativo": ConteoRecitativoContent,
-    "subitizacion-tarjetas-puntos": SubitizacionTarjetasPuntosContent,
+    "subitizacion-tarjetas-puntos-1": SubitizacionTarjetasPuntos1Content,
     "descubriendo-recta": DescubriendoRectaContent, 
 };
 

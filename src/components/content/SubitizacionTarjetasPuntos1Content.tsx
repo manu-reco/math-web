@@ -1,13 +1,9 @@
 import {
     ArticleHeader,
     ArticleSection,
-    ActivityBox,
-    TipBox,
     InfoBox,
     KeyPoints,
-    DialogBubble,
     ConceptPopover,
-    DownloadButton,
     PdfButton
 } from "@/components/pildoras/ArticleComponents";
 
@@ -15,7 +11,7 @@ import { findArticleById } from "@/lib/pildorasData";
 import Image from "next/image";
 
 export default function SubitizacionTarjetasPuntosContent() {
-    const article = findArticleById("subitizacion-tarjetas-puntos");
+    const article = findArticleById("subitizacion-tarjetas-puntos-1");
 
     return (
         <>
@@ -72,14 +68,13 @@ export default function SubitizacionTarjetasPuntosContent() {
                     <Image src="/subitizacion/subitizacion-puntos-1-3.jpeg" alt="Juego de tarjetas con puntos con cantidades del 1 al 3, para agrupar bajo tarjetas con los dígitos 1, 2 y 3" width={250} height={400} />
                 </div>
 
-
                 <InfoBox title="Consejo sobre el material">
                     <p>Se puede jugar individualmente o en grupo. </p>
                     <p>Si la actividad se realiza con el grupo clase, deberemos tener <strong>un lote para cada cuatro niños/as</strong>, aproximadamente.</p>
                 </InfoBox>
+            </ArticleSection>
 
-                <p><strong>Dinámica: </strong></p>
-
+            <ArticleSection title="Dinámica">
                 <p>Se colocan las tarjetas con los dígitos en una mesa o en el suelo, de forma que quede espacio debajo de ellas para poder colocar las tarjetas de puntos.</p>
 
                 <p>Se establece un orden de intervención. Cada niño/a <strong>tomará una tarjeta de puntos</strong>, mirará detenidamente la cantidad <strong>y la colocará debajo de la tarjeta del dígito correspondiente.</strong></p>
@@ -87,16 +82,32 @@ export default function SubitizacionTarjetasPuntosContent() {
                 <p>Cuando todas las tarjetas estén colocadas, se hará una comprobación. Si alguna tarjeta ha quedado en un lugar incorrecto, <strong>se invitará a los niños/as a revisarlo contando los puntos uno por uno</strong>.</p>
 
                 <p>En este juego <strong>no hay límite de tiempo y nadie gana ni pierde. Se trabaja en equipo</strong>.</p>
-
             </ArticleSection>
+
 
             <ArticleSection title="Descargar recursos">
                 <p>Puedes descargar los materiales necesarios para llevar a cabo esta actividad en el aula:</p>
-                <PdfButton
-                    filePath="\subitizacion\subitización-puntos-1-5-pequeño.pdf"
-                    label="Ver recurso"
 
+                <p><strong>Tarjetas de puntos (1-5)</strong>.</p>
+
+                <div className="flex flex-wrap gap-4">
+                    <PdfButton
+                        filePath="\subitizacion\Subitización puntos 1-5 pequeño.pdf"
+                        label="Formato pequeño (4 por página)"
+                    />
+                    <PdfButton
+                        filePath="\subitizacion\Subitización puntos 1-5 grande.pdf"
+                        label="Formato grande (2 por página)"
+                    />
+                </div>
+
+                <p><strong>Tarjetas con números (1-12)</strong>.</p>
+
+                <PdfButton
+                    filePath="\subitizacion\Tarjetas números 1-12.pdf"
+                    label="6 tarjetas por página"
                 />
+            
             </ArticleSection>
         </>
     );

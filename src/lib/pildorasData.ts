@@ -126,9 +126,10 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
             title: "Subitización",
             articles: [
                 {
-                    id: "subitizacion-tarjetas-puntos",
-                    title: "Subitización con Tarjetas de Puntos",
-                    subtitle: "Utilizamos tarjetas con puntos para identificar cantidades pequeñas de forma súbita, sin conteo, y asociarlas con números arábigos.",
+                    id: "subitizacion-tarjetas-puntos-1",
+                    title: "Subitización con Tarjetas de Puntos: Nivel 1",
+                    subtitle: "Utilizamos tarjetas con puntos para identificar cantidades pequeñas de forma súbita, sin conteo, y asociarlas con números arábigos. Números del 1 al 3.",
+                },
                 },
             ]
         },
