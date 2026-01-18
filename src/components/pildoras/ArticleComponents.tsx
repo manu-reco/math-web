@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner } from "lucide-react";
 
 import {
     Tooltip,
@@ -294,5 +294,27 @@ export function DownloadButton({ filePath, label = "Descargar recurso", variant 
                 {label}
             </Button>
         </a>
+    );
+}
+
+interface PdfButtonProps {
+    filePath: string;
+    label?: string;
+}
+
+export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
+    return (
+        <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
+            <a
+                type="button" href={filePath} download
+                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
+            >
+                <FileSearchCorner size={20} />
+                {label}
+            </a>
+            <button type="button" className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+                <Download size={20} />
+            </button>
+        </div>
     );
 }

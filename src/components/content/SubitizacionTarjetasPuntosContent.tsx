@@ -8,6 +8,7 @@ import {
     DialogBubble,
     ConceptPopover,
     DownloadButton,
+    PdfButton
 } from "@/components/pildoras/ArticleComponents";
 
 import { findArticleById } from "@/lib/pildorasData";
@@ -91,9 +92,9 @@ export default function SubitizacionTarjetasPuntosContent() {
 
             <ArticleSection title="Descargar recursos">
                 <p>Puedes descargar los materiales necesarios para llevar a cabo esta actividad en el aula:</p>
-                <DownloadButton
+                <PdfButton
                     filePath="\subitizacion\subitización-puntos-1-5-pequeño.pdf"
-                    label="Descargar recurso"
+                    label="Ver recurso"
 
                 />
             </ArticleSection>
