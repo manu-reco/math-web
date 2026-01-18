@@ -330,7 +330,7 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     return (
         <>
             <Dialog>
-                <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
+                <div className="inline-flex bg-primary/5 text-primary rounded-xl duration-200 min-h-12 hover:scale-105 hover:shadow-lg transition" role="group">
                     {/* Visualizar */}
                     <DialogTrigger
                         render={
