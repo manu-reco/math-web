@@ -224,7 +224,12 @@ export function ConceptTooltip({
     );
 }
 
-
+/**
+ * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
+ * @param conceptId ID del concepto definido en concepts.json
+ * @param text Texto opcional para mostrar en lugar del nombre del concepto
+ * @param definition Definición opcional para mostrar en lugar de la definición del concepto
+ */
 interface ConceptPopoverProps {
     conceptId: string;
     text?: string;
@@ -292,6 +297,11 @@ interface DownloadButtonProps {
     size?: ButtonProps['size'];
 }
 
+/**
+ * Componente de botón para descargar un archivo
+ * @param filePath Ruta del archivo a descargar
+ * @param label Texto del botón
+ */
 export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
     return (
         <a href={filePath} download>
@@ -311,6 +321,11 @@ interface PdfButtonProps {
     label?: string;
 }
 
+/**
+ * Grupo de botones para visualizar un archivo PDF en un diálogo modal o descargarlo directamente 
+ * @param filePath Ruta del archivo PDF
+ * @param label Texto del botón de visualización
+ */
 export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     return (
         <>

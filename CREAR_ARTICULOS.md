@@ -173,6 +173,14 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
   - Usa las definiciones de `concepts.json`
 - *`ConceptTooltip`*: Misma función, pero provocaba errores en formato móvil. No usar por ahora.
 
+### Botones de Recursos
+
+- **`DownloadButton`**: Botón grande para descarga directa de un recurso.
+    - Props: `filePath` (string), `label` (opcional), `variant` (opcional), `size` (opcional)
+- **`PdfButton`**: Botón doble para ver el recurso en un modal y descargarlo.
+    - Props: `filePath` (string), `label` (opcional)
+
+
 ## 🔗 Estructura de URLs
 
 Los artículos se acceden mediante esta estructura:
