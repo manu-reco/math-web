@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner } from "lucide-react";
 
@@ -347,6 +347,27 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     }
 
     function PdfDialog({ filePath, from = "top", showCloseButton = true }: PdfDialogProps) {
+        const [status, setStatus] = useState<'loading' | 'available' | 'missing'>('loading');
+
+        useEffect(() => {
+            let isActive = true;
+            setStatus('loading');
+
+            fetch(filePath, { method: 'HEAD' })
+                .then((response) => {
+                    if (!isActive) return;
+                    setStatus(response.ok ? 'available' : 'missing');
+                })
+                .catch(() => {
+                    if (!isActive) return;
+                    setStatus('missing');
+                });
+
+            return () => {
+                isActive = false;
+            };
+        }, [filePath]);
+
         return (
             <DialogPopup
                 from={from}
@@ -356,12 +377,29 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
                 <DialogHeader className="shrink-0">
                     <DialogTitle>Ver recurso</DialogTitle>
                 </DialogHeader>
-                {/* PDF */}
-                <iframe
-                    src={filePath}
-                    className="flex-1 w-full min-h-0"
-                    title="PDF Viewer"
-                />
+                {status === 'loading' && (
+                    <div className="flex-1 w-full min-h-0 flex items-center justify-center text-text-secondary">
+                        <span>Cargando recurso…</span>
+                    </div>
+                )}
+
+                {status === 'missing' && (
+                    <div className="flex-1 w-full min-h-0 flex flex-col items-center justify-center text-center gap-3 px-6">
+                        <div className="text-lg font-semibold text-text">No se pudo cargar el recurso</div>
+                        <p className="text-text-secondary">
+                            Revisa que el archivo exista o que la ruta sea correcta.
+                        </p>
+                        <p className="text-sm text-text-secondary break-all">{filePath}</p>
+                    </div>
+                )}
+
+                {status === 'available' && (
+                    <iframe
+                        src={filePath}
+                        className="flex-1 w-full min-h-0"
+                        title="PDF Viewer"
+                    />
+                )}
             </DialogPopup>
         );
     }
