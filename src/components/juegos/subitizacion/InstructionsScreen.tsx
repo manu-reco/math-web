@@ -5,7 +5,7 @@ interface InstructionsScreenProps {
 export default function InstructionsScreen({ onStart }: InstructionsScreenProps) {
     return (
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl font-bold mb-6">
                 Instrucciones para el profesor
             </h2>
             

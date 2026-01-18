@@ -5,10 +5,10 @@ export default function ContactPage() {
         <div className="bg-gray-50 py-20">
             <div className="container-custom">
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-4xl font-bold mb-4">
                         Contacta con Nosotros
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-xl text-text-secondary max-w-2xl mx-auto">
                         ¿Tienes dudas sobre nuestros cursos? ¿Quieres colaborar? Estamos aquí para ayudarte.
                     </p>
                 </div>
@@ -16,7 +16,7 @@ export default function ContactPage() {
                 <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {/* Contact Info */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                        <h2 className="text-2xl font-bold mb-8">
                             Información de Contacto
                         </h2>
                         <div className="space-y-8">
@@ -25,9 +25,9 @@ export default function ContactPage() {
                                     <Mail size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900">Email</h3>
-                                    <p className="text-gray-600">info@mathedu.es</p>
-                                    <p className="text-gray-600">soporte@mathedu.es</p>
+                                    <h3 className="font-bold">Email</h3>
+                                    <p className="text-text-secondary">info@mathedu.es</p>
+                                    <p className="text-text-secondary">soporte@mathedu.es</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
@@ -35,9 +35,9 @@ export default function ContactPage() {
                                     <Phone size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900">Teléfono</h3>
-                                    <p className="text-gray-600">+34 912 345 678</p>
-                                    <p className="text-sm text-gray-500">Lunes a Viernes, 9:00 - 18:00</p>
+                                    <h3 className="font-bold">Teléfono</h3>
+                                    <p className="text-text-secondary">+34 912 345 678</p>
+                                    <p className="text-sm text-text-secondary">Lunes a Viernes, 9:00 - 18:00</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
@@ -45,8 +45,8 @@ export default function ContactPage() {
                                     <MapPin size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-gray-900">Oficina</h3>
-                                    <p className="text-gray-600">
+                                    <h3 className="font-bold">Oficina</h3>
+                                    <p className="text-text-secondary">
                                         Calle de las Matemáticas, 42<br />
                                         28001 Madrid, España
                                     </p>
@@ -55,18 +55,18 @@ export default function ContactPage() {
                         </div>
 
                         <div className="mt-12">
-                            <h3 className="font-bold text-gray-900 mb-4">Síguenos</h3>
+                            <h3 className="font-bold mb-4">Síguenos</h3>
                             <div className="flex space-x-4">
-                                <a href="#" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <a href="#" className="bg-gray-100 p-3 rounded-full text-text-secondary hover:bg-primary hover:text-white transition-colors">
                                     <Facebook size={20} />
                                 </a>
-                                <a href="#" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <a href="#" className="bg-gray-100 p-3 rounded-full text-text-secondary hover:bg-primary hover:text-white transition-colors">
                                     <Twitter size={20} />
                                 </a>
-                                <a href="#" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <a href="#" className="bg-gray-100 p-3 rounded-full text-text-secondary hover:bg-primary hover:text-white transition-colors">
                                     <Instagram size={20} />
                                 </a>
-                                <a href="#" className="bg-gray-100 p-3 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <a href="#" className="bg-gray-100 p-3 rounded-full text-text-secondary hover:bg-primary hover:text-white transition-colors">
                                     <Linkedin size={20} />
                                 </a>
                             </div>
@@ -75,13 +75,13 @@ export default function ContactPage() {
 
                     {/* Contact Form */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                        <h2 className="text-2xl font-bold mb-8">
                             Envíanos un mensaje
                         </h2>
                         <form className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="name" className="block text-sm font-medium mb-1">
                                         Nombre
                                     </label>
                                     <input
@@ -92,7 +92,7 @@ export default function ContactPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="lastname" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="lastname" className="block text-sm font-medium mb-1">
                                         Apellidos
                                     </label>
                                     <input
@@ -104,7 +104,7 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="email" className="block text-sm font-medium mb-1">
                                     Email
                                 </label>
                                 <input
@@ -115,7 +115,7 @@ export default function ContactPage() {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="subject" className="block text-sm font-medium mb-1">
                                     Asunto
                                 </label>
                                 <select
@@ -129,7 +129,7 @@ export default function ContactPage() {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="message" className="block text-sm font-medium mb-1">
                                     Mensaje
                                 </label>
                                 <textarea

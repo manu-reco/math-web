@@ -120,7 +120,7 @@ export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) 
             {points.map((point, i) => (
                 <li key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
-                    <span className="text-gray-700">{point}</span>
+                    <span className="text-text/85">{point}</span>
                 </li>
             ))}
         </ul>
@@ -143,7 +143,7 @@ const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
     purple: { bg: 'bg-purple-50', text: 'text-purple-900' },
     orange: { bg: 'bg-orange-50', text: 'text-orange-900' },
     pink: { bg: 'bg-pink-50', text: 'text-pink-900' },
-    gray: { bg: 'bg-gray-50', text: 'text-gray-900' },
+    gray: { bg: 'bg-gray-50', text: 'text-text' },
 };
 
 export function DialogBubble({ speaker = 'teacher', color, children }: DialogBubbleProps) {

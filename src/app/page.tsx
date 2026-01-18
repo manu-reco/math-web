@@ -36,7 +36,7 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Todo lo que necesitas para enseñar mejor
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -50,10 +50,10 @@ export default function Home() {
               <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-primary">
                 <BookOpen size={28} />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold mb-3">
                 Formación Continua
               </h3>
-              <p className="text-gray-600">
+              <p className="text-text-secondary">
                 Cursos actualizados sobre didáctica de las matemáticas, desde conceptos básicos hasta estrategias avanzadas.
               </p>
             </div>
@@ -63,10 +63,10 @@ export default function Home() {
               <div className="bg-orange-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-secondary">
                 <Brain size={28} />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold mb-3">
                 Recursos Prácticos
               </h3>
-              <p className="text-gray-600">
+              <p className="text-text-secondary">
                 Accede a cientos de ejercicios, juegos y materiales listos para imprimir o usar en el aula.
               </p>
             </div>
@@ -76,10 +76,10 @@ export default function Home() {
               <div className="bg-teal-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-teal-600">
                 <Users size={28} />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold mb-3">
                 Comunidad Docente
               </h3>
-              <p className="text-gray-600">
+              <p className="text-text-secondary">
                 Conecta con otros profesores, comparte experiencias y resuelve dudas en nuestros foros exclusivos.
               </p>
             </div>
