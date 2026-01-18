@@ -93,7 +93,7 @@ export default function SubitizacionTarjetasPuntosContent() {
             <ArticleSection title="Descargar recursos">
                 <p>Puedes descargar los materiales necesarios para llevar a cabo esta actividad en el aula:</p>
                 <PdfButton
-                    filePath="\subitizacion\subitización-puntos-1-5-pequeño.pdf"
+                    filePath="\subitizacion\subitización-puntos-1-3.jpeg"
                     label="Ver recurso"
 
                 />

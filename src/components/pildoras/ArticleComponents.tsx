@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
-import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, X } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner } from "lucide-react";
 
 import {
     Tooltip,
@@ -21,6 +21,15 @@ import {
     Button,
     type ButtonProps
 } from '@/components/animate-ui/components/buttons/button';
+
+import {
+    Dialog,
+    DialogTrigger,
+    DialogPopup,
+    DialogHeader,
+    DialogTitle,
+    type DialogPopupProps,
+} from '@/components/animate-ui/components/base/dialog';
 
 import conceptsData from '@/data/concepts.json';
 
@@ -303,55 +312,57 @@ interface PdfButtonProps {
 }
 
 export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
-    const [open, setOpen] = useState(false);
-
     return (
         <>
-            <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
-                {/* Visualizar */}
-                <button
-                    type="button"
-                    onClick={() => setOpen(true)}
-                    className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
-                >
-                    <FileSearchCorner size={20} />
-                    {label}
-                </button>
-                {/* Descargar */}
-                <button type="button" className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
-                    <Download size={20} />
-                </button>
-            </div>
+            <Dialog>
+                <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
+                    {/* Visualizar */}
+                    <DialogTrigger
+                        render={
+                            <button
+                                type="button"
+                                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
+                            >
+                                <FileSearchCorner size={20} />
+                                {label}
+                            </button>
+                        }
+                    />
+                    {/* Descargar */}
+                    <a href={filePath} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+                        <Download size={20} />
+                    </a>
+                </div>
 
-            {/* Modal */}
-            {open && <PdfModal filePath={filePath} onClose={() => setOpen(false)} />}
+                {/* Dialog / Modal */}
+                <PdfDialog filePath={filePath} />
+            </Dialog>
         </>
     );
 
-    interface PdfModalProps {
+    interface PdfDialogProps {
         filePath: string;
-        onClose: () => void;
+        from?: DialogPopupProps['from'];
+        showCloseButton?: boolean;
     }
 
-    function PdfModal({ filePath, onClose }: PdfModalProps) {
+    function PdfDialog({ filePath, from = "top", showCloseButton = true }: PdfDialogProps) {
         return (
-            <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
-                <div className="bg-white w-[95vw] h-[90vh] rounded-xl shadow-xl relative overflow-hidden">
-                    {/* Header */}
-                    <div className="flex items-center justify-end p-3 border-b">
-                        <button onClick={onClose}>
-                            <X size={20} />
-                        </button>
-                    </div>
-
-                    {/* PDF */}
-                    <iframe
-                        src={filePath}
-                        className="w-full h-full"
-                        title="PDF Viewer"
-                    />
-                </div>
-            </div>
+            <DialogPopup
+                from={from}
+                showCloseButton={showCloseButton}
+                className="bg-white w-[90vw] max-w-[90vw] sm:max-w-[90vw] h-[95vh] rounded-xl shadow-xl flex flex-col overflow-hidden"
+            >
+                <DialogHeader className="shrink-0">
+                    <DialogTitle>Ver recurso</DialogTitle>
+                </DialogHeader>
+                {/* PDF */}
+                <iframe
+                    src={filePath}
+                    className="flex-1 w-full min-h-0"
+                    title="PDF Viewer"
+                />
+            </DialogPopup>
         );
     }
 }
