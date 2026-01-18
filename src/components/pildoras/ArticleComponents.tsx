@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
-import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, X } from "lucide-react";
 
 import {
     Tooltip,
@@ -303,18 +303,55 @@ interface PdfButtonProps {
 }
 
 export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
+    const [open, setOpen] = useState(false);
+
     return (
-        <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
-            <a
-                type="button" href={filePath} download
-                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
-            >
-                <FileSearchCorner size={20} />
-                {label}
-            </a>
-            <button type="button" className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
-                <Download size={20} />
-            </button>
-        </div>
+        <>
+            <div className="inline-flex text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
+                {/* Visualizar */}
+                <button
+                    type="button"
+                    onClick={() => setOpen(true)}
+                    className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
+                >
+                    <FileSearchCorner size={20} />
+                    {label}
+                </button>
+                {/* Descargar */}
+                <button type="button" className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+                    <Download size={20} />
+                </button>
+            </div>
+
+            {/* Modal */}
+            {open && <PdfModal filePath={filePath} onClose={() => setOpen(false)} />}
+        </>
     );
+
+    interface PdfModalProps {
+        filePath: string;
+        onClose: () => void;
+    }
+
+    function PdfModal({ filePath, onClose }: PdfModalProps) {
+        return (
+            <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
+                <div className="bg-white w-[95vw] h-[90vh] rounded-xl shadow-xl relative overflow-hidden">
+                    {/* Header */}
+                    <div className="flex items-center justify-end p-3 border-b">
+                        <button onClick={onClose}>
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    {/* PDF */}
+                    <iframe
+                        src={filePath}
+                        className="w-full h-full"
+                        title="PDF Viewer"
+                    />
+                </div>
+            </div>
+        );
+    }
 }
