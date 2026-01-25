@@ -1,0 +1,75 @@
+{
+    "title": "Búhos en el árbol",
+    "background": "/cuentos/bg-park.png",
+    "pages": [
+        {
+            "id": "page-1",
+            "actors": [
+                {
+                    "id": "tree-1",
+                    "type": "image",
+                    "src": "cuentos/arbol.png",
+                    "x": 50,
+                    "y": 55,
+                    "zIndex": 5,
+                    "width": 600,
+                    "height": 600,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "tree-1",
+                    "action": "appear"
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        },
+        {
+            "id": "page-2",
+            "actors": [
+                {
+                    "id": "apple-1",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 41,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "apple-1",
+                    "action": "appear"
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        },
+        {
+            "id": "page-3",
+            "actors": [
+                {
+                    "id": "apple-2",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 58,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "apple-2",
+                    "action": "appear"
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        }    
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "title": "Búhos en el árbol",
+    "background": "/cuentos/bg-park.png",
+    "pages": [
+        {
+            "id": "page-1",
+            "actors": [
+                {
+                    "id": "owl-1",
+                    "type": "image",
+                    "src": "icons/buho-rojo.png",
+                    "x": 50,
+                    "y": 80,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": true
+                },
+                {
+                    "id": "tree",
+                    "type": "image",
+                    "src": "cuentos/tree.png",
+                    "x": 70,
+                    "y": 60,
+                    "zIndex": 5,
+                    "width": 850,
+                    "height": 850,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "owl-1",
+                    "action": "appear"
+                },
+                {
+                    "actor": "tree",
+                    "action": "appear"
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        },
+        {
+            "id": "page-2",
+            "actors": [
+                {
+                    "actor": "owl-1",
+                    "action": "move",
+                    "to": {
+                        "x": 65,
+                        "y": 50
+                    },
+                    "duration": 2000
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        },
+        {
+            "id": "page-3",
+            "actors": [
+                {
+                    "actor": "owl-1",
+                    "action": "move",
+                    "to": {
+                        "x": 10,
+                        "y": 20
+                    },
+                    "duration": 2000
+                }
+            ],
+            "advanceOn": "spaceOrClick"
+        }
+    ]
+}
