@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
 import NavDropdown, { DropdownItem } from "./NavDropdown";
 
@@ -50,7 +51,14 @@ export default function Navbar() {
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
                     <div className="shrink-0 flex items-center">
-                        <Link href="/" className="text-2xl font-bold text-primary">
+                        <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
+                            <Image
+                                src="/logo buho circulo color.svg"
+                                alt="MathEdu Logo"
+                                width={50}
+                                height={50}
+                                priority
+                            />
                             MathEdu
                         </Link>
                     </div>

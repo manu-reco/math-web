@@ -1,13 +1,25 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BookOpen, Brain, CheckCircle, Users } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20 lg:py-32">
+      <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20 lg:py-28">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
+            <div className="flex items-center gap-6 mb-6 justify-center">
+              <Image
+                src="/logo buho relleno color.svg"
+                alt="MathEdu Logo"
+                width={150}
+                height={150}
+                priority
+                className="bg-white rounded-full"
+              />
+              <span className="text-2xl md:text-3xl font-bold">MathEdu</span>
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Domina las Matemáticas para Infantil y Primaria
             </h1>
