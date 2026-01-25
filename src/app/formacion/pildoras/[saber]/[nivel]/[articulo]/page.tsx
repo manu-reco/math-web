@@ -8,6 +8,8 @@ import ConteoRecitativoContent from "@/components/content/ConteoRecitativoConten
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
 import DescubriendoRectaContent from "@/components/content/DescubriendoRectaContent";
 import SubitizacionTarjetasPuntos1Content from "@/components/content/SubitizacionTarjetasPuntos1Content";
+import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
+import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
@@ -15,6 +17,8 @@ const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "actividades-conceptos-basicos": ArticuloPruebaActividades,
     "conteo-recitativo": ConteoRecitativoContent,
     "subitizacion-tarjetas-puntos-1": SubitizacionTarjetasPuntos1Content,
+    "subitizacion-tarjetas-puntos-2": SubitizacionTarjetasPuntos2Content,
+    "subitizacion-tarjetas-puntos-3": SubitizacionTarjetasPuntos3Content,
     "descubriendo-recta": DescubriendoRectaContent, 
 };
 
