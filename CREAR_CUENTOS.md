@@ -23,8 +23,10 @@ src/
 └── app/
     └── juegos/
         └── cuentos/
-            └── [nombre]/
-                └── page.tsx          # Página del cuento
+      ├── _components/
+      │   └── StoryPageTemplate.tsx # Base reutilizable de cuentos
+      └── [nombre]/
+        └── page.tsx          # Página del cuento (usa la base)
 ```
 
 ## 🎯 Características
@@ -312,79 +314,43 @@ Crear `src/data/cuentos/mi-cuento.story.json`:
 }
 ```
 
+**Opcional**: Puedes mover/encapsular el contenido en un módulo de `src/components/content/` y exportar `storyData` desde ahí si prefieres agruparlo con otros contenidos.
+
 ### 2. Crear la página Next.js
 
 Crear `src/app/juegos/cuentos/mi-cuento/page.tsx`:
 
 ```tsx
-"use client";
-
-import { useState } from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import StoryPlayer from "@/components/story/StoryPlayer";
 import storyData from "@/data/cuentos/mi-cuento.story.json";
-import { validateStoryData } from "@/lib/validateStory";
-import type { StoryData } from "@/types/story";
+import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
 
 export default function MiCuentoPage() {
-    const [gameCompleted, setGameCompleted] = useState(false);
+  return <StoryPageTemplate storyData={storyData} />;
+}
+```
 
-    let validatedStory: StoryData;
-    try {
-        validatedStory = validateStoryData(storyData) as StoryData;
-    } catch (error) {
-        console.error('Error validating story:', error);
-        return <div>Error al cargar el cuento</div>;
-    }
+### 2.1 Personalizar el final del cuento (opcional)
 
-    if (gameCompleted) {
-      return (
-        <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
-          <div className="bg-white p-12 rounded-2xl shadow-2xl text-center max-w-md">
-            <div className="text-6xl mb-6">🎉</div>
-            <h1 className="text-3xl font-bold mb-4">
-              ¡Cuento completado!
-            </h1>
-            <p className="text-text-secondary mb-8">
-              Has terminado de leer &quot;{validatedStory.title}&quot;
-            </p>
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={() => setGameCompleted(false)}
-                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
-              >
-                Leer de nuevo
-              </button>
-              <Link
-                href="/juegos"
-                className="inline-flex items-center justify-center gap-2 bg-gray-100 text-text-secondary px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-              >
-                <ArrowLeft size={20} />
-                Volver a Juegos
-              </Link>
-            </div>
+`StoryPageTemplate` acepta `renderCompletion` y `renderError` para personalizar la UI:
+
+```tsx
+import storyData from "@/data/cuentos/mi-cuento.story.json";
+import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+
+export default function MiCuentoPage() {
+  return (
+    <StoryPageTemplate
+      storyData={storyData}
+      renderCompletion={(story, onRestart) => (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold">¡Terminaste {story.title}!</h1>
+            <button className="mt-6" onClick={onRestart}>Leer de nuevo</button>
           </div>
         </div>
-      );
-    }
-
-    return (
-      <div className="relative">
-        <Link
-          href="/juegos"
-          className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm text-text-secondary px-4 py-2 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all flex items-center gap-2 font-medium"
-        >
-          <ArrowLeft size={20} />
-          Salir
-        </Link>
-
-        <StoryPlayer
-          story={validatedStory}
-          onComplete={() => setGameCompleted(true)}
-        />
-      </div>
-    );
+      )}
+    />
+  );
 }
 ```
 
