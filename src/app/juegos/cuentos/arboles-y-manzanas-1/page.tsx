@@ -4,11 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
-import storyData from "@/data/cuentos/owl-tree.story.json";
+import storyData from "@/data/cuentos/arboles-y-manzanas-1.story.json";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
 
-export default function OwlTreeStoryPage() {
+export default function ArbolesYManzanasStoryPage() {
     const [gameCompleted, setGameCompleted] = useState(false);
 
     // Validar datos del cuento

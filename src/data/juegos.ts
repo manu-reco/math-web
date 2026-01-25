@@ -21,6 +21,16 @@ export const games: Game[] = [
         path: "/juegos/subitizacion/"
     },
     {
+        id: "arboles-y-manzanas-1",
+        title: "Árboles y manzanas. Parte 1",
+        image: "/cuentos/arboles-y-manzanas.jpg",
+        area: "Aritmética",
+        description: "Cuento interactivo para aprender a contar hasta 2 con manzanas y árboles.",
+        skills: ["Sentido numérico", "Cantidad", "Cardinalidad", "Subitización", "Comunicación oral"],
+        isAvailable: true,
+        path: "/juegos/cuentos/arboles-y-manzanas-1"
+    },
+    {
         id: "buho-ejemplo",
         title: "Búhos al árbol",
         image: "/cuentos/tree.png",
@@ -31,7 +41,7 @@ export const games: Game[] = [
         path: "/juegos/cuentos/owl-tree"
     },
     {
-        id: "juego-3",
+        id: "juego-4",
         title: "Próximamente",
         image: "/placeholder-game.png",
         area: "Aritmética",
@@ -41,7 +51,7 @@ export const games: Game[] = [
         path: "#"
     },
     {
-        id: "juego-4",
+        id: "juego-5",
         title: "Próximamente",
         image: "/placeholder-game.png",
         area: "Aritmética",
