@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
+import StoryCompletionScreen from "@/app/juegos/cuentos/_components/StoryCompletionScreen";
 
 interface StoryChapterConfig {
     id: string;
@@ -17,14 +17,6 @@ interface StoryPageTemplateProps {
     storyData?: unknown;
     chapters?: StoryChapterConfig[];
     backHref?: string;
-    renderCompletion?: (params: {
-        story: StoryData;
-        chapterIndex: number;
-        chapterCount: number;
-        onRestart: () => void;
-        onNextChapter: () => void;
-        hasNextChapter: boolean;
-    }) => ReactNode;
     renderError?: (params: { chapterIndex: number; chapterCount: number }) => ReactNode;
 }
 
@@ -43,11 +35,11 @@ export default function StoryPageTemplate({
     storyData,
     chapters,
     backHref = DEFAULT_BACK_HREF,
-    renderCompletion,
     renderError,
 }: StoryPageTemplateProps) {
     const [gameCompleted, setGameCompleted] = useState(false);
     const [chapterIndex, setChapterIndex] = useState(0);
+    const [completedChapters, setCompletedChapters] = useState<boolean[]>([]);
 
     const resolvedChapters: StoryChapterConfig[] = chapters?.length
         ? chapters
@@ -64,6 +56,11 @@ export default function StoryPageTemplate({
         if (!hasNextChapter) return;
         setGameCompleted(false);
         setChapterIndex(prev => prev + 1);
+    };
+    const handleSelectChapter = (index: number) => {
+        if (index < 0 || index >= chapterCount) return;
+        setGameCompleted(false);
+        setChapterIndex(index);
     };
 
     // Validar datos del cuento
@@ -118,58 +115,25 @@ export default function StoryPageTemplate({
 
     // Mostrar pantalla de finalización si el cuento ha sido completado
     if (gameCompleted) {
-        if (renderCompletion) {
-            return (
-                <>{
-                    renderCompletion({
-                        story: validatedStory,
-                        chapterIndex,
-                        chapterCount,
-                        onRestart: handleRestart,
-                        onNextChapter: handleNextChapter,
-                        hasNextChapter,
-                    })
-                }</>
-            );
-        }
         return (
-            <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
-                <div className="bg-white p-12 rounded-2xl shadow-2xl text-center max-w-md">
-                    <div className="text-6xl mb-6">🎉</div>
-                    <h1 className="text-3xl font-bold mb-4">
-                        {hasNextChapter
-                            ? `¡Capítulo ${chapterIndex + 1} completado!`
-                            : "¡Cuento completado!"}
-                    </h1>
-                    <p className="text-text-secondary mb-8">
-                        Has terminado de leer &quot;{validatedStory.title}&quot;
-                    </p>
-                    <div className="flex flex-col gap-4">
-                        {hasNextChapter ? (
-                            <button
-                                onClick={handleNextChapter}
-                                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
-                            >
-                                Ir al capítulo {chapterIndex + 2}
-                            </button>
-                        ) : (
-                            <button
-                                onClick={handleRestart}
-                                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
-                            >
-                                Leer de nuevo
-                            </button>
-                        )}
-                        <Link
-                            href={backHref}
-                            className="inline-flex items-center justify-center gap-2 bg-gray-100 text-text-secondary px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-                        >
-                            <ArrowLeft size={20} />
-                            Volver a Juegos
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <StoryCompletionScreen
+                backHref={backHref}
+                chapterIndex={chapterIndex}
+                chapterCount={chapterCount}
+                chapterTitles={resolvedChapters.map((chapter, index) => {
+                    try {
+                        const parsed = validateStoryData(chapter.storyData) as StoryData;
+                        return parsed.title || `Capítulo ${index + 1}`;
+                    } catch {
+                        return `Capítulo ${index + 1}`;
+                    }
+                })}
+                completedChapters={resolvedChapters.map((_, index) => !!completedChapters[index])}
+                hasNextChapter={hasNextChapter}
+                onRestart={handleRestart}
+                onNextChapter={handleNextChapter}
+                onSelectChapter={handleSelectChapter}
+            />
         );
     }
 
@@ -186,7 +150,14 @@ export default function StoryPageTemplate({
 
             <StoryPlayer
                 story={validatedStory}
-                onComplete={() => setGameCompleted(true)}
+                onComplete={() => {
+                    setCompletedChapters(prev => {
+                        const next = [...prev];
+                        next[chapterIndex] = true;
+                        return next;
+                    });
+                    setGameCompleted(true);
+                }}
             />
         </div>
     );

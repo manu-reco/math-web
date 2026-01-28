@@ -351,38 +351,16 @@ export default function MiCuentoPage() {
 }
 ```
 
-### 2.1 Personalizar el final del cuento (opcional)
+### 2.1 Pantalla de finalización (componente separado)
 
-`StoryPageTemplate` acepta `renderCompletion` y `renderError` para personalizar la UI:
+La pantalla de finalización se renderiza con el componente base en:
 
-```tsx
-import storyData from "@/data/cuentos/mi-cuento.story.json";
-import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+- [src/app/juegos/cuentos/_components/StoryCompletionScreen.tsx](src/app/juegos/cuentos/_components/StoryCompletionScreen.tsx)
 
-export default function MiCuentoPage() {
-  return (
-    <StoryPageTemplate
-      storyData={storyData}
-      renderCompletion={({ story, onRestart, hasNextChapter, onNextChapter, chapterIndex }) => (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold">
-              {hasNextChapter
-                ? `¡Capítulo ${chapterIndex + 1} completado!`
-                : `¡Terminaste ${story.title}!`}
-            </h1>
-            {hasNextChapter ? (
-              <button className="mt-6" onClick={onNextChapter}>Ir al siguiente capítulo</button>
-            ) : (
-              <button className="mt-6" onClick={onRestart}>Leer de nuevo</button>
-            )}
-          </div>
-        </div>
-      )}
-    />
-  );
-}
-```
+Siempre muestra:
+- Botón de volver a leer.
+- Botón de siguiente capítulo (si lo hay).
+- Lista de capítulos completa con indicador leído/no leído.
 
 ### 3. Añadir a la lista de juegos
 
