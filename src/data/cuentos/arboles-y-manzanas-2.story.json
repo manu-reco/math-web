@@ -1,5 +1,5 @@
 {
-    "title": "Árboles y manzanas — Capítulo 1",
+    "title": "Árboles y manzanas — Capítulo 2",
     "background": "/cuentos/bg-park.png",
     "pages": [
         {
@@ -32,7 +32,18 @@
                     "id": "apple-1",
                     "type": "image",
                     "src": "cuentos/manzana.png",
-                    "x": 41,
+                    "x": 38,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                },
+                {
+                    "id": "apple-2",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 62,
                     "y": 50,
                     "zIndex": 10,
                     "width": 100,
@@ -44,6 +55,10 @@
                 {
                     "actor": "apple-1",
                     "action": "appear"
+                },
+                {
+                    "actor": "apple-2",
+                    "action": "appear"
                 }
             ],
             "advanceOn": "spaceOrClick"
@@ -52,11 +67,11 @@
             "id": "page-3",
             "actors": [
                 {
-                    "id": "apple-2",
+                    "id": "apple-3",
                     "type": "image",
                     "src": "cuentos/manzana.png",
-                    "x": 58,
-                    "y": 50,
+                    "x": 50,
+                    "y": 30,
                     "zIndex": 10,
                     "width": 100,
                     "height": 100,
@@ -65,11 +80,11 @@
             ],
             "onEnter": [
                 {
-                    "actor": "apple-2",
+                    "actor": "apple-3",
                     "action": "appear"
                 }
             ],
             "advanceOn": "spaceOrClick"
-        }    
+        }
     ]
 }

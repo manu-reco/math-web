@@ -19,14 +19,15 @@ src/
 │       └── DragTarget.tsx            # Zonas de arrastre
 ├── data/
 │   └── cuentos/
-│       └── [nombre].story.json       # Datos del cuento
+│       ├── [nombre].story.json       # Datos del cuento (un capítulo)
+│       └── [nombre]-capitulo-2.story.json # Otros capítulos (opcional)
 └── app/
     └── juegos/
         └── cuentos/
-      ├── _components/
-      │   └── StoryPageTemplate.tsx # Base reutilizable de cuentos
-      └── [nombre]/
-        └── page.tsx          # Página del cuento (usa la base)
+            ├── _components/
+            │   └── StoryPageTemplate.tsx # Base reutilizable de cuentos
+            └── [nombre]/
+                └── page.tsx          # Página del cuento (usa la base)
 ```
 
 ## 🎯 Características
@@ -43,12 +44,6 @@ src/
 - ✅ **TypeScript completo** - Tipado estricto en todo el sistema
 
 ## 📝 Estructura de un Cuento (JSON)
-
-### Campos globales del cuento
-
-- **background** (string, opcional): Fondo global para todas las páginas (si una página no define `background`).
-- **backgroundColor** (string, opcional): Color de fondo global (si una página no define `backgroundColor`).
-
 
 ```json
 {
@@ -91,6 +86,12 @@ src/
   ]
 }
 ```
+
+### Campos globales del cuento
+
+- **background** (string, opcional): Fondo global para todas las páginas (si una página no define `background`).
+- **backgroundColor** (string, opcional): Color de fondo global (si una página no define `backgroundColor`).
+
 
 ## 🎭 Tipos de Actores
 
@@ -329,6 +330,27 @@ export default function MiCuentoPage() {
 }
 ```
 
+### 2.0 Usar capítulos (opcional)
+
+Puedes separar cada capítulo en un JSON independiente y pasarlos como `chapters`:
+
+```tsx
+import chapter1 from "@/data/cuentos/mi-cuento-capitulo-1.story.json";
+import chapter2 from "@/data/cuentos/mi-cuento-capitulo-2.story.json";
+import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+
+export default function MiCuentoPage() {
+  return (
+    <StoryPageTemplate
+      chapters={[
+        { id: "capitulo-1", storyData: chapter1 },
+        { id: "capitulo-2", storyData: chapter2 },
+      ]}
+    />
+  );
+}
+```
+
 ### 2.1 Personalizar el final del cuento (opcional)
 
 `StoryPageTemplate` acepta `renderCompletion` y `renderError` para personalizar la UI:
@@ -341,11 +363,19 @@ export default function MiCuentoPage() {
   return (
     <StoryPageTemplate
       storyData={storyData}
-      renderCompletion={(story, onRestart) => (
+      renderCompletion={({ story, onRestart, hasNextChapter, onNextChapter, chapterIndex }) => (
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">¡Terminaste {story.title}!</h1>
-            <button className="mt-6" onClick={onRestart}>Leer de nuevo</button>
+            <h1 className="text-3xl font-bold">
+              {hasNextChapter
+                ? `¡Capítulo ${chapterIndex + 1} completado!`
+                : `¡Terminaste ${story.title}!`}
+            </h1>
+            {hasNextChapter ? (
+              <button className="mt-6" onClick={onNextChapter}>Ir al siguiente capítulo</button>
+            ) : (
+              <button className="mt-6" onClick={onRestart}>Leer de nuevo</button>
+            )}
           </div>
         </div>
       )}
