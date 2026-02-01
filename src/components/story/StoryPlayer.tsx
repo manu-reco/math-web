@@ -188,7 +188,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
             />
 
             {/* Indicador de progreso con controles de navegación */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
