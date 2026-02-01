@@ -1,11 +1,10 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
+import FixedExitButton from "../FixedExitButton";
 import StoryErrorScreen from "./StoryErrorScreen";
 import StoryCompletionScreen from "@/components/juegos/cuentos/StoryCompletionScreen";
 
@@ -71,10 +70,13 @@ export default function StoryPageTemplate({
             return <>{renderError({ chapterIndex, chapterCount })}</>;
         }
         return (
-            <StoryErrorScreen
-                errorMessage="No se encontró el capítulo del cuento."
-                backHref={backHref}
-            />
+            <>
+                <FixedExitButton backHref={backHref} />
+                <StoryErrorScreen
+                    errorMessage="No se encontró el capítulo del cuento."
+                    backHref={backHref}
+                />
+            </>
         );
     }
     try {
@@ -85,48 +87,47 @@ export default function StoryPageTemplate({
             return <>{renderError({ chapterIndex, chapterCount })}</>;
         }
         return (
-            <StoryErrorScreen
-                errorMessage="Hubo un problema con los datos del cuento. Por favor, contacta al administrador."
-                backHref={backHref}
-            />
+            <>
+                <FixedExitButton backHref={backHref} />
+                <StoryErrorScreen
+                    errorMessage="Hubo un problema con los datos del cuento. Por favor, contacta al administrador."
+                    backHref={backHref}
+                />
+            </>
         );
     }
 
     // Mostrar pantalla de finalización si el cuento ha sido completado
     if (gameCompleted) {
         return (
-            <StoryCompletionScreen
-                backHref={backHref}
-                chapterIndex={chapterIndex}
-                chapterCount={chapterCount}
-                chapterTitles={resolvedChapters.map((chapter, index) => {
-                    try {
-                        const parsed = validateStoryData(chapter.storyData) as StoryData;
-                        return parsed.title || `Capítulo ${index + 1}`;
-                    } catch {
-                        return `Capítulo ${index + 1}`;
-                    }
-                })}
-                completedChapters={resolvedChapters.map((_, index) => !!completedChapters[index])}
-                hasNextChapter={hasNextChapter}
-                onRestart={handleRestart}
-                onNextChapter={handleNextChapter}
-                onSelectChapter={handleSelectChapter}
-            />
+            <>
+                <FixedExitButton backHref={backHref} />
+                <StoryCompletionScreen
+                    backHref={backHref}
+                    chapterIndex={chapterIndex}
+                    chapterCount={chapterCount}
+                    chapterTitles={resolvedChapters.map((chapter, index) => {
+                        try {
+                            const parsed = validateStoryData(chapter.storyData) as StoryData;
+                            return parsed.title || `Capítulo ${index + 1}`;
+                        } catch {
+                            return `Capítulo ${index + 1}`;
+                        }
+                    })}
+                    completedChapters={resolvedChapters.map((_, index) => !!completedChapters[index])}
+                    hasNextChapter={hasNextChapter}
+                    onRestart={handleRestart}
+                    onNextChapter={handleNextChapter}
+                    onSelectChapter={handleSelectChapter}
+                />
+            </>
         );
     }
 
     // Renderizar el reproductor del cuento
     return (
-        <div className="relative">
-            <Link
-                href={backHref}
-                className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm text-text-secondary px-4 py-2 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all flex items-center gap-2 font-medium"
-            >
-                <ArrowLeft size={20} />
-                Salir
-            </Link>
-
+        <>
+            <FixedExitButton backHref={backHref} />
             <StoryPlayer
                 story={validatedStory}
                 onComplete={() => {
@@ -138,6 +139,6 @@ export default function StoryPageTemplate({
                     setGameCompleted(true);
                 }}
             />
-        </div>
+        </>
     );
 }
