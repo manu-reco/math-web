@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Circle } from "lucide-react";
+import { useEffect } from "react";
+import confetti from "canvas-confetti";
+import { ArrowRight, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 
 interface StoryCompletionScreenProps {
     backHref: string;
@@ -16,7 +17,6 @@ interface StoryCompletionScreenProps {
 }
 
 export default function StoryCompletionScreen({
-    backHref,
     chapterIndex,
     chapterCount,
     chapterTitles,
@@ -26,6 +26,13 @@ export default function StoryCompletionScreen({
     onNextChapter,
     onSelectChapter,
 }: StoryCompletionScreenProps) {
+
+    useEffect(() => {
+        confetti({
+            spread: 360,
+        });
+    }, []);
+
     return (
         <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
             <div className="bg-white p-8 md:p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
@@ -40,27 +47,22 @@ export default function StoryCompletionScreen({
                 </p>
 
                 <div className="flex flex-col gap-3 mb-8">
-                    <button
-                        onClick={onRestart}
-                        className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
-                    >
-                        Volver a leer
-                    </button>
                     {hasNextChapter && (
                         <button
                             onClick={onNextChapter}
-                            className="bg-primary/10 text-primary px-6 py-3 rounded-lg hover:bg-primary/20 transition-colors font-medium"
+                            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium cursor-pointer"
                         >
+                            <ArrowRight className="inline-block mr-2" />
                             Ir al capítulo {chapterIndex + 2}
                         </button>
                     )}
-                    <Link
-                        href={backHref}
-                        className="inline-flex items-center justify-center gap-2 bg-gray-100 text-text-secondary px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                    <button
+                        onClick={onRestart}
+                        className="bg-primary/10 text-primary px-6 py-3 rounded-lg hover:bg-primary/20 transition-colors font-medium cursor-pointer"
                     >
-                        <ArrowLeft size={20} />
-                        Volver a Juegos
-                    </Link>
+                        <RotateCcw className="inline-block mr-2" />
+                        Volver a leer
+                    </button>
                 </div>
 
                 <div className="text-left">
@@ -73,7 +75,7 @@ export default function StoryCompletionScreen({
                                 <button
                                     key={index}
                                     onClick={() => onSelectChapter(index)}
-                                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg border transition-colors ${
+                                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg border transition-colors cursor-pointer ${
                                         isCurrent
                                             ? "border-primary/40 bg-primary/5"
                                             : "border-gray-100 hover:bg-gray-50"
@@ -89,7 +91,7 @@ export default function StoryCompletionScreen({
                                             Capítulo {index + 1}
                                         </span>
                                     </div>
-                                    <span className="text-xs text-gray-500 truncate max-w-[160px]">
+                                    <span className="text-xs text-gray-500 truncate max-w-40">
                                         {title || `Capítulo ${index + 1}`}
                                     </span>
                                 </button>
