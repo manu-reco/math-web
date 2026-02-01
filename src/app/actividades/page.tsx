@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { games } from "@/data/juegos";
-import GamesGrid from "@/components/juegos/GamesGrid";
+import { games } from "@/data/actividades";
+import GamesGrid from "@/components/actividades/GamesGrid";
 
-export default function JuegosPage() {
+export default function ActividadesPage() {
     return (
         <main className="min-h-screen bg-linear-to-b from-blue-50 to-white pb-20">
             {/* Header */}
@@ -14,10 +14,10 @@ export default function JuegosPage() {
                         </Link>
                     </nav>                    
                     <h1 className="text-5xl font-bold mb-4">
-                        Juegos Educativos
+                        Actividades Educativas
                     </h1>
                     <p className="text-xl text-text-secondary max-w-3xl">
-                        Aprende matemáticas de forma divertida e interactiva con nuestros juegos educativos
+                        Aprende matemáticas de forma divertida e interactiva con nuestras actividades interactivas.
                     </p>
                 </div>
             </header>

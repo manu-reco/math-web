@@ -20,7 +20,7 @@ export const games: Game[] = [
         description: "Reconoce la cantidad de elementos sin necesidad de contar uno por uno.",
         skills: ["Concepto de cantidad", "Conteo", "Subitización", "Suma", "Composición y descomposición"],
         isAvailable: true,
-        path: "/juegos/subitizacion/"
+        path: "/actividades/subitizacion/"
     },
     {
         id: "arboles-y-manzanas-1",
@@ -31,7 +31,7 @@ export const games: Game[] = [
         description: "Cuento interactivo para aprender a contar hasta 2 con manzanas y árboles.",
         skills: ["Sentido numérico", "Cantidad", "Cardinalidad", "Subitización", "Comunicación oral"],
         isAvailable: true,
-        path: "/juegos/cuentos/arboles-y-manzanas-1"
+        path: "/actividades/cuentos/arboles-y-manzanas-1"
     },
     {
         id: "buho-ejemplo",
@@ -42,7 +42,7 @@ export const games: Game[] = [
         description: "Ejemplo de cuento interactivo con un búho que vuela al árbol.",
         skills: ["En desarrollo"],
         isAvailable: true,
-        path: "/juegos/cuentos/owl-tree"
+        path: "/actividades/cuentos/owl-tree"
     },
     {
         id: "juego-4",

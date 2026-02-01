@@ -22,7 +22,7 @@ src/
 │       ├── [nombre].story.json       # Datos del cuento (un capítulo)
 │       └── [nombre]-capitulo-2.story.json # Otros capítulos (opcional)
 └── app/
-    └── juegos/
+    └── actividades/
         └── cuentos/
             ├── _components/
             │   └── StoryPageTemplate.tsx # Base reutilizable de cuentos
@@ -319,11 +319,11 @@ Crear `src/data/cuentos/mi-cuento.story.json`:
 
 ### 2. Crear la página Next.js
 
-Crear `src/app/juegos/cuentos/mi-cuento/page.tsx`:
+Crear `src/app/actividades/cuentos/mi-cuento/page.tsx`:
 
 ```tsx
 import storyData from "@/data/cuentos/mi-cuento.story.json";
-import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+import StoryPageTemplate from "@/app/actividades/cuentos/_components/StoryPageTemplate";
 
 export default function MiCuentoPage() {
   return <StoryPageTemplate storyData={storyData} />;
@@ -337,7 +337,7 @@ Puedes separar cada capítulo en un JSON independiente y pasarlos como `chapters
 ```tsx
 import chapter1 from "@/data/cuentos/mi-cuento-capitulo-1.story.json";
 import chapter2 from "@/data/cuentos/mi-cuento-capitulo-2.story.json";
-import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+import StoryPageTemplate from "@/app/actividades/cuentos/_components/StoryPageTemplate";
 
 export default function MiCuentoPage() {
   return (
@@ -355,16 +355,16 @@ export default function MiCuentoPage() {
 
 La pantalla de finalización se renderiza con el componente base en:
 
-- [src/app/juegos/cuentos/_components/StoryCompletionScreen.tsx](src/app/juegos/cuentos/_components/StoryCompletionScreen.tsx)
+- [src/app/actividades/cuentos/_components/StoryCompletionScreen.tsx](src/app/actividades/cuentos/_components/StoryCompletionScreen.tsx)
 
 Siempre muestra:
 - Botón de volver a leer.
 - Botón de siguiente capítulo (si lo hay).
 - Lista de capítulos completa con indicador leído/no leído.
 
-### 3. Añadir a la lista de juegos
+### 3. Añadir a la lista de actividades
 
-Editar `src/data/juegos.ts`:
+Editar `src/data/actividades.ts`:
 
 ```typescript
 {
@@ -375,7 +375,7 @@ Editar `src/data/juegos.ts`:
     description: "Descripción del cuento",
     skills: ["Habilidades que trabaja"],
     isAvailable: true,
-    path: "/juegos/cuentos/mi-cuento"
+    path: "/actividades/cuentos/mi-cuento"
 }
 ```
 

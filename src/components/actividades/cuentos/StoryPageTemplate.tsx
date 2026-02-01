@@ -6,7 +6,7 @@ import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
 import FixedExitButton from "../FixedExitButton";
 import StoryErrorScreen from "./StoryErrorScreen";
-import StoryCompletionScreen from "@/components/juegos/cuentos/StoryCompletionScreen";
+import StoryCompletionScreen from "@/components/actividades/cuentos/StoryCompletionScreen";
 
 interface StoryChapterConfig {
     id: string;
@@ -20,13 +20,13 @@ interface StoryPageTemplateProps {
     renderError?: (params: { chapterIndex: number; chapterCount: number }) => ReactNode;
 }
 
-const DEFAULT_BACK_HREF = "/juegos";
+const DEFAULT_BACK_HREF = "/actividades";
 
 /**
  * Plantilla para páginas de cuentos interactivos.
  * Valida los datos del cuento y maneja la lógica de finalización.
  * @param props.storyData Datos del cuento a mostrar.
- * @param props.backHref URL para el enlace de regreso (por defecto: "/juegos").
+ * @param props.backHref URL para el enlace de regreso (por defecto: "/actividades").
  * @param props.renderCompletion Función para renderizar la pantalla de finalización personalizada.
  * @param props.renderError Función para renderizar una pantalla de error personalizada.
  * @returns Componente de la página del cuento.

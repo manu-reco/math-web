@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Game } from '@/data/juegos';
+import { Game } from '@/data/actividades';
 import Link from "next/link";
 import Image from "next/image";
 

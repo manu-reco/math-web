@@ -4,10 +4,10 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { subitizacionLevels } from "@/data/subitizacionLevels";
 import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
-import InstructionsScreen from "@/components/juegos/subitizacion/InstructionsScreen";
-import LevelSelector from "@/components/juegos/subitizacion/LevelSelector";
-import GameGrid from "@/components/juegos/subitizacion/GameGrid";
-import CompletionScreen from "@/components/juegos/subitizacion/CompletionScreen";
+import InstructionsScreen from "@/components/actividades/subitizacion/InstructionsScreen";
+import LevelSelector from "@/components/actividades/subitizacion/LevelSelector";
+import GameGrid from "@/components/actividades/subitizacion/GameGrid";
+import CompletionScreen from "@/components/actividades/subitizacion/CompletionScreen";
 
 type GameState = 'instructions' | 'levelSelect' | 'playing' | 'completed';
 type GameMode = 'concrete' | 'abstract';
@@ -33,7 +33,7 @@ export default function SubitizacionPage() {
         } else if (gameState === 'playing' || gameState === 'completed') {
             setGameState('levelSelect');
         }
-        // Si gameState === 'instructions', no hacemos nada aquí (el Link redirigirá a /juegos)
+        // Si gameState === 'instructions', no hacemos nada aquí (el Link redirigirá a /actividades)
     };
 
     const goToSelectLevel = () => {
@@ -122,8 +122,8 @@ export default function SubitizacionPage() {
             <header className="bg-white shadow-sm border-b border-gray-100">
                 <div className="container-custom py-6">
                     {gameState === 'instructions' ? (
-                        <Link href="/juegos" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
-                            ← Volver a Juegos
+                        <Link href="/actividades" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
+                            ← Volver a Actividades
                         </Link>
                     ) : (
                         <button

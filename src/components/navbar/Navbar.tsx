@@ -75,12 +75,12 @@ export default function Navbar() {
                             variant="desktop"
                         />
 
-                        {/* Juegos */}
+                        {/* Actividades */}
                         <Link
-                            href="/juegos"
+                            href="/actividades"
                             className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium box-border border-2 border-transparent rounded-xl hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
                         >
-                            Juegos
+                            Actividades
                         </Link>
 
                         {/* Información Dropdown */}
@@ -131,10 +131,10 @@ export default function Navbar() {
                         />
 
                         <Link
-                            href="/juegos"
+                            href="/actividades"
                             className="block text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
                         >
-                            Juegos
+                            Actividades
                         </Link>
 
                         <NavDropdown
