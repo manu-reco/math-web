@@ -47,10 +47,13 @@ export default function GameCard({ game }: GameCardProps) {
 
                 {/* Contenido */}
                 <div className="p-6 flex flex-col grow">
-                    {/* Saber */}
+                    {/* Saber y nivel */}
                     <div className="mb-3">
                         <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
                             {game.area}
+                        </span>
+                        <span className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-semibold rounded-full ml-2">
+                            {game.level}
                         </span>
                     </div>
 

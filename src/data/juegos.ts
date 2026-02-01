@@ -3,6 +3,7 @@ export interface Game {
     title: string;
     image: string;
     area: string;
+    level: string;
     description: string;
     skills: string[];
     isAvailable: boolean;
@@ -15,6 +16,7 @@ export const games: Game[] = [
         title: "Subitización",
         image: "/subitizacion/tarjetas-puntos-1-4-desord.png",
         area: "Aritmética",
+        level: "Primeros pasos y segundo ciclo",
         description: "Reconoce la cantidad de elementos sin necesidad de contar uno por uno.",
         skills: ["Concepto de cantidad", "Conteo", "Subitización", "Suma", "Composición y descomposición"],
         isAvailable: true,
@@ -25,6 +27,7 @@ export const games: Game[] = [
         title: "Árboles y manzanas. Parte 1",
         image: "/cuentos/arboles-y-manzanas.jpg",
         area: "Aritmética",
+        level: "Primeros pasos",
         description: "Cuento interactivo para aprender a contar hasta 2 con manzanas y árboles.",
         skills: ["Sentido numérico", "Cantidad", "Cardinalidad", "Subitización", "Comunicación oral"],
         isAvailable: true,
@@ -35,6 +38,7 @@ export const games: Game[] = [
         title: "Búhos al árbol",
         image: "/cuentos/tree.png",
         area: "Aritmética",
+        level: "Primeros pasos",
         description: "Ejemplo de cuento interactivo con un búho que vuela al árbol.",
         skills: ["En desarrollo"],
         isAvailable: true,
@@ -45,6 +49,7 @@ export const games: Game[] = [
         title: "Próximamente",
         image: "/placeholder-game.png",
         area: "Aritmética",
+        level: "Segundo ciclo",
         description: "Juego todavía en desarrollo",
         skills: ["En desarrollo"],
         isAvailable: false,
@@ -55,6 +60,7 @@ export const games: Game[] = [
         title: "Próximamente",
         image: "/placeholder-game.png",
         area: "Aritmética",
+        level: "Tercer ciclo",
         description: "Juego todavía en desarrollo",
         skills: ["En desarrollo"],
         isAvailable: false,
