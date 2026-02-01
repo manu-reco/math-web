@@ -1,6 +1,6 @@
 import chapter1 from "@/data/cuentos/arboles-y-manzanas-1.story.json";
 import chapter2 from "@/data/cuentos/arboles-y-manzanas-2.story.json";
-import StoryPageTemplate from "@/app/juegos/cuentos/_components/StoryPageTemplate";
+import StoryPageTemplate from "@/components/juegos/cuentos/StoryPageTemplate";
 
 export default function ArbolesYManzanasStoryPage() {
     return (

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
-import StoryCompletionScreen from "@/app/juegos/cuentos/_components/StoryCompletionScreen";
+import StoryCompletionScreen from "@/components/juegos/cuentos/StoryCompletionScreen";
 
 interface StoryChapterConfig {
     id: string;
