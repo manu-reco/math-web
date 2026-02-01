@@ -14,6 +14,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     const [actors, setActors] = useState<Map<string, ActorState>>(new Map());
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [assetsLoaded, setAssetsLoaded] = useState(false);
+    const [viewportScale, setViewportScale] = useState(1);
 
     const currentPage = story.pages[currentPageIndex];
 
@@ -84,6 +85,20 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
             img.src = src.startsWith('/') ? src : `/${src}`;
         });
     }, [story]);
+
+    // Escala global según ancho de pantalla (para móvil)
+    useEffect(() => {
+        const updateScale = () => {
+            const baseWidth = 1200; // ancho de referencia
+            const minScale = 0.6;
+            const nextScale = Math.min(1, Math.max(minScale, window.innerWidth / baseWidth));
+            setViewportScale(nextScale);
+        };
+
+        updateScale();
+        window.addEventListener("resize", updateScale);
+        return () => window.removeEventListener("resize", updateScale);
+    }, []);
 
     // Avanzar a la siguiente página
     const advancePage = useCallback(() => {
@@ -168,6 +183,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                 onAdvance={advancePage}
                 globalBackground={story.background}
                 globalBackgroundColor={story.backgroundColor}
+                viewportScale={viewportScale}
             />
 
             {/* Indicador de progreso con controles de navegación */}

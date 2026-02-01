@@ -15,9 +15,10 @@ interface PageProps {
     onAdvance: () => void;
     globalBackground?: string; // Background global de la historia
     globalBackgroundColor?: string; // Color de fondo global de la historia
+    viewportScale: number;
 }
 
-export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor }: PageProps) {
+export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor, viewportScale }: PageProps) {
     // Ejecutar una acción usando la función centralizada
     const executeAction = useCallback((action: ActionDefinition) => {
         const actor = actors.get(action.actor);
@@ -86,6 +87,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
                     key={actorState.id}
                     actorState={actorState}
                     updateActor={updateActor}
+                    viewportScale={viewportScale}
                 />
             ))}
 

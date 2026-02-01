@@ -7,9 +7,10 @@ import type { ActorState } from "@/types/story";
 interface ActorProps {
     actorState: ActorState;
     updateActor: (actorId: string, updates: Partial<ActorState>) => void;
+    viewportScale: number;
 }
 
-export default function Actor({ actorState, updateActor }: ActorProps) {
+export default function Actor({ actorState, updateActor, viewportScale }: ActorProps) {
     const { definition, currentPosition, visible, animationDuration } = actorState;
 
     if (!visible) return null;
@@ -22,6 +23,8 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
         updateActor(actorState.id, { isDragging: false });
     };
 
+    const baseScale = (definition.scale || 1) * viewportScale;
+
     // Convertir ms a segundos para Framer Motion
     const durationInSeconds = (animationDuration || 1500) / 1000;
 
@@ -32,7 +35,7 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
         className: "absolute",
         initial: {
             opacity: 0,
-            scale: 0.3,
+            scale: 0.3 * viewportScale,
             left: `${currentPosition.x}%`,
             top: `${currentPosition.y}%`,
             x: '-50%',
@@ -40,7 +43,7 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
         },
         animate: { 
             opacity: 1, 
-            scale: definition.scale || 1,
+            scale: baseScale,
             rotate: definition.rotation || 0,
             left: `${currentPosition.x}%`,
             top: `${currentPosition.y}%`,
@@ -64,7 +67,7 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
-                whileDrag={{ scale: 1.1 }}
+                whileDrag={{ scale: baseScale * 1.1 }}
                 style={{
                     ...commonProps.style,
                     zIndex: actorState.isDragging ? 100 : (definition.zIndex || 10),
@@ -76,7 +79,7 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
                         alt={actorState.id}
                         width={definition.width || 100}
                         height={definition.height || 100}
-                        className="pointer-events-none select-none"
+                        className="pointer-events-none select-none max-w-none"
                         draggable={false}
                     />
                 )}
@@ -97,7 +100,7 @@ export default function Actor({ actorState, updateActor }: ActorProps) {
                     alt={actorState.id}
                     width={definition.width || 100}
                     height={definition.height || 100}
-                    className="pointer-events-none select-none"
+                    className="pointer-events-none select-none max-w-none"
                     draggable={false}
                 />
             )}
