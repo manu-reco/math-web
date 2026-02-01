@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
+import StoryErrorScreen from "./StoryErrorScreen";
 import StoryCompletionScreen from "@/components/juegos/cuentos/StoryCompletionScreen";
 
 interface StoryChapterConfig {
@@ -70,21 +71,10 @@ export default function StoryPageTemplate({
             return <>{renderError({ chapterIndex, chapterCount })}</>;
         }
         return (
-            <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50 flex items-center justify-center">
-                <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md">
-                    <h1 className="text-2xl font-bold text-red-600 mb-4">Error al cargar el cuento</h1>
-                    <p className="mb-6">
-                        No se encontraron capítulos para este cuento.
-                    </p>
-                    <Link
-                        href={backHref}
-                        className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-                    >
-                        <ArrowLeft size={20} />
-                        Volver a Juegos
-                    </Link>
-                </div>
-            </div>
+            <StoryErrorScreen
+                errorMessage="No se encontró el capítulo del cuento."
+                backHref={backHref}
+            />
         );
     }
     try {
@@ -95,21 +85,10 @@ export default function StoryPageTemplate({
             return <>{renderError({ chapterIndex, chapterCount })}</>;
         }
         return (
-            <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50 flex items-center justify-center">
-                <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md">
-                    <h1 className="text-2xl font-bold text-red-600 mb-4">Error al cargar el cuento</h1>
-                    <p className="mb-6">
-                        Hubo un problema con los datos del cuento. Por favor, contacta al administrador.
-                    </p>
-                    <Link
-                        href={backHref}
-                        className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-                    >
-                        <ArrowLeft size={20} />
-                        Volver a Juegos
-                    </Link>
-                </div>
-            </div>
+            <StoryErrorScreen
+                errorMessage="Hubo un problema con los datos del cuento. Por favor, contacta al administrador."
+                backHref={backHref}
+            />
         );
     }
 
