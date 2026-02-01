@@ -75,6 +75,7 @@ export interface ActorState {
     isDragging: boolean;
     isAnimating: boolean;
     animationDuration?: number; // Duración de la animación actual en ms
+    animationType?: 'appear' | 'disappear' | 'move';
 }
 
 // Estado de la historia en runtime

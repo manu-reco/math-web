@@ -35,6 +35,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                             visible: false, // Empiezan invisibles
                             isDragging: false,
                             isAnimating: false,
+                            animationType: undefined,
                         });
                     }
                 }

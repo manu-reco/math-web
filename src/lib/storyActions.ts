@@ -17,20 +17,30 @@ export function executeStoryAction(
             updateActor(action.actor, { 
                 visible: true,
                 currentPosition: { x: actor.definition.x, y: actor.definition.y },
-                isAnimating: false
+                isAnimating: true,
+                animationDuration: action.duration || 1000,
+                animationType: 'appear',
             });
+            setTimeout(() => {
+                updateActor(action.actor, {
+                    isAnimating: false,
+                    animationType: undefined,
+                });
+            }, action.duration || 1000);
             break;
 
         case 'disappear':
             // Animar desaparición
             updateActor(action.actor, {
                 isAnimating: true,
-                animationDuration: action.duration || 1000
+                animationDuration: action.duration || 1000,
+                animationType: 'disappear',
             });
             setTimeout(() => {
                 updateActor(action.actor, {
                     visible: false,
-                    isAnimating: false
+                    isAnimating: false,
+                    animationType: undefined,
                 });
             }, action.duration || 1000);
             break;
@@ -42,11 +52,12 @@ export function executeStoryAction(
                     currentPosition: action.to,
                     isAnimating: true,
                     animationDuration: action.duration || 1500,
+                    animationType: 'move',
                 });
 
                 // Marcar como no animando después de la duración
                 setTimeout(() => {
-                    updateActor(action.actor, { isAnimating: false });
+                    updateActor(action.actor, { isAnimating: false, animationType: undefined });
                 }, action.duration || 1500);
             }
             break;

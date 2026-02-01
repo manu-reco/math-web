@@ -11,7 +11,7 @@ interface ActorProps {
 }
 
 export default function Actor({ actorState, updateActor, viewportScale }: ActorProps) {
-    const { definition, currentPosition, visible, animationDuration } = actorState;
+    const { definition, currentPosition, visible, animationDuration, isAnimating, animationType } = actorState;
 
     if (!visible) return null;
 
@@ -28,6 +28,11 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
     // Convertir ms a segundos para Framer Motion
     const durationInSeconds = (animationDuration || 1500) / 1000;
 
+    const targetOpacity = animationType === 'disappear' && isAnimating ? 0 : 1;
+    const targetScale = animationType === 'disappear' && isAnimating
+        ? 0.3 * viewportScale
+        : baseScale;
+
     const commonProps = {
         style: {
             zIndex: definition.zIndex || 10,
@@ -42,8 +47,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
             y: '-50%',
         },
         animate: { 
-            opacity: 1, 
-            scale: baseScale,
+            opacity: targetOpacity, 
+            scale: targetScale,
             rotate: definition.rotation || 0,
             left: `${currentPosition.x}%`,
             top: `${currentPosition.y}%`,
@@ -84,7 +89,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     />
                 )}
                 {definition.type === 'text' && definition.text && (
-                    <div className="text-2xl font-bold text-gray-800 select-none">
+                    <div className="text-2xl font-bold text-text select-none">
                         {definition.text}
                     </div>
                 )}
@@ -105,7 +110,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                 />
             )}
             {definition.type === 'text' && definition.text && (
-                <div className="text-2xl font-bold text-gray-800 select-none">
+                <div className="text-2xl font-bold text-text select-none">
                     {definition.text}
                 </div>
             )}
