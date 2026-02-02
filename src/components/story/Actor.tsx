@@ -46,8 +46,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
             x: '-50%',
             y: '-50%',
         },
-        animate: { 
-            opacity: targetOpacity, 
+        animate: {
+            opacity: targetOpacity,
             scale: targetScale,
             rotate: definition.rotation || 0,
             left: `${currentPosition.x}%`,
@@ -89,7 +89,17 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     />
                 )}
                 {definition.type === 'text' && definition.text && (
-                    <div className="text-2xl font-bold text-text select-none">
+                    <div
+                        className="font-bold text-text select-none rounded-2xl shadow-xl inset-shadow-xl"
+                        style={{
+                            fontSize: typeof definition.textFontSize === 'number'
+                                ? `${definition.textFontSize}rem`
+                                : (definition.textFontSize || '2rem'),
+                            backgroundColor: `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1
+                                ? (definition.textBackgroundOpacity ?? 30) / 100
+                                : (definition.textBackgroundOpacity ?? 30))})`,
+                        }}
+                    >
                         {definition.text}
                     </div>
                 )}
@@ -110,7 +120,17 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                 />
             )}
             {definition.type === 'text' && definition.text && (
-                <div className="text-2xl font-bold text-text select-none">
+                <div
+                    className="font-bold text-text select-none rounded-2xl p-5"
+                    style={{
+                        fontSize: typeof definition.textFontSize === 'number'
+                            ? `${definition.textFontSize}rem`
+                            : (definition.textFontSize || '2rem'),
+                        backgroundColor: `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1
+                            ? (definition.textBackgroundOpacity ?? 30) / 100
+                            : (definition.textBackgroundOpacity ?? 30))})`,
+                    }}
+                >
                     {definition.text}
                 </div>
             )}

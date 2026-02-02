@@ -14,6 +14,8 @@ export interface ActorDefinition {
     type: 'image' | 'text';
     src?: string; // Para type: 'image'
     text?: string; // Para type: 'text'
+    textFontSize?: string | number; // Para type: 'text' (default: 2rem)
+    textBackgroundOpacity?: number; // Para type: 'text' (0-100, default: 30)
     x: number; // Posición inicial X (porcentaje)
     y: number; // Posición inicial Y (porcentaje)
     width?: number; // Ancho opcional (px)

@@ -21,6 +21,8 @@ const ActorDefinitionSchema = z.object({
     type: z.enum(['image', 'text']),
     src: z.string().optional(),
     text: z.string().optional(),
+    textFontSize: z.union([z.string(), z.number()]).optional(),
+    textBackgroundOpacity: z.number().min(0).max(100).optional(),
     x: z.number().min(0).max(100),
     y: z.number().min(0).max(100),
     width: z.number().optional(),
