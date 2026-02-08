@@ -14,13 +14,19 @@ export function executeStoryAction(
     switch (action.action) {
         case 'appear':
             // Ir a posición original y hacer visible
-            updateActor(action.actor, { 
+            updateActor(action.actor, {
                 visible: true,
                 currentPosition: { x: actor.definition.x, y: actor.definition.y },
                 isAnimating: true,
                 animationDuration: action.duration || 1000,
                 animationType: 'appear',
+                triggerConfetti: action.confetti === true,
             });
+            if (action.confetti === true) {
+                setTimeout(() => {
+                    updateActor(action.actor, { triggerConfetti: false });
+                }, 50);
+            }
             setTimeout(() => {
                 updateActor(action.actor, {
                     isAnimating: false,

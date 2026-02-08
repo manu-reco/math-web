@@ -65,6 +65,7 @@
                 {
                     "actor": "number-1",
                     "action": "appear",
+                    "confetti": true
                 }
             ],
             "advanceOn": "spaceOrClick"
@@ -113,10 +114,10 @@
                 {
                     "actor": "number-2",
                     "action": "appear",
+                    "confetti": true
                 }
             ],
             "advanceOn": "spaceOrClick"
         }
     ]
-}
 }

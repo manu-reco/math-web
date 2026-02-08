@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import type { ActorState } from "@/types/story";
+import { ConfettiOnMount } from "./ConfettiOnMount";
 
 interface ActorProps {
     actorState: ActorState;
@@ -11,7 +12,7 @@ interface ActorProps {
 }
 
 export default function Actor({ actorState, updateActor, viewportScale }: ActorProps) {
-    const { definition, currentPosition, visible, animationDuration, isAnimating, animationType } = actorState;
+    const { definition, currentPosition, visible, animationDuration, isAnimating, animationType, triggerConfetti } = actorState;
 
     if (!visible) return null;
 
@@ -78,6 +79,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     zIndex: actorState.isDragging ? 100 : (definition.zIndex || 10),
                 }}
             >
+                {/* Añadir confetti si triggerConfetti lo indica */}
+                {triggerConfetti && <ConfettiOnMount />}
                 {definition.type === 'image' && definition.src && (
                     <Image
                         src={definition.src.startsWith('/') ? definition.src : `/${definition.src}`}
@@ -134,6 +137,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     {definition.text}
                 </div>
             )}
+            {/* Añadir confetti si triggerConfetti lo indica */}
+            {triggerConfetti && <ConfettiOnMount />}
         </motion.div>
     );
 }

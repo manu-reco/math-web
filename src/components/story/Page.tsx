@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { motion } from "motion/react";
 import type { PageDefinition, ActorState, ActionDefinition } from "@/types/story";
 import { executeStoryAction } from "@/lib/storyActions";
@@ -19,13 +19,19 @@ interface PageProps {
 }
 
 export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor, viewportScale }: PageProps) {
+    const actorsRef = useRef(actors);
+
+    useEffect(() => {
+        actorsRef.current = actors;
+    }, [actors]);
+
     // Ejecutar una acción usando la función centralizada
     const executeAction = useCallback((action: ActionDefinition) => {
-        const actor = actors.get(action.actor);
+        const actor = actorsRef.current.get(action.actor);
         if (!actor) return;
         
         executeStoryAction(action, actor, updateActor);
-    }, [actors, updateActor]);
+    }, [updateActor]);
 
     // Ejecutar acciones onEnter cuando se monta la página
     useEffect(() => {
@@ -44,7 +50,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
             }, page.autoAdvanceDelay);
             return () => clearTimeout(timer);
         }
-    }, [page, executeAction, onAdvance]);
+    }, [page.id, page.onEnter, page.advanceOn, page.autoAdvanceDelay, executeAction, onAdvance]);
 
     // Encontrar actores y acciones de esta página
     const pageActions = page.actors.filter(item => 'action' in item) as ActionDefinition[];

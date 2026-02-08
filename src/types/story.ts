@@ -35,6 +35,7 @@ export interface ActionDefinition {
     delay?: number; // Retraso antes de ejecutar
     easing?: string; // Función de easing
     sound?: string; // Para 'playSound'
+    confetti?: boolean; // Para 'appear' (dispara confetti)
     targetId?: string; // Para 'drag' - ID del DragTarget
 }
 
@@ -78,6 +79,7 @@ export interface ActorState {
     isAnimating: boolean;
     animationDuration?: number; // Duración de la animación actual en ms
     animationType?: 'appear' | 'disappear' | 'move';
+    triggerConfetti?: boolean; // Indica si se debe disparar confetti al aparecer
 }
 
 // Estado de la historia en runtime

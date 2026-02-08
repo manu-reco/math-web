@@ -13,6 +13,7 @@ const ActionDefinitionSchema = z.object({
     delay: z.number().optional(),
     easing: z.string().optional(),
     sound: z.string().optional(),
+    confetti: z.boolean().optional(),
     targetId: z.string().optional(),
 });
 
