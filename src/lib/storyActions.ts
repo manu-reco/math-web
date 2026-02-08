@@ -1,5 +1,8 @@
 import type { ActionDefinition, ActorState } from "@/types/story";
 
+const CONFETTI_COOLDOWN_MS = 300;
+const confettiLastFired = new Map<string, number>();
+
 /**
  * Ejecuta una acción sobre un actor
  * @param action - La definición de la acción a ejecutar
@@ -20,12 +23,18 @@ export function executeStoryAction(
                 isAnimating: true,
                 animationDuration: action.duration || 1000,
                 animationType: 'appear',
-                triggerConfetti: action.confetti === true,
             });
             if (action.confetti === true) {
-                setTimeout(() => {
-                    updateActor(action.actor, { triggerConfetti: false });
-                }, 50);
+                const now = Date.now();
+                const lastFired = confettiLastFired.get(action.actor) ?? 0;
+
+                if (now - lastFired > CONFETTI_COOLDOWN_MS) {
+                    confettiLastFired.set(action.actor, now);
+                    updateActor(action.actor, { triggerConfetti: true });
+                    setTimeout(() => {
+                        updateActor(action.actor, { triggerConfetti: false });
+                    }, 50);
+                }
             }
             setTimeout(() => {
                 updateActor(action.actor, {
