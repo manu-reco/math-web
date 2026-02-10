@@ -126,9 +126,10 @@ src/
 {
   "actor": "buho",
   "action": "appear",
-  "delay": 500
+  "confetti": true
 }
 ```
+
 
 ### Disappear (Desaparecer)
 ```json
