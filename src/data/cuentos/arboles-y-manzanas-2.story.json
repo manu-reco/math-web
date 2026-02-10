@@ -22,34 +22,10 @@
                     "actor": "tree-1",
                     "action": "appear"
                 }
-            ],
-            "advanceOn": "spaceOrClick"
+            ]
         },
         {
             "id": "page-2",
-            "actors": [
-                {
-                    "id": "apple-1",
-                    "type": "image",
-                    "src": "cuentos/manzana.png",
-                    "x": 38,
-                    "y": 50,
-                    "zIndex": 10,
-                    "width": 100,
-                    "height": 100,
-                    "interactive": false
-                }
-            ],
-            "onEnter": [
-                {
-                    "actor": "apple-1",
-                    "action": "appear"
-                }
-            ],
-            "advanceOn": "spaceOrClick"
-        },
-        {
-            "id": "page-3",
             "actors": [
                 {
                     "id": "number-1",
@@ -67,11 +43,59 @@
                     "action": "appear",
                     "confetti": true
                 }
+            ]
+        },
+
+        {
+            "id": "page-3",
+            "actors": [
+                {
+                    "id": "apple-1",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 38,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                }
             ],
-            "advanceOn": "spaceOrClick"
+            "onEnter": [
+                {
+                    "actor": "number-1",
+                    "action": "disappear"
+                },
+                {
+                    "actor": "apple-1",
+                    "action": "appear",
+                    "delay": 500
+                }
+            ]
         },
         {
             "id": "page-4",
+            "actors": [
+                {
+                    "id": "number-1",
+                    "type": "text",
+                    "text": "1",
+                    "textFontSize": 10,
+                    "textBackgroundOpacity": 0,
+                    "x": 50,
+                    "y": 50
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-1",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        },
+        {
+            "id": "page-5",
             "actors": [
                 {
                     "id": "apple-2",
@@ -92,13 +116,13 @@
                 },
                 {
                     "actor": "apple-2",
-                    "action": "appear"
+                    "action": "appear",
+                    "delay": 500
                 }
-            ],
-            "advanceOn": "spaceOrClick"
+            ]
         },
         {
-            "id": "page-5",
+            "id": "page-6",
             "actors": [
                 {
                     "id": "number-2",
@@ -116,8 +140,7 @@
                     "action": "appear",
                     "confetti": true
                 }
-            ],
-            "advanceOn": "spaceOrClick"
+            ]
         }
     ]
 }

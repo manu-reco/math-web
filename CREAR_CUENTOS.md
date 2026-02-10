@@ -171,8 +171,8 @@ src/
 - **actors** (array): Lista de actores o acciones
 - **onEnter** (array, opcional): Acciones al entrar a la página
 - **onExit** (array, opcional): Acciones al salir de la página
-- **advanceOn** (string): Condición de avance
-  - `"spaceOrClick"` - Espacio o click para avanzar
+- **advanceOn** (string, opcional): Condición de avance
+  - `"spaceOrClick"` - Espacio o click para avanzar (por defecto)
   - `"dragComplete"` - Avanza cuando se complete el drag
   - `"auto"` - Avanza automáticamente
   - `"animation"` - Avanza cuando termina la animación
@@ -309,8 +309,7 @@ Crear `src/data/cuentos/mi-cuento.story.json`:
           "actor": "personaje",
           "action": "appear"
         }
-      ],
-      "advanceOn": "spaceOrClick"
+      ]
     }
   ]
 }

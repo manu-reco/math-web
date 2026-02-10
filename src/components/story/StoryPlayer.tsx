@@ -19,6 +19,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     const actorsRef = useRef(actors);
 
     const currentPage = story.pages[currentPageIndex];
+    const currentAdvanceOn = currentPage.advanceOn ?? 'spaceOrClick';
 
     useEffect(() => {
         actorsRef.current = actors;
@@ -190,7 +191,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     // Manejador de teclado (Espacio y flechas)
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if ((event.code === 'ArrowRight' || event.code === 'Space') && currentPage.advanceOn === 'spaceOrClick') {
+            if ((event.code === 'ArrowRight' || event.code === 'Space') && currentAdvanceOn === 'spaceOrClick') {
                 event.preventDefault();
                 advancePage();
             } else if (event.code === 'ArrowLeft') {
@@ -201,14 +202,14 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
 
         window.addEventListener('keydown', handleKeyPress);
         return () => window.removeEventListener('keydown', handleKeyPress);
-    }, [advancePage, goToPreviousPage, currentPage.advanceOn]);
+    }, [advancePage, goToPreviousPage, currentAdvanceOn]);
 
     // Manejador de clic en el fondo
     const handleBackgroundClick = useCallback(() => {
-        if (currentPage.advanceOn === 'spaceOrClick') {
+        if (currentAdvanceOn === 'spaceOrClick') {
             advancePage();
         }
-    }, [advancePage, currentPage.advanceOn]);
+    }, [advancePage, currentAdvanceOn]);
 
     if (!assetsLoaded) {
         return (

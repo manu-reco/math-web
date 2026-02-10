@@ -51,7 +51,7 @@ const PageDefinitionSchema = z.object({
     actors: z.array(z.union([ActorDefinitionSchema, ActionDefinitionSchema])),
     onEnter: z.array(ActionDefinitionSchema).optional(),
     onExit: z.array(ActionDefinitionSchema).optional(),
-    advanceOn: z.enum(['spaceOrClick', 'dragComplete', 'auto', 'animation']),
+    advanceOn: z.enum(['spaceOrClick', 'dragComplete', 'auto', 'animation']).default('spaceOrClick'),
     dragTargets: z.array(DragTargetSchema).optional(),
     autoAdvanceDelay: z.number().optional(),
 });

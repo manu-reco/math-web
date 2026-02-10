@@ -55,7 +55,7 @@ export interface PageDefinition {
     actors: (ActorDefinition | ActionDefinition)[]; // Puede contener definiciones o acciones
     onEnter?: ActionDefinition[]; // Acciones al entrar a la página
     onExit?: ActionDefinition[]; // Acciones al salir de la página
-    advanceOn: AdvanceCondition;
+    advanceOn?: AdvanceCondition; // Default: 'spaceOrClick'
     dragTargets?: DragTargetDefinition[];
     autoAdvanceDelay?: number; // Para advanceOn: 'auto'
 }

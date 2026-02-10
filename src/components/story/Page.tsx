@@ -20,6 +20,7 @@ interface PageProps {
 
 export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor, viewportScale }: PageProps) {
     const actorsRef = useRef(actors);
+    const advanceOn = page.advanceOn ?? 'spaceOrClick';
 
     useEffect(() => {
         actorsRef.current = actors;
@@ -44,13 +45,13 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
         }
 
         // Auto-advance si está configurado
-        if (page.advanceOn === 'auto' && page.autoAdvanceDelay) {
+        if (advanceOn === 'auto' && page.autoAdvanceDelay) {
             const timer = setTimeout(() => {
                 onAdvance();
             }, page.autoAdvanceDelay);
             return () => clearTimeout(timer);
         }
-    }, [page.id, page.onEnter, page.advanceOn, page.autoAdvanceDelay, executeAction, onAdvance]);
+    }, [page.id, page.onEnter, advanceOn, page.autoAdvanceDelay, executeAction, onAdvance]);
 
     // Encontrar actores y acciones de esta página
     const pageActions = page.actors.filter(item => 'action' in item) as ActionDefinition[];
@@ -80,7 +81,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
                     actors={actors}
                     updateActor={updateActor}
                     onComplete={() => {
-                        if (page.advanceOn === 'dragComplete') {
+                        if (advanceOn === 'dragComplete') {
                             onAdvance();
                         }
                     }}
