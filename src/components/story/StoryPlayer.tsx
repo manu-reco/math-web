@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
+import { useState, useEffect, useCallback, useRef } from "react";
+import type { StoryData, ActorState, ActorDefinition, ActionDefinition, PageDefinition } from "@/types/story";
 import Page from "./Page";
+import { executeStoryAction } from "@/lib/storyActions";
 
 interface StoryPlayerProps {
     story: StoryData;
@@ -15,8 +16,66 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [assetsLoaded, setAssetsLoaded] = useState(false);
     const [viewportScale, setViewportScale] = useState(1);
+    const actorsRef = useRef(actors);
 
     const currentPage = story.pages[currentPageIndex];
+
+    useEffect(() => {
+        actorsRef.current = actors;
+    }, [actors]);
+
+    // Actualizar estado de actor
+    const updateActor = useCallback((actorId: string, updates: Partial<ActorState>) => {
+        setActors(prev => {
+            const newActors = new Map(prev);
+            const actor = newActors.get(actorId);
+            if (actor) {
+                newActors.set(actorId, { ...actor, ...updates });
+            }
+            return newActors;
+        });
+    }, []);
+
+    // Ejecutar disappear al hacer “atrás” para actores que aparecieron en la página actual
+    const runDisappearForAppearActions = useCallback((page: PageDefinition) => {
+        const appearActions: ActionDefinition[] = [];
+
+        if (page.onEnter) {
+            appearActions.push(...page.onEnter.filter(action => action.action === "appear"));
+        }
+
+        const inlineActions = page.actors.filter(item => "action" in item) as ActionDefinition[];
+        inlineActions.forEach(action => {
+            if (action.action === "appear") {
+                appearActions.push(action);
+            }
+        });
+
+        if (appearActions.length === 0) return;
+
+        const explicitExitDisappear = new Set(
+            (page.onExit || [])
+                .filter(action => action.action === "disappear")
+                .map(action => action.actor)
+        );
+
+        appearActions.forEach(action => {
+            if (explicitExitDisappear.has(action.actor)) return;
+
+            const actor = actorsRef.current.get(action.actor);
+            if (!actor || !actor.visible) return;
+
+            executeStoryAction(
+                {
+                    actor: action.actor,
+                    action: "disappear",
+                    duration: action.duration,
+                },
+                actor,
+                updateActor
+            );
+        });
+    }, [updateActor]);
 
     // Inicializar actores de todas las páginas
     useEffect(() => {
@@ -121,11 +180,12 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         if (isTransitioning) return;
 
         if (currentPageIndex > 0) {
+            runDisappearForAppearActions(currentPage);
             setIsTransitioning(true);
             setCurrentPageIndex(prev => prev - 1);
             setTimeout(() => setIsTransitioning(false), 100);
         }
-    }, [currentPageIndex, isTransitioning]);
+    }, [currentPageIndex, isTransitioning, currentPage, runDisappearForAppearActions]);
 
     // Manejador de teclado (Espacio y flechas)
     useEffect(() => {
@@ -149,18 +209,6 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
             advancePage();
         }
     }, [advancePage, currentPage.advanceOn]);
-
-    // Actualizar estado de actor
-    const updateActor = useCallback((actorId: string, updates: Partial<ActorState>) => {
-        setActors(prev => {
-            const newActors = new Map(prev);
-            const actor = newActors.get(actorId);
-            if (actor) {
-                newActors.set(actorId, { ...actor, ...updates });
-            }
-            return newActors;
-        });
-    }, []);
 
     if (!assetsLoaded) {
         return (
