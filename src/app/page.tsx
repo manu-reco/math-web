@@ -12,13 +12,13 @@ export default function Home() {
             <div className="flex items-center gap-6 mb-6 justify-center">
               <Image
                 src="/logo buho circulo color.svg"
-                alt="MathEdu Logo"
+                alt="Froneo Logo"
                 width={150}
                 height={150}
                 priority
                 className="bg-white rounded-full"
               />
-              <span className="text-2xl md:text-3xl font-bold">MathEdu</span>
+              <span className="text-2xl md:text-3xl font-bold">Froneo</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Domina las Matemáticas para Infantil y Primaria
@@ -35,7 +35,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/formacion/pildoras"
-                className="bg-white/10 hover:bg-white/20 border border-white/30 px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center"
+                className="bg-accent hover:bg-accent border border-white/30 px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center"
               >
                 Prueba Gratis
               </Link>

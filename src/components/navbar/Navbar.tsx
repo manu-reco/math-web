@@ -54,12 +54,12 @@ export default function Navbar() {
                         <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
                             <Image
                                 src="/logo buho circulo color.svg"
-                                alt="MathEdu Logo"
+                                alt="Froneo Logo"
                                 width={50}
                                 height={50}
                                 priority
                             />
-                            MathEdu
+                            Froneo
                         </Link>
                     </div>
 
