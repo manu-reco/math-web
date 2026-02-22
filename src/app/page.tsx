@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20 lg:py-28">
+      <section className="bg-linear-to-r from-primary to-[#36c9b8] text-white py-20 lg:py-28">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center gap-6 mb-6 justify-center">
