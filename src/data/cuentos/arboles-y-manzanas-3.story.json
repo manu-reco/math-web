@@ -1,0 +1,160 @@
+{
+    "title": "Árboles y manzanas — Capítulo 3",
+    "background": "/cuentos/bg-park.png",
+    "pages": [
+        {
+            "id": "page-1",
+            "actors": [
+                {
+                    "id": "tree-1",
+                    "type": "image",
+                    "src": "cuentos/arbol.png",
+                    "x": 30,
+                    "y": 55,
+                    "zIndex": 5,
+                    "width": 600,
+                    "height": 600,
+                    "interactive": false
+                },
+                {
+                    "id": "tree-2",
+                    "type": "image",
+                    "src": "cuentos/arbol.png",
+                    "x": 70,
+                    "y": 55,
+                    "zIndex": 5,
+                    "width": 600,
+                    "height": 600,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "tree-1",
+                    "action": "appear"
+                },
+                {
+                    "actor": "tree-2",
+                    "action": "appear"
+                }
+            ]
+        },
+        {
+            "id": "page-2",
+            "actors": [
+                {
+                    "id": "number-2",
+                    "type": "text",
+                    "text": "2",
+                    "textFontSize": 10,
+                    "textBackgroundOpacity": 0,
+                    "x": 50,
+                    "y": 50
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-2",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        },
+        {
+            "id": "page-3",
+            "actors": [
+                {
+                    "id": "apple-1",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 30,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-2",
+                    "action": "disappear"
+                },
+                {
+                    "actor": "apple-1",
+                    "action": "appear",
+                    "delay": 500
+                }
+            ]
+        },
+        {
+            "id": "page-4",
+            "actors": [
+                {
+                    "id": "number-1",
+                    "type": "text",
+                    "text": "1",
+                    "textFontSize": 10,
+                    "textBackgroundOpacity": 0,
+                    "x": 50,
+                    "y": 50
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-1",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        },
+        {
+            "id": "page-5",
+            "actors": [
+                {
+                    "id": "apple-2",
+                    "type": "image",
+                    "src": "cuentos/manzana.png",
+                    "x": 70,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 100,
+                    "height": 100,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-1",
+                    "action": "disappear"
+                },
+                {
+                    "actor": "apple-2",
+                    "action": "appear",
+                    "delay": 500
+                }
+            ]
+        },
+        {
+            "id": "page-6",
+            "actors": [
+                {
+                    "id": "number-2",
+                    "type": "text",
+                    "text": "2",
+                    "textFontSize": 10,
+                    "textBackgroundOpacity": 0,
+                    "x": 50,
+                    "y": 50
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "number-2",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        }
+    ]
+}
