@@ -15,7 +15,11 @@ export interface ActorDefinition {
     src?: string; // Para type: 'image'
     text?: string; // Para type: 'text'
     textFontSize?: string | number; // Para type: 'text' (default: 2rem)
+    textColor?: string; // Para type: 'text' - nombre de color Tailwind (default: 'text')
     textBackgroundOpacity?: number; // Para type: 'text' (0-100, default: 30)
+    textOutline?: boolean; // Para type: 'text' - activa el contorno/stroke del texto (default: false)
+    textOutlineSize?: string; // Para type: 'text' - grosor del contorno, e.g. '2px' (default: 1px)
+    textOutlineColor?: string; // Para type: 'text' - color del contorno, e.g. 'white' (default: white)
     x: number; // Posición inicial X (porcentaje)
     y: number; // Posición inicial Y (porcentaje)
     width?: number; // Ancho opcional (px)

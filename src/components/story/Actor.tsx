@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import type { ActorState } from "@/types/story";
@@ -96,7 +96,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
             )}
             {definition.type === 'text' && definition.text && (
                 <div
-                    className={`font-bold text-text select-none rounded-2xl ${definition.draggable ? 'shadow-xl inset-shadow-xl' : 'p-5'}`}
+                    className={`font-bold text-${definition.textColor ?? 'text'} ${definition.textOutline ? 'text-outline' : ''} ${definition.textOutlineSize ? '[--outline-size:' + definition.textOutlineSize + ']' : ''} ${definition.textOutlineColor ? '[--outline-color:' + definition.textOutlineColor + ']' : ''} select-none rounded-2xl ${definition.draggable ? 'shadow-xl inset-shadow-xl' : 'p-5'}`}
                     style={{
                         fontSize: typeof definition.textFontSize === 'number'
                             ? `${definition.textFontSize}rem`
