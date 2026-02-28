@@ -10,6 +10,8 @@ src/
 │   └── story.ts                      # Tipos TypeScript para el sistema
 ├── lib/
 │   └── validateStory.ts              # Validación de datos con Zod
+├── hooks/
+│   └── use-story-controls.tsx         # Lógica reutilizable de controles del cuento
 ├── components/
 │   └── story/
 │       ├── StoryPlayer.tsx           # Motor principal del cuento
@@ -114,10 +116,15 @@ src/
   "id": "titulo",
   "type": "text",
   "text": "Había una vez...",
+  "textFontSize": 2,
+  "textBackgroundOpacity": 30,
   "x": 50,
   "y": 20
 }
 ```
+**Notas**:
+- `textFontSize` acepta número (rem) o string CSS (default: 2rem).
+- `textBackgroundOpacity` es 0-100 (default: 30).
 
 ## 🎬 Acciones Disponibles
 
@@ -129,6 +136,7 @@ src/
   "confetti": true
 }
 ```
+**Nota**: `confetti` es opcional y, si es `true`, lanza una ráfaga de confetti cuando el actor aparece.
 
 
 ### Disappear (Desaparecer)

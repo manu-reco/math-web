@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import type { StoryData, ActorState, ActorDefinition, ActionDefinition, PageDefinition } from "@/types/story";
+import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
 import Page from "./Page";
-import { executeStoryAction } from "@/lib/storyActions";
+import useStoryControls from "@/hooks/use-story-controls";
 
 interface StoryPlayerProps {
     story: StoryData;
@@ -19,7 +19,6 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     const actorsRef = useRef(actors);
 
     const currentPage = story.pages[currentPageIndex];
-    const currentAdvanceOn = currentPage.advanceOn ?? 'spaceOrClick';
 
     useEffect(() => {
         actorsRef.current = actors;
@@ -37,46 +36,17 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         });
     }, []);
 
-    // Ejecutar disappear al hacer “atrás” para actores que aparecieron en la página actual
-    const runDisappearForAppearActions = useCallback((page: PageDefinition) => {
-        const appearActions: ActionDefinition[] = [];
-
-        if (page.onEnter) {
-            appearActions.push(...page.onEnter.filter(action => action.action === "appear"));
-        }
-
-        const inlineActions = page.actors.filter(item => "action" in item) as ActionDefinition[];
-        inlineActions.forEach(action => {
-            if (action.action === "appear") {
-                appearActions.push(action);
-            }
-        });
-
-        if (appearActions.length === 0) return;
-
-        const explicitExitDisappear = new Set(
-            (page.onExit || [])
-                .filter(action => action.action === "disappear")
-                .map(action => action.actor)
-        );
-
-        appearActions.forEach(action => {
-            if (explicitExitDisappear.has(action.actor)) return;
-
-            const actor = actorsRef.current.get(action.actor);
-            if (!actor || !actor.visible) return;
-
-            executeStoryAction(
-                {
-                    actor: action.actor,
-                    action: "disappear",
-                    duration: action.duration,
-                },
-                actor,
-                updateActor
-            );
-        });
-    }, [updateActor]);
+    const { advancePage, goToPreviousPage, handleBackgroundClick } = useStoryControls({
+        story,
+        currentPage,
+        currentPageIndex,
+        isTransitioning,
+        setCurrentPageIndex,
+        setIsTransitioning,
+        actorsRef,
+        updateActor,
+        onComplete,
+    });
 
     // Inicializar actores de todas las páginas
     useEffect(() => {
@@ -161,67 +131,6 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         window.addEventListener("resize", updateScale);
         return () => window.removeEventListener("resize", updateScale);
     }, []);
-
-    // Avanzar a la siguiente página
-    const advancePage = useCallback(() => {
-        if (isTransitioning) return;
-
-        for (const actor of actorsRef.current.values()) {
-            if (actor.isAnimating) {
-                return;
-            }
-        }
-
-        if (currentPageIndex < story.pages.length - 1) {
-            setIsTransitioning(true);
-            setCurrentPageIndex(prev => prev + 1);
-            setTimeout(() => setIsTransitioning(false), 100);
-        } else {
-            // Historia completada
-            onComplete?.();
-        }
-    }, [currentPageIndex, story.pages.length, isTransitioning, onComplete]);
-
-    // Retroceder a la página anterior
-    const goToPreviousPage = useCallback(() => {
-        if (isTransitioning) return;
-        
-        for (const actor of actorsRef.current.values()) {
-            if (actor.isAnimating) {
-                return;
-            }
-        }
-
-        if (currentPageIndex > 0) {
-            runDisappearForAppearActions(currentPage);
-            setIsTransitioning(true);
-            setCurrentPageIndex(prev => prev - 1);
-            setTimeout(() => setIsTransitioning(false), 100);
-        }
-    }, [currentPageIndex, isTransitioning, currentPage, runDisappearForAppearActions]);
-
-    // Manejador de teclado (Espacio y flechas)
-    useEffect(() => {
-        const handleKeyPress = (event: KeyboardEvent) => {
-            if ((event.code === 'ArrowRight' || event.code === 'Space') && currentAdvanceOn === 'spaceOrClick') {
-                event.preventDefault();
-                advancePage();
-            } else if (event.code === 'ArrowLeft') {
-                event.preventDefault();
-                goToPreviousPage();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyPress);
-        return () => window.removeEventListener('keydown', handleKeyPress);
-    }, [advancePage, goToPreviousPage, currentAdvanceOn]);
-
-    // Manejador de clic en el fondo
-    const handleBackgroundClick = useCallback(() => {
-        if (currentAdvanceOn === 'spaceOrClick') {
-            advancePage();
-        }
-    }, [advancePage, currentAdvanceOn]);
 
     if (!assetsLoaded) {
         return (
