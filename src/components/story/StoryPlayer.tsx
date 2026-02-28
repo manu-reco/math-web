@@ -166,6 +166,12 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     const advancePage = useCallback(() => {
         if (isTransitioning) return;
 
+        for (const actor of actorsRef.current.values()) {
+            if (actor.isAnimating) {
+                return;
+            }
+        }
+
         if (currentPageIndex < story.pages.length - 1) {
             setIsTransitioning(true);
             setCurrentPageIndex(prev => prev + 1);
@@ -179,6 +185,12 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
     // Retroceder a la página anterior
     const goToPreviousPage = useCallback(() => {
         if (isTransitioning) return;
+        
+        for (const actor of actorsRef.current.values()) {
+            if (actor.isAnimating) {
+                return;
+            }
+        }
 
         if (currentPageIndex > 0) {
             runDisappearForAppearActions(currentPage);
