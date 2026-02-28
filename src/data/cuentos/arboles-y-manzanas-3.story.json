@@ -49,7 +49,9 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true
                 }
             ],
             "onEnter": [
@@ -97,7 +99,9 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true
                 }
             ],
             "onEnter": [
@@ -145,7 +149,9 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true
                 }
             ],
             "onEnter": [

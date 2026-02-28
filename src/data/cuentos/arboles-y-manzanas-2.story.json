@@ -34,7 +34,10 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true,
+                    "textOutlineSize": "2px"
                 }
             ],
             "onEnter": [
@@ -45,7 +48,6 @@
                 }
             ]
         },
-
         {
             "id": "page-3",
             "actors": [
@@ -83,7 +85,10 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true,
+                    "textOutlineSize": "2px"
                 }
             ],
             "onEnter": [
@@ -131,7 +136,10 @@
                     "textFontSize": 10,
                     "textBackgroundOpacity": 0,
                     "x": 50,
-                    "y": 50
+                    "y": 50,
+                    "textColor": "primary",
+                    "textOutline": true,
+                    "textOutlineSize": "2px"
                 }
             ],
             "onEnter": [
