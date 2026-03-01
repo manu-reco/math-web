@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 
+import Image from "next/image";
+
 import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner } from "lucide-react";
 
 import {
@@ -75,6 +77,38 @@ export function ArticleSection({ title, children }: { title: string; children: R
                 {children}
             </div>
         </section>
+    );
+}
+
+type ArticleImagesProps = {
+    images: {
+        src: string;
+        alt: string;
+    }[];
+    maxHeight?: number;
+};
+
+/**
+ * Componente para mostrar una o varias imágenes con un diseño consistente y responsive.
+ * @param images Array de objetos con src y alt de cada imagen
+ * @param maxHeight Altura máxima de las imágenes en píxeles. Por defecto, 300px. La anchura se ajusta automáticamente para mantener la proporción. 
+ */
+export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
+    maxHeight = maxHeight || 300;
+    // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con clases de Tailwind
+    return (
+        <div className="flex flex-row flex-wrap gap-4 my-6 items-center justify-center">
+            {images.map((image, index) => (
+                <div key={index} className="flex justify-center">
+                    <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={300} height={300}
+                        className={`max-h-[${maxHeight}px] h-auto w-auto rounded-md shadow-md`}
+                    />
+                </div>
+            ))}
+        </div>
     );
 }
 

@@ -156,6 +156,9 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
 
 ### Cajas de Contenido
 
+- **`ArticleImages`**: Contenedor para mostrar una o más imágenes con un diseño consistente y responsive. Props
+  - `images` (array): Array de objetos con src y alt de cada imagen.
+  - `maxHeight` (number): Opcional, para elegir la altura máxima de las imágenes en píxeles. Por defecto, 300px.
 - **`ActivityBox`**: Actividades prácticas para el aula (con icono de lápiz).
 - **`TipBox`**: Consejos o trucos útiles (fondo amarillo, icono de bombilla).
 - **`InfoBox`**: Información adicional o aclaraciones (fondo azul, icono de información).
@@ -163,9 +166,9 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
 ### Elementos de Texto
 
 - **`KeyPoints`**: Lista de puntos clave con checkmarks verdes.
-- **`DialogBubble`**: Burbujas de diálogo para conversaciones entre maestro y estudiante. Añade un `—` al comienzo para marcar que es un diálogo. 
-  - Props: `speaker="teacher"` o `speaker="student"` para mostrar diferentes iconos y ajustar la dirección del flex
-  - Props: `color="orange"`, `"primary"`, `"blue"`, `"green"`, `"purple"`, `"pink"`, `"gray"`. Por defecto, "orange" para teacher y "primary" para student
+- **`DialogBubble`**: Burbujas de diálogo para conversaciones entre maestro y estudiante. Añade un `—` al comienzo para marcar que es un diálogo. Props:
+  - `speaker="teacher"` o `speaker="student"`: Para mostrar diferentes iconos y ajustar la dirección del flex.
+  - `color="orange"`, `"primary"`, `"blue"`, `"green"`, `"purple"`, `"pink"`, `"gray"`: para cambiar el color del fondo. Por defecto, "orange" para teacher y "primary" para student.
 
 ### Componentes Especiales
 

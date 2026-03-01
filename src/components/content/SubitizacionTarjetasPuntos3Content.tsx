@@ -1,6 +1,7 @@
 import {
     ArticleHeader,
     ArticleSection,
+    ArticleImages,
     InfoBox,
     KeyPoints,
     ConceptPopover,
@@ -8,7 +9,6 @@ import {
 } from "@/components/pildoras/ArticleComponents";
 
 import { findArticleById } from "@/lib/pildorasData";
-import Image from "next/image";
 
 export default function SubitizacionTarjetasPuntos3Content() {
     const article = findArticleById("subitizacion-tarjetas-puntos-3");
@@ -63,15 +63,9 @@ export default function SubitizacionTarjetasPuntos3Content() {
                     <li>Tarjetas con los dígitos 5, 6 y 7.</li>
                 </ul>
 
-                <div className="flex justify-center my-6">
-                    <Image
-                        src="/subitizacion/juego-puntos-5-7-desorden.jpeg"
-                        alt="Juego de tarjetas con puntos con cantidades del 5 al 7, para agrupar bajo tarjetas con los dígitos 5, 6 y 7"
-                        width={0} height={0}
-                        className="max-h-[400px] h-auto w-auto"
-                    />
-                </div>
-
+                <ArticleImages images={[
+                    { src: "/subitizacion/juego-puntos-5-7-desorden.jpeg", alt: "Tarjetas con puntos, con cantidades de 5 a 7, y tarjetas con los dígitos 5, 6 y 7" }
+                ]} />
 
                 <InfoBox title="Consejo sobre el material">
                     <p>Se puede jugar individualmente o en grupo. </p>
@@ -84,20 +78,10 @@ export default function SubitizacionTarjetasPuntos3Content() {
 
                 <p>Se establece un orden de intervención. Cada niño/a <strong>tomará una tarjeta de puntos</strong>, mirará detenidamente la cantidad <strong>y la colocará debajo de la tarjeta del dígito correspondiente.</strong></p>
 
-                <div className="flex flex-row flex-wrap gap-3 md:gap-4 my-6 items-center justify-center">
-                    <Image
-                        src="/subitizacion/juego-puntos-5-7-desorden.jpeg"
-                        alt="Juego de tarjetas con puntos con cantidades del 5 al 7, para agrupar bajo tarjetas con los dígitos 5, 6 y 7"
-                        width={0} height={0}
-                        className="max-h-[400px] h-auto w-auto"
-                    />
-                    <Image
-                        src="/subitizacion/juego-puntos-5-7-orden.jpeg"
-                        alt="Juego de tarjetas con puntos con cantidades del 5 al 7, para agrupar bajo tarjetas con los dígitos 5, 6 y 7"
-                        width={0} height={0}
-                        className="max-h-[400px] h-auto w-auto"
-                    />
-                </div>
+                <ArticleImages images={[
+                    { src: "/subitizacion/juego-puntos-5-7-desorden.jpeg", alt: "Tarjetas con puntos, con cantidades de 5 a 7, y tarjetas con los dígitos 5, 6 y 7" },
+                    { src: "/subitizacion/juego-puntos-5-7-orden.jpeg", alt: "Juego de tarjetas con puntos con cantidades del 5 al 7, para agrupar bajo tarjetas con los dígitos 5, 6 y 7" }
+                ]} />
 
                 <p>Cuando todas las tarjetas estén colocadas, se hará una comprobación. Si alguna tarjeta ha quedado en un lugar incorrecto, <strong>se invitará a los niños/as a revisarlo contando los puntos uno por uno</strong>.</p>
 
