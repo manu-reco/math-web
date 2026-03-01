@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
 import Page from "./Page";
 import useStoryControls from "@/hooks/use-story-controls";
+import { withBasePath } from "@/lib/assetPath";
 
 interface StoryPlayerProps {
     story: StoryData;
@@ -114,7 +115,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                     setAssetsLoaded(true);
                 }
             };
-            img.src = src.startsWith('/') ? src : `/${src}`;
+            img.src = withBasePath(src);
         });
     }, [story]);
 

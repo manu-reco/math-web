@@ -4,6 +4,7 @@ import { useEffect, useCallback, useRef } from "react";
 import { motion } from "motion/react";
 import type { PageDefinition, ActorState, ActionDefinition } from "@/types/story";
 import { executeStoryAction } from "@/lib/storyActions";
+import { withBasePath } from "@/lib/assetPath";
 import Actor from "./Actor";
 import TimelineAction from "./TimelineAction";
 import DragTarget from "./DragTarget";
@@ -67,7 +68,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
                 backgroundColor: finalBackgroundColor,
             }}
             style={{
-                backgroundImage: finalBackground ? `url(${finalBackground})` : undefined,
+                backgroundImage: finalBackground ? `url(${withBasePath(finalBackground)})` : undefined,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}

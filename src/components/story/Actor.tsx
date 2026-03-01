@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { ActorState } from "@/types/story";
 import { ConfettiOnMount } from "./ConfettiOnMount";
 import { fireStarsConfetti } from "@/lib/confetti";
+import { withBasePath } from "@/lib/assetPath";
 
 interface ActorProps {
     actorState: ActorState;
@@ -86,7 +87,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         <>
             {definition.type === 'image' && definition.src && (
                 <Image
-                    src={definition.src.startsWith('/') ? definition.src : `/${definition.src}`}
+                    src={withBasePath(definition.src)}
                     alt={actorState.id}
                     width={definition.width || 100}
                     height={definition.height || 100}
