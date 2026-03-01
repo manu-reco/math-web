@@ -29,6 +29,26 @@ interface PageProps {
     }>;
 }
 
+// Generar rutas estáticas para GitHub Pages
+export async function generateStaticParams() {
+    const params: { saber: string; nivel: string }[] = [];
+
+    for (const contentKey of Object.keys(COURSE_CONTENT)) {
+        for (const saber of SABERES) {
+            const prefix = `${saber.id}-`;
+            if (contentKey.startsWith(prefix)) {
+                const nivel = contentKey.slice(prefix.length);
+                if (NIVELES.some((n) => n.id === nivel)) {
+                    params.push({ saber: saber.id, nivel });
+                }
+                break;
+            }
+        }
+    }
+
+    return params;
+}
+
 export default async function SaberPage({ params }: PageProps) {
     const { saber: saberId, nivel: nivelId } = await params;
 

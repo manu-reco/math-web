@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: "/math-web",
+  assetPrefix: "/math-web/",
 };
 
-export default nextConfig;
+module.exports = nextConfig;
