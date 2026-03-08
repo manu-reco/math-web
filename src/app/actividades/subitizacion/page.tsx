@@ -26,7 +26,7 @@ export default function SubitizacionPage() {
 
     // FUNCIONES DEL JUEGO
     const handleBack = () => {
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 100, behavior: 'smooth'  });
 
         if (gameState === 'levelSelect') {
             setGameState('instructions');
@@ -37,12 +37,12 @@ export default function SubitizacionPage() {
     };
 
     const goToSelectLevel = () => {
-        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 100, behavior: 'smooth'  });
         setGameState('levelSelect');
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
-        window.scrollTo({ top: 100 });
+        window.scrollTo({ top: 100, behavior: 'smooth'  });
         setCurrentLevel(level);
         setCurrentMode(mode);
         // Construir patrones desde PatternTemplate a Pattern con iconos asignados
