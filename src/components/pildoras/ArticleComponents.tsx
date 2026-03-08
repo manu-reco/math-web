@@ -96,7 +96,7 @@ type ArticleImagesProps = {
  */
 export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
     maxHeight = maxHeight || 300;
-    // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con clases de Tailwind
+    // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con CSS
     return (
         <div className="flex flex-row flex-wrap gap-4 my-6 items-center justify-center">
             {images.map((image, index) => (
@@ -105,7 +105,8 @@ export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
                         src={image.src}
                         alt={image.alt}
                         width={300} height={300}
-                        className={`max-h-[${maxHeight}px] h-auto w-auto rounded-md shadow-md`}
+                        className="h-auto w-auto max-w-full rounded-md shadow-md"
+                        style={{ maxHeight: `${maxHeight}px` }}
                     />
                 </div>
             ))}
