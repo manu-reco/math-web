@@ -25,7 +25,7 @@ export default function NavDropdown({
 }: NavDropdownProps) {
     if (variant === "mobile") {
         return (
-            <div className="space-y-1">
+            <div className="space-y-1" data-nav-dropdown-root="true">
                 <NavDropdownButton 
                     label={label}
                     onClick={onToggle}
@@ -50,7 +50,7 @@ export default function NavDropdown({
     }
 
     return (
-        <div className="relative group">
+        <div className="relative group" data-nav-dropdown-root="true">
             <NavDropdownButton 
                 label={label}
                 onClick={onToggle}

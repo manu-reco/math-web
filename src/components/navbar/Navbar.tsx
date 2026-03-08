@@ -33,6 +33,16 @@ export default function Navbar() {
         setActiveDropdown(null);
     };
 
+    const handleNavClickCapture = (event: React.MouseEvent<HTMLElement>) => {
+        const target = event.target as HTMLElement;
+        const clickedInsideDropdown = Boolean(target.closest("[data-nav-dropdown-root='true']"));
+
+        // Cierra dropdown al hacer click en cualquier zona del nav que no sea dropdown.
+        if (activeDropdown && !clickedInsideDropdown) {
+            setActiveDropdown(null);
+        }
+    };
+
     // Cerrar menú móvil / dropdown al hacer clic fuera
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +63,7 @@ export default function Navbar() {
     }, [activeDropdown, isOpen]);
 
     return (
-        <nav ref={navRef} className="bg-white shadow-md sticky top-0 z-50">
+        <nav ref={navRef} onClickCapture={handleNavClickCapture} className="bg-white shadow-md sticky top-0 z-50">
             <div className="container-custom">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
