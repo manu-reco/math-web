@@ -52,13 +52,21 @@ export default function Navbar() {
             }
         };
 
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        };
+
         // Solo añadir el listener si está abierto algún dropdown o el menú móvil
         if (activeDropdown || isOpen) {
             document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener("keydown", handleEscape);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscape);
         };
     }, [activeDropdown, isOpen]);
 
@@ -95,7 +103,7 @@ export default function Navbar() {
                         {/* Actividades */}
                         <Link
                             href="/actividades"
-                            className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium box-border border-2 border-transparent rounded-xl hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
+                            className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium box-border border-2 border-transparent rounded-md hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
                         >
                             Actividades
                         </Link>
