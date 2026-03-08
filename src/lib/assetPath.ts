@@ -5,16 +5,18 @@ export function withBasePath(src: string): string {
         return src;
     }
 
+    const slashNormalized = src.replace(/\\/g, "/");
+
     if (
-        src.startsWith("http://") ||
-        src.startsWith("https://") ||
-        src.startsWith("data:") ||
-        src.startsWith("blob:")
+        slashNormalized.startsWith("http://") ||
+        slashNormalized.startsWith("https://") ||
+        slashNormalized.startsWith("data:") ||
+        slashNormalized.startsWith("blob:")
     ) {
-        return src;
+        return slashNormalized;
     }
 
-    const normalizedSrc = src.startsWith("/") ? src : `/${src}`;
+    const normalizedSrc = slashNormalized.startsWith("/") ? slashNormalized : `/${slashNormalized}`;
 
     if (!BASE_PATH) {
         return normalizedSrc;

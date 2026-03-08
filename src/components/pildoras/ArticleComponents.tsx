@@ -34,6 +34,7 @@ import {
 } from '@/components/animate-ui/components/base/dialog';
 
 import conceptsData from '@/data/concepts.json';
+import { withBasePath } from "@/lib/assetPath";
 
 interface ArticleHeaderProps {
     title: string;
@@ -337,8 +338,10 @@ interface DownloadButtonProps {
  * @param label Texto del botón
  */
 export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
+    const resourceUrl = withBasePath(filePath);
+
     return (
-        <a href={filePath} download>
+        <a href={resourceUrl} download>
             <Button
                 variant={variant} size={size}
                 className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
@@ -361,6 +364,8 @@ interface PdfButtonProps {
  * @param label Texto del botón de visualización
  */
 export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
+    const resourceUrl = withBasePath(filePath);
+
     return (
         <>
             <Dialog>
@@ -378,13 +383,13 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
                         }
                     />
                     {/* Descargar */}
-                    <a href={filePath} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+                    <a href={resourceUrl} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
                         <Download size={20} />
                     </a>
                 </div>
 
                 {/* Dialog / Modal */}
-                <PdfDialog filePath={filePath} />
+                <PdfDialog filePath={resourceUrl} />
             </Dialog>
         </>
     );
