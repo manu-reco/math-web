@@ -21,32 +21,39 @@ const informacionItems: DropdownItem[] = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const navRef = useRef<HTMLElement>(null);
 
     const toggleMenu = () => setIsOpen(!isOpen);
     const toggleDropdown = (name: string) => {
         setActiveDropdown(activeDropdown === name ? null : name);
     };
 
-    // Cerrar dropdown al hacer clic fuera
+    const closeAll = () => {
+        setIsOpen(false);
+        setActiveDropdown(null);
+    };
+
+    // Cerrar menú móvil / dropdown al hacer clic fuera
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setActiveDropdown(null);
+            // ¿Se hizo clic fuera del nav?
+            if (navRef.current && !navRef.current.contains(event.target as Node)) {
+                closeAll();
             }
         };
 
-        if (activeDropdown) {
+        // Solo añadir el listener si está abierto algún dropdown o el menú móvil
+        if (activeDropdown || isOpen) {
             document.addEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [activeDropdown]);
+    }, [activeDropdown, isOpen]);
 
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50">
+        <nav ref={navRef} className="bg-white shadow-md sticky top-0 z-50">
             <div className="container-custom">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
@@ -64,7 +71,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Desktop Menu */}
-                    <div ref={dropdownRef} className="hidden md:flex space-x-8 items-center">
+                    <div className="hidden md:flex space-x-8 items-center">
                         {/* Formación Dropdown */}
                         <NavDropdown
                             label="Formación"
@@ -126,13 +133,18 @@ export default function Navbar() {
                             items={formacionItems}
                             isOpen={activeDropdown === "mobile-formacion"}
                             onToggle={() => toggleDropdown("mobile-formacion")}
-                            onItemClick={() => setActiveDropdown(null)}
+                            onItemClick={() => {
+                                closeAll();
+                            }}
                             variant="mobile"
                         />
 
                         <Link
                             href="/actividades"
                             className="block text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
+                            onClick={() => {
+                                closeAll();
+                            }}
                         >
                             Actividades
                         </Link>
@@ -142,13 +154,18 @@ export default function Navbar() {
                             items={informacionItems}
                             isOpen={activeDropdown === "mobile-informacion"}
                             onToggle={() => toggleDropdown("mobile-informacion")}
-                            onItemClick={() => setActiveDropdown(null)}
+                            onItemClick={() => {
+                                closeAll();
+                            }}
                             variant="mobile"
                         />
 
                         <Link
                             href="/login"
                             className="block w-full text-center bg-secondary hover:bg-secondary-hover text-white px-4 py-3 rounded-md text-base font-medium mt-4"
+                            onClick={() => {
+                                closeAll();
+                            }}
                         >
                             Iniciar Sesión
                         </Link>
