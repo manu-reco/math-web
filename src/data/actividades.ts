@@ -47,7 +47,7 @@ export const games: Game[] = [
     {
         id: "juego-4",
         title: "Próximamente",
-        image: "logo buho relleno color.svg",
+        image: "logo-buho-relleno-color.svg",
         area: "Aritmética",
         level: "Segundo ciclo",
         description: "Juego todavía en desarrollo",
@@ -58,7 +58,7 @@ export const games: Game[] = [
     {
         id: "juego-5",
         title: "Próximamente",
-        image: "logo buho relleno color.svg",
+        image: "logo-buho-relleno-color.svg",
         area: "Aritmética",
         level: "Tercer ciclo",
         description: "Juego todavía en desarrollo",

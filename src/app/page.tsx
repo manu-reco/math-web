@@ -11,7 +11,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center gap-6 mb-6 justify-center">
               <Image
-                src="/logo buho circulo color.svg"
+                src="/logo-buho-circulo-color.svg"
                 alt="MathEdu Logo"
                 width={150}
                 height={150}

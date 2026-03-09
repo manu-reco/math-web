@@ -17,14 +17,15 @@ export function withBasePath(src: string): string {
     }
 
     const normalizedSrc = slashNormalized.startsWith("/") ? slashNormalized : `/${slashNormalized}`;
+    const encodedSrc = encodeURI(normalizedSrc);
 
     if (!BASE_PATH) {
-        return normalizedSrc;
+        return encodedSrc;
     }
 
-    if (normalizedSrc === BASE_PATH || normalizedSrc.startsWith(`${BASE_PATH}/`)) {
-        return normalizedSrc;
+    if (encodedSrc === BASE_PATH || encodedSrc.startsWith(`${BASE_PATH}/`)) {
+        return encodedSrc;
     }
 
-    return `${BASE_PATH}${normalizedSrc}`;
+    return `${BASE_PATH}${encodedSrc}`;
 }
