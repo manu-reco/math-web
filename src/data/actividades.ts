@@ -14,7 +14,7 @@ export const games: Game[] = [
     {
         id: "subitizacion",
         title: "Subitización",
-        image: "/subitizacion/tarjetas-puntos-1-4-desord.png",
+        image: "/subitizacion/subitizacion-juego-web.jpg",
         area: "Aritmética",
         level: "Primeros pasos y segundo ciclo",
         description: "Reconoce la cantidad de elementos sin necesidad de contar uno por uno.",
@@ -47,7 +47,7 @@ export const games: Game[] = [
     {
         id: "juego-4",
         title: "Próximamente",
-        image: "/placeholder-game.png",
+        image: "logo buho relleno color.svg",
         area: "Aritmética",
         level: "Segundo ciclo",
         description: "Juego todavía en desarrollo",
@@ -58,7 +58,7 @@ export const games: Game[] = [
     {
         id: "juego-5",
         title: "Próximamente",
-        image: "/placeholder-game.png",
+        image: "logo buho relleno color.svg",
         area: "Aritmética",
         level: "Tercer ciclo",
         description: "Juego todavía en desarrollo",
