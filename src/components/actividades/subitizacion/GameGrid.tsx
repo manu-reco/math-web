@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react"
+import InstructionText from "../InstructionText";
 import { Pattern, IconPosition } from "@/data/subitizacionPatterns";
 
 const GRID_CONFIG = {
@@ -50,34 +51,6 @@ function GridCell({ position }: GridCellProps) {
         </div>
     );
 }
-
-function InstructionText() {
-    const isTouchDevice = typeof window !== "undefined" && (
-        ("ontouchstart" in window) ||
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia("(pointer: coarse)").matches
-    );
-
-    return (
-        <div className="mt-8 text-center">
-            {isTouchDevice ? (
-                <p className="text-text-secondary text-lg">
-                    <span className="font-semibold">Toca la pantalla</span> para avanzar
-                </p>
-            ) : (
-                <div className="text-text-secondary text-lg space-y-2">
-                    <p>
-                        Presiona <kbd className="px-3 py-1 bg-gray-100 border border-gray-300 rounded text-sm font-mono mx-1">←</kbd> / <kbd className="px-3 py-1 bg-gray-100 border border-gray-300 rounded text-sm font-mono mx-1">→</kbd> en el teclado para retroceder / avanzar
-                    </p>
-                    <p>
-                        Presiona <kbd className="px-3 py-1 bg-gray-100 border border-gray-300 rounded text-sm font-mono mx-1">Espacio</kbd> o <span className="font-semibold">toca la pantalla</span> para avanzar.
-                    </p>
-                </div>
-            )}
-        </div>
-    );
-}
-
 
 // Componente principal que muestra el grid de subitización
 export default function GameGrid({ pattern, onNext }: GameGridProps) {

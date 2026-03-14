@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from "react";
 import StoryPlayer from "@/components/story/StoryPlayer";
+import InstructionText from "../InstructionText";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
 import FixedExitButton from "../FixedExitButton";
@@ -126,7 +127,7 @@ export default function StoryPageTemplate({
 
     // Renderizar el reproductor del cuento
     return (
-        <>
+        <div className="pb-10">
             <FixedExitButton backHref={backHref} />
             <StoryPlayer
                 story={validatedStory}
@@ -139,6 +140,7 @@ export default function StoryPageTemplate({
                     setGameCompleted(true);
                 }}
             />
-        </>
+            <InstructionText />
+        </div>
     );
 }

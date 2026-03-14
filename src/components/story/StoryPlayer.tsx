@@ -172,7 +172,6 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                     advancePage();
                 }}
                 isPreviousDisabled={currentPageIndex === 0}
-                isNextDisabled={currentPageIndex === story.pages.length - 1}
                 previousAriaLabel="Página anterior"
                 nextAriaLabel="Página siguiente"
                 position="absolute"
