@@ -26,7 +26,7 @@ export default function SubitizacionPage() {
 
     // FUNCIONES DEL JUEGO
     const handleBack = () => {
-        window.scrollTo({ top: 100, behavior: 'smooth'  });
+        window.scrollTo({ top: 100, behavior: 'smooth' });
 
         if (gameState === 'levelSelect') {
             setGameState('instructions');
@@ -37,12 +37,12 @@ export default function SubitizacionPage() {
     };
 
     const goToSelectLevel = () => {
-        window.scrollTo({ top: 100, behavior: 'smooth'  });
+        window.scrollTo({ top: 100, behavior: 'smooth' });
         setGameState('levelSelect');
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
-        window.scrollTo({ top: 100, behavior: 'smooth'  });
+        window.scrollTo({ top: 100, behavior: 'smooth' });
         setCurrentLevel(level);
         setCurrentMode(mode);
         // Construir patrones desde PatternTemplate a Pattern con iconos asignados
@@ -52,27 +52,48 @@ export default function SubitizacionPage() {
         setGameState('playing');
     };
 
-    // Al pulsar Espacio: avanzar al siguiente patrón si estamos jugando
+    // Avanza al siguiente patrón de forma segura (sin desbordar índice)
     const nextPattern = useCallback(() => {
-        if (currentPatternIndex < shuffledPatterns.length - 1) {
-            setCurrentPatternIndex(prev => prev + 1);
-        } else {
-            setGameState('completed');
-        }
-    }, [currentPatternIndex, shuffledPatterns.length]);
+        setCurrentPatternIndex(prev => {
+            const lastIndex = shuffledPatterns.length - 1;
+
+            if (lastIndex < 0) return 0;
+
+            if (prev >= lastIndex) {
+                setGameState('completed');
+                return lastIndex;
+            }
+
+            return prev + 1;
+        });
+    }, [shuffledPatterns.length]);
+
+    // Retrocede al patrón anterior
+    const previousPattern = useCallback(() => {
+        setCurrentPatternIndex(prev => Math.max(0, prev - 1));
+    }, []);
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.code === 'Space' && gameState === 'playing') {
+            if (event.code === 'Space' || event.code === 'ArrowRight') {
                 event.preventDefault();
-                nextPattern();
+                if (gameState === 'playing') {
+                    nextPattern();
+                }
+            }
+
+            if (event.code === 'ArrowLeft') {
+                event.preventDefault();
+                if (gameState === 'playing') {
+                    previousPattern();
+                }
             }
         };
 
         window.addEventListener('keydown', handleKeyPress);
         return () => window.removeEventListener('keydown', handleKeyPress);
         // cleanup: quita el listener antes de desmontar el componente o actualizarlo
-    }, [gameState, nextPattern]);
+    }, [gameState, nextPattern, previousPattern]);
 
     const handleNextLevel = () => {
         if (!currentLevel) return;
@@ -138,7 +159,7 @@ export default function SubitizacionPage() {
                     </h1>
                     {currentLevel && gameState === 'playing' && (
                         <p className="text-text-secondary mt-2">
-                            {currentLevel.name} - Patrón {currentPatternIndex + 1} de {shuffledPatterns.length}
+                            {currentLevel.name} - Patrón {Math.min(currentPatternIndex + 1, shuffledPatterns.length)} de {shuffledPatterns.length}
                         </p>
                     )}
                 </div>
@@ -158,10 +179,46 @@ export default function SubitizacionPage() {
                 )}
 
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
-                    <GameGrid
-                        pattern={shuffledPatterns[currentPatternIndex]}
-                        onNext={nextPattern}
-                    />
+                    <div className="relative">
+                        <GameGrid
+                            pattern={shuffledPatterns[currentPatternIndex]}
+                            onNext={nextPattern}
+                        />
+
+                        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    previousPattern();
+                                }}
+                                disabled={currentPatternIndex === 0}
+                                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Patrón anterior"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+
+                            <span className="min-w-12 text-center">
+                                {Math.min(currentPatternIndex + 1, shuffledPatterns.length)} / {shuffledPatterns.length}
+                            </span>
+
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    nextPattern();
+                                }}
+                                disabled={shuffledPatterns.length === 0}
+                                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Patrón siguiente"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 )}
 
                 {gameState === 'completed' && currentLevel && (() => {
