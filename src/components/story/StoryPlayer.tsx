@@ -147,7 +147,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
 
     return (
         <div 
-            className="w-full h-screen overflow-hidden relative"
+            className="w-full h-[calc(100dvh-4rem)] overflow-hidden relative"
             onClick={handleBackgroundClick}
         >
             <Page
