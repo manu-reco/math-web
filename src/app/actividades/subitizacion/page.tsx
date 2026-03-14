@@ -8,6 +8,7 @@ import InstructionsScreen from "@/components/actividades/subitizacion/Instructio
 import LevelSelector from "@/components/actividades/subitizacion/LevelSelector";
 import GameGrid from "@/components/actividades/subitizacion/GameGrid";
 import CompletionScreen from "@/components/actividades/subitizacion/CompletionScreen";
+import ProgressNavigator from "@/components/actividades/ProgressNavigator";
 
 type GameState = 'instructions' | 'levelSelect' | 'playing' | 'completed';
 type GameMode = 'concrete' | 'abstract';
@@ -179,46 +180,30 @@ export default function SubitizacionPage() {
                 )}
 
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
-                    <div className="relative">
+                    <>
                         <GameGrid
                             pattern={shuffledPatterns[currentPatternIndex]}
                             onNext={nextPattern}
                         />
 
-                        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    previousPattern();
-                                }}
-                                disabled={currentPatternIndex === 0}
-                                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
-                                aria-label="Patrón anterior"
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-
-                            <span className="min-w-12 text-center">
-                                {Math.min(currentPatternIndex + 1, shuffledPatterns.length)} / {shuffledPatterns.length}
-                            </span>
-
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    nextPattern();
-                                }}
-                                disabled={shuffledPatterns.length === 0}
-                                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
-                                aria-label="Patrón siguiente"
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                        <ProgressNavigator
+                            currentStep={Math.min(currentPatternIndex + 1, shuffledPatterns.length)}
+                            totalSteps={shuffledPatterns.length}
+                            onPrevious={(e) => {
+                                e.stopPropagation();
+                                previousPattern();
+                            }}
+                            onNext={(e) => {
+                                e.stopPropagation();
+                                nextPattern();
+                            }}
+                            isPreviousDisabled={currentPatternIndex === 0}
+                            isNextDisabled={shuffledPatterns.length === 0}
+                            previousAriaLabel="Patrón anterior"
+                            nextAriaLabel="Patrón siguiente"
+                            position="fixed"
+                        />
+                    </>
                 )}
 
                 {gameState === 'completed' && currentLevel && (() => {

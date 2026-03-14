@@ -5,6 +5,7 @@ import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
 import Page from "./Page";
 import useStoryControls from "@/hooks/use-story-controls";
 import { withBasePath } from "@/lib/assetPath";
+import ProgressNavigator from "@/components/actividades/ProgressNavigator";
 
 interface StoryPlayerProps {
     story: StoryData;
@@ -159,40 +160,23 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                 viewportScale={viewportScale}
             />
 
-            {/* Indicador de progreso con controles de navegación */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3">
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        goToPreviousPage();
-                    }}
-                    disabled={currentPageIndex === 0}
-                    className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Página anterior"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                
-                <span className="min-w-12 text-center">
-                    {currentPageIndex + 1} / {story.pages.length}
-                </span>
-                
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        advancePage();
-                    }}
-                    disabled={currentPageIndex === story.pages.length - 1}
-                    className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Página siguiente"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
+            <ProgressNavigator
+                currentStep={currentPageIndex + 1}
+                totalSteps={story.pages.length}
+                onPrevious={(e) => {
+                    e.stopPropagation();
+                    goToPreviousPage();
+                }}
+                onNext={(e) => {
+                    e.stopPropagation();
+                    advancePage();
+                }}
+                isPreviousDisabled={currentPageIndex === 0}
+                isNextDisabled={currentPageIndex === story.pages.length - 1}
+                previousAriaLabel="Página anterior"
+                nextAriaLabel="Página siguiente"
+                position="absolute"
+            />
         </div>
     );
 }
