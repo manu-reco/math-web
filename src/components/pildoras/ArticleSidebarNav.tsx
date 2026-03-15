@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { SquareMenu, X } from "lucide-react";
 
 type NavArticle = {
     id: string;
@@ -48,7 +48,7 @@ export default function ArticleSidebarNav({
     }, [isDrawerOpen]);
 
     const renderNav = () => (
-        <nav aria-label="Temario de artículos" className="space-y-6 h-full overflow-y-auto">
+        <nav aria-label="Temario de artículos" className="space-y-6">
             {chapters.map((chapter) => (
                 <section key={chapter.id} className="space-y-2">
                     <h3 className="text-sm font-semibold text-text-primary">
@@ -85,13 +85,13 @@ export default function ArticleSidebarNav({
         <>
             <button
                 type="button"
-                className="fixed top-4 left-4 z-50 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 bg-white shadow-sm lg:hidden"
+                className="fixed top-18 left-4 z-50 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 bg-white shadow-sm lg:hidden"
                 aria-label="Abrir temario"
                 aria-controls="mobile-article-drawer"
                 aria-expanded={isDrawerOpen}
                 onClick={() => setIsDrawerOpen(true)}
             >
-                <Menu size={20} />
+                <SquareMenu size={20} />
             </button>
 
             {isDrawerOpen && (
@@ -122,11 +122,13 @@ export default function ArticleSidebarNav({
                 </div>
             )}
 
-            <aside className="sticky top-36 hidden h-fit rounded-xl border border-gray-100 bg-white p-4 lg:block">
+            <aside className="sticky top-20 hidden h-[calc(100vh-6rem)] rounded-xl border border-gray-100 bg-white p-4 lg:flex lg:flex-col">
                 <h2 className="mb-4 text-sm font-semibold text-text-primary">
                     Temario
                 </h2>
-                {renderNav()}
+                <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+                    {renderNav()}
+                </div>
             </aside>
         </>
     );

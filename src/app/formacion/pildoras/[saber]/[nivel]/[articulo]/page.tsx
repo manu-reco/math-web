@@ -100,47 +100,51 @@ export default async function ArticlePage({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-white pb-20">
-            {/* Navigation Bar */}
-            <div className="sticky top-16 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
-                <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 h-14 md:h-16 flex items-center">
-                    <Link
-                        href={`/formacion/pildoras/${saberId}/${nivelId}`}
-                        className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
-                    >
-                        <ArrowLeft size={20} className="mr-2" />
-                        Volver al temario
-                    </Link>
+            <div className="mx-auto grid max-w-7xl lg:gap-8 px-4 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:px-8">
+                <div className="lg:py-8">
+                    <ArticleSidebarNav
+                        chapters={chapters ?? []}
+                        saberId={saberId}
+                        nivelId={nivelId}
+                        activeArticleId={articuloId}
+                    />
                 </div>
-            </div>
 
-            <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[300px_minmax(0,1fr)] lg:px-8">
-                <ArticleSidebarNav
-                    chapters={chapters ?? []}
-                    saberId={saberId}
-                    nivelId={nivelId}
-                    activeArticleId={articuloId}
-                />
-
-                {/* Article Content */}
-                <article className="min-w-0 max-w-4xl lg:justify-self-end">
-                    {ContentComponent ? (
-                        <ContentComponent />
-                    ) : (
-                        <div className="text-center py-12 md:py-20">
-                            <h1 className="text-2xl md:text-3xl font-bold mb-4 px-4">
-                                Contenido en Construcción
-                            </h1>
-                            <p className="text-base md:text-lg text-text-secondary mb-8 px-4">
-                                Estamos redactando este artículo para ti.
-                            </p>
-                            <div className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100 inline-block mx-4">
-                                <p className="text-text-secondary italic">
-                                    Slug: {articuloId}
-                                </p>
-                            </div>
+                {/* Navigation bar */}
+                <div className="min-w-0">
+                    <div className="sticky top-16 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
+                        <div className="h-14 md:h-16 flex items-center ml-10 lg:ml-0 px-2 sm:px-4 lg:px-0">
+                            <Link
+                                href={`/formacion/pildoras/${saberId}/${nivelId}`}
+                                className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
+                            >
+                                <ArrowLeft size={20} className="mr-2" />
+                                Volver al temario
+                            </Link>
                         </div>
-                    )}
-                </article>
+                    </div>
+
+                    {/* Article Content */}
+                    <article className="min-w-0 max-w-4xl py-8 md:py-12">
+                        {ContentComponent ? (
+                            <ContentComponent />
+                        ) : (
+                            <div className="text-center py-12 md:py-20">
+                                <h1 className="text-2xl md:text-3xl font-bold mb-4 px-4">
+                                    Contenido en Construcción
+                                </h1>
+                                <p className="text-base md:text-lg text-text-secondary mb-8 px-4">
+                                    Estamos redactando este artículo para ti.
+                                </p>
+                                <div className="p-6 md:p-8 bg-gray-50 rounded-2xl border border-gray-100 inline-block mx-4">
+                                    <p className="text-text-secondary italic">
+                                        Slug: {articuloId}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                    </article>
+                </div>
             </div>
         </div>
     );
