@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { SquareMenu, X } from "lucide-react";
+import { ArrowLeft, SquareMenu, X } from "lucide-react";
 
 type NavArticle = {
     id: string;
@@ -63,11 +63,10 @@ export default function ArticleSidebarNav({
                                     <Link
                                         href={`/formacion/pildoras/${saberId}/${nivelId}/${article.id}`}
                                         onClick={() => setIsDrawerOpen(false)}
-                                        className={`block rounded-md px-3 py-2 text-sm transition-colors ${
-                                            isActive
-                                                ? "bg-primary/10 text-primary font-medium"
-                                                : "text-text-secondary hover:bg-gray-50 hover:text-text-primary"
-                                        }`}
+                                        className={`block rounded-md px-3 py-2 text-sm transition-colors ${isActive
+                                            ? "bg-primary/10 text-primary font-medium"
+                                            : "text-text-secondary hover:bg-gray-50 hover:text-text-primary"
+                                            }`}
                                         aria-current={isActive ? "page" : undefined}
                                     >
                                         {article.title}
@@ -104,10 +103,14 @@ export default function ArticleSidebarNav({
                         className="h-full w-[85vw] max-w-sm overflow-y-auto bg-white px-4 py-6"
                         onClick={(event) => event.stopPropagation()}
                     >
-                        <div className="mb-4 flex items-center justify-between">
-                            <h2 className="text-base font-semibold text-text-primary">
-                                Temario
-                            </h2>
+                        <div className="mb-4 text-sm flex items-center justify-between">
+                            <Link
+                                href={`/formacion/pildoras/${saberId}/${nivelId}`}
+                                className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
+                            >
+                                <ArrowLeft size={20} className="mr-2" />
+                                Volver al temario
+                            </Link>
                             <button
                                 type="button"
                                 className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 text-text-secondary"
@@ -123,9 +126,14 @@ export default function ArticleSidebarNav({
             )}
 
             <aside className="sticky top-20 hidden h-[calc(100vh-6rem)] rounded-xl border border-gray-100 bg-white p-4 lg:flex lg:flex-col">
-                <h2 className="mb-4 text-sm font-semibold text-text-primary">
-                    Temario
-                </h2>
+                <Link
+                    href={`/formacion/pildoras/${saberId}/${nivelId}`}
+                    className="inline-flex items-center mb-4 text-sm text-text-secondary hover:text-primary transition-colors font-medium"
+                >
+                    <ArrowLeft size={20} className="mr-2" />
+                    Volver al temario
+                </Link>
+
                 <div className="min-h-0 flex-1 overflow-y-auto pr-1">
                     {renderNav()}
                 </div>
