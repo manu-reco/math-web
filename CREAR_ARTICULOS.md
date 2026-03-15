@@ -182,6 +182,10 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
     - Props: `filePath` (string), `label` (opcional), `variant` (opcional), `size` (opcional)
 - **`PdfButton`**: Botón doble para ver el recurso en un modal y descargarlo.
     - Props: `filePath` (string), `label` (opcional)
+- **`ArticleNavigationButton`**: Botón de navegación entre artículos.
+    - Props: `href` (string), `direction` (`"next"` o `"previous"`), `label` (opcional), `size` (opcional)
+    - En la plataforma, estos botones ya se añaden automáticamente al final de cada artículo desde `src/app/formacion/pildoras/[saber]/[nivel]/[articulo]/page.tsx`.
+    - Solo necesitas usar este componente dentro del contenido del artículo si quieres añadir navegación también en mitad del artículo.
 
 
 ## 🔗 Estructura de URLs

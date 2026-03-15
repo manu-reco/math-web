@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, ArrowRight } from "lucide-react";
+import { Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, ArrowRight, ArrowLeft } from "lucide-react";
 
 import {
     Tooltip,
@@ -355,31 +355,6 @@ export function DownloadButton({ filePath, label = "Descargar recurso", variant 
     );
 }
 
-interface NextArticleButtonProps {
-    href: string;
-    label?: string;
-    size?: ButtonProps['size'];
-}
-
-/**
- * Botón para navegar al siguiente artículo
- * @param href Enlace al siguiente artículo
- * @param label Texto del botón
- */
-export function NextArticleButton({ href, label = "Siguiente artículo", size = "lg" }: NextArticleButtonProps) {
-    return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
-                {label}
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-        </Link>
-    );
-}
-
 interface PdfButtonProps {
     filePath: string;
     label?: string;
@@ -484,4 +459,39 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
             </DialogPopup>
         );
     }
+}
+
+interface ArticleNavigationButtonProps {
+    href: string;
+    direction?: 'next' | 'previous';
+    label?: string;
+    size?: ButtonProps['size'];
+}
+
+/**
+ * Botón para navegar entre artículos
+ * @param href Enlace al artículo de destino
+ * @param direction Dirección de navegación: "next" o "previous"
+ * @param label Texto del botón
+ */
+export function ArticleNavigationButton({ href, direction = "next", label, size = "lg" }: ArticleNavigationButtonProps) {
+    const isPrevious = direction === "previous";
+    const buttonLabel = label ?? (isPrevious ? "Artículo anterior" : "Siguiente artículo");
+
+    return (
+        <Link href={href}>
+            <Button
+                variant="default" size={size}
+                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
+            >
+                {isPrevious ? (
+                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                ) : null}
+                {buttonLabel}
+                {!isPrevious ? (
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                ) : null}
+            </Button>
+        </Link>
+    );
 }
