@@ -7,6 +7,7 @@ import SubitizacionTarjetasPuntos1Content from "@/components/content/Subitizacio
 import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
 import ArticleSidebarNav from "@/components/pildoras/ArticleSidebarNav";
+import { ArticleNavigationButton } from "@/components/pildoras/ArticleComponents";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
@@ -93,6 +94,16 @@ export default async function ArticlePage({ params }: PageProps) {
     }
 
     const ContentComponent = CONTENT_REGISTRY[articuloId];
+    const orderedArticles = chapters?.flatMap((chapter) => chapter.articles) ?? [];
+    const currentArticleIndex = orderedArticles.findIndex((article) => article.id === articuloId);
+    const previousArticle = currentArticleIndex > 0 ? orderedArticles[currentArticleIndex - 1] : undefined;
+    const nextArticle = currentArticleIndex >= 0 ? orderedArticles[currentArticleIndex + 1] : undefined;
+    const previousArticleHref = previousArticle
+        ? `/formacion/pildoras/${saberId}/${nivelId}/${previousArticle.id}`
+        : undefined;
+    const nextArticleHref = nextArticle
+        ? `/formacion/pildoras/${saberId}/${nivelId}/${nextArticle.id}`
+        : undefined;
 
     return (
         <div className="min-h-screen bg-white pb-20">
@@ -124,9 +135,34 @@ export default async function ArticlePage({ params }: PageProps) {
                                 </p>
                             </div>
                         </div>
-                    )}
-                </article>
-            </div>
+                    </div>
+                )}
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                    {previousArticleHref ? (
+                        <ArticleNavigationButton
+                            href={previousArticleHref}
+                            direction="previous"
+                        />
+                    ) : null}
+                    {nextArticleHref ? (
+                        <ArticleNavigationButton
+                            href={nextArticleHref}
+                            direction="next"
+                        />
+                    ) : null}
+                </div>
+
+                {!nextArticleHref && (
+                    <div className="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-3">
+                            ¡Has llegado a la última lección del temario!
+                        </h3>
+                        <p className="text-text-secondary leading-relaxed">
+                            Ahora puedes repasar este temario si crees que lo necesitas, avanzar a un nivel superior si quieres contenido para estudiantes de mayor edad, o cambiar a otro saber para seguir aprendiendo.
+                        </p>
+                    </div>
+                )}
+            </article>
         </div>
     );
 }
