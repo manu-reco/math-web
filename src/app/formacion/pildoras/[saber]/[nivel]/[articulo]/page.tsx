@@ -10,6 +10,7 @@ import DescubriendoRectaContent from "@/components/content/DescubriendoRectaCont
 import SubitizacionTarjetasPuntos1Content from "@/components/content/SubitizacionTarjetasPuntos1Content";
 import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
+import { NextArticleButton } from "@/components/pildoras/ArticleComponents";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
@@ -19,7 +20,7 @@ const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "subitizacion-tarjetas-puntos-1": SubitizacionTarjetasPuntos1Content,
     "subitizacion-tarjetas-puntos-2": SubitizacionTarjetasPuntos2Content,
     "subitizacion-tarjetas-puntos-3": SubitizacionTarjetasPuntos3Content,
-    "descubriendo-recta": DescubriendoRectaContent, 
+    "descubriendo-recta": DescubriendoRectaContent,
 };
 
 interface PageProps {
@@ -96,6 +97,12 @@ export default async function ArticlePage({ params }: PageProps) {
     }
 
     const ContentComponent = CONTENT_REGISTRY[articuloId];
+    const orderedArticles = chapters?.flatMap((chapter) => chapter.articles) ?? [];
+    const currentArticleIndex = orderedArticles.findIndex((article) => article.id === articuloId);
+    const nextArticle = currentArticleIndex >= 0 ? orderedArticles[currentArticleIndex + 1] : undefined;
+    const nextArticleHref = nextArticle
+        ? `/formacion/pildoras/${saberId}/${nivelId}/${nextArticle.id}`
+        : undefined;
 
     return (
         <div className="min-h-screen bg-white pb-20">
@@ -131,6 +138,20 @@ export default async function ArticlePage({ params }: PageProps) {
                         </div>
                     </div>
                 )}
+                <div className="mt-10">
+                    {nextArticleHref ? (
+                        <NextArticleButton href={nextArticleHref} label="Ir al siguiente artículo" />
+                    ) : (
+                        <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 md:p-8">
+                            <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-3">
+                                ¡Has llegado a la última lección del temario!
+                            </h3>
+                            <p className="text-text-secondary leading-relaxed">
+                                Ahora puedes repasar este temario si crees que lo necesitas, avanzar a un nivel superior si quieres contenido para estudiantes de mayor edad, o cambiar a otro saber para seguir aprendiendo.
+                            </p>
+                        </div>
+                    )}
+                </div>
             </article>
         </div>
     );
