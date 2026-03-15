@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
 import NavDropdown, { DropdownItem } from "./NavDropdown";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const formacionItems: DropdownItem[] = [
     { label: "Formación Online", href: "/formacion/online" },
@@ -143,53 +145,61 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-white border-t border-gray-200">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <NavDropdown
-                            label="Formación"
-                            items={formacionItems}
-                            isOpen={activeDropdown === "mobile-formacion"}
-                            onToggle={() => toggleDropdown("mobile-formacion")}
-                            onItemClick={() => {
-                                closeAll();
-                            }}
-                            variant="mobile"
-                        />
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                    >
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <NavDropdown
+                                label="Formación"
+                                items={formacionItems}
+                                isOpen={activeDropdown === "mobile-formacion"}
+                                onToggle={() => toggleDropdown("mobile-formacion")}
+                                onItemClick={() => {
+                                    closeAll();
+                                }}
+                                variant="mobile"
+                            />
 
-                        <Link
-                            href="/actividades"
-                            className="block text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
-                            onClick={() => {
-                                closeAll();
-                            }}
-                        >
-                            Actividades
-                        </Link>
+                            <Link
+                                href="/actividades"
+                                className="block text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
+                                onClick={() => {
+                                    closeAll();
+                                }}
+                            >
+                                Actividades
+                            </Link>
 
-                        <NavDropdown
-                            label="Información"
-                            items={informacionItems}
-                            isOpen={activeDropdown === "mobile-informacion"}
-                            onToggle={() => toggleDropdown("mobile-informacion")}
-                            onItemClick={() => {
-                                closeAll();
-                            }}
-                            variant="mobile"
-                        />
+                            <NavDropdown
+                                label="Información"
+                                items={informacionItems}
+                                isOpen={activeDropdown === "mobile-informacion"}
+                                onToggle={() => toggleDropdown("mobile-informacion")}
+                                onItemClick={() => {
+                                    closeAll();
+                                }}
+                                variant="mobile"
+                            />
 
-                        <Link
-                            href="/login"
-                            className="block w-full text-center bg-secondary hover:bg-secondary-hover text-white px-4 py-3 rounded-md text-base font-medium mt-4"
-                            onClick={() => {
-                                closeAll();
-                            }}
-                        >
-                            Iniciar Sesión
-                        </Link>
-                    </div>
-                </div>
-            )}
+                            <Link
+                                href="/login"
+                                className="block w-full text-center bg-secondary hover:bg-secondary-hover text-white px-4 py-3 rounded-md text-base font-medium mt-4"
+                                onClick={() => {
+                                    closeAll();
+                                }}
+                            >
+                                Iniciar Sesión
+                            </Link>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }
