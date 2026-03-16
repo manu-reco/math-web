@@ -15,7 +15,6 @@ import {
 import { motion } from "framer-motion";
 import { SABERES, NIVELES } from "@/lib/pildorasData";
 import { clsx } from "clsx";
-import React from "react";
 
 const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
     Calculator,
@@ -23,6 +22,13 @@ const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
     BrainCircuit,
     Ruler,
     BarChart3,
+};
+
+const cardMotionProps = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 },
+    transition: { duration: 0.3 },
 };
 
 export default function PildorasPage() {
@@ -35,8 +41,10 @@ export default function PildorasPage() {
     const hasNivel = Boolean(selectedNivel);
     const isPartialStep = (hasSaber && !hasNivel) || (!hasSaber && hasNivel);
     const frontCard: "saber" | "nivel" = !hasSaber && hasNivel ? "saber" : "nivel";
+    const isReadyToNavigate = hasSaber && hasNivel;
     const selectedSaberData = SABERES.find((saber) => saber.id === selectedSaber);
     const selectedNivelData = NIVELES.find((nivel) => nivel.id === selectedNivel);
+    const SelectedSaberIcon = selectedSaberData ? IconMap[selectedSaberData.icon] ?? Calculator : Calculator;
 
     useEffect(() => {
         if (navigationTimeoutRef.current) {
@@ -63,10 +71,7 @@ export default function PildorasPage() {
     const saberCard = (
         <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            {...cardMotionProps}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
@@ -115,10 +120,7 @@ export default function PildorasPage() {
     const nivelCard = (
         <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            {...cardMotionProps}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
@@ -179,10 +181,7 @@ export default function PildorasPage() {
                 <div
                     className={clsx("p-2 rounded-lg transition-colors", selectedSaberData?.color || "bg-gray-100 text-text-secondary")}
                 >
-                    {selectedSaberData && IconMap[selectedSaberData.icon] ? (
-                        React.createElement(IconMap[selectedSaberData.icon], { size: 24 })
-                    ) : (
-                        <Calculator size={24} />)}
+                    <SelectedSaberIcon size={24} />
                 </div>
                 <div className="flex-1">
                     <h3 className="font-bold">{selectedSaberData?.title}</h3>
@@ -201,7 +200,7 @@ export default function PildorasPage() {
         >
             <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
-                Elige un Nivel
+                Has elegido:
             </h2>
             <div
                 className="w-full text-left my-4 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
@@ -220,7 +219,7 @@ export default function PildorasPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-            {selectedSaber && selectedNivel && (
+            {isReadyToNavigate && (
                 <motion.div
                     className="fixed inset-0 z-50 bg-black/20 backdrop-blur-[1px] flex items-center justify-center px-4"
                     initial={{ opacity: 0 }}
@@ -259,16 +258,11 @@ export default function PildorasPage() {
                 ) : (
                     <div className="mb-12">
                         <div className="max-w-[760px] mx-auto flex flex-col gap-4 transition-all duration-300">
-                            <div>
-                                {frontCard === "saber" ? saberCard : nivelCard}
-                            </div>
-                            <div>
-                                {frontCard === "saber" ? nivelBackCard : saberBackCard}
-                            </div>
+                            {frontCard === "saber" ? saberCard : nivelCard}
+                            {frontCard === "saber" ? nivelBackCard : saberBackCard}
                         </div>
                     </div>
                 )}
-
             </div>
         </div>
     );
