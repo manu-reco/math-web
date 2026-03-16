@@ -36,6 +36,7 @@ import {
 
 import conceptsData from '@/data/concepts.json';
 import { withBasePath } from "@/lib/assetPath";
+import { clsx } from "clsx";
 
 interface ArticleHeaderProps {
     title: string;
@@ -57,11 +58,11 @@ export function ArticleHeader({ title, subtitle, description, category, level }:
                 {title}
             </h1>
             {subtitle && (
-                <h2 className="text-2xl text-text-secondary font-medium mb-6">
+                <h2 className="text-xl text-text-secondary font-medium mb-6">
                     {subtitle}
                 </h2>
             )}
-            <p className="text-xl text-text-secondary leading-relaxed max-w-3xl">
+            <p className="text-lg text-text-secondary leading-relaxed max-w-3xl">
                 {description}
             </p>
         </header>
@@ -72,7 +73,6 @@ export function ArticleSection({ title, children }: { title: string; children: R
     return (
         <section className="mb-12">
             <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                <span className="w-1.5 h-8 bg-primary rounded-full"></span>
                 {title}
             </h3>
             <div className="text-lg leading-relaxed space-y-6">
@@ -96,18 +96,20 @@ type ArticleImagesProps = {
  * @param maxHeight Altura máxima de las imágenes en píxeles. Por defecto, 300px. La anchura se ajusta automáticamente para mantener la proporción. 
  */
 export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
-    maxHeight = maxHeight || 300;
     // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con CSS
     return (
-        <div className="flex flex-row flex-wrap gap-4 my-6 items-center justify-center">
+        <div className="flex flex-row flex-wrap gap-4 m-6 items-center justify-center">
             {images.map((image, index) => (
                 <div key={index} className="flex justify-center">
                     <Image
                         src={image.src}
                         alt={image.alt}
                         width={300} height={300}
-                        className="h-auto w-auto max-w-full rounded-md shadow-md"
-                        style={{ maxHeight: `${maxHeight}px` }}
+                        className={clsx(
+                            "h-auto w-auto max-w-full rounded-md shadow-md",
+                            maxHeight ? `max-h-[${maxHeight}px]` :
+                                images.length === 1 ? "max-h-[300px]" : "max-h-[250px]"
+                        )}
                     />
                 </div>
             ))}
