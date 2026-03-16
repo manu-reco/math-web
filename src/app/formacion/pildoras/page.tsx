@@ -15,6 +15,7 @@ import {
 import { motion } from "framer-motion";
 import { SABERES, NIVELES } from "@/lib/pildorasData";
 import { clsx } from "clsx";
+import React from "react";
 
 const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
     Calculator,
@@ -60,11 +61,11 @@ export default function PildorasPage() {
     }, [selectedSaber, selectedNivel, router]);
 
     const saberCard = (
-        <motion.div 
+        <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
@@ -73,7 +74,7 @@ export default function PildorasPage() {
             </h2>
             {isPartialStep && frontCard === "saber" && (
                 <p className="text-sm text-primary font-medium mb-4">
-                    Escoge el saber para continuar.
+                    Ahora, escoge el saber para continuar.
                 </p>
             )}
             <div className="space-y-3">
@@ -112,11 +113,11 @@ export default function PildorasPage() {
     );
 
     const nivelCard = (
-        <motion.div 
+        <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
@@ -125,7 +126,7 @@ export default function PildorasPage() {
             </h2>
             {isPartialStep && frontCard === "nivel" && (
                 <p className="text-sm text-secondary font-medium mb-4">
-                    Escoge el nivel para continuar.
+                    Ahora, escoge el nivel para continuar.
                 </p>
             )}
             <div className="space-y-3">
@@ -163,18 +164,33 @@ export default function PildorasPage() {
     );
 
     const saberBackCard = (
-        <button
+        <motion.button
             type="button"
             onClick={() => setSelectedSaber(null)}
             className="w-full text-left bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md"
         >
             <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
-                Elige un Saber
+                Has elegido:
             </h2>
-            <p className="font-semibold text-primary">{selectedSaberData?.title}</p>
+            <div
+                className="w-full text-left my-4 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
+            >
+                <div
+                    className={clsx("p-2 rounded-lg transition-colors", selectedSaberData?.color || "bg-gray-100 text-text-secondary")}
+                >
+                    {selectedSaberData && IconMap[selectedSaberData.icon] ? (
+                        React.createElement(IconMap[selectedSaberData.icon], { size: 24 })
+                    ) : (
+                        <Calculator size={24} />)}
+                </div>
+                <div className="flex-1">
+                    <h3 className="font-bold">{selectedSaberData?.title}</h3>
+                    <p className="text-sm text-text-secondary">{selectedSaberData?.description}</p>
+                </div>
+            </div>
             <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
-        </button>
+        </motion.button>
     );
 
     const nivelBackCard = (
@@ -187,7 +203,17 @@ export default function PildorasPage() {
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
                 Elige un Nivel
             </h2>
-            <p className="font-semibold text-secondary">{selectedNivelData?.title}</p>
+            <div
+                className="w-full text-left my-4 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
+            >
+                <div className="p-2 rounded-lg transition-colors bg-secondary/20 text-secondary">
+                    <GraduationCap size={24} />
+                </div>
+                <div className="flex-1">
+                    <h3 className="font-bold">{selectedNivelData?.title}</h3>
+                    <p className="text-sm text-text-secondary">{selectedNivelData?.description}</p>
+                </div>
+            </div>
             <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
         </button>
     );
@@ -211,24 +237,12 @@ export default function PildorasPage() {
                     </div>
                 ) : (
                     <div className="mb-12">
-                        <div className="md:hidden flex flex-col">
-                            <div className="relative z-20 transition-all duration-300">
+                        <div className="max-w-[760px] mx-auto flex flex-col gap-4 transition-all duration-300">
+                            <div>
                                 {frontCard === "saber" ? saberCard : nivelCard}
                             </div>
-                            <div className="relative z-10 -mt-8 opacity-95 transition-all duration-300">
+                            <div>
                                 {frontCard === "saber" ? nivelBackCard : saberBackCard}
-                            </div>
-                        </div>
-
-                        <div className="hidden md:block relative min-h-[520px]">
-                            <div className={clsx(
-                                "absolute inset-x-0 top-2 mx-auto w-full max-w-[760px] z-10 transition-all duration-300 opacity-95 scale-[0.985]",
-                                frontCard === "saber" ? "-translate-x-8" : "translate-x-8"
-                            )}>
-                                {frontCard === "saber" ? nivelBackCard : saberBackCard}
-                            </div>
-                            <div className="absolute inset-x-0 top-0 mx-auto w-full max-w-[760px] z-20 transition-all duration-300 shadow-xl">
-                                {frontCard === "saber" ? saberCard : nivelCard}
                             </div>
                         </div>
                     </div>
