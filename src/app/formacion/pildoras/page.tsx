@@ -72,7 +72,6 @@ export default function PildorasPage() {
     const saberCard = (
         <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            {...cardMotionProps}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
@@ -121,7 +120,6 @@ export default function PildorasPage() {
     const nivelCard = (
         <motion.div
             className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            {...cardMotionProps}
         >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
@@ -234,19 +232,19 @@ export default function PildorasPage() {
                     </p>
                 </div>
 
-                {!isPartialStep ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                        {saberCard}
-                        {nivelCard}
-                    </div>
-                ) : (
-                    <div className="mb-12">
-                        <div className="max-w-[760px] mx-auto flex flex-col gap-4 transition-all duration-300">
-                            {frontCard === "saber" ? saberCard : nivelCard}
-                            {frontCard === "saber" ? nivelBackCard : saberBackCard}
-                        </div>
-                    </div>
-                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    {!isPartialStep ? (
+                        <>
+                            {saberCard}
+                            {nivelCard}
+                        </>
+                    ) : (
+                        <>
+                            {frontCard === "saber" ? saberCard : saberBackCard}
+                            {frontCard === "saber" ? nivelBackCard : nivelCard}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
