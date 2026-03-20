@@ -49,16 +49,20 @@ export default function PildorasPage() {
     const selectedNivelData = NIVELES.find((nivel) => nivel.id === selectedNivel);
     const SelectedSaberIcon = selectedSaberData ? IconMap[selectedSaberData.icon] ?? Calculator : Calculator;
 
+    // Manejar la navegación con un pequeño retraso para mostrar la pantalla de carga
     useEffect(() => {
+        // Si ya hay un timeout programado, limpiarlo
         if (navigationTimeoutRef.current) {
             clearTimeout(navigationTimeoutRef.current);
             navigationTimeoutRef.current = null;
         }
 
+        // Solo navegar si tanto saber como nivel están seleccionados
         if (!selectedSaber || !selectedNivel) {
             return;
         }
 
+        // Programar un pequeño delay antes de navegar a la página de resultados
         navigationTimeoutRef.current = setTimeout(() => {
             router.push(`/formacion/pildoras/${selectedSaber}/${selectedNivel}`);
         }, 500);
@@ -72,11 +76,11 @@ export default function PildorasPage() {
     }, [selectedSaber, selectedNivel, router]);
 
     const saberCard = (
-        <motion.div layout className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <motion.div layout className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+            <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
                 {isSaberSummaryMode ? "Has elegido:" : "Elige un Saber"}
-            </h2>
+            </motion.h2>
             <AnimatePresence mode="wait" initial={false}>
                 {isSaberSummaryMode ? (
                     <motion.button
@@ -98,30 +102,27 @@ export default function PildorasPage() {
                                 <h3 className="font-bold">{selectedSaberData?.title}</h3>
                                 <p className="text-sm text-text-secondary">{selectedSaberData?.description}</p>
                             </div>
+                            <CheckCircle2 className="text-primary" size={24} />
                         </div>
                         <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
                     </motion.button>
                 ) : (
                     <motion.div key="saber-selection" {...cardContentMotionProps}>
                         {isSelectionInProgress && pendingSelectionType === "saber" && (
-                            <p className="text-sm text-primary font-medium mb-4">
+                            <motion.p layout className="text-sm text-primary font-medium mb-4">
                                 Ahora, escoge el saber para continuar.
-                            </p>
+                            </motion.p>
                         )}
-                        <div className="space-y-3">
+                        <motion.div layout className="space-y-3">
                             {SABERES.map((saber) => {
                                 const Icon = IconMap[saber.icon];
                                 const isSelected = selectedSaber === saber.id;
                                 return (
-                                    <button
+                                    <motion.button
+                                        layout
                                         key={saber.id}
                                         onClick={() => setSelectedSaber(saber.id)}
-                                        className={clsx(
-                                            "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group",
-                                            isSelected
-                                                ? "border-primary bg-primary/5 shadow-md"
-                                                : "border-gray-100 hover:border-primary/50 hover:bg-gray-50"
-                                        )}
+                                        className="w-full text-left bg-white p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 border-gray-100 hover:border-primary/50 hover:bg-gray-50"
                                     >
                                         <div
                                             className={clsx(
@@ -136,10 +137,10 @@ export default function PildorasPage() {
                                             <p className="text-sm text-text-secondary">{saber.description}</p>
                                         </div>
                                         {isSelected && <CheckCircle2 className="text-primary" size={24} />}
-                                    </button>
+                                    </motion.button>
                                 );
                             })}
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -147,14 +148,15 @@ export default function PildorasPage() {
     );
 
     const nivelCard = (
-        <motion.div layout className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <motion.div layout className="bg-white rounded-2xl min-h-56 shadow-sm border border-gray-100 p-6 overflow-hidden">
+            <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
                 {isNivelSummaryMode ? "Has elegido:" : "Elige un Nivel"}
-            </h2>
+            </motion.h2>
             <AnimatePresence mode="wait" initial={false}>
                 {isNivelSummaryMode ? (
                     <motion.button
+                        layout
                         key="nivel-summary"
                         type="button"
                         onClick={() => setSelectedNivel(null)}
@@ -162,7 +164,7 @@ export default function PildorasPage() {
                         {...cardContentMotionProps}
                     >
                         <div
-                            className="w-full text-left my-2 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
+                            className="w-full text-left my-2 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-secondary/50 shadow-sm"
                         >
                             <div className="p-2 rounded-lg transition-colors bg-secondary/20 text-secondary">
                                 <GraduationCap size={24} />
@@ -171,29 +173,26 @@ export default function PildorasPage() {
                                 <h3 className="font-bold">{selectedNivelData?.title}</h3>
                                 <p className="text-sm text-text-secondary">{selectedNivelData?.description}</p>
                             </div>
+                            <CheckCircle2 className="text-secondary" size={24} />
                         </div>
                         <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
                     </motion.button>
                 ) : (
-                    <motion.div key="nivel-selection" {...cardContentMotionProps}>
+                    <div key="nivel-selection" {...cardContentMotionProps}>
                         {isSelectionInProgress && pendingSelectionType === "nivel" && (
                             <p className="text-sm text-secondary font-medium mb-4">
                                 Ahora, escoge el nivel para continuar.
                             </p>
                         )}
-                        <div className="space-y-3">
+                        <motion.div layout className="space-y-3">
                             {NIVELES.map((nivel) => {
                                 const isSelected = selectedNivel === nivel.id;
                                 return (
                                     <button
                                         key={nivel.id}
                                         onClick={() => setSelectedNivel(nivel.id)}
-                                        className={clsx(
-                                            "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4",
-                                            isSelected
-                                                ? "border-secondary bg-secondary/5 shadow-md"
-                                                : "border-gray-100 hover:border-secondary/50 hover:bg-gray-50"
-                                        )}
+                                        
+                                        className="w-full text-left bg-white p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 border-gray-100 hover:border-secondary/50 hover:bg-gray-50"
                                     >
                                         <div
                                             className={clsx(
@@ -211,8 +210,8 @@ export default function PildorasPage() {
                                     </button>
                                 );
                             })}
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
         </motion.div>
