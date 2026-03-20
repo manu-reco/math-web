@@ -12,7 +12,7 @@ import {
     CheckCircle2,
     GraduationCap
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { SABERES, NIVELES } from "@/lib/pildorasData";
 import { clsx } from "clsx";
 import LoadingOverlay from "@/components/LoadingOverlay";
@@ -25,11 +25,11 @@ const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
     BarChart3,
 };
 
-const cardMotionProps = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 20 },
-    transition: { duration: 0.3 },
+const cardContentMotionProps = {
+    initial: { opacity: 0, y: 8, height: 0 },
+    animate: { opacity: 1, y: 0, height: "auto" },
+    exit: { opacity: 0, y: -8, height: 0 },
+    transition: { duration: 0.25 },
 };
 
 export default function PildorasPage() {
@@ -40,23 +40,29 @@ export default function PildorasPage() {
 
     const hasSaber = Boolean(selectedSaber);
     const hasNivel = Boolean(selectedNivel);
-    const isPartialStep = (hasSaber && !hasNivel) || (!hasSaber && hasNivel);
-    const frontCard: "saber" | "nivel" = !hasSaber && hasNivel ? "saber" : "nivel";
+    const isSelectionInProgress = (hasSaber && !hasNivel) || (!hasSaber && hasNivel);
+    const pendingSelectionType: "saber" | "nivel" = !hasSaber && hasNivel ? "saber" : "nivel";
     const isReadyToNavigate = hasSaber && hasNivel;
+    const isSaberSummaryMode = isSelectionInProgress && pendingSelectionType === "nivel";
+    const isNivelSummaryMode = isSelectionInProgress && pendingSelectionType === "saber";
     const selectedSaberData = SABERES.find((saber) => saber.id === selectedSaber);
     const selectedNivelData = NIVELES.find((nivel) => nivel.id === selectedNivel);
     const SelectedSaberIcon = selectedSaberData ? IconMap[selectedSaberData.icon] ?? Calculator : Calculator;
 
+    // Manejar la navegación con un pequeño retraso para mostrar la pantalla de carga
     useEffect(() => {
+        // Si ya hay un timeout programado, limpiarlo
         if (navigationTimeoutRef.current) {
             clearTimeout(navigationTimeoutRef.current);
             navigationTimeoutRef.current = null;
         }
 
+        // Solo navegar si tanto saber como nivel están seleccionados
         if (!selectedSaber || !selectedNivel) {
             return;
         }
 
+        // Programar un pequeño delay antes de navegar a la página de resultados
         navigationTimeoutRef.current = setTimeout(() => {
             router.push(`/formacion/pildoras/${selectedSaber}/${selectedNivel}`);
         }, 500);
@@ -70,152 +76,145 @@ export default function PildorasPage() {
     }, [selectedSaber, selectedNivel, router]);
 
     const saberCard = (
-        <motion.div
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            {...cardMotionProps}
-        >
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <motion.div layout className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+            <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
-                Elige un Saber
-            </h2>
-            {isPartialStep && frontCard === "saber" && (
-                <p className="text-sm text-primary font-medium mb-4">
-                    Ahora, escoge el saber para continuar.
-                </p>
-            )}
-            <div className="space-y-3">
-                {SABERES.map((saber) => {
-                    const Icon = IconMap[saber.icon];
-                    const isSelected = selectedSaber === saber.id;
-                    return (
-                        <button
-                            key={saber.id}
-                            onClick={() => setSelectedSaber(saber.id)}
-                            className={clsx(
-                                "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group",
-                                isSelected
-                                    ? "border-primary bg-primary/5 shadow-md"
-                                    : "border-gray-100 hover:border-primary/50 hover:bg-gray-50"
-                            )}
+                {isSaberSummaryMode ? "Has elegido:" : "Elige un Saber"}
+            </motion.h2>
+            <AnimatePresence mode="wait" initial={false}>
+                {isSaberSummaryMode ? (
+                    <motion.button
+                        key="saber-summary"
+                        type="button"
+                        onClick={() => setSelectedSaber(null)}
+                        className="w-full text-left"
+                        {...cardContentMotionProps}
+                    >
+                        <div
+                            className="w-full text-left my-2 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
                         >
                             <div
-                                className={clsx(
-                                    "p-2 rounded-lg transition-colors",
-                                    isSelected ? "bg-white text-primary" : saber.color
-                                )}
+                                className={clsx("p-2 rounded-lg transition-colors", selectedSaberData?.color || "bg-gray-100 text-text-secondary")}
                             >
-                                <Icon size={24} />
+                                <SelectedSaberIcon size={24} />
                             </div>
                             <div className="flex-1">
-                                <h3 className={clsx("font-bold", isSelected ? "text-primary" : "")}>{saber.title}</h3>
-                                <p className="text-sm text-text-secondary">{saber.description}</p>
+                                <h3 className="font-bold">{selectedSaberData?.title}</h3>
+                                <p className="text-sm text-text-secondary">{selectedSaberData?.description}</p>
                             </div>
-                            {isSelected && <CheckCircle2 className="text-primary" size={24} />}
-                        </button>
-                    );
-                })}
-            </div>
+                            <CheckCircle2 className="text-primary" size={24} />
+                        </div>
+                        <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
+                    </motion.button>
+                ) : (
+                    <motion.div key="saber-selection" {...cardContentMotionProps}>
+                        {isSelectionInProgress && pendingSelectionType === "saber" && (
+                            <motion.p layout className="text-sm text-primary font-medium mb-4">
+                                Ahora, escoge el saber para continuar.
+                            </motion.p>
+                        )}
+                        <motion.div layout className="space-y-3">
+                            {SABERES.map((saber) => {
+                                const Icon = IconMap[saber.icon];
+                                const isSelected = selectedSaber === saber.id;
+                                return (
+                                    <motion.button
+                                        layout
+                                        key={saber.id}
+                                        onClick={() => setSelectedSaber(saber.id)}
+                                        className="w-full text-left bg-white p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 border-gray-100 hover:border-primary/50 hover:bg-gray-50"
+                                    >
+                                        <div
+                                            className={clsx(
+                                                "p-2 rounded-lg transition-colors",
+                                                isSelected ? "bg-white text-primary" : saber.color
+                                            )}
+                                        >
+                                            <Icon size={24} />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className={clsx("font-bold", isSelected ? "text-primary" : "")}>{saber.title}</h3>
+                                            <p className="text-sm text-text-secondary">{saber.description}</p>
+                                        </div>
+                                        {isSelected && <CheckCircle2 className="text-primary" size={24} />}
+                                    </motion.button>
+                                );
+                            })}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 
     const nivelCard = (
-        <motion.div
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6"
-            {...cardMotionProps}
-        >
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <motion.div layout className="bg-white rounded-2xl min-h-56 shadow-sm border border-gray-100 p-6 overflow-hidden">
+            <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
-                Elige un Nivel
-            </h2>
-            {isPartialStep && frontCard === "nivel" && (
-                <p className="text-sm text-secondary font-medium mb-4">
-                    Ahora, escoge el nivel para continuar.
-                </p>
-            )}
-            <div className="space-y-3">
-                {NIVELES.map((nivel) => {
-                    const isSelected = selectedNivel === nivel.id;
-                    return (
-                        <button
-                            key={nivel.id}
-                            onClick={() => setSelectedNivel(nivel.id)}
-                            className={clsx(
-                                "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4",
-                                isSelected
-                                    ? "border-secondary bg-secondary/5 shadow-md"
-                                    : "border-gray-100 hover:border-secondary/50 hover:bg-gray-50"
-                            )}
+                {isNivelSummaryMode ? "Has elegido:" : "Elige un Nivel"}
+            </motion.h2>
+            <AnimatePresence mode="wait" initial={false}>
+                {isNivelSummaryMode ? (
+                    <motion.button
+                        layout
+                        key="nivel-summary"
+                        type="button"
+                        onClick={() => setSelectedNivel(null)}
+                        className="w-full text-left"
+                        {...cardContentMotionProps}
+                    >
+                        <div
+                            className="w-full text-left my-2 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-secondary/50 shadow-sm"
                         >
-                            <div
-                                className={clsx(
-                                    "p-2 rounded-lg bg-gray-100 text-text-secondary",
-                                    isSelected && "bg-white text-secondary"
-                                )}
-                            >
+                            <div className="p-2 rounded-lg transition-colors bg-secondary/20 text-secondary">
                                 <GraduationCap size={24} />
                             </div>
                             <div className="flex-1">
-                                <h3 className={clsx("font-bold", isSelected ? "text-secondary" : "")}>{nivel.title}</h3>
-                                <p className="text-sm text-text-secondary">{nivel.description}</p>
+                                <h3 className="font-bold">{selectedNivelData?.title}</h3>
+                                <p className="text-sm text-text-secondary">{selectedNivelData?.description}</p>
                             </div>
-                            {isSelected && <CheckCircle2 className="text-secondary" size={24} />}
-                        </button>
-                    );
-                })}
-            </div>
+                            <CheckCircle2 className="text-secondary" size={24} />
+                        </div>
+                        <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
+                    </motion.button>
+                ) : (
+                    <div key="nivel-selection" {...cardContentMotionProps}>
+                        {isSelectionInProgress && pendingSelectionType === "nivel" && (
+                            <p className="text-sm text-secondary font-medium mb-4">
+                                Ahora, escoge el nivel para continuar.
+                            </p>
+                        )}
+                        <motion.div layout className="space-y-3">
+                            {NIVELES.map((nivel) => {
+                                const isSelected = selectedNivel === nivel.id;
+                                return (
+                                    <button
+                                        key={nivel.id}
+                                        onClick={() => setSelectedNivel(nivel.id)}
+                                        
+                                        className="w-full text-left bg-white p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 border-gray-100 hover:border-secondary/50 hover:bg-gray-50"
+                                    >
+                                        <div
+                                            className={clsx(
+                                                "p-2 rounded-lg bg-gray-100 text-text-secondary",
+                                                isSelected && "bg-white text-secondary"
+                                            )}
+                                        >
+                                            <GraduationCap size={24} />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className={clsx("font-bold", isSelected ? "text-secondary" : "")}>{nivel.title}</h3>
+                                            <p className="text-sm text-text-secondary">{nivel.description}</p>
+                                        </div>
+                                        {isSelected && <CheckCircle2 className="text-secondary" size={24} />}
+                                    </button>
+                                );
+                            })}
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </motion.div>
-    );
-
-    const saberBackCard = (
-        <motion.button
-            type="button"
-            onClick={() => setSelectedSaber(null)}
-            className="w-full text-left bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md"
-        >
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm">1</span>
-                Has elegido:
-            </h2>
-            <div
-                className="w-full text-left my-4 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
-            >
-                <div
-                    className={clsx("p-2 rounded-lg transition-colors", selectedSaberData?.color || "bg-gray-100 text-text-secondary")}
-                >
-                    <SelectedSaberIcon size={24} />
-                </div>
-                <div className="flex-1">
-                    <h3 className="font-bold">{selectedSaberData?.title}</h3>
-                    <p className="text-sm text-text-secondary">{selectedSaberData?.description}</p>
-                </div>
-            </div>
-            <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
-        </motion.button>
-    );
-
-    const nivelBackCard = (
-        <button
-            type="button"
-            onClick={() => setSelectedNivel(null)}
-            className="w-full text-left bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md"
-        >
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-secondary text-sm">2</span>
-                Has elegido:
-            </h2>
-            <div
-                className="w-full text-left my-4 p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group border-primary/50 shadow-sm"
-            >
-                <div className="p-2 rounded-lg transition-colors bg-secondary/20 text-secondary">
-                    <GraduationCap size={24} />
-                </div>
-                <div className="flex-1">
-                    <h3 className="font-bold">{selectedNivelData?.title}</h3>
-                    <p className="text-sm text-text-secondary">{selectedNivelData?.description}</p>
-                </div>
-            </div>
-            <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
-        </button>
     );
 
     return (
@@ -234,19 +233,10 @@ export default function PildorasPage() {
                     </p>
                 </div>
 
-                {!isPartialStep ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                        {saberCard}
-                        {nivelCard}
-                    </div>
-                ) : (
-                    <div className="mb-12">
-                        <div className="max-w-[760px] mx-auto flex flex-col gap-4 transition-all duration-300">
-                            {frontCard === "saber" ? saberCard : nivelCard}
-                            {frontCard === "saber" ? nivelBackCard : saberBackCard}
-                        </div>
-                    </div>
-                )}
+                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 md:items-start gap-8 mb-12">
+                    {saberCard}
+                    {nivelCard}
+                </motion.div>
             </div>
         </div>
     );
