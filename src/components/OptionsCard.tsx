@@ -13,6 +13,7 @@ interface Option {
 
 interface OptionsCardProps {
     title: string;
+    number?: string | number;
     themeColor?: "primary" | "secondary" | "accent";
     extraInfo?: string;
 }
@@ -38,8 +39,7 @@ const ThemeMap = {
     }
 };
 
-export default function OptionsCard({ title, themeColor = "primary", extraInfo }: OptionsCardProps) {
-    const color = themeColor || "primary";
+export default function OptionsCard({ title, number = "", themeColor = "primary", extraInfo }: OptionsCardProps) {
 
     const allOptions: Option[] = [
         { id: 1, icon: 'Calculator', label: 'Aritmética', color: "bg-blue-100 text-blue-600", description: "Domina los números y las operaciones básicas." },
@@ -71,15 +71,15 @@ export default function OptionsCard({ title, themeColor = "primary", extraInfo }
         : allOptions;
 
     return (
-        <motion.div layout className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden">
+        <motion.div layout className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden" transition={{ duration: 0.3 }}>
             <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <span className={clsx("flex items-center justify-center w-8 h-8 rounded-full text-sm", theme.bg, theme.text)}>1</span>
+                <motion.span layout className={clsx("flex items-center justify-center w-8 h-8 rounded-full text-sm", theme.bg, theme.text)}>{number}</motion.span>
                 {isOptionSelected ? `Has elegido:` : `Elige ${title}`}
             </motion.h2>
             <AnimatePresence mode="wait" initial={false}>
-                <motion.div key="selection" initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                <motion.div key="selection" layout>
                     {extraInfo && (
-                        <motion.p layout className={clsx(`text-sm text-${color} font-medium mb-4`)}>
+                        <motion.p layout className={clsx("text-sm font-medium mb-4", theme.text)}>
                             {extraInfo}
                         </motion.p>
                     )}
@@ -95,25 +95,32 @@ export default function OptionsCard({ title, themeColor = "primary", extraInfo }
                                     key={option.id}
                                     onClick={() => handleOptionClick(option.id)}
                                     className={clsx(
-                                        "w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-4 group",
-                                        theme.hover,
-                                        isThisSelected ? theme.border : `bg-white border-gray-100 hover:bg-gray-50`
-                                    )}                                >
-                                    <div className={clsx(
-                                        "p-2 rounded-lg transition-colors", option.color
-                                    )}>
-                                        <IconComponent size={24} />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className={clsx("font-bold", isThisSelected ? theme.text : "")}>{option.label}</h3>
-                                        <p className="text-sm text-text-secondary">{option.description}</p>
-                                    </div>
-                                    {isThisSelected && <CheckCircle2 className={clsx(`text-${color}`)} size={24} />}
-                                    
+                                        "w-full text-left bg-white",
+                                        isThisSelected ? theme.border : `border-gray-100 hover:bg-gray-50`
+                                    )}
+                                    animate
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <motion.div layout className={clsx("w-full text-left my-1 p-4 rounded-xl border-2 flex items-center gap-4 group", theme.hover, isThisSelected ? theme.border : `border-gray-100 hover:bg-gray-50`)}>
+                                        <div className={clsx(
+                                            "p-2 rounded-lg transition-colors", option.color
+                                        )}>
+                                            <IconComponent size={24} />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="font-bold">{option.label}</h3>
+                                            <p className="text-sm text-text-secondary">{option.description}</p>
+                                        </div>
+                                        <div>
+                                            <CheckCircle2 className={clsx(isThisSelected ? theme.text : "text-transparent")} size={24} />
+                                        </div>
+                                    </motion.div>
+                                    {isOptionSelected &&
+                                        <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
+                                    }
                                 </motion.button>
                             );
                         })}
-                        {isOptionSelected && <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>}
                     </motion.div>
                 </motion.div>
             </AnimatePresence>
