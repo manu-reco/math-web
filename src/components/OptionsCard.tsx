@@ -71,22 +71,42 @@ export default function OptionsCard({ title, number = "", themeColor = "primary"
         : allOptions;
 
     return (
-        <motion.div layout className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden" transition={{ duration: 0.3 }}>
+        <motion.div
+            layout
+            className="bg-white min-h-56 rounded-2xl shadow-sm border border-gray-100 p-6 overflow-hidden"
+            transition={{ layout: { duration: 0.25 }, duration: 0.2 }}
+        >
             <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <motion.span layout className={clsx("flex items-center justify-center w-8 h-8 rounded-full text-sm", theme.bg, theme.text)}>{number}</motion.span>
                 {isOptionSelected ? `Has elegido:` : `Elige ${title}`}
             </motion.h2>
-            <AnimatePresence mode="wait" initial={false}>
-                <motion.div key="selection" layout>
-                    {extraInfo && (
-                        <motion.p layout className={clsx("text-sm font-medium mb-4", theme.text)}>
+
+            <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                    key={isOptionSelected ? "summary" : "selection"}
+                    layout
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -18 }}
+                    transition={{ duration: 0.24 }}
+                >
+                    {extraInfo && !isOptionSelected && (
+                        <motion.p
+                            layout
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.2 }}
+                            className={clsx("text-sm font-medium mb-4", theme.text)}
+                        >
                             {extraInfo}
                         </motion.p>
                     )}
+
                     <motion.div layout className="space-y-3">
                         {visibleOptions.map((option) => {
                             const Icon = IconMap[option.icon as string] || Circle;
-                            const IconComponent = Icon || Circle; // Fallback si no se encuentra el icono en IconMap
+                            const IconComponent = Icon || Circle;
                             const isThisSelected = selectedId === option.id;
 
                             return (
@@ -96,28 +116,40 @@ export default function OptionsCard({ title, number = "", themeColor = "primary"
                                     onClick={() => handleOptionClick(option.id)}
                                     className={clsx(
                                         "w-full text-left bg-white",
-                                        isThisSelected ? theme.border : `border-gray-100 hover:bg-gray-50`
+                                        isThisSelected ? theme.border : "border-gray-100 hover:bg-gray-50"
                                     )}
-                                    animate
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ layout: { duration: 0.2 }, duration: 0.18 }}
                                 >
-                                    <motion.div layout className={clsx("w-full text-left my-1 p-4 rounded-xl border-2 flex items-center gap-4 group", theme.hover, isThisSelected ? theme.border : `border-gray-100 hover:bg-gray-50`)}>
-                                        <div className={clsx(
-                                            "p-2 rounded-lg transition-colors", option.color
-                                        )}>
+                                    <motion.div
+                                        layout
+                                        className={clsx(
+                                            "w-full text-left my-1 p-4 rounded-xl border-2 flex items-center gap-4 group",
+                                            theme.hover,
+                                            isThisSelected ? theme.border : "border-gray-100 hover:bg-gray-50"
+                                        )}
+                                    >
+                                        <div className={clsx("p-2 rounded-lg transition-colors", option.color)}>
                                             <IconComponent size={24} />
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="font-bold">{option.label}</h3>
-                                            <p className="text-sm text-text-secondary">{option.description}</p>
+                                            <motion.h3 layout className="font-bold">{option.label}</motion.h3>
+                                            <motion.p layout className="text-sm text-text-secondary">{option.description}</motion.p>
                                         </div>
-                                        <div>
-                                            <CheckCircle2 className={clsx(isThisSelected ? theme.text : "text-transparent")} size={24} />
-                                        </div>
+                                        <CheckCircle2 className={clsx(isThisSelected ? theme.text : "text-transparent")} size={24} />
                                     </motion.div>
-                                    {isOptionSelected &&
-                                        <p className="text-sm text-text-secondary mt-1">Pulsa para volver y cambiar la selección.</p>
-                                    }
+
+                                    {isOptionSelected && (
+                                        <motion.p
+                                            layout
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: "auto" }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="text-sm text-text-secondary mt-1 overflow-hidden"
+                                        >
+                                            Pulsa para volver y cambiar la selección.
+                                        </motion.p>
+                                    )}
                                 </motion.button>
                             );
                         })}
