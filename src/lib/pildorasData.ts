@@ -1,15 +1,18 @@
 
+import { BarChart3, BrainCircuit, Calculator, Ruler, Shapes } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
 export type Saber = {
     id: string;
-    title: string; // e.g., "Aritmética"
-    icon: string; // Name of the icon to use
+    title: string;
+    icon: LucideIcon;
     color: string; // Tailwind color class
     description: string;
 };
 
 export type Nivel = {
     id: string;
-    title: string; // e.g., "Primeros pasos"
+    title: string;
     description: string;
 };
 
@@ -29,35 +32,35 @@ export const SABERES: Saber[] = [
     {
         id: "aritmetica",
         title: "Aritmética",
-        icon: "Calculator",
+        icon: Calculator,
         color: "bg-blue-100 text-blue-600",
         description: "Domina los números y las operaciones básicas.",
     },
     {
         id: "geometria",
         title: "Geometría",
-        icon: "Shapes",
+        icon: Shapes,
         color: "bg-green-100 text-green-600",
         description: "Explora formas, espacios y dimensiones.",
     },
     {
         id: "problemas",
         title: "Problemas",
-        icon: "BrainCircuit",
+        icon: BrainCircuit,
         color: "bg-purple-100 text-purple-600",
         description: "Desarrolla el pensamiento lógico y la resolución.",
     },
     {
         id: "medidas",
         title: "Medidas",
-        icon: "Ruler",
+        icon: Ruler,
         color: "bg-orange-100 text-orange-600",
         description: "Aprende a medir el mundo que te rodea.",
     },
     {
         id: "probabilidad",
         title: "Probabilidad y Estadística",
-        icon: "BarChart3",
+        icon: BarChart3,
         color: "bg-red-100 text-red-600",
         description: "Analiza datos y predice resultados.",
     },

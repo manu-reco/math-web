@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { BarChart3, BrainCircuit, Calculator, CheckCircle2, Circle, GraduationCap, Ruler, Shapes } from "lucide-react";
+import { CheckCircle2, Circle } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import type { ComponentType } from "react";
 
 export interface OptionsCardOption {
     id: string;
-    icon?: string;
+    icon?: ComponentType<{ size: number }>;
     label: string;
     color?: string;
     description?: string;
@@ -60,16 +61,6 @@ export default function OptionsCard({
     selectedId,
     onSelectionChange,
 }: OptionsCardProps) {
-
-    const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
-        Calculator,
-        Shapes,
-        BrainCircuit,
-        Ruler,
-        BarChart3,
-        GraduationCap,
-    };
-
     const isOptionSelected = selectedId !== null;
     const theme = ThemeMap[themeColor];
 
@@ -118,8 +109,7 @@ export default function OptionsCard({
 
                     <motion.div layout className="space-y-3">
                         {visibleOptions.map((option) => {
-                            const Icon = IconMap[option.icon as string] || Circle;
-                            const IconComponent = Icon || Circle;
+                            const IconComponent = option.icon || Circle;
                             const isThisSelected = selectedId === option.id;
 
                             return (
