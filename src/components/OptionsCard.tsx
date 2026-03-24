@@ -1,10 +1,9 @@
 import clsx from "clsx";
-import { BarChart3, BrainCircuit, Calculator, CheckCircle2, Circle, Ruler, Shapes } from "lucide-react";
+import { BarChart3, BrainCircuit, Calculator, CheckCircle2, Circle, GraduationCap, Ruler, Shapes } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
 
-interface Option {
-    id: number;
+export interface OptionsCardOption {
+    id: string;
     icon?: string;
     label: string;
     color?: string;
@@ -16,6 +15,9 @@ interface OptionsCardProps {
     number?: string | number;
     themeColor?: "primary" | "secondary" | "accent";
     extraInfo?: string;
+    options: OptionsCardOption[];
+    selectedId: string | null;
+    onSelectionChange: (selectedId: string | null) => void;
 }
 
 const ThemeMap = {
@@ -39,14 +41,25 @@ const ThemeMap = {
     }
 };
 
-export default function OptionsCard({ title, number = "", themeColor = "primary", extraInfo }: OptionsCardProps) {
-
-    const allOptions: Option[] = [
-        { id: 1, icon: 'Calculator', label: 'Aritmética', color: "bg-blue-100 text-blue-600", description: "Domina los números y las operaciones básicas." },
-        { id: 2, icon: 'Shapes', label: 'Geometría', color: "bg-green-100 text-green-600", description: "Explora formas, espacios y dimensiones." },
-        { id: 3, icon: 'BrainCircuit', label: 'Problemas', color: "bg-purple-100 text-purple-600", description: "Desarrolla el pensamiento lógico y la resolución de problemas." },
-        { id: 4, icon: 'Ruler', label: 'Medidas', color: "bg-orange-100 text-orange-600", description: "Aprende a medir el mundo que te rodea." },
-    ];
+/**
+ * Selection card component used in the Pildoras page to choose between Saberes and Niveles. It displays a list of options, each with an icon, label, description, and color. When an option is selected, it shows only that option and changes the title to indicate the selection. Clicking the selected option again will reset the selection and show all options.
+ * @param title - The title of the card, shown when no option is selected.
+ * @param number - An optional number or string to display in a colored circle next to the title.
+ * @param themeColor - The color theme for the card, which affects the colors of the title, borders, and hover states. It can be "primary", "secondary", or "accent".
+ * @param extraInfo - Additional information text shown below the title when no option is selected.
+ * @param options - An array of options to display, each with an id and label, and optionally an icon, color, and description.
+ * @param selectedId - The id of the currently selected option, or null if no option is selected.
+ * @param onSelectionChange - A callback function that is called when an option is clicked, with the id of the selected option or null if the selection is cleared.
+ */
+export default function OptionsCard({
+    title,
+    number = "",
+    themeColor = "primary",
+    extraInfo,
+    options,
+    selectedId,
+    onSelectionChange,
+}: OptionsCardProps) {
 
     const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
         Calculator,
@@ -54,21 +67,21 @@ export default function OptionsCard({ title, number = "", themeColor = "primary"
         BrainCircuit,
         Ruler,
         BarChart3,
+        GraduationCap,
     };
 
-    const [selectedId, setSelectedId] = useState<number | null>(null);
     const isOptionSelected = selectedId !== null;
     const theme = ThemeMap[themeColor];
 
     // Si se selecciona una opción, se muestra solo esa; si se vuelve a clicar, se muestran todas
-    const handleOptionClick = (id: number): void => {
-        setSelectedId(prevId => (prevId === id ? null : id));
+    const handleOptionClick = (id: string): void => {
+        onSelectionChange(selectedId === id ? null : id);
     };
 
     // Filtramos las opciones basándonos en el estado
     const visibleOptions = selectedId
-        ? allOptions.filter((option) => option.id === selectedId)
-        : allOptions;
+        ? options.filter((option) => option.id === selectedId)
+        : options;
 
     return (
         <motion.div
@@ -78,7 +91,7 @@ export default function OptionsCard({ title, number = "", themeColor = "primary"
         >
             <motion.h2 layout className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <motion.span layout className={clsx("flex items-center justify-center w-8 h-8 rounded-full text-sm", theme.bg, theme.text)}>{number}</motion.span>
-                {isOptionSelected ? `Has elegido:` : `Elige ${title}`}
+                {isOptionSelected ? `Has elegido:` : title}
             </motion.h2>
 
             <AnimatePresence mode="popLayout" initial={false}>
