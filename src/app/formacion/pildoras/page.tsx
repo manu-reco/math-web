@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { GraduationCap } from "lucide-react";
 import { NIVELES, SABERES } from "@/lib/pildorasData";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import OptionsCard, { type OptionsCardOption } from "@/components/OptionsCard";
@@ -32,9 +31,9 @@ export default function PildorasPage() {
         () =>
             NIVELES.map((nivel) => ({
                 id: nivel.id,
-                icon: GraduationCap,
+                icon: nivel.icon, 
                 label: nivel.title,
-                color: "bg-secondary/20 text-secondary",
+                color: nivel.color, 
                 description: nivel.description,
             })),
         []

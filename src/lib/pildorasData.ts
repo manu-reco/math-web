@@ -1,18 +1,12 @@
 
-import { BarChart3, BrainCircuit, Calculator, Ruler, Shapes } from "lucide-react";
+import { Baby, BarChart3, BrainCircuit, Calculator, GraduationCap, Ruler, School, Shapes } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export type Saber = {
+export type LearningTrackOption = {
     id: string;
     title: string;
     icon: LucideIcon;
-    color: string; // Tailwind color class
-    description: string;
-};
-
-export type Nivel = {
-    id: string;
-    title: string;
+    color: string;
     description: string;
 };
 
@@ -28,7 +22,7 @@ export type Chapter = {
     articles: Article[];
 };
 
-export const SABERES: Saber[] = [
+export const SABERES: LearningTrackOption[] = [
     {
         id: "aritmetica",
         title: "Aritmética",
@@ -66,20 +60,26 @@ export const SABERES: Saber[] = [
     },
 ];
 
-export const NIVELES: Nivel[] = [
+export const NIVELES: LearningTrackOption[] = [
     {
         id: "primeros-pasos",
         title: "Primeros Pasos",
+        icon: Baby,
+        color: "bg-emerald-100 text-emerald-700",
         description: "Infantil y 1º ciclo de Primaria",
     },
     {
         id: "segundo-ciclo",
         title: "Segundo Ciclo",
+        icon: School,
+        color: "bg-sky-100 text-sky-700",
         description: "3º y 4º de Primaria",
     },
     {
         id: "tercer-ciclo",
         title: "Tercer Ciclo",
+        icon: GraduationCap,
+        color: "bg-indigo-100 text-indigo-700",
         description: "5º y 6º de Primaria",
     },
 ];
