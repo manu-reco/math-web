@@ -1,15 +1,12 @@
 
-export type Saber = {
-    id: string;
-    title: string; // e.g., "Aritmética"
-    icon: string; // Name of the icon to use
-    color: string; // Tailwind color class
-    description: string;
-};
+import { Baby, BarChart3, BrainCircuit, Calculator, GraduationCap, Ruler, School, Shapes } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-export type Nivel = {
+export type LearningTrackOption = {
     id: string;
-    title: string; // e.g., "Primeros pasos"
+    title: string;
+    icon: LucideIcon;
+    color: string;
     description: string;
 };
 
@@ -25,58 +22,64 @@ export type Chapter = {
     articles: Article[];
 };
 
-export const SABERES: Saber[] = [
+export const SABERES: LearningTrackOption[] = [
     {
         id: "aritmetica",
         title: "Aritmética",
-        icon: "Calculator",
+        icon: Calculator,
         color: "bg-blue-100 text-blue-600",
         description: "Domina los números y las operaciones básicas.",
     },
     {
         id: "geometria",
         title: "Geometría",
-        icon: "Shapes",
+        icon: Shapes,
         color: "bg-green-100 text-green-600",
         description: "Explora formas, espacios y dimensiones.",
     },
     {
         id: "problemas",
         title: "Problemas",
-        icon: "BrainCircuit",
+        icon: BrainCircuit,
         color: "bg-purple-100 text-purple-600",
         description: "Desarrolla el pensamiento lógico y la resolución.",
     },
     {
         id: "medidas",
         title: "Medidas",
-        icon: "Ruler",
+        icon: Ruler,
         color: "bg-orange-100 text-orange-600",
         description: "Aprende a medir el mundo que te rodea.",
     },
     {
         id: "probabilidad",
         title: "Probabilidad y Estadística",
-        icon: "BarChart3",
+        icon: BarChart3,
         color: "bg-red-100 text-red-600",
         description: "Analiza datos y predice resultados.",
     },
 ];
 
-export const NIVELES: Nivel[] = [
+export const NIVELES: LearningTrackOption[] = [
     {
         id: "primeros-pasos",
         title: "Primeros Pasos",
+        icon: Baby,
+        color: "bg-emerald-100 text-emerald-700",
         description: "Infantil y 1º ciclo de Primaria",
     },
     {
         id: "segundo-ciclo",
         title: "Segundo Ciclo",
+        icon: School,
+        color: "bg-sky-100 text-sky-700",
         description: "3º y 4º de Primaria",
     },
     {
         id: "tercer-ciclo",
         title: "Tercer Ciclo",
+        icon: GraduationCap,
+        color: "bg-indigo-100 text-indigo-700",
         description: "5º y 6º de Primaria",
     },
 ];

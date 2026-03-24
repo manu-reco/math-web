@@ -4,23 +4,10 @@ import { notFound } from "next/navigation";
 import {
     ArrowLeft,
     BookOpen,
-    ChevronRight,
-    Calculator,
-    Shapes,
-    BrainCircuit,
-    Ruler,
-    BarChart3
+    ChevronRight
 } from "lucide-react";
 import { SABERES, NIVELES, COURSE_CONTENT } from "@/lib/pildorasData";
 import { clsx } from "clsx";
-
-const IconMap: Record<string, React.ComponentType<{ size: number }>> = {
-    Calculator,
-    Shapes,
-    BrainCircuit,
-    Ruler,
-    BarChart3,
-};
 
 interface PageProps {
     params: Promise<{
@@ -61,7 +48,7 @@ export default async function SaberPage({ params }: PageProps) {
 
     const contentKey = `${saberId}-${nivelId}`;
     const chapters = COURSE_CONTENT[contentKey];
-    const Icon = IconMap[saber.icon];
+    const Icon = saber.icon;
 
     return (
         <div className="min-h-screen bg-slate-50 pb-20">
