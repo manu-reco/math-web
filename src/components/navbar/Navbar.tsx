@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const formacionItems: DropdownItem[] = [
     { label: "Formación Online", href: "/formacion/online" },
-    { label: "Formación Presencial", href: "/formacion/presencial" },
+    // { label: "Formación Presencial", href: "/formacion/presencial" }, (aun no disponible)
     { label: "Píldoras de formación (Gratis)", href: "/formacion/pildoras" },
 ];
 

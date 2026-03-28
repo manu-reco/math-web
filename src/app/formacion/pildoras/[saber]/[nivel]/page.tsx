@@ -20,16 +20,9 @@ interface PageProps {
 export async function generateStaticParams() {
     const params: { saber: string; nivel: string }[] = [];
 
-    for (const contentKey of Object.keys(COURSE_CONTENT)) {
-        for (const saber of SABERES) {
-            const prefix = `${saber.id}-`;
-            if (contentKey.startsWith(prefix)) {
-                const nivel = contentKey.slice(prefix.length);
-                if (NIVELES.some((n) => n.id === nivel)) {
-                    params.push({ saber: saber.id, nivel });
-                }
-                break;
-            }
+    for (const saber of SABERES) {
+        for (const nivel of NIVELES) {
+            params.push({ saber: saber.id, nivel: nivel.id });
         }
     }
 
