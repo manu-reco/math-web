@@ -8,7 +8,7 @@ import {
     ArticleImages
 } from "@/components/pildoras/ArticleComponents";
 
-import { findArticleById } from "@/lib/pildorasData";
+import { findArticleById } from "@/data/pildorasData";
 
 export default function SubitizacionTarjetasPuntosContent() {
     const article = findArticleById("subitizacion-tarjetas-puntos-1");

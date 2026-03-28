@@ -8,7 +8,7 @@ import {
     KeyPoints
 } from "@/components/pildoras/ArticleComponents";
 
-import { findArticleById } from "@/lib/pildorasData";
+import { findArticleById } from "@/data/pildorasData";
 
 export default function MayorMenorContent() {
     const article = findArticleById("mayor-menor");

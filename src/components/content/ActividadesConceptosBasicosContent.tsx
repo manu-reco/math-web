@@ -6,7 +6,7 @@ import {
     ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
-import { findArticleById } from "@/lib/pildorasData";
+import { findArticleById } from "@/data/pildorasData";
 
 
 export default function ActividadesConceptosBasicosContent() {

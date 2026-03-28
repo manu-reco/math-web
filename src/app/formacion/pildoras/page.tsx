@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { NIVELES, SABERES } from "@/lib/pildorasData";
+import { NIVELES, SABERES } from "@/data/pildorasData";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import OptionsCard, { type OptionsCardOption } from "@/components/OptionsCard";
 

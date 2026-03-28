@@ -6,7 +6,7 @@ import {
     BookOpen,
     ChevronRight
 } from "lucide-react";
-import { SABERES, NIVELES, COURSE_CONTENT } from "@/lib/pildorasData";
+import { SABERES, NIVELES, COURSE_CONTENT } from "@/data/pildorasData";
 import { clsx } from "clsx";
 
 interface PageProps {

@@ -1,4 +1,4 @@
-import { SABERES, NIVELES, COURSE_CONTENT } from "@/lib/pildorasData";
+import { SABERES, NIVELES, COURSE_CONTENT } from "@/data/pildorasData";
 import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";

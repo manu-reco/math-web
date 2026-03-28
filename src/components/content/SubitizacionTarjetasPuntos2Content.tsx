@@ -8,7 +8,7 @@ import {
     PdfButton
 } from "@/components/pildoras/ArticleComponents";
 
-import { findArticleById } from "@/lib/pildorasData";
+import { findArticleById } from "@/data/pildorasData";
 
 export default function SubitizacionTarjetasPuntos2Content() {
     const article = findArticleById("subitizacion-tarjetas-puntos-2");
