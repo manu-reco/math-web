@@ -14,6 +14,7 @@ export type Article = {
     id: string;
     title: string;
     subtitle: string;
+    isHidden?: boolean;
 };
 
 export type Chapter = {
@@ -92,6 +93,12 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
             title: "1. Conceptos básicos",
             articles: [
                 {
+                    id: "demo-article-components",
+                    title: "Componentes para artículos",
+                    subtitle: "Muestra todos los componentes y sus usos en una sola píldora.",
+                    isHidden: true,
+                },
+                {
                     id: "mayor-menor",
                     title: "Mayor que / Menor que",
                     subtitle: "Aprende a comparar cantidades.",
@@ -158,7 +165,6 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
         },
 
     ],
-    // Add more mock data as needed
 };
 
 // Función helper para encontrar un artículo por su ID en saberes y niveles

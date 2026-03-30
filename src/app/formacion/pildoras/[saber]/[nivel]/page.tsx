@@ -40,7 +40,12 @@ export default async function SaberPage({ params }: PageProps) {
     }
 
     const contentKey = `${saberId}-${nivelId}`;
-    const chapters = COURSE_CONTENT[contentKey];
+    const chapters = COURSE_CONTENT[contentKey]
+        ?.map((chapter) => ({
+            ...chapter,
+            articles: chapter.articles.filter((article) => !article.isHidden),
+        }))
+        .filter((chapter) => chapter.articles.length > 0);
     const Icon = saber.icon;
 
     return (
@@ -92,10 +97,10 @@ export default async function SaberPage({ params }: PageProps) {
                             ¡Vuelve pronto!
                         </p>
                         <Link
-                            href="/formacion/pildoras"
+                            href="/formacion/pildoras/aritmetica/primeros-pasos"
                             className="inline-block mt-6 px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-colors"
                         >
-                            Explorar otros temas
+                            Ir a &quot;Aritmética (Primeros Pasos)&quot;
                         </Link>
                     </div>
                 ) : (

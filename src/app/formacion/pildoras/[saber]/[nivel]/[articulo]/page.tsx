@@ -3,6 +3,7 @@ import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
 import DescubriendoRectaContent from "@/components/content/DescubriendoRectaContent";
+import DemoArticleComponentsContent from "@/components/content/DemoArticleComponentsContent";
 import SubitizacionTarjetasPuntos1Content from "@/components/content/SubitizacionTarjetasPuntos1Content";
 import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
@@ -11,6 +12,7 @@ import { ArticleNavigationButton } from "@/components/pildoras/ArticleComponents
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
+    "demo-article-components": DemoArticleComponentsContent,
     "mayor-menor": MayorMenorContent,
     "actividades-conceptos-basicos": ArticuloPruebaActividades,
     "conteo-recitativo": ConteoRecitativoContent,
@@ -66,11 +68,13 @@ export default async function ArticlePage({ params }: PageProps) {
     const saber = SABERES.find((s) => s.id === saberId);
     const nivel = NIVELES.find((n) => n.id === nivelId);
 
-    // Find the article in the data structure to get the title if needed, 
-    // though the content component usually has it.
-    // But we need to validate the URL.
     const contentKey = `${saberId}-${nivelId}`;
-    const chapters = COURSE_CONTENT[contentKey];
+    const chapters = COURSE_CONTENT[contentKey]
+        ?.map((chapter) => ({
+            ...chapter,
+            articles: chapter.articles.filter((article) => !article.isHidden),
+        }))
+        .filter((chapter) => chapter.articles.length > 0);
 
     let articleFound = false;
     if (chapters) {
@@ -106,7 +110,7 @@ export default async function ArticlePage({ params }: PageProps) {
         : undefined;
 
     return (
-        <div className="min-h-screen bg-white pb-20">
+        <div className="min-h-screen bg-primary/5 pb-20">
             <div className="mx-auto grid max-w-7xl lg:gap-8 px-4 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:px-8">
                 <div className="lg:py-8">
                     <ArticleSidebarNav
@@ -118,13 +122,13 @@ export default async function ArticlePage({ params }: PageProps) {
                 </div>
 
                 {/* Article Content */}
-                <article className="min-w-0 max-w-4xl py-8 md:py-12 mt-6 lg:mt-2">
+                <article className="min-w-0 max-w-4xl bg-white p-8 md:p-12 mt-6 lg:mt-2">
                     {ContentComponent ? (
                         <ContentComponent />
                     ) : (
                         <div className="text-center py-12 md:py-20">
                             <h1 className="text-2xl md:text-3xl font-bold mb-4 px-4">
-                                Contenido en Construcción
+                                Contenido en desarrollo
                             </h1>
                             <p className="text-base md:text-lg text-text-secondary mb-8 px-4">
                                 Estamos redactando este artículo para ti.
