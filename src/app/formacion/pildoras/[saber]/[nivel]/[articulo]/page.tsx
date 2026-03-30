@@ -1,4 +1,5 @@
-import { SABERES, NIVELES, COURSE_CONTENT } from "@/data/pildorasData";
+import { SABERES, NIVELES, COURSE_CONTENT, getVisibleTrackData, hasVisibleArticle } from "@/data/pildorasData";
+import { notFound } from "next/navigation";
 import MayorMenorContent from "@/components/content/MayorMenorContent";
 import ConteoRecitativoContent from "@/components/content/ConteoRecitativoContent";
 import ArticuloPruebaActividades from "@/components/content/ActividadesConceptosBasicosContent";
@@ -65,40 +66,17 @@ export default async function ArticlePage({ params }: PageProps) {
     const { saber: saberId, nivel: nivelId, articulo: articuloId } = await params;
 
     // Validate existence
-    const saber = SABERES.find((s) => s.id === saberId);
-    const nivel = NIVELES.find((n) => n.id === nivelId);
+    const { saber, nivel, visibleChapters } = getVisibleTrackData(saberId, nivelId);
 
-    const contentKey = `${saberId}-${nivelId}`;
-    const chapters = COURSE_CONTENT[contentKey]
-        ?.map((chapter) => ({
-            ...chapter,
-            articles: chapter.articles.filter((article) => !article.isHidden),
-        }))
-        .filter((chapter) => chapter.articles.length > 0);
+    const articleFound = hasVisibleArticle(visibleChapters, articuloId);
+    const hasRegisteredContent = Boolean(CONTENT_REGISTRY[articuloId]);
 
-    let articleFound = false;
-    if (chapters) {
-        for (const chapter of chapters) {
-            if (chapter.articles.find(a => a.id === articuloId)) {
-                articleFound = true;
-                break;
-            }
-        }
-    }
-
-    if (!saber || !nivel || !articleFound) {
-        // We might want to allow rendering if we have the component even if not in the list,
-        // but strict validation is better.
-        // However, for this demo, if I missed adding it to the list but have the component, let's show it.
-        // But I added them to the list in pildorasData.ts.
-        // So strict check is fine.
-        if (!CONTENT_REGISTRY[articuloId]) {
-            // If we don't have the component, we show a generic placeholder
-        }
+    if (!saber || !nivel || (!articleFound && !hasRegisteredContent)) {
+        notFound();
     }
 
     const ContentComponent = CONTENT_REGISTRY[articuloId];
-    const orderedArticles = chapters?.flatMap((chapter) => chapter.articles) ?? [];
+    const orderedArticles = visibleChapters?.flatMap((chapter) => chapter.articles) ?? [];
     const currentArticleIndex = orderedArticles.findIndex((article) => article.id === articuloId);
     const previousArticle = currentArticleIndex > 0 ? orderedArticles[currentArticleIndex - 1] : undefined;
     const nextArticle = currentArticleIndex >= 0 ? orderedArticles[currentArticleIndex + 1] : undefined;
@@ -114,7 +92,7 @@ export default async function ArticlePage({ params }: PageProps) {
             <div className="mx-auto grid max-w-7xl lg:gap-8 px-4 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:px-8">
                 <div className="lg:py-8">
                     <ArticleSidebarNav
-                        chapters={chapters ?? []}
+                        chapters={visibleChapters ?? []}
                         saberId={saberId}
                         nivelId={nivelId}
                         activeArticleId={articuloId}

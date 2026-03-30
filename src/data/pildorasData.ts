@@ -167,6 +167,30 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
     ],
 };
 
+// Función helper para obtener datos de saber, nivel y capítulos visibles (no ocultos) para una ruta dada
+export function getVisibleTrackData(saberId: string, nivelId: string): {
+    saber?: LearningTrackOption;
+    nivel?: LearningTrackOption;
+    visibleChapters?: Chapter[];
+} {
+    const saber = SABERES.find((item) => item.id === saberId);
+    const nivel = NIVELES.find((item) => item.id === nivelId);
+    const contentKey = `${saberId}-${nivelId}`;
+
+    const visibleChapters = COURSE_CONTENT[contentKey]
+        ?.map((chapter) => ({
+            ...chapter,
+            articles: chapter.articles.filter((article) => !article.isHidden),
+        }))
+        .filter((chapter) => chapter.articles.length > 0);
+
+    return { saber, nivel, visibleChapters };
+}
+
+export function hasVisibleArticle(chapters: Chapter[] | undefined, articleId: string): boolean {
+    return chapters?.some((chapter) => chapter.articles.some((article) => article.id === articleId)) ?? false;
+}
+
 // Función helper para encontrar un artículo por su ID en saberes y niveles
 export function findArticleById(articleId: string): Article | undefined {
     for (const chapters of Object.values(COURSE_CONTENT)) {

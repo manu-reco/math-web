@@ -6,7 +6,7 @@ import {
     BookOpen,
     ChevronRight
 } from "lucide-react";
-import { SABERES, NIVELES, COURSE_CONTENT } from "@/data/pildorasData";
+import { SABERES, NIVELES, getVisibleTrackData } from "@/data/pildorasData";
 import { clsx } from "clsx";
 
 interface PageProps {
@@ -32,20 +32,12 @@ export async function generateStaticParams() {
 export default async function SaberPage({ params }: PageProps) {
     const { saber: saberId, nivel: nivelId } = await params;
 
-    const saber = SABERES.find((s) => s.id === saberId);
-    const nivel = NIVELES.find((n) => n.id === nivelId);
+    const { saber, nivel, visibleChapters } = getVisibleTrackData(saberId, nivelId);
 
     if (!saber || !nivel) {
         notFound();
     }
 
-    const contentKey = `${saberId}-${nivelId}`;
-    const chapters = COURSE_CONTENT[contentKey]
-        ?.map((chapter) => ({
-            ...chapter,
-            articles: chapter.articles.filter((article) => !article.isHidden),
-        }))
-        .filter((chapter) => chapter.articles.length > 0);
     const Icon = saber.icon;
 
     return (
@@ -71,7 +63,7 @@ export default async function SaberPage({ params }: PageProps) {
                                     {nivel.title}
                                 </span>
                                 <span className="text-gray-400">•</span>
-                                <span className="text-text-secondary text-sm">{chapters ? `${chapters.length} Capítulos` : "Próximamente"}</span>
+                                <span className="text-text-secondary text-sm">{visibleChapters ? `${visibleChapters.length} Capítulos` : "Próximamente"}</span>
                             </div>
                             <h1 className="text-4xl font-extrabold text-text mb-2">
                                 {saber.title}
@@ -86,7 +78,7 @@ export default async function SaberPage({ params }: PageProps) {
 
             {/* Content */}
             <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 mt-8 md:mt-12">
-                {!chapters ? (
+                {!visibleChapters ? (
                     <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
                         <div className="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                             <BookOpen size={32} className="text-gray-400" />
@@ -105,7 +97,7 @@ export default async function SaberPage({ params }: PageProps) {
                     </div>
                 ) : (
                     <div className="grid gap-6 md:gap-8">
-                        {chapters.map((chapter, index) => (
+                        {visibleChapters.map((chapter, index) => (
                             <div key={chapter.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="p-4 md:p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
                                     <h2 className="text-xl font-bold text-text flex items-center gap-3">
