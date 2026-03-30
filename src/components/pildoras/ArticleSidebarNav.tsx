@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 type NavArticle = {
     id: string;
     title: string;
+    isHidden?: boolean;
 };
 
 type NavChapter = {
@@ -49,14 +50,14 @@ export default function ArticleSidebarNav({
     }, [isDrawerOpen]);
 
     const renderNav = () => (
-        <nav aria-label="Temario de artículos" className="space-y-6">
+        <nav aria-label="Temario de artículos" className="space-y-6 text-md">
             {chapters.map((chapter) => (
                 <section key={chapter.id} className="space-y-2">
-                    <h3 className="text-sm font-semibold text-text-primary">
+                    <h3 className="text-lg font-semibold text-text-primary">
                         {chapter.title}
                     </h3>
                     <ul className="space-y-1">
-                        {chapter.articles.map((article) => {
+                        {chapter.articles.filter((article) => !article.isHidden).map((article) => {
                             const isActive = article.id === activeArticleId;
 
                             return (
@@ -64,7 +65,7 @@ export default function ArticleSidebarNav({
                                     <Link
                                         href={`/formacion/pildoras/${saberId}/${nivelId}/${article.id}`}
                                         onClick={() => setIsDrawerOpen(false)}
-                                        className={`block rounded-md px-3 py-2 text-sm transition-colors ${isActive
+                                        className={`block rounded-md px-3 py-2 transition-colors ${isActive
                                             ? "bg-primary/10 text-primary font-medium"
                                             : "text-text-secondary hover:bg-gray-50 hover:text-text-primary"
                                             }`}
@@ -144,7 +145,7 @@ export default function ArticleSidebarNav({
                     Volver al temario
                 </Link>
 
-                <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+                <div className="min-h-0 text-md flex-1 overflow-y-auto pr-1">
                     {renderNav()}
                 </div>
             </aside>

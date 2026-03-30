@@ -100,7 +100,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 </div>
 
                 {/* Article Content */}
-                <article className="min-w-0 max-w-4xl bg-white p-8 md:p-12 mt-6 lg:mt-2">
+                <article className="min-w-0 max-w-4xl bg-white rounded-xl p-8 md:p-12 mt-6 lg:mt-2">
                     {ContentComponent ? (
                         <ContentComponent />
                     ) : (
