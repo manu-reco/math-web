@@ -36,6 +36,7 @@ import {
 
 import conceptsData from '@/data/concepts.json';
 import { withBasePath } from "@/lib/assetPath";
+import { SABERES, NIVELES } from "@/data/pildorasData";
 import { clsx } from "clsx";
 
 interface ArticleHeaderProps {
@@ -47,13 +48,26 @@ interface ArticleHeaderProps {
 }
 
 export function ArticleHeader({ title, subtitle, description, category, level }: ArticleHeaderProps) {
+    const saber = SABERES.find((item) => item.title.toLowerCase() === category.toLowerCase());
+    const nivel = NIVELES.find((item) => item.title.toLowerCase() === level.toLowerCase());
+    const temarioHref = saber && nivel
+        ? `/formacion/pildoras/${saber.id}/${nivel.id}`
+        : null;
+
     return (
         <header className="mb-12 border-b border-gray-100 pb-8">
-            <div className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider">
-                <span>{category}</span>
-                <span className="text-gray-400">•</span>
-                <span>{level}</span>
-            </div>
+            {temarioHref ? (
+                <Link
+                    href={temarioHref}
+                    className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider underline underline-offset-4 hover:text-primary/80 transition-colors"
+                >
+                    <span>{category} • {level}</span>
+                </Link>
+            ) : (
+                <div className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider">
+                    <span>{category} • {level}</span>
+                </div>
+            )}
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
                 {title}
             </h1>

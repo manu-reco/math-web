@@ -43,7 +43,8 @@ export default async function SaberPage({ params }: PageProps) {
     return (
         <div className="min-h-screen bg-slate-50 pb-20">
             {/* Header */}
-            <div className={clsx("w-full py-8 md:py-12 px-6 sm:px-8 lg:px-12 shadow-sm", saber.color.replace("text-", "bg-").replace("100", "50"))}>
+            {/* Toma el color del saber para usarlo como fondo, con un matiz más claro y sin cambiar el color del texto */}
+            <div className={clsx("w-full py-8 md:py-12 px-6 sm:px-8 lg:px-12 shadow-sm", saber.color.replace("100", "50").replace(/text-[^\s]+/g, ""))}>
                 <div className="max-w-5xl mx-auto">
                     <Link
                         href="/formacion/pildoras"
