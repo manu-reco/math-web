@@ -149,6 +149,7 @@ export default function SubitizacionPage() {
                         </Link>
                     ) : (
                         <button
+                            type="button"
                             onClick={handleBack}
                             className="text-primary hover:text-primary-hover font-medium mb-2 inline-block hover:cursor-pointer"
                         >

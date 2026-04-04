@@ -94,8 +94,11 @@ export default function ContactPage() {
                                         Nombre
                                     </label>
                                     <input
+                                        name="firstName"
                                         type="text"
                                         id="name"
+                                        autoComplete="given-name"
+                                        required
                                         className="w-full rounded-lg border-gray-300 border px-4 py-2 focus:ring-primary focus:border-primary"
                                         placeholder="Tu nombre"
                                     />
@@ -105,8 +108,11 @@ export default function ContactPage() {
                                         Apellidos
                                     </label>
                                     <input
+                                        name="lastName"
                                         type="text"
                                         id="lastname"
+                                        autoComplete="family-name"
+                                        required
                                         className="w-full rounded-lg border-gray-300 border px-4 py-2 focus:ring-primary focus:border-primary"
                                         placeholder="Tus apellidos"
                                     />
@@ -117,8 +123,11 @@ export default function ContactPage() {
                                     Email
                                 </label>
                                 <input
+                                    name="email"
                                     type="email"
                                     id="email"
+                                    autoComplete="email"
+                                    required
                                     className="w-full rounded-lg border-gray-300 border px-4 py-2 focus:ring-primary focus:border-primary"
                                     placeholder="tu@email.com"
                                 />
@@ -128,9 +137,12 @@ export default function ContactPage() {
                                     Asunto
                                 </label>
                                 <select
+                                    name="subject"
                                     id="subject"
+                                    required
                                     className="w-full rounded-lg border-gray-300 border px-4 py-2 focus:ring-primary focus:border-primary"
                                 >
+                                    <option value="" disabled>Selecciona un asunto</option>
                                     <option>Información general</option>
                                     <option>Soporte técnico</option>
                                     <option>Facturación</option>
@@ -142,8 +154,11 @@ export default function ContactPage() {
                                     Mensaje
                                 </label>
                                 <textarea
+                                    name="message"
                                     id="message"
                                     rows={4}
+                                    autoComplete="off"
+                                    required
                                     className="w-full rounded-lg border-gray-300 border px-4 py-2 focus:ring-primary focus:border-primary"
                                     placeholder="¿En qué podemos ayudarte?"
                                 ></textarea>
