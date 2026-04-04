@@ -2,12 +2,14 @@ import {
     ActivityBox,
     ArticleHeader,
     ArticleImages,
-    ArticleNavigationButton,
+    ArticleNextButton,
+    ArticlePreviousButton,
     ArticleSection,
     ConceptPopover,
     ConceptTooltip,
     DownloadButton,
-    DialogBubble,
+    DialogStudentBubble,
+    DialogTeacherBubble,
     InfoBox,
     KeyPoints,
     PdfButton,
@@ -85,16 +87,16 @@ export default function DemoArticleComponentsContent() {
                 <p><strong>Burbujas de diálogo</strong></p>
                 <p>Para mostrar conversaciones entre maestros y estudiantes. Tienen un estilo similar al de las conversaciones por WhatsApp, y se puede personalizar su color. Empiezan siempre con un guión porque son diálogos.</p>
                 <p>Los <strong>maestros</strong> tienen un icono de graduado, están alineados a la izquierda y son de color naranja por defecto.</p>
-                <DialogBubble speaker="teacher">
+                <DialogTeacherBubble>
                     ¡Hoy vamos a aprender los dobles del 1 al 10!
-                </DialogBubble>
+                </DialogTeacherBubble>
                 <p>Los <strong>alumnos</strong> tienen un icono de persona, están alineados a la derecha y son de color primario (verdigris) por defecto.</p>
-                <DialogBubble speaker="student">
+                <DialogStudentBubble>
                     ¡Yo ya sé hacer eso, más difícil!
-                </DialogBubble>
-                <DialogBubble speaker="student" color="purple">
+                </DialogStudentBubble>
+                <DialogStudentBubble color="purple">
                     A mí me cuesta un poco, ¿podemos practicar con los dobles del 1 al 5 primero?
-                </DialogBubble>
+                </DialogStudentBubble>
             </ArticleSection>
 
             <ArticleSection title="4) Conceptos con Popover (ventana emergente)">
@@ -136,15 +138,13 @@ export default function DemoArticleComponentsContent() {
 
                 <p>Botones de <strong>navegación</strong> (dos direcciones):</p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
-                    <ArticleNavigationButton
+                    <ArticlePreviousButton
                         href="#"
-                        direction="previous"
                         label="Volver al índice"
                         size="sm"
                     />
-                    <ArticleNavigationButton
+                    <ArticleNextButton
                         href="#"
-                        direction="next"
                         label="Ir al siguiente artículo"
                         size="sm"
                     />

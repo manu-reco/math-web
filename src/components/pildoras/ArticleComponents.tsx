@@ -190,10 +190,8 @@ export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) 
 }
 
 type DialogColor = 'primary' | 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
-type DialogSpeaker = 'teacher' | 'student';
 
-interface DialogBubbleProps {
-    speaker?: DialogSpeaker;
+interface DialogBubbleVariantProps {
     color?: DialogColor;
     children: React.ReactNode;
 }
@@ -208,28 +206,41 @@ const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
     gray: { bg: 'bg-gray-50', text: 'text-text' },
 };
 
-export function DialogBubble({ speaker = 'teacher', color, children }: DialogBubbleProps) {
-    const isTeacher = speaker === 'teacher';
 
-    // Si no se especifica color, usar orange para teacher y primary para student
-    const defaultColor = isTeacher ? 'orange' : 'primary';
-    const finalColor = color || defaultColor;
-    const colors = colorClasses[finalColor];
-
-    // Iconos según el speaker
-    const Icon = isTeacher ? GraduationCap : User;
+/**
+ * Componente para mostrar un diálogo de un profesor, con un diseño de burbuja y un icono de gorro de graduación. Está alineado a la izquierda y la burbuja tiene la "cola" en la esquina superior izquierda.
+ * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "orange". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
+ * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
+ */
+export function DialogTeacherBubble({ color = 'orange', children }: DialogBubbleVariantProps) {
+    const colors = colorClasses[color];
 
     return (
-        <div className={`my-4 flex items-start gap-3 ${isTeacher ? 'flex-row' : 'flex-row-reverse'}`}>
-            {/* Icono del speaker */}
+        <div className="my-4 flex items-start gap-3 flex-row">
             <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
-                <Icon size={20} />
+                <GraduationCap size={20} />
             </div>
+            <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm border border-opacity-20`}>
+                <span className="flex gap-1.5">{"—"}{children}</span>
+            </div>
+        </div>
+    );
+}
 
-            {/* Burbuja de diálogo */}
-            <div
-                className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl px-5 py-4 shadow-sm border border-opacity-20 ${isTeacher ? 'rounded-tl-sm' : 'rounded-tr-sm'}`}
-            >
+/**
+ *  Componente para mostrar un diálogo de un estudiante, con un diseño de burbuja y un icono de usuario. Está alineado a la derecha y la burbuja tiene la "cola" en la esquina superior derecha.
+ * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "primary". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
+ * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
+ */
+export function DialogStudentBubble({ color = 'primary', children }: DialogBubbleVariantProps) {
+    const colors = colorClasses[color];
+
+    return (
+        <div className="my-4 flex items-start gap-3 flex-row-reverse">
+            <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
+                <User size={20} />
+            </div>
+            <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tr-sm px-5 py-4 shadow-sm border border-opacity-20`}>
                 <span className="flex gap-1.5">{"—"}{children}</span>
             </div>
         </div>
@@ -477,36 +488,46 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     }
 }
 
-interface ArticleNavigationButtonProps {
+interface ArticleNavigationVariantProps {
     href: string;
-    direction?: 'next' | 'previous';
     label?: string;
     size?: ButtonProps['size'];
 }
 
+
 /**
- * Botón para navegar entre artículos
- * @param href Enlace al artículo de destino
- * @param direction Dirección de navegación: "next" o "previous"
+ * Botón para navegar al siguiente artículo, con una flecha a la derecha.
+ * @param href Enlace al siguiente artículo
  * @param label Texto del botón
  */
-export function ArticleNavigationButton({ href, direction = "next", label, size = "lg" }: ArticleNavigationButtonProps) {
-    const isPrevious = direction === "previous";
-    const buttonLabel = label ?? (isPrevious ? "Artículo anterior" : "Siguiente artículo");
-
+export function ArticleNextButton({ href, label = "Siguiente artículo", size = "lg" }: ArticleNavigationVariantProps) {
     return (
         <Link href={href}>
             <Button
                 variant="default" size={size}
                 className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
             >
-                {isPrevious ? (
-                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                ) : null}
-                {buttonLabel}
-                {!isPrevious ? (
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                ) : null}
+                {label}
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </Button>
+        </Link>
+    );
+}
+
+/**
+ * Botón para navegar al artículo anterior, con una flecha a la izquierda.
+ * @param href Enlace al artículo anterior
+ * @param label Texto del botón
+ */
+export function ArticlePreviousButton({ href, label = "Artículo anterior", size = "lg" }: ArticleNavigationVariantProps) {
+    return (
+        <Link href={href}>
+            <Button
+                variant="default" size={size}
+                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
+            >
+                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                {label}
             </Button>
         </Link>
     );

@@ -12,7 +12,7 @@ Guía para crear un nuevo artículo educativo en la sección de **Formación > P
 
 ### 2. Agregar los datos básicos a "pildorasData.ts"
 
-Añade el nuevo artículo dentro de un capítulo nuevo o ya existente en la constante COURSE_CONTENT de [`src/lib/pildorasData.ts`](src/lib/pildorasData.ts). Así, ya aparecerá en la lista de artículos del saber y nivel seleccionado.
+Añade el nuevo artículo dentro de un capítulo nuevo o ya existente en la constante COURSE_CONTENT de [`src/data/pildorasData.ts`](src/data/pildorasData.ts). Así, ya aparecerá en la lista de artículos del saber y nivel seleccionado.
 
 ```typescript
 export const COURSE_CONTENT: Record<string, Article[]> = {
@@ -57,11 +57,12 @@ import {
     ArticleSection,
     TipBox,
     KeyPoints,
-    DialogBubble,
+    DialogTeacherBubble,
+    DialogStudentBubble,
     ConceptPopover
 } from "@/components/pildoras/ArticleComponents";
 
-import { findArticleById } from "@/lib/pildorasData";
+import { findArticleById } from "@/data/pildorasData";
 
 export default function MiNuevoArticuloContent() {
 
@@ -100,13 +101,13 @@ export default function MiNuevoArticuloContent() {
             </ArticleSection>
 
             <ArticleSection title="Actividades Propuestas">
-                <DialogBubble speaker="teacher">
+                <DialogTeacherBubble>
                     <p>“Diálogo del <strong>del profesor</strong>”</p> 
-                </DialogBubble>
+                </DialogTeacherBubble>
                 
-                <DialogBubble speaker="student">
+                <DialogStudentBubble>
                     <p>“Diálogo del <strong>estudiante</strong>”</p>
-                </DialogBubble>
+                </DialogStudentBubble>
             </ArticleSection>
         </>
     );
@@ -166,9 +167,8 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
 ### Elementos de Texto
 
 - **`KeyPoints`**: Lista de puntos clave con checkmarks verdes.
-- **`DialogBubble`**: Burbujas de diálogo para conversaciones entre maestro y estudiante. Añade un `—` al comienzo para marcar que es un diálogo. Props:
-  - `speaker="teacher"` o `speaker="student"`: Para mostrar diferentes iconos y ajustar la dirección del flex.
-  - `color="orange"`, `"primary"`, `"blue"`, `"green"`, `"purple"`, `"pink"`, `"gray"`: para cambiar el color del fondo. Por defecto, "orange" para teacher y "primary" para student.
+- **`DialogTeacherBubble`**: Burbuja para intervenciones del docente (izquierda, icono de graduado, color `orange` por defecto).
+- **`DialogStudentBubble`**: Burbuja para intervenciones del estudiante (derecha, icono de usuario, color `primary` por defecto).
 
 ### Componentes Especiales
 
@@ -182,8 +182,11 @@ Los componentes están definidos en [`src/components/pildoras/ArticleComponents.
     - Props: `filePath` (string), `label` (opcional), `variant` (opcional), `size` (opcional)
 - **`PdfButton`**: Botón doble para ver el recurso en un modal y descargarlo.
     - Props: `filePath` (string), `label` (opcional)
-- **`ArticleNavigationButton`**: Botón de navegación entre artículos.
-    - Props: `href` (string), `direction` (`"next"` o `"previous"`), `label` (opcional), `size` (opcional)
+- **`ArticleNextButton`**: Botón de navegación al siguiente artículo.
+    - Props: `href` (string), `label` (opcional), `size` (opcional)
+- **`ArticlePreviousButton`**: Botón de navegación al artículo anterior.
+    - Props: `href` (string), `label` (opcional), `size` (opcional)
+    - Se mantiene para código existente, pero para nuevos artículos se recomiendan `ArticleNextButton` y `ArticlePreviousButton`.
     - En la plataforma, estos botones ya se añaden automáticamente al final de cada artículo desde `src/app/formacion/pildoras/[saber]/[nivel]/[articulo]/page.tsx`.
     - Solo necesitas usar este componente dentro del contenido del artículo si quieres añadir navegación también en mitad del artículo.
 

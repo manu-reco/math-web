@@ -10,7 +10,7 @@ import SubitizacionTarjetasPuntos1Content from "@/components/content/Subitizacio
 import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
 import ArticleSidebarNav from "@/components/pildoras/ArticleSidebarNav";
-import { ArticleNavigationButton } from "@/components/pildoras/ArticleComponents";
+import { ArticleNextButton, ArticlePreviousButton } from "@/components/pildoras/ArticleComponents";
 import { getCanonicalUrl } from "@/lib/siteUrl";
 
 // Registry of content components
@@ -164,15 +164,13 @@ export default async function ArticlePage({ params }: PageProps) {
                     )}
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                         {previousArticleHref ? (
-                            <ArticleNavigationButton
+                            <ArticlePreviousButton
                                 href={previousArticleHref}
-                                direction="previous"
                             />
                         ) : null}
                         {nextArticleHref ? (
-                            <ArticleNavigationButton
+                            <ArticleNextButton
                                 href={nextArticleHref}
-                                direction="next"
                             />
                         ) : null}
                     </div>
