@@ -136,6 +136,10 @@ export default function Navbar() {
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={toggleMenu}
+                            type="button"
+                            aria-expanded={isOpen}
+                            aria-controls="mobile-navigation-menu"
+                            aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary focus:outline-none"
                         >
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -148,6 +152,7 @@ export default function Navbar() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        id="mobile-navigation-menu"
                         className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}

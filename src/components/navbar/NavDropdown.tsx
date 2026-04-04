@@ -24,17 +24,22 @@ export default function NavDropdown({
     onItemClick,
     variant = "desktop"
 }: NavDropdownProps) {
+    const panelId = `${label.toLowerCase().replace(/\s+/g, "-")}-${variant}-menu`;
+
     if (variant === "mobile") {
         return (
             <div className="space-y-1" data-nav-dropdown-root="true">
                 <NavDropdownButton
                     label={label}
                     onClick={onToggle}
+                    isOpen={isOpen}
+                    controlsId={panelId}
                     variant="mobile"
                 />
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
+                            id={panelId}
                             className="pl-4 space-y-1 overflow-hidden"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -63,11 +68,14 @@ export default function NavDropdown({
             <NavDropdownButton
                 label={label}
                 onClick={onToggle}
+                isOpen={isOpen}
+                controlsId={panelId}
                 variant="desktop"
             />
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        id={panelId}
                         className="absolute left-0 mt-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
