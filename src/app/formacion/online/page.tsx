@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { PlayCircle, Lock, Clock, FileText } from "lucide-react";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Formacion online",
+    description:
+        "Cursos online de didactica matematica para docentes, con modulos practicos y seguimiento de progreso.",
+    path: "/formacion/online",
+});
 
 const modules = [
     {
@@ -102,7 +111,7 @@ export default function OnlineTrainingPage() {
                                                     Desbloquear
                                                 </Link>
                                             ) : (
-                                                <button className="text-xs font-bold text-primary hover:text-primary-hover uppercase tracking-wide">
+                                                <button type="button" className="text-xs font-bold text-primary hover:text-primary-hover uppercase tracking-wide">
                                                     Ver ahora
                                                 </button>
                                             )}

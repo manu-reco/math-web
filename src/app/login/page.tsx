@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, Lock, ArrowRight } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Iniciar sesion",
+    description: "Accede a tu cuenta de MathEdu para continuar tu formacion y gestionar tus recursos.",
+    path: "/login",
+});
 
 /*
   RECOMENDACIÓN DE SISTEMA DE AUTH:

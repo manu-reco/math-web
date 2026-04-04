@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Registro",
+    description: "Crea tu cuenta en MathEdu y accede a cursos, actividades y recursos de matematicas para docentes.",
+    path: "/register",
+});
 
 export default function RegisterPage() {
     return (

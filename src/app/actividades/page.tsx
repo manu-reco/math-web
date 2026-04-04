@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/data/actividades";
 import GamesGrid from "@/components/actividades/GamesGrid";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Actividades educativas",
+    description:
+        "Actividades interactivas para trabajar matematicas en Infantil y Primaria de forma divertida y guiada.",
+    path: "/actividades",
+});
 
 export default function ActividadesPage() {
     return (

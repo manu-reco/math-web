@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Precios",
+    description:
+        "Consulta los planes de MathEdu para docentes, con opciones gratuitas, pro y para centros educativos.",
+    path: "/precios",
+});
 
 const plans = [
     {

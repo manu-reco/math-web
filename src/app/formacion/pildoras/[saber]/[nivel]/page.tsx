@@ -1,4 +1,5 @@
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -8,6 +9,7 @@ import {
 } from "lucide-react";
 import { SABERES, NIVELES, getVisibleTrackData } from "@/data/pildorasData";
 import { clsx } from "clsx";
+import { getCanonicalUrl } from "@/lib/siteUrl";
 
 interface PageProps {
     params: Promise<{
@@ -27,6 +29,46 @@ export async function generateStaticParams() {
     }
 
     return params;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { saber: saberId, nivel: nivelId } = await params;
+    const { saber, nivel } = getVisibleTrackData(saberId, nivelId);
+
+    if (!saber || !nivel) {
+        return {
+            title: "Ruta no encontrada",
+            robots: {
+                index: false,
+                follow: false,
+            },
+        };
+    }
+
+    const title = `${saber.title} - ${nivel.title}`;
+    const description = `Explora las pildoras de ${saber.title} para ${nivel.title} con contenidos practicos para el aula.`;
+    const path = `/formacion/pildoras/${saberId}/${nivelId}`;
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: path,
+        },
+        openGraph: {
+            title,
+            description,
+            url: getCanonicalUrl(path),
+            type: "article",
+            locale: "es_ES",
+            siteName: "MathEdu",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
+    };
 }
 
 export default async function SaberPage({ params }: PageProps) {

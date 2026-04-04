@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { Users, Target, Heart } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+    title: "Sobre nosotros",
+    description:
+        "Conoce al equipo de MathEdu y nuestra mision para transformar la ensenanza de matematicas en Infantil y Primaria.",
+    path: "/nosotros",
+});
 
 export default function AboutPage() {
     return (

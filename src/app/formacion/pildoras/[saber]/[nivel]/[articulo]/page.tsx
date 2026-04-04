@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SABERES, NIVELES, COURSE_CONTENT, getVisibleTrackData, hasVisibleArticle } from "@/data/pildorasData";
 import { notFound } from "next/navigation";
 import MayorMenorContent from "@/components/content/MayorMenorContent";
@@ -10,6 +11,7 @@ import SubitizacionTarjetasPuntos2Content from "@/components/content/Subitizacio
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
 import ArticleSidebarNav from "@/components/pildoras/ArticleSidebarNav";
 import { ArticleNavigationButton } from "@/components/pildoras/ArticleComponents";
+import { getCanonicalUrl } from "@/lib/siteUrl";
 
 // Registry of content components
 const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
@@ -60,6 +62,48 @@ export async function generateStaticParams() {
     }
 
     return params;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { saber: saberId, nivel: nivelId, articulo: articuloId } = await params;
+    const { saber, nivel, visibleChapters } = getVisibleTrackData(saberId, nivelId);
+    const orderedArticles = visibleChapters?.flatMap((chapter) => chapter.articles) ?? [];
+    const article = orderedArticles.find((item) => item.id === articuloId);
+
+    if (!saber || !nivel || !article) {
+        return {
+            title: "Articulo no encontrado",
+            robots: {
+                index: false,
+                follow: false,
+            },
+        };
+    }
+
+    const title = article.title;
+    const description = article.subtitle;
+    const path = `/formacion/pildoras/${saberId}/${nivelId}/${articuloId}`;
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: path,
+        },
+        openGraph: {
+            title,
+            description,
+            url: getCanonicalUrl(path),
+            type: "article",
+            locale: "es_ES",
+            siteName: "MathEdu",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
+    };
 }
 
 export default async function ArticlePage({ params }: PageProps) {

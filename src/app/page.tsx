@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen, Brain, CheckCircle, Users } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Inicio",
+  description:
+    "Formacion de matematicas para docentes de Infantil y Primaria con cursos, recursos y actividades practicas.",
+  path: "/",
+});
 
 export default function Home() {
   return (
