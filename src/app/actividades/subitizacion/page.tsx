@@ -213,17 +213,18 @@ export default function SubitizacionPage() {
                     const isLastConcreteLevel = currentMode === 'concrete' &&
                         !currentLevels.some(l => l.id === currentLevel.id + 1 && l.patterns.length > 0);
 
-                    const nextLevelMessage = isLastConcreteLevel && hasNextLevel
-                        ? '¡Pasar a Abstracto! ⚫'
+                    const primaryAction = hasNextLevel
+                        ? {
+                            label: isLastConcreteLevel ? '¡Pasar a Abstracto! ⚫' : 'Siguiente nivel →',
+                            onClick: handleNextLevel,
+                        }
                         : undefined;
 
                     return (
                         <CompletionScreen
                             levelName={currentLevel.name}
-                            hasNextLevel={hasNextLevel}
-                            onNextLevel={handleNextLevel}
+                            primaryAction={primaryAction}
                             onRestart={handleRestart}
-                            nextLevelMessage={nextLevelMessage}
                         />
                     );
                 })()}

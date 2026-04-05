@@ -14,42 +14,40 @@ interface StoryChapterConfig {
     storyData: unknown;
 }
 
-interface StoryPageTemplateProps {
-    storyData?: unknown;
-    chapters?: StoryChapterConfig[];
+interface StoryTemplateSharedProps {
     backHref?: string;
     renderError?: (params: { chapterIndex: number; chapterCount: number }) => ReactNode;
+}
+
+interface SingleChapterStoryPageTemplateProps extends StoryTemplateSharedProps {
+    storyData: unknown;
+}
+
+interface MultiChapterStoryPageTemplateProps extends StoryTemplateSharedProps {
+    chapters: StoryChapterConfig[];
 }
 
 const DEFAULT_BACK_HREF = "/actividades";
 
 /**
- * Plantilla para páginas de cuentos interactivos.
+ * Plantilla base para páginas de cuentos interactivos.
  * Valida los datos del cuento y maneja la lógica de finalización.
- * @param props.storyData Datos del cuento a mostrar.
+ * @param chapters Configuración de capítulos del cuento.
  * @param props.backHref URL para el enlace de regreso (por defecto: "/actividades").
- * @param props.renderCompletion Función para renderizar la pantalla de finalización personalizada.
  * @param props.renderError Función para renderizar una pantalla de error personalizada.
  * @returns Componente de la página del cuento.
  */
-export default function StoryPageTemplate({
-    storyData,
+function StoryPageTemplateBase({
     chapters,
     backHref = DEFAULT_BACK_HREF,
     renderError,
-}: StoryPageTemplateProps) {
+}: MultiChapterStoryPageTemplateProps) {
     const [gameCompleted, setGameCompleted] = useState(false);
     const [chapterIndex, setChapterIndex] = useState(0);
     const [completedChapters, setCompletedChapters] = useState<boolean[]>([]);
 
-    const resolvedChapters: StoryChapterConfig[] = chapters?.length
-        ? chapters
-        : storyData
-            ? [{ id: "capitulo-1", storyData } as StoryChapterConfig]
-            : [];
-
-    const currentChapter = resolvedChapters[chapterIndex];
-    const chapterCount = resolvedChapters.length;
+    const currentChapter = chapters[chapterIndex];
+    const chapterCount = chapters.length;
     const hasNextChapter = chapterIndex < chapterCount - 1;
 
     const handleRestart = () => setGameCompleted(false);
@@ -107,7 +105,7 @@ export default function StoryPageTemplate({
                     backHref={backHref}
                     chapterIndex={chapterIndex}
                     chapterCount={chapterCount}
-                    chapterTitles={resolvedChapters.map((chapter, index) => {
+                    chapterTitles={chapters.map((chapter, index) => {
                         try {
                             const parsed = validateStoryData(chapter.storyData) as StoryData;
                             return parsed.title || `Capítulo ${index + 1}`;
@@ -115,7 +113,7 @@ export default function StoryPageTemplate({
                             return `Capítulo ${index + 1}`;
                         }
                     })}
-                    completedChapters={resolvedChapters.map((_, index) => !!completedChapters[index])}
+                    completedChapters={chapters.map((_, index) => !!completedChapters[index])}
                     hasNextChapter={hasNextChapter}
                     onRestart={handleRestart}
                     onNextChapter={handleNextChapter}
@@ -142,5 +140,33 @@ export default function StoryPageTemplate({
             />
             <InstructionText />
         </div>
+    );
+}
+
+export function SingleChapterStoryPageTemplate({
+    storyData,
+    backHref,
+    renderError,
+}: SingleChapterStoryPageTemplateProps) {
+    return (
+        <StoryPageTemplateBase
+            chapters={[{ id: "capitulo-1", storyData }]}
+            backHref={backHref}
+            renderError={renderError}
+        />
+    );
+}
+
+export function MultiChapterStoryPageTemplate({
+    chapters,
+    backHref,
+    renderError,
+}: MultiChapterStoryPageTemplateProps) {
+    return (
+        <StoryPageTemplateBase
+            chapters={chapters}
+            backHref={backHref}
+            renderError={renderError}
+        />
     );
 }

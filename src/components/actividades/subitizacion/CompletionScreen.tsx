@@ -2,20 +2,21 @@ import { useEffect } from "react";
 
 import confetti from "canvas-confetti";
 
+interface CompletionPrimaryAction {
+    label: string;
+    onClick: () => void;
+}
+
 interface CompletionScreenProps {
     levelName: string;
-    hasNextLevel: boolean;
-    onNextLevel: () => void;
+    primaryAction?: CompletionPrimaryAction;
     onRestart: () => void;
-    nextLevelMessage?: string;
 }
 
 export default function CompletionScreen({
     levelName,
-    hasNextLevel,
-    onNextLevel,
+    primaryAction,
     onRestart,
-    nextLevelMessage
 }: CompletionScreenProps) {
 
     useEffect(() => {
@@ -43,16 +44,18 @@ export default function CompletionScreen({
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {hasNextLevel && (
+                {primaryAction && (
                     <button
-                        onClick={onNextLevel}
+                        type="button"
+                        onClick={primaryAction.onClick}
                         className="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
                     >
-                        {nextLevelMessage || 'Siguiente nivel →'}
+                        {primaryAction.label}
                     </button>
                 )}
 
                 <button
+                    type="button"
                     onClick={onRestart}
                     className="px-8 py-4 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
                 >

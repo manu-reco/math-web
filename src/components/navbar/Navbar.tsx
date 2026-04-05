@@ -4,7 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
-import NavDropdown, { DropdownItem } from "./NavDropdown";
+import NavDropdownDesktop from "./NavDropdownDesktop";
+import NavDropdownMobile from "./NavDropdownMobile";
+import type { DropdownItem } from "./NavDropdown.types";
 import { motion, AnimatePresence } from "framer-motion";
 
 
@@ -93,13 +95,12 @@ export default function Navbar() {
                     {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-8 items-center">
                         {/* Formación Dropdown */}
-                        <NavDropdown
+                        <NavDropdownDesktop
                             label="Formación"
                             items={formacionItems}
                             isOpen={activeDropdown === "formacion"}
                             onToggle={() => toggleDropdown("formacion")}
                             onItemClick={() => setActiveDropdown(null)}
-                            variant="desktop"
                         />
 
                         {/* Actividades */}
@@ -111,13 +112,12 @@ export default function Navbar() {
                         </Link>
 
                         {/* Información Dropdown */}
-                        <NavDropdown
+                        <NavDropdownDesktop
                             label="Información"
                             items={informacionItems}
                             isOpen={activeDropdown === "informacion"}
                             onToggle={() => toggleDropdown("informacion")}
                             onItemClick={() => setActiveDropdown(null)}
-                            variant="desktop"
                         />
                     </div>
 
@@ -160,7 +160,7 @@ export default function Navbar() {
                         transition={{ duration: 0.28, ease: "easeInOut" }}
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            <NavDropdown
+                            <NavDropdownMobile
                                 label="Formación"
                                 items={formacionItems}
                                 isOpen={activeDropdown === "mobile-formacion"}
@@ -168,7 +168,6 @@ export default function Navbar() {
                                 onItemClick={() => {
                                     closeAll();
                                 }}
-                                variant="mobile"
                             />
 
                             <Link
@@ -181,7 +180,7 @@ export default function Navbar() {
                                 Actividades
                             </Link>
 
-                            <NavDropdown
+                            <NavDropdownMobile
                                 label="Información"
                                 items={informacionItems}
                                 isOpen={activeDropdown === "mobile-informacion"}
@@ -189,7 +188,6 @@ export default function Navbar() {
                                 onItemClick={() => {
                                     closeAll();
                                 }}
-                                variant="mobile"
                             />
 
                             <Link

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import storyData from "@/data/cuentos/owl-tree.story.json";
-import StoryPageTemplate from "@/components/actividades/cuentos/StoryPageTemplate";
+import { SingleChapterStoryPageTemplate } from "@/components/actividades/cuentos/StoryPageTemplate";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -11,5 +11,5 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function OwlTreeStoryPage() {
-    return <StoryPageTemplate storyData={storyData} />;
+    return <SingleChapterStoryPageTemplate storyData={storyData} />;
 }
