@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react"
-import InstructionText from "../InstructionText";
 import { Pattern, IconPosition } from "@/data/subitizacionPatterns";
 
 const GRID_CONFIG = {
@@ -105,8 +104,6 @@ export default function GameGrid({ pattern, onNext }: GameGridProps) {
                     </div>
                 </motion.button>
             </AnimatePresence>
-
-            <InstructionText />
         </div>
     );
 }

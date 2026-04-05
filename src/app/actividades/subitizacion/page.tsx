@@ -4,18 +4,19 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { subitizacionLevels } from "@/data/subitizacionLevels";
 import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
-import InstructionsScreen from "@/components/actividades/subitizacion/InstructionsScreen";
+import ActivityInstructionsModal from "@/components/actividades/ActivityInstructionsModal";
+import SubitizacionInstructionsContent from "@/components/actividades/subitizacion/SubitizacionInstructionsContent";
 import LevelSelector from "@/components/actividades/subitizacion/LevelSelector";
 import GameGrid from "@/components/actividades/subitizacion/GameGrid";
 import CompletionScreen from "@/components/actividades/subitizacion/CompletionScreen";
 import ProgressNavigator from "@/components/actividades/ProgressNavigator";
 
-type GameState = 'instructions' | 'levelSelect' | 'playing' | 'completed';
+type GameState = 'levelSelect' | 'playing' | 'completed';
 type GameMode = 'concrete' | 'abstract';
 
 export default function SubitizacionPage() {
     // ESTADOS DEL JUEGO
-    const [gameState, setGameState] = useState<GameState>('instructions');
+    const [gameState, setGameState] = useState<GameState>('levelSelect');
     const [currentMode, setCurrentMode] = useState<GameMode>('concrete');
     const [currentLevel, setCurrentLevel] = useState<Level | null>(null);
 
@@ -29,17 +30,9 @@ export default function SubitizacionPage() {
     const handleBack = () => {
         window.scrollTo({ top: 100, behavior: 'smooth' });
 
-        if (gameState === 'levelSelect') {
-            setGameState('instructions');
-        } else if (gameState === 'playing' || gameState === 'completed') {
+        if (gameState === 'playing' || gameState === 'completed') {
             setGameState('levelSelect');
         }
-        // Si gameState === 'instructions', no hacemos nada aquí (el Link redirigirá a /actividades)
-    };
-
-    const goToSelectLevel = () => {
-        window.scrollTo({ top: 100, behavior: 'smooth' });
-        setGameState('levelSelect');
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
@@ -120,7 +113,7 @@ export default function SubitizacionPage() {
         setCurrentMode('concrete');
         setShuffledPatterns([]);
         setCurrentPatternIndex(0);
-        setGameState('instructions');
+        setGameState('levelSelect');
     };
 
     // Comprueba si hay un siguiente nivel disponible para mostrar/ocultar el botón "Siguiente nivel"
@@ -141,9 +134,13 @@ export default function SubitizacionPage() {
 
     return (
         <div className="min-h-screen bg-linear-to-b from-purple-50 to-blue-50 pb-20">
+            <ActivityInstructionsModal title="Cómo jugar a Subitización">
+                <SubitizacionInstructionsContent />
+            </ActivityInstructionsModal>
+
             <header className="bg-white shadow-sm border-b border-gray-100">
                 <div className="container-custom py-6">
-                    {gameState === 'instructions' ? (
+                    {gameState === 'levelSelect' ? (
                         <Link href="/actividades" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
                             ← Volver a Actividades
                         </Link>
@@ -153,7 +150,7 @@ export default function SubitizacionPage() {
                             onClick={handleBack}
                             className="text-primary hover:text-primary-hover font-medium mb-2 inline-block hover:cursor-pointer"
                         >
-                            ← Volver a {gameState === 'levelSelect' ? 'Instrucciones' : 'Selección de Nivel'}
+                            ← Volver a Selección de Nivel
                         </button>
                     )}
                     <h1 className="text-4xl font-bold">
@@ -168,10 +165,6 @@ export default function SubitizacionPage() {
             </header >
 
             <main className="container-custom max-w-6xl mx-auto mt-12 px-6">
-                {gameState === 'instructions' && (
-                    <InstructionsScreen onStart={goToSelectLevel} />
-                )}
-
                 {gameState === 'levelSelect' && (
                     <LevelSelector
                         concreteLevels={subitizacionLevels.concrete}

@@ -3,6 +3,7 @@
 import { ReactNode, useState } from "react";
 import StoryPlayer from "@/components/story/StoryPlayer";
 import InstructionText from "../InstructionText";
+import ActivityInstructionsModal from "../ActivityInstructionsModal";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
 import FixedExitButton from "../FixedExitButton";
@@ -62,6 +63,14 @@ function StoryPageTemplateBase({
         setChapterIndex(index);
     };
 
+    const storyTitle = (() => {
+        try {
+            return validateStoryData(currentChapter?.storyData).title || "este cuento";
+        } catch {
+            return "este cuento";
+        }
+    })();
+
     // Validar datos del cuento
     let validatedStory: StoryData;
     if (!currentChapter) {
@@ -101,6 +110,33 @@ function StoryPageTemplateBase({
         return (
             <>
                 <FixedExitButton backHref={backHref} />
+                <ActivityInstructionsModal title="Cómo jugar a Cuentos Interactivos">
+                    <section>
+                        <h3 className="text-xl font-semibold text-primary mb-3">¿En qué consiste?</h3>
+                        <p>
+                            En este cuento, el alumnado sigue la historia y participa en pequeñas acciones para resolver
+                            situaciones mientras avanza por la narración.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-semibold text-primary mb-3">Cómo participar</h3>
+                        <ul className="list-disc list-inside space-y-2 ml-4">
+                            <li>Lee en voz alta o deja que el alumnado lea cada escena</li>
+                            <li>Haz que anticipen qué ocurrirá antes de avanzar</li>
+                            <li>Refuerza estrategias y lenguaje matemático tras cada acción</li>
+                        </ul>
+                    </section>
+
+                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p className="text-blue-900">
+                            <strong>Sugerencia:</strong> Puedes rejugar {storyTitle} para promover diferentes hipótesis y
+                            formas de resolver cada reto.
+                        </p>
+                    </div>
+
+                    <InstructionText />
+                </ActivityInstructionsModal>
                 <StoryCompletionScreen
                     backHref={backHref}
                     chapterIndex={chapterIndex}
@@ -127,6 +163,33 @@ function StoryPageTemplateBase({
     return (
         <div className="pb-10">
             <FixedExitButton backHref={backHref} />
+            <ActivityInstructionsModal title="Cómo jugar a Cuentos Interactivos">
+                <section>
+                    <h3 className="text-xl font-semibold text-primary mb-3">¿En qué consiste?</h3>
+                    <p>
+                        En este cuento, el alumnado sigue la historia y participa en pequeñas acciones para resolver
+                        situaciones mientras avanza por la narración.
+                    </p>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-semibold text-primary mb-3">Cómo participar</h3>
+                    <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>Lee en voz alta o deja que el alumnado lea cada escena</li>
+                        <li>Haz que anticipen qué ocurrirá antes de avanzar</li>
+                        <li>Refuerza estrategias y lenguaje matemático tras cada acción</li>
+                    </ul>
+                </section>
+
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                    <p className="text-blue-900">
+                        <strong>Sugerencia:</strong> En {storyTitle}, pregunta al alumnado qué pistas visuales les ayudaron
+                        a decidir cada respuesta.
+                    </p>
+                </div>
+
+                <InstructionText />
+            </ActivityInstructionsModal>
             <StoryPlayer
                 story={validatedStory}
                 onComplete={() => {
@@ -138,7 +201,6 @@ function StoryPageTemplateBase({
                     setGameCompleted(true);
                 }}
             />
-            <InstructionText />
         </div>
     );
 }
