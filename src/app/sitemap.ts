@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { COURSE_CONTENT } from "@/data/pildorasData";
 import { getCanonicalUrl } from "@/lib/siteUrl";
 
+export const dynamic = "force-static";
+
 function getPildorasRoutes(): string[] {
     const routes = new Set<string>();
 
