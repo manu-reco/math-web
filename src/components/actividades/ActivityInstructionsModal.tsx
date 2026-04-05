@@ -39,11 +39,13 @@ export default function ActivityInstructionsModal({
             <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="fixed top-20 right-4 z-50 bg-white/95 backdrop-blur-sm text-text-secondary px-4 py-2 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all flex items-center gap-2 font-medium"
+                className="group fixed top-20 right-4 z-50 h-14 min-w-14 px-4 flex items-center justify-center bg-white/80 backdrop-blur-sm text-text-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-out overflow-hidden cursor-pointer"
                 aria-label="Abrir instrucciones"
             >
-                <CircleHelp size={18} />
-                Instrucciones
+                <CircleHelp size={20} className="shrink-0" />
+                <span className="max-w-0 opacity-0 whitespace-nowrap font-semibold text-sm group-hover:max-w-[120px] group-hover:opacity-100 group-hover:ml-2 transition-all duration-300">
+                    Instrucciones
+                </span>
             </button>
 
             {isOpen && (
