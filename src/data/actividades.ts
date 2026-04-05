@@ -24,7 +24,7 @@ export const games: Game[] = [
     },
     {
         id: "arboles-y-manzanas-1",
-        title: "Árboles y manzanas. Parte 1",
+        title: "Árboles y manzanas. El número 2",
         image: "/cuentos/arboles-y-manzanas.jpg",
         area: "Aritmética",
         level: "Primeros pasos",
