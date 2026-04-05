@@ -1,6 +1,6 @@
 "use client";
 
-export default function InstructionText() {
+export default function ActivityControlsText() {
     const isTouchDevice = typeof window !== "undefined" && (
         ("ontouchstart" in window) ||
         navigator.maxTouchPoints > 0 ||
@@ -8,9 +8,9 @@ export default function InstructionText() {
     );
 
     return (
-        <div className="text-center">
-            <h3 className="text-xl font-semibold text-primary mb-3 underline underline-offset-4">
-                Instrucciones
+        <>
+            <h3 className="text-xl font-semibold text-primary mb-3">
+                Controles
             </h3>
             {isTouchDevice ? (
                 <p className="text-text-secondary text-lg">
@@ -26,6 +26,6 @@ export default function InstructionText() {
                     </p>
                 </div>
             )}
-        </div>
+        </>
     );
 }

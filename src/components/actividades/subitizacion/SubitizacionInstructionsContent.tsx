@@ -1,4 +1,4 @@
-import InstructionText from "../InstructionText";
+import ActivityControlsText from "../ActivityControlsText";
 
 export default function SubitizacionInstructionsContent() {
     return (
@@ -49,7 +49,7 @@ export default function SubitizacionInstructionsContent() {
                 </p>
             </div>
 
-            <InstructionText />
+            <ActivityControlsText />
         </>
     );
 }

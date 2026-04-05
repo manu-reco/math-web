@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from "react";
 import StoryPlayer from "@/components/story/StoryPlayer";
-import InstructionText from "../InstructionText";
+import ActivityControlsText from "../ActivityControlsText";
 import ActivityInstructionsModal from "../ActivityInstructionsModal";
 import { validateStoryData } from "@/lib/validateStory";
 import type { StoryData } from "@/types/story";
@@ -134,7 +134,7 @@ function StoryPageTemplateBase({
                     </p>
                 </div>
 
-                <InstructionText />
+                <ActivityControlsText />
             </ActivityInstructionsModal>
 
             {gameCompleted ? (
