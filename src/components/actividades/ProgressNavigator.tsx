@@ -28,7 +28,7 @@ export default function ProgressNavigator({
             : "absolute bottom-4 left-1/2 -translate-x-1/2";
 
     return (
-        <div className={`${basePositionClass} z-50 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3`}>
+        <div className={`${basePositionClass} z-30 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3`}>
             <button
                 type="button"
                 onClick={onPrevious}
