@@ -9,7 +9,7 @@ export default function ActivityControlsText() {
 
     return (
         <>
-            <h3 className="text-xl font-semibold text-primary mb-3">
+            <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
                 Controles
             </h3>
             {isTouchDevice ? (

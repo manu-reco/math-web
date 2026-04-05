@@ -134,7 +134,7 @@ export default function SubitizacionPage() {
 
     return (
         <div className="min-h-screen bg-linear-to-b from-purple-50 to-blue-50 pb-20">
-            <ActivityInstructionsModal title="Cómo jugar a Subitización">
+            <ActivityInstructionsModal>
                 <SubitizacionInstructionsContent />
             </ActivityInstructionsModal>
 
@@ -154,7 +154,7 @@ export default function SubitizacionPage() {
                         </button>
                     )}
                     <h1 className="text-4xl font-bold">
-                        Subitización 🦉
+                        Subitización
                     </h1>
                     {currentLevel && gameState === 'playing' && (
                         <p className="text-text-secondary mt-2">

@@ -9,7 +9,7 @@ interface LevelSelectorProps {
 export default function LevelSelector({ concreteLevels, abstractLevels, onSelectLevel }: LevelSelectorProps) {
     const renderLevelCard = (level: Level, mode: 'concrete' | 'abstract') => {
         const isAvailable = level.patterns.length > 0;
-        
+
         return (
             <button
                 key={`${mode}-${level.id}`}
@@ -56,9 +56,8 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             {/* Sección Concreto */}
             <section>
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold mb-2">
-                        🦉 Concreto (Búhos)
-                    </h2>
+                    <h2 className="text-3xl font-bold mb-2">Concreto (Búhos)</h2>
+
                     <p className="text-text-secondary">
                         Reconoce cantidades con búhos de colores
                     </p>
@@ -72,7 +71,7 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             <section>
                 <div className="mb-6">
                     <h2 className="text-3xl font-bold mb-2">
-                        ⚫ Abstracto (Puntos)
+                        Abstracto (Puntos)
                     </h2>
                     <p className="text-text-secondary">
                         Reconoce cantidades con representación abstracta

@@ -2,11 +2,10 @@
 
 import { ReactNode, useEffect, useId, useState } from "react";
 import { CircleHelp, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ExpandingFab from "../ExpandingFab";
 
 interface ActivityInstructionsModalProps {
-    title: string;
+    title?: string;
     children: ReactNode;
 }
 
@@ -62,7 +61,7 @@ export default function ActivityInstructionsModal({
 
                         <div className="pr-10">
                             <h2 id={titleId} className="text-2xl sm:text-3xl font-bold mb-6">
-                                {title}
+                                {title || "Instrucciones"}
                             </h2>
                             <div className="space-y-6 text-base sm:text-lg">
                                 {children}
@@ -70,9 +69,12 @@ export default function ActivityInstructionsModal({
                         </div>
 
                         <div className="mt-8 flex justify-end">
-                            <Button onClick={() => setIsOpen(false)} className="px-6">
+                            <button
+                                className="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+                                onClick={() => setIsOpen(false)}
+                            >
                                 Entendido
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </div>
