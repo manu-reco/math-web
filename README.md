@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MathEdu Web
 
-## Getting Started
+ES: Plataforma educativa para formacion en didactica de matematicas (Infantil y Primaria).
+EN: Educational platform for math teaching training (Early Childhood and Primary).
 
-First, run the development server:
+- Live site: https://manu-reco.github.io/math-web
+- Framework: Next.js 16 (App Router)
+- Target: static export for GitHub Pages
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript 5
+- Tailwind CSS v4
+- Framer Motion
+- Zod
+- ESLint 9
+
+## Quick Start
+
+EN
+1. Install dependencies: `npm ci`
+2. Start local dev server: `npm run dev`
+3. Open: `http://localhost:3000`
+
+## Scripts
+
+- `npm run dev` - local development
+- `npm run build` - production build + static export to `out/`
+- `npm run start` - run production server locally
+- `npm run lint` - run ESLint
+
+## Project Structure
+
+```text
+src/
+	app/               # routes, layout, sitemap, robots
+	components/        # reusable UI and domain components
+	data/              # pildoras, activities, stories data
+	hooks/             # custom React hooks
+	lib/               # SEO, URL, assets, validation helpers
+	types/             # TypeScript types
+public/              # static assets
+.github/workflows/   # CI/CD to GitHub Pages
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment (GitHub Pages)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Deployment runs automatically on push to `main`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Workflow: `.github/workflows/deploy-pages.yml`
+- Artifact: `out/`
+- Next config uses:
+	- `output: "export"`
+	- `basePath: "/math-web"`
+	- custom image loader for prefixed assets
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Optional / Opcionales:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SITE_URL` (default: `https://manu-reco.github.io`)
+- `NEXT_PUBLIC_BASE_PATH` (default: `/math-web`)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content Authoring Docs
 
-## Deploy on Vercel
+- `CREAR_ARTICULOS.md` - crear nuevos articulos de pildoras
+- `CREAR_CUENTOS.md` - crear cuentos interactivos en JSON
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+EN: If you want to contribute, start here:
+
+- `CONTRIBUTING.md` (PR workflow, checks, and project conventions)
+- Follow `CREAR_ARTICULOS.md` and `CREAR_CUENTOS.md` for content changes
+- If you change the content workflow, update those docs in the same PR
+
+ES: Si quieres colaborar, empieza por aquí:
+- `CONTRIBUTING.md` (PR workflow, validaciones y convenciones del proyecto)
+- Sigue `CREAR_ARTICULOS.md` y `CREAR_CUENTOS.md` para cambios en estos apartados
+- Si cambias el workflow del contenidos, actualiza esos documentos en la misma PR.
+
+## License
+
+All rights reserved.
