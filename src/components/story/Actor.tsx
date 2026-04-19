@@ -16,6 +16,11 @@ interface ActorProps {
 
 export default function Actor({ actorState, updateActor, viewportScale }: ActorProps) {
     const { definition, currentPosition, visible, animationDuration, isAnimating, animationType, triggerConfetti } = actorState;
+    const imageWidth = definition.width ?? 100;
+    const imageHeight = definition.height ?? 100;
+    const imageStyle = definition.width
+        ? { width: imageWidth, height: "auto" as const }
+        : { width: "auto" as const, height: imageHeight };
 
     // Referencia para localizar el elemento en pantalla
     const actorRef = useRef<HTMLDivElement>(null);
@@ -89,9 +94,10 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                 <Image
                     src={withBasePath(definition.src)}
                     alt={actorState.id}
-                    width={definition.width || 100}
-                    height={definition.height || 100}
+                    width={imageWidth}
+                    height={imageHeight}
                     className="pointer-events-none select-none max-w-none"
+                    style={imageStyle}
                     draggable={false}
                 />
             )}
