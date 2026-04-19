@@ -44,6 +44,7 @@ function GridCell({ position }: GridCellProps) {
                     src={position.icon}
                     alt="Icono"
                     fill
+                    sizes="(min-width: 1024px) 96px, (min-width: 768px) 80px, 64px"
                     className="object-contain"
                 />
             </motion.div>
