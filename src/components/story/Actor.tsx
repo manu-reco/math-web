@@ -18,9 +18,6 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
     const { definition, currentPosition, visible, animationDuration, isAnimating, animationType, triggerConfetti } = actorState;
     const imageWidth = definition.width ?? 100;
     const imageHeight = definition.height ?? 100;
-    const imageStyle = definition.width
-        ? { width: imageWidth, height: "auto" as const }
-        : { width: "auto" as const, height: imageHeight };
 
     // Referencia para localizar el elemento en pantalla
     const actorRef = useRef<HTMLDivElement>(null);
@@ -91,15 +88,19 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
     const renderContent = () => (
         <>
             {definition.type === 'image' && definition.src && (
-                <Image
-                    src={withBasePath(definition.src)}
-                    alt={actorState.id}
-                    width={imageWidth}
-                    height={imageHeight}
-                    className="pointer-events-none select-none max-w-none"
-                    style={imageStyle}
-                    draggable={false}
-                />
+                <div
+                    className="relative pointer-events-none select-none max-w-none"
+                    style={{ width: imageWidth, height: imageHeight }}
+                >
+                    <Image
+                        src={withBasePath(definition.src)}
+                        alt={actorState.id}
+                        fill
+                        sizes={`${imageWidth}px`}
+                        className="object-contain"
+                        draggable={false}
+                    />
+                </div>
             )}
             {definition.type === 'text' && definition.text && (
                 <div
