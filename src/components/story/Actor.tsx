@@ -44,10 +44,10 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         updateActor(actorState.id, { isDragging: false });
     };
 
-    const baseScale = (definition.scale || 1) * viewportScale;
+    const baseScale = (definition.scale ?? 1) * viewportScale;
 
     // Convertir ms a segundos para Framer Motion
-    const durationInSeconds = (animationDuration || 1500) / 1000;
+    const durationInSeconds = (animationDuration ?? 1500) / 1000;
 
     const targetOpacity = animationType === 'disappear' && isAnimating ? 0 : 1;
     const targetScale = animationType === 'disappear' && isAnimating
@@ -56,7 +56,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
 
     const commonProps = {
         style: {
-            zIndex: definition.zIndex || 10,
+            zIndex: definition.zIndex ?? 10,
         },
         className: "absolute",
         initial: {

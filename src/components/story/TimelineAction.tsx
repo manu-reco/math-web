@@ -24,7 +24,7 @@ export default function TimelineAction({ action, actors, updateActor }: Timeline
         // Ejecutar acción usando la función centralizada con delay si existe
         const timer = setTimeout(() => {
             executeStoryAction(action, actor, updateActor);
-        }, action.delay || 0);
+        }, action.delay ?? 0);
         
         return () => clearTimeout(timer);
     }, [action, updateActor]);

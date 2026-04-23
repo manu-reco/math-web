@@ -21,7 +21,7 @@ export function executeStoryAction(
                 visible: true,
                 currentPosition: { x: actor.definition.x, y: actor.definition.y },
                 isAnimating: true,
-                animationDuration: action.duration || 1000,
+                animationDuration: action.duration ?? 1000,
                 animationType: 'appear',
             });
             if (action.confetti === true) {
@@ -41,14 +41,14 @@ export function executeStoryAction(
                     isAnimating: false,
                     animationType: undefined,
                 });
-            }, action.duration || 1000);
+            }, action.duration ?? 1000);
             break;
 
         case 'disappear':
             // Animar desaparición
             updateActor(action.actor, {
                 isAnimating: true,
-                animationDuration: action.duration || 1000,
+                animationDuration: action.duration ?? 1000,
                 animationType: 'disappear',
             });
             setTimeout(() => {
@@ -57,7 +57,7 @@ export function executeStoryAction(
                     isAnimating: false,
                     animationType: undefined,
                 });
-            }, action.duration || 1000);
+            }, action.duration ?? 1000);
             break;
 
         case 'move':
@@ -66,14 +66,14 @@ export function executeStoryAction(
                     visible: true, // Hacer visible si estaba oculto
                     currentPosition: action.to,
                     isAnimating: true,
-                    animationDuration: action.duration || 1500,
+                    animationDuration: action.duration ?? 1500,
                     animationType: 'move',
                 });
 
                 // Marcar como no animando después de la duración
                 setTimeout(() => {
                     updateActor(action.actor, { isAnimating: false, animationType: undefined });
-                }, action.duration || 1500);
+                }, action.duration ?? 1500);
             }
             break;
 

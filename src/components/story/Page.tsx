@@ -41,7 +41,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
             page.onEnter.forEach((action, index) => {
                 setTimeout(() => {
                     executeAction(action);
-                }, action.delay || index * 100);
+                }, action.delay ?? index * 100);
             });
         }
 
