@@ -1,5 +1,5 @@
+import { forwardRef } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react"
 import { Pattern, IconPosition } from "@/data/subitizacionPatterns";
 
 const GRID_CONFIG = {
@@ -8,9 +8,9 @@ const GRID_CONFIG = {
 } as const;
 
 const STYLES = {
-    cell: "w-14 h-14 md:w-24 md:h-24 lg:w-28 lg:h-28 flex items-center justify-center",
-    icon: "relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24",
-    grid: "bg-white rounded-2xl shadow-2xl p-8 md:p-12 cursor-pointer hover:shadow-3xl transition-shadow duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30",
+    cell: "w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-36 xl:h-36 flex items-center justify-center",
+    icon: "relative w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 xl:w-32 xl:h-32",
+    grid: "bg-white rounded-2xl shadow-2xl p-8 md:p-12 lg:p-10 xl:p-8 cursor-pointer hover:shadow-3xl focus:outline-none ring-1 focus:ring-4 ring-primary/30 transition-ring duration-200",
 } as const;
 
 interface GameGridProps {
@@ -29,31 +29,21 @@ function GridCell({ position }: GridCellProps) {
 
     return (
         <div className={STYLES.cell}>
-            <motion.div
-                className={STYLES.icon}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20
-                }}
-            >
+            <div className={STYLES.icon}>
                 <Image
                     src={position.icon}
                     alt="Icono"
                     fill
-                    sizes="(min-width: 1024px) 96px, (min-width: 768px) 80px, 64px"
+                    sizes="(min-width: 1280px) 128px, (min-width: 1024px) 112px, (min-width: 768px) 80px, 64px"
                     className="object-contain"
                 />
-            </motion.div>
+            </div>
         </div>
     );
 }
 
 // Componente principal que muestra el grid de subitización
-export default function GameGrid({ pattern, onNext }: GameGridProps) {
+const GameGrid = forwardRef<HTMLDivElement, GameGridProps>(function GameGrid({ pattern, onNext }, ref) {
 
     // Crear mapa de posiciones ocupadas para búsqueda rápida
     const positionMap = new Map<string, IconPosition>();
@@ -83,28 +73,23 @@ export default function GameGrid({ pattern, onNext }: GameGridProps) {
     );
 
     return (
-        <div className="flex flex-col items-center justify-center">
-            <AnimatePresence mode="popLayout">
-                <motion.button
-                    key={pattern.id}
-                    onClick={onNext}
-                    className={STYLES.grid}
-                    aria-label="Presiona para continuar al siguiente patrón"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
+        <div ref={ref} className="flex flex-col items-center justify-center">
+            <button
+                onClick={onNext}
+                className={STYLES.grid}
+                aria-label="Presiona para continuar al siguiente patrón"
+            >
+                <div
+                    className="grid gap-4 lg:gap-5"
+                    style={{ gridTemplateRows: `repeat(${GRID_CONFIG.rows}, 1fr)` }}
                 >
-                    <div
-                        className="grid gap-4"
-                        style={{ gridTemplateRows: `repeat(${GRID_CONFIG.rows}, 1fr)` }}
-                    >
-                        {Array.from({ length: GRID_CONFIG.rows }).map((_, rowIndex) =>
-                            renderRow(rowIndex)
-                        )}
-                    </div>
-                </motion.button>
-            </AnimatePresence>
+                    {Array.from({ length: GRID_CONFIG.rows }).map((_, rowIndex) =>
+                        renderRow(rowIndex)
+                    )}
+                </div>
+            </button>
         </div>
     );
-}
+});
+
+export default GameGrid;

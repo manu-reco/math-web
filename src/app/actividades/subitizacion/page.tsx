@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { subitizacionLevels } from "@/data/subitizacionLevels";
 import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
@@ -25,18 +25,34 @@ export default function SubitizacionPage() {
 
     // Índice del patrón actual dentro de shuffledPatterns
     const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
+    const gameGridRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToGameGridCenter = useCallback((behavior: ScrollBehavior = 'smooth') => {
+        const gridElement = gameGridRef.current;
+        if (!gridElement) return;
+
+        const navbarElement = document.querySelector<HTMLElement>("[data-site-navbar='true']");
+        const navbarHeight = navbarElement?.getBoundingClientRect().height ?? 0;
+        const viewportHeight = window.innerHeight;
+        const maxScroll = document.documentElement.scrollHeight - viewportHeight;
+        if (maxScroll <= 0) return;
+
+        const rect = gridElement.getBoundingClientRect();
+        const elementTop = window.scrollY + rect.top;
+        const targetTop = elementTop - (viewportHeight + navbarHeight - rect.height) / 2;
+        const clampedTop = Math.max(0, Math.min(targetTop, maxScroll));
+
+        window.scrollTo({ top: clampedTop, behavior });
+    }, []);
 
     // FUNCIONES DEL JUEGO
     const handleBack = () => {
-        window.scrollTo({ top: 100, behavior: 'smooth' });
-
         if (gameState === 'playing' || gameState === 'completed') {
             setGameState('levelSelect');
         }
     };
 
     const playLevel = (level: Level, mode: GameMode) => {
-        window.scrollTo({ top: 100, behavior: 'smooth' });
         setCurrentLevel(level);
         setCurrentMode(mode);
         // Construir patrones desde PatternTemplate a Pattern con iconos asignados
@@ -89,6 +105,16 @@ export default function SubitizacionPage() {
         // cleanup: quita el listener antes de desmontar el componente o actualizarlo
     }, [gameState, nextPattern, previousPattern]);
 
+    useEffect(() => {
+        if (gameState !== 'playing') return;
+
+        const rafId = window.requestAnimationFrame(() => {
+            scrollToGameGridCenter('smooth');
+        });
+
+        return () => window.cancelAnimationFrame(rafId);
+    }, [gameState, currentPatternIndex, scrollToGameGridCenter]);
+
     const handleNextLevel = () => {
         if (!currentLevel) return;
 
@@ -133,7 +159,7 @@ export default function SubitizacionPage() {
     })() : false;
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-purple-50 to-blue-50 pb-20">
+        <div className="bg-linear-to-b from-purple-50 to-blue-50 pb-20">
             <ActivityInstructionsModal>
                 <SubitizacionInstructionsContent />
             </ActivityInstructionsModal>
@@ -176,6 +202,7 @@ export default function SubitizacionPage() {
                 {gameState === 'playing' && shuffledPatterns[currentPatternIndex] && (
                     <>
                         <GameGrid
+                            ref={gameGridRef}
                             pattern={shuffledPatterns[currentPatternIndex]}
                             onNext={nextPattern}
                         />

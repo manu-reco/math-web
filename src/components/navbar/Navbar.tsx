@@ -75,7 +75,12 @@ export default function Navbar() {
     }, [activeDropdown, isOpen]);
 
     return (
-        <nav ref={navRef} onClickCapture={handleNavClickCapture} className="bg-white shadow-md sticky top-0 z-50">
+        <nav
+            ref={navRef}
+            data-site-navbar="true"
+            onClickCapture={handleNavClickCapture}
+            className="bg-white shadow-md sticky top-0 z-50"
+        >
             <div className="container-custom">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
