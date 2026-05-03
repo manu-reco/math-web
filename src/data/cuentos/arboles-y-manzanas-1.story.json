@@ -28,6 +28,29 @@
             "id": "page-2",
             "actors": [
                 {
+                    "id": "hand-1",
+                    "type": "image",
+                    "src": "icons/mano-1.png",
+                    "x": 50,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 300,
+                    "height": 300,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "hand-1",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        },
+        {
+            "id": "page-3",
+            "actors": [
+                {
                     "id": "apple-1",
                     "type": "image",
                     "src": "cuentos/manzana.png",
@@ -41,13 +64,40 @@
             ],
             "onEnter": [
                 {
+                    "actor": "hand-1",
+                    "action": "disappear"
+                },
+                {
                     "actor": "apple-1",
                     "action": "appear"
                 }
             ]
         },
         {
-            "id": "page-3",
+            "id": "page-4",
+            "actors": [
+                {
+                    "id": "hand-1",
+                    "type": "image",
+                    "src": "icons/mano-1.png",
+                    "x": 50,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 300,
+                    "height": 300,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "hand-1",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        },
+        {
+            "id": "page-5",
             "actors": [
                 {
                     "id": "apple-2",
@@ -63,10 +113,37 @@
             ],
             "onEnter": [
                 {
+                    "actor": "hand-1",
+                    "action": "disappear"
+                },
+                {
                     "actor": "apple-2",
                     "action": "appear"
                 }
             ]
-        }    
+        },
+        {
+            "id": "page-6",
+            "actors": [
+                {
+                    "id": "hand-2",
+                    "type": "image",
+                    "src": "icons/mano-2.png",
+                    "x": 50,
+                    "y": 50,
+                    "zIndex": 10,
+                    "width": 300,
+                    "height": 300,
+                    "interactive": false
+                }
+            ],
+            "onEnter": [
+                {
+                    "actor": "hand-2",
+                    "action": "appear",
+                    "confetti": true
+                }
+            ]
+        }
     ]
 }
