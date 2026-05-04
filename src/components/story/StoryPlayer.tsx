@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import type { StoryData, ActorState, ActorDefinition } from "@/types/story";
+import type { StoryData, ActorState } from "@/types/story";
 import Page from "./Page";
 import useStoryControls from "@/hooks/use-story-controls";
 import { withBasePath } from "@/lib/assetPath";
@@ -50,29 +50,23 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         onComplete,
     });
 
-    // Inicializar actores de todas las páginas
+    // Inicializar actores del cuento
     useEffect(() => {
         const initialActors = new Map<string, ActorState>();
-        
-        story.pages.forEach(page => {
-            page.actors.forEach(item => {
-                // Solo procesar definiciones de actores, no acciones
-                if ('type' in item) {
-                    const actorDef = item as ActorDefinition;
-                    if (!initialActors.has(actorDef.id)) {
-                        initialActors.set(actorDef.id, {
-                            id: actorDef.id,
-                            definition: actorDef,
-                            currentPosition: { x: actorDef.x, y: actorDef.y },
-                            visible: false, // Empiezan invisibles
-                            isDragging: false,
-                            isAnimating: false,
-                            triggerConfetti: false,
-                            animationType: undefined,
-                        });
-                    }
-                }
-            });
+
+        story.actors.forEach(actorDef => {
+            if (!initialActors.has(actorDef.id)) {
+                initialActors.set(actorDef.id, {
+                    id: actorDef.id,
+                    definition: actorDef,
+                    currentPosition: { x: actorDef.x, y: actorDef.y },
+                    visible: false,
+                    isDragging: false,
+                    isAnimating: false,
+                    triggerConfetti: false,
+                    animationType: undefined,
+                });
+            }
         });
 
         setActors(initialActors);
@@ -83,13 +77,14 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
         const imagesToLoad: string[] = [];
 
         // Recopilar todas las imágenes
+        story.actors.forEach(actor => {
+            if (actor.type === 'image' && actor.src) {
+                imagesToLoad.push(actor.src);
+            }
+        });
+
         story.pages.forEach(page => {
             if (page.background) imagesToLoad.push(page.background);
-            page.actors.forEach(item => {
-                if ('type' in item && item.type === 'image' && item.src) {
-                    imagesToLoad.push(item.src);
-                }
-            });
         });
 
         // Precargar

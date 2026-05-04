@@ -1,33 +1,77 @@
 {
     "title": "Árboles y manzanas — Capítulo 3",
     "background": "/cuentos/bg-park.png",
+    "actors": [
+        {
+            "id": "tree-1",
+            "type": "image",
+            "src": "cuentos/arbol.png",
+            "x": 30,
+            "y": 55,
+            "zIndex": 5,
+            "width": 600,
+            "height": 600,
+            "interactive": false
+        },
+        {
+            "id": "tree-2",
+            "type": "image",
+            "src": "cuentos/arbol.png",
+            "x": 70,
+            "y": 55,
+            "zIndex": 5,
+            "width": 600,
+            "height": 600,
+            "interactive": false
+        },
+        {
+            "id": "number-2",
+            "type": "text",
+            "text": "2",
+            "textFontSize": 10,
+            "textBackgroundOpacity": 0,
+            "x": 50,
+            "y": 50,
+            "textColor": "primary",
+            "textOutline": true
+        },
+        {
+            "id": "apple-1",
+            "type": "image",
+            "src": "cuentos/manzana.png",
+            "x": 30,
+            "y": 50,
+            "zIndex": 10,
+            "width": 100,
+            "height": 100,
+            "interactive": false
+        },
+        {
+            "id": "number-1",
+            "type": "text",
+            "text": "1",
+            "textFontSize": 10,
+            "textBackgroundOpacity": 0,
+            "x": 50,
+            "y": 50,
+            "textColor": "primary",
+            "textOutline": true
+        },
+        {
+            "id": "apple-2",
+            "type": "image",
+            "src": "cuentos/manzana.png",
+            "x": 70,
+            "y": 50,
+            "zIndex": 10,
+            "width": 100,
+            "height": 100,
+            "interactive": false
+        }
+    ],
     "pages": [
         {
             "id": "page-1",
-            "actors": [
-                {
-                    "id": "tree-1",
-                    "type": "image",
-                    "src": "cuentos/arbol.png",
-                    "x": 30,
-                    "y": 55,
-                    "zIndex": 5,
-                    "width": 600,
-                    "height": 600,
-                    "interactive": false
-                },
-                {
-                    "id": "tree-2",
-                    "type": "image",
-                    "src": "cuentos/arbol.png",
-                    "x": 70,
-                    "y": 55,
-                    "zIndex": 5,
-                    "width": 600,
-                    "height": 600,
-                    "interactive": false
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "tree-1",
@@ -41,19 +85,6 @@
         },
         {
             "id": "page-2",
-            "actors": [
-                {
-                    "id": "number-2",
-                    "type": "text",
-                    "text": "2",
-                    "textFontSize": 10,
-                    "textBackgroundOpacity": 0,
-                    "x": 50,
-                    "y": 50,
-                    "textColor": "primary",
-                    "textOutline": true
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "number-2",
@@ -64,19 +95,6 @@
         },
         {
             "id": "page-3",
-            "actors": [
-                {
-                    "id": "apple-1",
-                    "type": "image",
-                    "src": "cuentos/manzana.png",
-                    "x": 30,
-                    "y": 50,
-                    "zIndex": 10,
-                    "width": 100,
-                    "height": 100,
-                    "interactive": false
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "number-2",
@@ -91,19 +109,6 @@
         },
         {
             "id": "page-4",
-            "actors": [
-                {
-                    "id": "number-1",
-                    "type": "text",
-                    "text": "1",
-                    "textFontSize": 10,
-                    "textBackgroundOpacity": 0,
-                    "x": 50,
-                    "y": 50,
-                    "textColor": "primary",
-                    "textOutline": true
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "number-1",
@@ -114,19 +119,6 @@
         },
         {
             "id": "page-5",
-            "actors": [
-                {
-                    "id": "apple-2",
-                    "type": "image",
-                    "src": "cuentos/manzana.png",
-                    "x": 70,
-                    "y": 50,
-                    "zIndex": 10,
-                    "width": 100,
-                    "height": 100,
-                    "interactive": false
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "number-1",
@@ -141,19 +133,6 @@
         },
         {
             "id": "page-6",
-            "actors": [
-                {
-                    "id": "number-2",
-                    "type": "text",
-                    "text": "2",
-                    "textFontSize": 10,
-                    "textBackgroundOpacity": 0,
-                    "x": 50,
-                    "y": 50,
-                    "textColor": "primary",
-                    "textOutline": true
-                }
-            ],
             "onEnter": [
                 {
                     "actor": "number-2",

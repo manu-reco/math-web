@@ -37,8 +37,7 @@ export default function useStoryControls({
 			appearActions.push(...page.onEnter.filter(action => action.action === "appear"));
 		}
 
-		const inlineActions = page.actors.filter(item => "action" in item) as ActionDefinition[];
-		inlineActions.forEach(action => {
+		(page.onEnter || []).forEach(action => {
 			if (action.action === "appear") {
 				appearActions.push(action);
 			}

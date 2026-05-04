@@ -6,7 +6,6 @@ import type { PageDefinition, ActorState, ActionDefinition } from "@/types/story
 import { executeStoryAction } from "@/lib/storyActions";
 import { withBasePath } from "@/lib/assetPath";
 import Actor from "./Actor";
-import TimelineAction from "./TimelineAction";
 import DragTarget from "./DragTarget";
 
 interface PageProps {
@@ -54,9 +53,6 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
         }
     }, [page.id, page.onEnter, advanceOn, page.autoAdvanceDelay, executeAction, onAdvance]);
 
-    // Encontrar actores y acciones de esta página
-    const pageActions = page.actors.filter(item => 'action' in item) as ActionDefinition[];
-
     // Usar background de la página o el global como fallback
     const finalBackground = page.background ?? globalBackground;
     const finalBackgroundColor = page.backgroundColor ?? globalBackgroundColor ?? '#e0f2fe';
@@ -99,15 +95,6 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
                 />
             ))}
 
-            {/* Ejecutar acciones de la página */}
-            {pageActions.map((action, index) => (
-                <TimelineAction
-                    key={`${action.actor}-${index}`}
-                    action={action}
-                    actors={actors}
-                    updateActor={updateActor}
-                />
-            ))}
         </motion.div>
     );
 }

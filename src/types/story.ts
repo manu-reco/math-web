@@ -56,12 +56,16 @@ export interface PageDefinition {
     id: string;
     background?: string; // URL del fondo
     backgroundColor?: string; // Color de fondo alternativo
-    actors: (ActorDefinition | ActionDefinition)[]; // Puede contener definiciones o acciones
     onEnter?: ActionDefinition[]; // Acciones al entrar a la página
     onExit?: ActionDefinition[]; // Acciones al salir de la página
     advanceOn?: AdvanceCondition; // Default: 'spaceOrClick'
     dragTargets?: DragTargetDefinition[];
     autoAdvanceDelay?: number; // Para advanceOn: 'auto'
+}
+
+export interface ChapterDefinition {
+    actors: ActorDefinition[];
+    pages: PageDefinition[];
 }
 
 export interface StoryData {
@@ -70,6 +74,7 @@ export interface StoryData {
     narrator?: string;
     background?: string; // Background global (se usa si la página no define uno)
     backgroundColor?: string; // Color de fondo global (se usa si la página no define uno)
+    actors: ActorDefinition[];
     pages: PageDefinition[];
 }
 

@@ -52,7 +52,6 @@ const PageDefinitionSchema = z.object({
     id: z.string(),
     background: z.string().optional(),
     backgroundColor: z.string().optional(),
-    actors: z.array(z.union([ActorDefinitionSchema, ActionDefinitionSchema])),
     onEnter: z.array(ActionDefinitionSchema).optional(),
     onExit: z.array(ActionDefinitionSchema).optional(),
     advanceOn: z.enum(['spaceOrClick', 'dragComplete', 'auto', 'animation']).default('spaceOrClick'),
@@ -66,6 +65,7 @@ const StoryDataSchema = z.object({
     narrator: z.string().optional(),
     background: z.string().optional(),
     backgroundColor: z.string().optional(),
+    actors: z.array(ActorDefinitionSchema),
     pages: z.array(PageDefinitionSchema).min(1),
 });
 
