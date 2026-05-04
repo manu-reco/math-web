@@ -17,7 +17,6 @@ src/
 │       ├── StoryPlayer.tsx           # Motor principal del cuento
 │       ├── Page.tsx                  # Contenedor de página
 │       ├── Actor.tsx                 # Componente de actor reutilizable
-│       ├── TimelineAction.tsx        # Ejecutor de acciones
 │       └── DragTarget.tsx            # Zonas de arrastre
 ├── data/
 │   └── cuentos/
@@ -54,27 +53,27 @@ src/
   "narrator": "Narrador (opcional)",
   "background": "/ruta/a/imagen.png",
   "backgroundColor": "#e0f2fe",
+  "actors": [
+    {
+      "id": "actor-1",
+      "type": "image",
+      "src": "ruta/imagen.png",
+      "x": 50,
+      "y": 80,
+      "width": 100,
+      "height": 100,
+      "interactive": true,
+      "draggable": false,
+      "scale": 1.0,
+      "rotation": 0,
+      "zIndex": 10
+    }
+  ],
   "pages": [
     {
       "id": "page-1",
       "background": "/ruta/a/imagen.png",
       "backgroundColor": "#e0f2fe",
-      "actors": [
-        {
-          "id": "actor-1",
-          "type": "image",
-          "src": "ruta/imagen.png",
-          "x": 50,
-          "y": 80,
-          "width": 100,
-          "height": 100,
-          "interactive": true,
-          "draggable": false,
-          "scale": 1.0,
-          "rotation": 0,
-          "zIndex": 10
-        }
-      ],
       "onEnter": [
         {
           "actor": "actor-1",
@@ -91,6 +90,7 @@ src/
 
 ### Campos globales del cuento
 
+- **actors** (array): Lista de todos los actores disponibles en el cuento. Se declaran **una sola vez** al inicio.
 - **background** (string, opcional): Fondo global para todas las páginas (si una página no define `background`).
 - **backgroundColor** (string, opcional): Color de fondo global (si una página no define `backgroundColor`).
 
@@ -176,8 +176,7 @@ src/
 - **id** (string): Identificador único
 - **background** (string, opcional): Ruta a imagen de fondo
 - **backgroundColor** (string, opcional): Color de fondo CSS
-- **actors** (array): Lista de actores o acciones
-- **onEnter** (array, opcional): Acciones al entrar a la página
+- **onEnter** (array, opcional): Acciones al entrar a la página (referencias a actores ya declarados)
 - **onExit** (array, opcional): Acciones al salir de la página
 - **advanceOn** (string, opcional): Condición de avance
   - `"spaceOrClick"` - Espacio o click para avanzar (por defecto)
@@ -248,10 +247,13 @@ Las posiciones usan **porcentajes (0-100)** para ser responsivas:
 
 ```json
 {
+  "actors": [
+    { "id": "buho", "type": "image", "src": "buho.png", "x": 50, "y": 80, "width": 100, "height": 100 },
+    { "id": "arbol", "type": "image", "src": "arbol.png", "x": 70, "y": 60, "width": 200, "height": 200 }
+  ],
   "pages": [
     {
       "id": "page-1",
-      "actors": [...],
       "onEnter": [
         { "actor": "buho", "action": "appear" },
         { "actor": "arbol", "action": "appear" }
@@ -259,7 +261,7 @@ Las posiciones usan **porcentajes (0-100)** para ser responsivas:
     },
     {
       "id": "page-2",
-      "actors": [
+      "onEnter": [
         {
           "actor": "buho",
           "action": "move",
@@ -297,21 +299,21 @@ Crear `src/data/cuentos/mi-cuento.story.json`:
 ```json
 {
   "title": "Mi Cuento",
+  "actors": [
+    {
+      "id": "personaje",
+      "type": "image",
+      "src": "cuentos/personaje.png",
+      "x": 50,
+      "y": 50,
+      "width": 150,
+      "height": 150
+    }
+  ],
   "pages": [
     {
       "id": "page-1",
       "backgroundColor": "#e0f2fe",
-      "actors": [
-        {
-          "id": "personaje",
-          "type": "image",
-          "src": "cuentos/personaje.png",
-          "x": 50,
-          "y": 50,
-          "width": 150,
-          "height": 150
-        }
-      ],
       "onEnter": [
         {
           "actor": "personaje",
