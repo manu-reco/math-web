@@ -1,79 +1,21 @@
 // Tipos TypeScript para el sistema de cuentos interactivos
 
-export type ActionType = 'appear' | 'disappear' | 'move' | 'drag' | 'playSound' | 'change-src' | 'change-text';
+import type {
+    ActionDefinition,
+    ActorDefinition,
+    DragTargetDefinition,
+    PageDefinition,
+    Position,
+    StoryData,
+} from "@/lib/storySchema";
 
-export type AdvanceCondition = 'spaceOrClick' | 'dragComplete' | 'auto' | 'animation';
+export type { ActionDefinition, ActorDefinition, DragTargetDefinition, PageDefinition, Position, StoryData };
 
-export interface Position {
-    x: number; // Porcentaje 0-100
-    y: number; // Porcentaje 0-100
-}
+export type ActionType = ActionDefinition["action"];
 
-export interface ActorDefinition {
-    id: string;
-    type: 'image' | 'text';
-    src?: string; // Para type: 'image'
-    text?: string; // Para type: 'text'
-    textFontSize?: string | number; // Para type: 'text' (default: 2rem)
-    textColor?: string; // Para type: 'text' - nombre de color Tailwind (default: 'text')
-    textBackgroundOpacity?: number; // Para type: 'text' (0-100, default: 30)
-    textOutline?: boolean; // Para type: 'text' - activa el contorno/stroke del texto (default: false)
-    textOutlineSize?: string; // Para type: 'text' - grosor del contorno, e.g. '2px' (default: 1px)
-    textOutlineColor?: string; // Para type: 'text' - color del contorno, e.g. 'white' (default: white)
-    x: number; // Posición inicial X (porcentaje)
-    y: number; // Posición inicial Y (porcentaje)
-    width?: number; // Ancho opcional (px)
-    height?: number; // Alto opcional (px)
-    interactive?: boolean;
-    draggable?: boolean;
-    scale?: number; // Escala inicial (default 1)
-    rotation?: number; // Rotación inicial en grados
-    zIndex?: number; // Orden de apilamiento
-}
-
-export interface ActionDefinition {
-    actor: string; // ID del actor
-    action: ActionType;
-    to?: Position | { src?: string } | { text?: string }; // Para 'move', o para change-src/change-text
-    duration?: number; // Duración en ms
-    delay?: number; // Retraso antes de ejecutar
-    easing?: string; // Función de easing
-    sound?: string; // Para 'playSound'
-    confetti?: boolean; // Para 'appear' (dispara confetti)
-    targetId?: string; // Para 'drag' - ID del DragTarget
-}
-
-export interface DragTargetDefinition {
-    id: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    acceptsActors: string[]; // IDs de actores que acepta
-}
-
-export interface PageDefinition {
-    id: string;
-    background?: string; // URL del fondo
-    backgroundColor?: string; // Color de fondo alternativo
-    onEnter?: ActionDefinition[]; // Acciones al entrar a la página
-    onExit?: ActionDefinition[]; // Acciones al salir de la página
-    advanceOn?: AdvanceCondition; // Default: 'spaceOrClick'
-    dragTargets?: DragTargetDefinition[];
-    autoAdvanceDelay?: number; // Para advanceOn: 'auto'
-}
+export type AdvanceCondition = NonNullable<PageDefinition["advanceOn"]>;
 
 export interface ChapterDefinition {
-    actors: ActorDefinition[];
-    pages: PageDefinition[];
-}
-
-export interface StoryData {
-    title: string;
-    author?: string;
-    narrator?: string;
-    background?: string; // Background global (se usa si la página no define uno)
-    backgroundColor?: string; // Color de fondo global (se usa si la página no define uno)
     actors: ActorDefinition[];
     pages: PageDefinition[];
 }

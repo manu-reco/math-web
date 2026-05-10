@@ -1,37 +1,7 @@
-import type { ActionDefinition, ActorState, Position } from "@/types/story";
+import type { ActionDefinition, ActorState } from "@/types/story";
 
 const CONFETTI_COOLDOWN_MS = 300;
 const confettiLastFired = new Map<string, number>();
-
-// Type guards para el atributo "to" de las acciones
-function isPositionPayload(value: ActionDefinition["to"]): value is Position {
-    return (
-        !!value
-        && typeof value === "object"
-        && "x" in value
-        && "y" in value
-        && typeof value.x === "number"
-        && typeof value.y === "number"
-    );
-}
-
-function isChangeSrcPayload(value: ActionDefinition["to"]): value is { src: string } {
-    return (
-        !!value
-        && typeof value === "object"
-        && "src" in value
-        && typeof value.src === "string"
-    );
-}
-
-function isChangeTextPayload(value: ActionDefinition["to"]): value is { text: string } {
-    return (
-        !!value
-        && typeof value === "object"
-        && "text" in value
-        && typeof value.text === "string"
-    );
-}
 
 /**
  * Ejecuta una acción sobre un actor
@@ -91,42 +61,36 @@ export function executeStoryAction(
             break;
 
         case 'move':
-            if (isPositionPayload(action.to)) {
-                updateActor(action.actor, {
-                    visible: true, // Hacer visible si estaba oculto
-                    currentPosition: action.to,
-                    isAnimating: true,
-                    animationDuration: action.duration ?? 1500,
-                    animationType: 'move',
-                });
+            updateActor(action.actor, {
+                visible: true, // Hacer visible si estaba oculto
+                currentPosition: action.to,
+                isAnimating: true,
+                animationDuration: action.duration ?? 1500,
+                animationType: 'move',
+            });
 
-                // Marcar como no animando después de la duración
-                setTimeout(() => {
-                    updateActor(action.actor, { isAnimating: false, animationType: undefined });
-                }, action.duration ?? 1500);
-            }
+            // Marcar como no animando después de la duración
+            setTimeout(() => {
+                updateActor(action.actor, { isAnimating: false, animationType: undefined });
+            }, action.duration ?? 1500);
             break;
 
         case 'change-src':
-            if (isChangeSrcPayload(action.to)) {
-                updateActor(action.actor, {
-                    definition: {
-                        ...actor.definition,
-                        src: action.to.src,
-                    },
-                });
-            }
+            updateActor(action.actor, {
+                definition: {
+                    ...actor.definition,
+                    src: action.to.src,
+                },
+            });
             break;
 
         case 'change-text':
-            if (isChangeTextPayload(action.to)) {
-                updateActor(action.actor, {
-                    definition: {
-                        ...actor.definition,
-                        text: action.to.text,
-                    },
-                });
-            }
+            updateActor(action.actor, {
+                definition: {
+                    ...actor.definition,
+                    text: action.to.text,
+                },
+            });
             break;
 
         case 'playSound':
