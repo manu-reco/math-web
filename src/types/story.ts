@@ -1,6 +1,6 @@
 // Tipos TypeScript para el sistema de cuentos interactivos
 
-export type ActionType = 'appear' | 'disappear' | 'move' | 'drag' | 'playSound';
+export type ActionType = 'appear' | 'disappear' | 'move' | 'drag' | 'playSound' | 'change-src' | 'change-text';
 
 export type AdvanceCondition = 'spaceOrClick' | 'dragComplete' | 'auto' | 'animation';
 
@@ -34,7 +34,7 @@ export interface ActorDefinition {
 export interface ActionDefinition {
     actor: string; // ID del actor
     action: ActionType;
-    to?: Position; // Para 'move'
+    to?: Position | { src?: string } | { text?: string }; // Para 'move', o para change-src/change-text
     duration?: number; // Duración en ms
     delay?: number; // Retraso antes de ejecutar
     easing?: string; // Función de easing

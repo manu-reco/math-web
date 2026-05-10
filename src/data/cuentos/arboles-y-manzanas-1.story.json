@@ -14,7 +14,7 @@
             "interactive": false
         },
         {
-            "id": "hand-1",
+            "id": "hand",
             "type": "image",
             "src": "icons/mano-1.png",
             "x": 50,
@@ -45,17 +45,6 @@
             "width": 100,
             "height": 100,
             "interactive": false
-        },
-        {
-            "id": "hand-2",
-            "type": "image",
-            "src": "icons/mano-2.png",
-            "x": 50,
-            "y": 50,
-            "zIndex": 10,
-            "width": 300,
-            "height": 300,
-            "interactive": false
         }
     ],
     "pages": [
@@ -72,7 +61,12 @@
             "id": "page-2",
             "onEnter": [
                 {
-                    "actor": "hand-1",
+                    "actor": "hand",
+                    "action": "change-src",
+                    "to": { "src": "icons/mano-1.png" }
+                },
+                {
+                    "actor": "hand",
                     "action": "appear",
                     "confetti": true
                 }
@@ -82,7 +76,7 @@
             "id": "page-3",
             "onEnter": [
                 {
-                    "actor": "hand-1",
+                    "actor": "hand",
                     "action": "disappear"
                 },
                 {
@@ -95,7 +89,12 @@
             "id": "page-4",
             "onEnter": [
                 {
-                    "actor": "hand-1",
+                    "actor": "hand",
+                    "action": "change-src",
+                    "to": { "src": "icons/mano-1.png" }
+                },
+                {
+                    "actor": "hand",
                     "action": "appear",
                     "confetti": true
                 }
@@ -105,7 +104,7 @@
             "id": "page-5",
             "onEnter": [
                 {
-                    "actor": "hand-1",
+                    "actor": "hand",
                     "action": "disappear"
                 },
                 {
@@ -118,7 +117,12 @@
             "id": "page-6",
             "onEnter": [
                 {
-                    "actor": "hand-2",
+                    "actor": "hand",
+                    "action": "change-src",
+                    "to": { "src": "icons/mano-2.png" }
+                },
+                {
+                    "actor": "hand",
                     "action": "appear",
                     "confetti": true
                 }

@@ -25,9 +25,9 @@
             "interactive": false
         },
         {
-            "id": "number-2",
+            "id": "number",
             "type": "text",
-            "text": "2",
+            "text": "",
             "textFontSize": 10,
             "textBackgroundOpacity": 0,
             "x": 50,
@@ -45,17 +45,6 @@
             "width": 100,
             "height": 100,
             "interactive": false
-        },
-        {
-            "id": "number-1",
-            "type": "text",
-            "text": "1",
-            "textFontSize": 10,
-            "textBackgroundOpacity": 0,
-            "x": 50,
-            "y": 50,
-            "textColor": "primary",
-            "textOutline": true
         },
         {
             "id": "apple-2",
@@ -87,7 +76,12 @@
             "id": "page-2",
             "onEnter": [
                 {
-                    "actor": "number-2",
+                    "actor": "number",
+                    "action": "change-text",
+                    "to": { "text": "2" }
+                },
+                {
+                    "actor": "number",
                     "action": "appear",
                     "confetti": true
                 }
@@ -97,7 +91,7 @@
             "id": "page-3",
             "onEnter": [
                 {
-                    "actor": "number-2",
+                    "actor": "number",
                     "action": "disappear"
                 },
                 {
@@ -111,7 +105,12 @@
             "id": "page-4",
             "onEnter": [
                 {
-                    "actor": "number-1",
+                    "actor": "number",
+                    "action": "change-text",
+                    "to": { "text": "1" }
+                },
+                {
+                    "actor": "number",
                     "action": "appear",
                     "confetti": true
                 }
@@ -121,7 +120,7 @@
             "id": "page-5",
             "onEnter": [
                 {
-                    "actor": "number-1",
+                    "actor": "number",
                     "action": "disappear"
                 },
                 {
@@ -135,7 +134,12 @@
             "id": "page-6",
             "onEnter": [
                 {
-                    "actor": "number-2",
+                    "actor": "number",
+                    "action": "change-text",
+                    "to": { "text": "2" }
+                },
+                {
+                    "actor": "number",
                     "action": "appear",
                     "confetti": true
                 }

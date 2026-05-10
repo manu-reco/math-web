@@ -5,17 +5,70 @@ const PositionSchema = z.object({
     y: z.number().min(0).max(100),
 });
 
-const ActionDefinitionSchema = z.object({
+const AppearSchema = z.object({
     actor: z.string(),
-    action: z.enum(['appear', 'disappear', 'move', 'drag', 'playSound']),
-    to: PositionSchema.optional(),
+    action: z.literal('appear'),
     duration: z.number().optional(),
     delay: z.number().optional(),
     easing: z.string().optional(),
-    sound: z.string().optional(),
     confetti: z.boolean().optional(),
-    targetId: z.string().optional(),
 });
+
+const DisappearSchema = z.object({
+    actor: z.string(),
+    action: z.literal('disappear'),
+    duration: z.number().optional(),
+    delay: z.number().optional(),
+    easing: z.string().optional(),
+});
+
+const MoveSchema = z.object({
+    actor: z.string(),
+    action: z.literal('move'),
+    to: PositionSchema,
+    duration: z.number().optional(),
+    delay: z.number().optional(),
+    easing: z.string().optional(),
+});
+
+const DragSchema = z.object({
+    actor: z.string(),
+    action: z.literal('drag'),
+    targetId: z.string().optional(),
+    duration: z.number().optional(),
+    delay: z.number().optional(),
+});
+
+const PlaySoundSchema = z.object({
+    actor: z.string(),
+    action: z.literal('playSound'),
+    sound: z.string(),
+    delay: z.number().optional(),
+});
+
+const ChangeSrcSchema = z.object({
+    actor: z.string(),
+    action: z.literal('change-src'),
+    to: z.object({ src: z.string() }),
+    delay: z.number().optional(),
+});
+
+const ChangeTextSchema = z.object({
+    actor: z.string(),
+    action: z.literal('change-text'),
+    to: z.object({ text: z.string() }),
+    delay: z.number().optional(),
+});
+
+const ActionDefinitionSchema = z.discriminatedUnion('action', [
+    AppearSchema,
+    DisappearSchema,
+    MoveSchema,
+    DragSchema,
+    PlaySoundSchema,
+    ChangeSrcSchema,
+    ChangeTextSchema,
+]);
 
 const ActorDefinitionSchema = z.object({
     id: z.string(),
