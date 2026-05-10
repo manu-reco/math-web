@@ -9,6 +9,7 @@ src/
 ├── types/
 │   └── story.ts                      # Tipos TypeScript para el sistema
 ├── lib/
+│   ├── storySchema.ts               # Esquema Zod (fuente de verdad)
 │   └── validateStory.ts              # Validación de datos con Zod
 ├── hooks/
 │   └── use-story-controls.tsx         # Lógica reutilizable de controles del cuento
@@ -169,6 +170,24 @@ src/
 }
 ```
 
+### Change Src (Cambiar Imagen)
+```json
+{
+  "actor": "mano",
+  "action": "change-src",
+  "to": { "src": "icons/mano-2.png" }
+}
+```
+
+### Change Text (Cambiar Texto)
+```json
+{
+  "actor": "numero",
+  "action": "change-text",
+  "to": { "text": "2" }
+}
+```
+
 ## 📄 Estructura de una Página
 
 ### Propiedades de Página
@@ -273,6 +292,8 @@ Las posiciones usan **porcentajes (0-100)** para ser responsivas:
   ]
 }
 ```
+
+Si necesitas reutilizar el mismo actor con otra imagen o texto, usa `change-src` o `change-text` antes de `appear`.
 
 ### Para hacer que un actor desaparezca
 
@@ -454,7 +475,7 @@ Ver archivo completo en: `src/data/cuentos/owl-tree.story.json`
 Si hay errores en el JSON, la validación de Zod los mostrará en la consola con detalles específicos:
 
 ```
-Invalid story data: pages.0.actors.0.x: Expected number, received string
+Invalid story data: pages.0.onEnter.0.to.x: Expected number, received string
 ```
 
 ## 📚 Próximas Mejoras
@@ -473,10 +494,11 @@ Ideas para futuras versiones:
 
 Para añadir nuevas características al sistema:
 
-1. Actualizar tipos en `src/types/story.ts`
-2. Actualizar validación en `src/lib/validateStory.ts`
-3. Implementar en componentes correspondientes
-4. Actualizar esta documentación
+1. Actualizar el esquema en `src/lib/storySchema.ts`
+2. Revisar los tipos en `src/types/story.ts` (re-exporta tipos inferidos)
+3. Actualizar validación en `src/lib/validateStory.ts` si cambia el contrato
+4. Implementar en componentes correspondientes
+5. Actualizar esta documentación
 
 ---
 
