@@ -14,6 +14,14 @@
             "interactive": false
         },
         {
+            "id": "subtitle",
+            "type": "subtitle",
+            "text": "",
+            "textColor": "primary",
+            "x": 50,
+            "y": 90
+        },
+        {
             "id": "tree-2",
             "type": "image",
             "src": "cuentos/arbol.png",
@@ -63,6 +71,15 @@
             "id": "page-1",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Aparece otro árbol más! ¿Cuántos árboles hay ahora?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "tree-1",
                     "action": "appear"
                 },
@@ -75,6 +92,15 @@
         {
             "id": "page-2",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Dos!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",
@@ -91,6 +117,15 @@
             "id": "page-3",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "Aparece una manzana en el árbol de la izquierda. ¿Cuántas manzanas hay en los árboles?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "number",
                     "action": "disappear"
                 },
@@ -104,6 +139,15 @@
         {
             "id": "page-4",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Una!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",
@@ -120,6 +164,15 @@
             "id": "page-5",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "Aparece otra manzana en el árbol de la derecha. ¿Cuántas manzanas hay en los árboles ahora?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "number",
                     "action": "disappear"
                 },
@@ -133,6 +186,15 @@
         {
             "id": "page-6",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Dos!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",

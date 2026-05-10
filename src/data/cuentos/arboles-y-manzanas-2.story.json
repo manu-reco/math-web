@@ -14,6 +14,14 @@
             "interactive": false
         },
         {
+            "id": "subtitle",
+            "type": "subtitle",
+            "text": "",
+            "textColor": "primary",
+            "x": 50,
+            "y": 90
+        },
+        {
             "id": "number",
             "type": "text",
             "text": "",
@@ -53,6 +61,15 @@
             "id": "page-1",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "Aparece un árbol sin manzanas. ¿Cuántos árboles hay?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "tree-1",
                     "action": "appear"
                 }
@@ -61,6 +78,15 @@
         {
             "id": "page-2",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Uno!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",
@@ -77,6 +103,15 @@
             "id": "page-3",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "Aparece una manzana en el árbol. ¿Cuántas manzanas hay?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "number",
                     "action": "disappear"
                 },
@@ -90,6 +125,15 @@
         {
             "id": "page-4",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Una!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",
@@ -106,6 +150,15 @@
             "id": "page-5",
             "onEnter": [
                 {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "Aparece otra manzana en el árbol. ¿Cuántas manzanas hay ahora?" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
+                {
                     "actor": "number-1",
                     "action": "disappear"
                 },
@@ -119,6 +172,15 @@
         {
             "id": "page-6",
             "onEnter": [
+                {
+                    "actor": "subtitle",
+                    "action": "change-text",
+                    "to": { "text": "¡Dos!" }
+                },
+                {
+                    "actor": "subtitle",
+                    "action": "appear"
+                },
                 {
                     "actor": "number",
                     "action": "change-text",
