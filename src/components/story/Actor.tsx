@@ -18,6 +18,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
     const { definition, currentPosition, visible, animationDuration, isAnimating, animationType, triggerConfetti } = actorState;
     const imageWidth = definition.width ?? 100;
     const imageHeight = definition.height ?? 100;
+    const isSubtitle = definition.type === "subtitle";
+    const isDraggable = !!definition.draggable && !isSubtitle;
 
     // Referencia para localizar el elemento en pantalla
     const actorRef = useRef<HTMLDivElement>(null);
@@ -54,16 +56,20 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         ? 0.3 * viewportScale
         : baseScale;
 
+    const renderPosition = isSubtitle
+        ? { x: 50, y: 90 }
+        : currentPosition;
+
     const commonProps = {
         style: {
-            zIndex: definition.zIndex ?? 10,
+            zIndex: definition.zIndex ?? (isSubtitle ? 15 : 10),
         },
         className: "absolute",
         initial: {
             opacity: 0,
             scale: 0.3 * viewportScale,
-            left: `${currentPosition.x}%`,
-            top: `${currentPosition.y}%`,
+            left: `${renderPosition.x}%`,
+            top: `${renderPosition.y}%`,
             x: '-50%',
             y: '-50%',
         },
@@ -71,8 +77,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
             opacity: targetOpacity,
             scale: targetScale,
             rotate: definition.rotation || 0,
-            left: `${currentPosition.x}%`,
-            top: `${currentPosition.y}%`,
+            left: `${renderPosition.x}%`,
+            top: `${renderPosition.y}%`,
             x: '-50%',
             y: '-50%',
         },
@@ -102,16 +108,21 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     />
                 </div>
             )}
-            {definition.type === 'text' && definition.text && (
+            {(definition.type === 'text' || definition.type === 'subtitle') && definition.text && (
                 <div
-                    className={`font-bold text-${definition.textColor ?? 'text'} ${definition.textOutline ? 'text-outline' : ''} ${definition.textOutlineSize ? '[--outline-size:' + definition.textOutlineSize + ']' : ''} ${definition.textOutlineColor ? '[--outline-color:' + definition.textOutlineColor + ']' : ''} select-none rounded-2xl ${definition.draggable ? 'shadow-xl inset-shadow-xl' : 'p-5'}`}
+                    className={`font-bold text-${definition.textColor ?? 'text'} ${definition.textOutline || isSubtitle ? 'text-outline' : ''} ${definition.textOutlineSize || isSubtitle ? '[--outline-size:' + (definition.textOutlineSize ?? '3px') + ']' : ''} ${definition.textOutlineColor || isSubtitle ? '[--outline-color:' + (definition.textOutlineColor ?? 'white') + ']' : ''} select-none rounded-2xl ${isDraggable ? 'shadow-xl inset-shadow-xl' : 'p-5'} ${isSubtitle ? 'w-[90vw] text-center' : ''}`}
                     style={{
-                        fontSize: typeof definition.textFontSize === 'number'
-                            ? `${definition.textFontSize}rem`
-                            : (definition.textFontSize || '2rem'),
-                        backgroundColor: definition.draggable
-                            ? `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`
-                            : `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`,
+                        fontSize: isSubtitle
+                            ? '1.1rem'
+                            : (typeof definition.textFontSize === 'number'
+                                ? `${definition.textFontSize}rem`
+                                : (definition.textFontSize || '2rem')),
+                        backgroundColor: isSubtitle
+                            ? 'rgba(0, 0, 0, 0.35)'
+                            : (definition.draggable
+                                ? `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`
+                                : `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`),
+                        textShadow: isSubtitle ? '0 2px 6px rgba(0, 0, 0, 0.6)' : undefined,
                     }}
                 >
                     {definition.text}
@@ -122,7 +133,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         </>
     );
 
-    if (definition.draggable) {
+    if (isDraggable) {
         return (
             <motion.div
                 ref={actorRef}

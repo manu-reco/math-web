@@ -3,6 +3,8 @@ import type { ActionDefinition, ActorState } from "@/types/story";
 const CONFETTI_COOLDOWN_MS = 300;
 const confettiLastFired = new Map<string, number>();
 
+const SUBTITLE_POSITION = { x: 50, y: 90 };
+
 /**
  * Ejecuta una acción sobre un actor
  * @param action - La definición de la acción a ejecutar
@@ -19,7 +21,9 @@ export function executeStoryAction(
             // Ir a posición original y hacer visible
             updateActor(action.actor, {
                 visible: true,
-                currentPosition: { x: actor.definition.x, y: actor.definition.y },
+                currentPosition: actor.definition.type === "subtitle"
+                    ? SUBTITLE_POSITION
+                    : { x: actor.definition.x, y: actor.definition.y },
                 isAnimating: true,
                 animationDuration: action.duration ?? 1000,
                 animationType: 'appear',
@@ -61,6 +65,9 @@ export function executeStoryAction(
             break;
 
         case 'move':
+            if (actor.definition.type === "subtitle") {
+                break;
+            }
             updateActor(action.actor, {
                 visible: true, // Hacer visible si estaba oculto
                 currentPosition: action.to,

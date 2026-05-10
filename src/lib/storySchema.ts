@@ -72,7 +72,7 @@ export const ActionDefinitionSchema = z.discriminatedUnion("action", [
 
 export const ActorDefinitionSchema = z.object({
     id: z.string(),
-    type: z.enum(["image", "text"]),
+    type: z.enum(["image", "text", "subtitle"]),
     src: z.string().optional(),
     text: z.string().optional(),
     textFontSize: z.union([z.string(), z.number()]).optional(),
@@ -90,6 +90,35 @@ export const ActorDefinitionSchema = z.object({
     scale: z.number().optional(),
     rotation: z.number().optional(),
     zIndex: z.number().optional(),
+}).superRefine((value, context) => {
+    if (value.type === "image" && !value.src) {
+        context.addIssue({
+            code: "custom",
+            path: ["src"],
+            message: "image actors require a source image",
+        });
+    }
+    if (value.type === "image" && (value.text || value.textFontSize || value.textColor || value.textOutline || value.textOutlineSize || value.textOutlineColor)) {
+        context.addIssue({
+            code: "custom",
+            path: ["text"],
+            message: "image actors cannot define text properties",
+        });
+    }
+    if ((value.type === "text" || value.type === "subtitle") && value.src) {
+        context.addIssue({
+            code: "custom",
+            path: ["src"],
+            message: "text and subtitle actors cannot define src",
+        });
+    }
+    if (value.type === "subtitle" && value.draggable) {
+        context.addIssue({
+            code: "custom",
+            path: ["draggable"],
+            message: "subtitle actors cannot be draggable",
+        });
+    }
 });
 
 export const DragTargetSchema = z.object({
