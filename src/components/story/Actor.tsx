@@ -60,11 +60,19 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         ? { x: 50, y: 90 }
         : currentPosition;
 
+    const subtitleDefaults = {
+        fontSize: "1.2rem",
+        backgroundColor: "rgba(0, 0, 0, 0.35)",
+        strokeWidth: "8px",
+        strokeColor: "white",
+        textShadow: "2px 2px 3px black",
+    };
+
     const commonProps = {
         style: {
             zIndex: definition.zIndex ?? (isSubtitle ? 15 : 10),
         },
-        className: "absolute",
+        className: "absolute border-0",
         initial: {
             opacity: 0,
             scale: 0.3 * viewportScale,
@@ -108,26 +116,42 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                     />
                 </div>
             )}
-            {(definition.type === 'text' || definition.type === 'subtitle') && definition.text && (
-                <div
-                    className={`font-bold text-${definition.textColor ?? 'text'} ${definition.textOutline || isSubtitle ? 'text-outline' : ''} ${definition.textOutlineSize || isSubtitle ? '[--outline-size:' + (definition.textOutlineSize ?? '3px') + ']' : ''} ${definition.textOutlineColor || isSubtitle ? '[--outline-color:' + (definition.textOutlineColor ?? 'white') + ']' : ''} select-none rounded-2xl ${isDraggable ? 'shadow-xl inset-shadow-xl' : 'p-5'} ${isSubtitle ? 'w-[90vw] text-center' : ''}`}
-                    style={{
-                        fontSize: isSubtitle
-                            ? '1.1rem'
-                            : (typeof definition.textFontSize === 'number'
-                                ? `${definition.textFontSize}rem`
-                                : (definition.textFontSize || '2rem')),
-                        backgroundColor: isSubtitle
-                            ? 'rgba(0, 0, 0, 0.35)'
-                            : (definition.draggable
-                                ? `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`
-                                : `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`),
-                        textShadow: isSubtitle ? '0 2px 6px rgba(0, 0, 0, 0.6)' : undefined,
-                    }}
-                >
-                    {definition.text}
-                </div>
-            )}
+            {(definition.type === 'text' || definition.type === 'subtitle') && definition.text && (() => {
+                const fontSize = isSubtitle
+                    ? subtitleDefaults.fontSize
+                    : (typeof definition.textFontSize === "number"
+                        ? `${definition.textFontSize}rem`
+                        : (definition.textFontSize || "2rem"));
+
+                const backgroundColor = isSubtitle
+                    ? subtitleDefaults.backgroundColor
+                    : (definition.draggable
+                        ? `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`
+                        : `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`);
+
+                const strokeWidth = definition.textOutlineSize ?? (isSubtitle ? subtitleDefaults.strokeWidth : undefined);
+                const strokeColor = definition.textOutlineColor ?? (isSubtitle ? subtitleDefaults.strokeColor : undefined);
+                const useStroke = isSubtitle || definition.textOutline;
+
+                return (
+                    <div
+                        className={`font-bold text-${definition.textColor ?? 'text'} ${useStroke ? 'text-stroke' : ''} select-none rounded-2xl ${isDraggable ? 'shadow-xl inset-shadow-xl' : 'p-5'} ${isSubtitle ? 'w-[90vw] text-center' : ''}`}
+                        style={{
+                            fontSize,
+                            backgroundColor,
+                            textShadow: isSubtitle ? subtitleDefaults.textShadow : undefined,
+                            ...(useStroke
+                                ? {
+                                    ["--stroke-width" as keyof React.CSSProperties]: strokeWidth,
+                                    ["--stroke-color" as keyof React.CSSProperties]: strokeColor,
+                                }
+                                : undefined),
+                        }}
+                    >
+                        {definition.text}
+                    </div>
+                );
+            })()}
             {/* Añadir confetti si triggerConfetti lo indica */}
             {triggerConfetti && <ConfettiOnMount onMount={handleConfetti} />}
         </>

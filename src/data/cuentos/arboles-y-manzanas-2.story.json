@@ -31,7 +31,8 @@
             "y": 50,
             "textColor": "primary",
             "textOutline": true,
-            "textOutlineSize": "2px"
+            "textOutlineSize": "2px",
+            "zIndex": 12
         },
         {
             "id": "apple-1",

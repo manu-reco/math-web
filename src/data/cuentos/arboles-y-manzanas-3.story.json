@@ -41,7 +41,8 @@
             "x": 50,
             "y": 50,
             "textColor": "primary",
-            "textOutline": true
+            "textOutline": true,
+            "zIndex": 12
         },
         {
             "id": "apple-1",
