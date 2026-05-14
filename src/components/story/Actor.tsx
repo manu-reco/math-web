@@ -64,7 +64,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         fontSize: "1.2rem",
         backgroundColor: "rgba(0, 0, 0, 0.35)",
         strokeWidth: "8px",
-        strokeColor: "white",
+        strokeColor: "black",
         textShadow: "2px 2px 3px black",
     };
 
