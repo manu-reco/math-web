@@ -41,8 +41,8 @@
             "x": 50,
             "y": 25,
             "textColor": "primary",
-            "textOutline": true,
-            "textOutlineSize": "8px",
+            "textStroke": true,
+            "textStrokeWidth": "8px",
             "zIndex": 12
         },
         {

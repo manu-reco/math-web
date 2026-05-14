@@ -78,9 +78,9 @@ export const ActorDefinitionSchema = z.object({
     textFontSize: z.union([z.string(), z.number()]).optional(),
     textBackgroundOpacity: z.number().min(0).max(100).optional(),
     textColor: z.string().optional(),
-    textOutline: z.boolean().optional(),
-    textOutlineSize: z.string().optional(),
-    textOutlineColor: z.string().optional(),
+    textStroke: z.boolean().optional(),
+    textStrokeWidth: z.string().optional(),
+    textStrokeColor: z.string().optional(),
     x: z.number().min(0).max(100),
     y: z.number().min(0).max(100),
     width: z.number().optional(),
@@ -98,7 +98,7 @@ export const ActorDefinitionSchema = z.object({
             message: "image actors require a source image",
         });
     }
-    if (value.type === "image" && (value.text || value.textFontSize || value.textColor || value.textOutline || value.textOutlineSize || value.textOutlineColor)) {
+    if (value.type === "image" && (value.text || value.textFontSize || value.textColor || value.textStroke || value.textStrokeWidth || value.textStrokeColor)) {
         context.addIssue({
             code: "custom",
             path: ["text"],

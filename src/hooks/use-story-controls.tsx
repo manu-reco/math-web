@@ -55,6 +55,7 @@ export default function useStoryControls({
 			if (explicitExitDisappear.has(action.actor)) return;
 
 			const actor = actorsRef.current.get(action.actor);
+			if (actor?.definition.type === "subtitle") return;
 			if (!actor || !actor.visible) return;
 
 			executeStoryAction(

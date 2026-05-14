@@ -129,9 +129,9 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                         ? `rgba(255, 255, 255, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`
                         : `rgba(0, 0, 0, ${((definition.textBackgroundOpacity ?? 30) > 1 ? (definition.textBackgroundOpacity ?? 30) / 100 : (definition.textBackgroundOpacity ?? 30))})`);
 
-                const strokeWidth = definition.textOutlineSize ?? (isSubtitle ? subtitleDefaults.strokeWidth : undefined);
-                const strokeColor = definition.textOutlineColor ?? (isSubtitle ? subtitleDefaults.strokeColor : undefined);
-                const useStroke = isSubtitle || definition.textOutline;
+                const strokeWidth = definition.textStrokeWidth ?? (isSubtitle ? subtitleDefaults.strokeWidth : undefined);
+                const strokeColor = definition.textStrokeColor ?? (isSubtitle ? subtitleDefaults.strokeColor : undefined);
+                const useStroke = isSubtitle || definition.textStroke;
 
                 return (
                     <div
@@ -144,6 +144,7 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
                                 ? {
                                     ["--stroke-width" as keyof React.CSSProperties]: strokeWidth,
                                     ["--stroke-color" as keyof React.CSSProperties]: strokeColor,
+                                    ["--stroke-shadow" as keyof React.CSSProperties]: isSubtitle ? subtitleDefaults.textShadow : undefined,
                                 }
                                 : undefined),
                         }}
