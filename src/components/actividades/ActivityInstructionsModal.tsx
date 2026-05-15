@@ -38,9 +38,12 @@ export default function ActivityInstructionsModal({
     return (
         <>
             <ExpandingFab
+                top={5}
+                right={1}
                 icon={CircleHelp}
                 label="Instrucciones"
                 onClick={() => setIsOpen(true)}
+                ariaLabel="Abrir instrucciones"
             />
 
             <AnimatePresence>

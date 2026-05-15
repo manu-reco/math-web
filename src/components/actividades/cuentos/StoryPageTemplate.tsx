@@ -11,6 +11,7 @@ import FixedExitButton from "../FixedExitButton";
 import StoryErrorScreen from "./StoryErrorScreen";
 import StoryCompletionScreen from "@/components/actividades/cuentos/StoryCompletionScreen";
 import { Captions, CaptionsOff } from "lucide-react";
+import ExpandingFab from "@/components/ExpandingFab";
 
 interface StoryChapterConfig {
     id: string;
@@ -123,6 +124,7 @@ function StoryPageTemplateBase({
 
     return (
         <div className="pb-10">
+
             <FixedExitButton backHref={backHref} />
             <ActivityInstructionsModal>
                 <PdfButton
@@ -131,21 +133,14 @@ function StoryPageTemplateBase({
                 <StoryInstructionsContent />
             </ActivityInstructionsModal>
 
-            <button
-                type="button"
+            <ExpandingFab
+                top={9}
+                right={1}
+                icon={subtitlesEnabled ? Captions : CaptionsOff}
+                label={subtitlesEnabled ? "Subtitulos" : "Subtitulos off"}
+                ariaLabel={subtitlesEnabled ? "Ocultar subtitulos" : "Mostrar subtitulos"}
                 onClick={() => setSubtitlesEnabled(prev => !prev)}
-                className="group fixed top-36 right-4 z-50 h-14 min-w-14 px-4 flex items-center justify-center bg-white/80 backdrop-blur-sm text-text-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-out overflow-hidden cursor-pointer"
-                aria-label={subtitlesEnabled ? "Ocultar subtitulos" : "Mostrar subtitulos"}
-            >
-                {subtitlesEnabled ? (
-                    <Captions size={20} className="shrink-0" />
-                ) : (
-                    <CaptionsOff size={20} className="shrink-0" />
-                )}
-                <span className="max-w-0 opacity-0 whitespace-nowrap font-semibold text-sm group-hover:max-w-[140px] group-hover:opacity-100 group-hover:ml-2 transition-all duration-300">
-                    {subtitlesEnabled ? "Subtitulos" : "Subtitulos off"}
-                </span>
-            </button>
+            />
 
             {gameCompleted ? (
                 <StoryCompletionScreen
