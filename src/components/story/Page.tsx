@@ -16,9 +16,10 @@ interface PageProps {
     globalBackground?: string; // Background global de la historia
     globalBackgroundColor?: string; // Color de fondo global de la historia
     viewportScale: number;
+    subtitlesEnabled?: boolean;
 }
 
-export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor, viewportScale }: PageProps) {
+export default function Page({ page, actors, updateActor, onAdvance, globalBackground, globalBackgroundColor, viewportScale, subtitlesEnabled = true }: PageProps) {
     const actorsRef = useRef(actors);
     const advanceOn = page.advanceOn ?? 'spaceOrClick';
 
@@ -92,6 +93,7 @@ export default function Page({ page, actors, updateActor, onAdvance, globalBackg
                     actorState={actorState}
                     updateActor={updateActor}
                     viewportScale={viewportScale}
+                    subtitlesEnabled={subtitlesEnabled}
                 />
             ))}
 

@@ -10,9 +10,10 @@ import ProgressNavigator from "@/components/actividades/ProgressNavigator";
 interface StoryPlayerProps {
     story: StoryData;
     onComplete?: () => void;
+    subtitlesEnabled?: boolean;
 }
 
-export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
+export default function StoryPlayer({ story, onComplete, subtitlesEnabled = true }: StoryPlayerProps) {
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [actors, setActors] = useState<Map<string, ActorState>>(new Map());
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -156,6 +157,7 @@ export default function StoryPlayer({ story, onComplete }: StoryPlayerProps) {
                 globalBackground={story.background}
                 globalBackgroundColor={story.backgroundColor}
                 viewportScale={viewportScale}
+                subtitlesEnabled={subtitlesEnabled}
             />
 
             <ProgressNavigator

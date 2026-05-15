@@ -12,9 +12,10 @@ interface ActorProps {
     actorState: ActorState;
     updateActor: (actorId: string, updates: Partial<ActorState>) => void;
     viewportScale: number;
+    subtitlesEnabled?: boolean;
 }
 
-export default function Actor({ actorState, updateActor, viewportScale }: ActorProps) {
+export default function Actor({ actorState, updateActor, viewportScale, subtitlesEnabled = true }: ActorProps) {
     const { definition, currentPosition, visible, animationDuration, isAnimating, animationType, triggerConfetti } = actorState;
     const imageWidth = definition.width ?? 100;
     const imageHeight = definition.height ?? 100;
@@ -36,7 +37,8 @@ export default function Actor({ actorState, updateActor, viewportScale }: ActorP
         }
     }, []);
 
-    if (!visible) return null;
+    const isVisible = isSubtitle ? subtitlesEnabled : visible;
+    if (!isVisible) return null;
 
     const handleDragStart = () => {
         updateActor(actorState.id, { isDragging: true });
