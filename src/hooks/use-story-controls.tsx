@@ -31,17 +31,11 @@ export default function useStoryControls({
 
 	// Ejecutar disappear al hacer “atrás” para actores que aparecieron en la página actual
 	const runDisappearForAppearActions = useCallback((page: PageDefinition) => {
-		const appearActions: ActionDefinition[] = [];
+		const isAppearAction = (
+			action: ActionDefinition
+		): action is Extract<ActionDefinition, { action: "appear" }> => action.action === "appear";
 
-		if (page.onEnter) {
-			appearActions.push(...page.onEnter.filter(action => action.action === "appear"));
-		}
-
-		(page.onEnter || []).forEach(action => {
-			if (action.action === "appear") {
-				appearActions.push(action);
-			}
-		});
+		const appearActions = (page.onEnter ?? []).filter(isAppearAction);
 
 		if (appearActions.length === 0) return;
 
