@@ -422,71 +422,74 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
             </Dialog>
         </>
     );
-
-    interface PdfDialogProps {
-        filePath: string;
-        from?: DialogPopupProps['from'];
-        showCloseButton?: boolean;
-    }
-
-    function PdfDialog({ filePath, from = "top", showCloseButton = true }: PdfDialogProps) {
-        const [status, setStatus] = useState<'loading' | 'available' | 'missing'>('loading');
-
-        useEffect(() => {
-            let isActive = true;
-            setStatus('loading');
-
-            fetch(filePath, { method: 'HEAD' })
-                .then((response) => {
-                    if (!isActive) return;
-                    setStatus(response.ok ? 'available' : 'missing');
-                })
-                .catch(() => {
-                    if (!isActive) return;
-                    setStatus('missing');
-                });
-
-            return () => {
-                isActive = false;
-            };
-        }, [filePath]);
-
-        return (
-            <DialogPopup
-                from={from}
-                showCloseButton={showCloseButton}
-                className="bg-white w-[90vw] max-w-[90vw] sm:max-w-[90vw] h-[95vh] rounded-xl shadow-xl flex flex-col overflow-hidden"
-            >
-                <DialogHeader className="shrink-0">
-                    <DialogTitle>Ver recurso</DialogTitle>
-                </DialogHeader>
-                {status === 'loading' && (
-                    <div className="flex-1 w-full min-h-0 flex items-center justify-center text-text-secondary">
-                        <span>Cargando recurso…</span>
-                    </div>
-                )}
-
-                {status === 'missing' && (
-                    <div className="flex-1 w-full min-h-0 flex flex-col items-center justify-center text-center gap-3 px-6">
-                        <div className="text-lg font-semibold text-text">No se pudo cargar el recurso</div>
-                        <p className="text-text-secondary">
-                            Revisa que el archivo exista o que la ruta sea correcta.
-                        </p>
-                        <p className="text-sm text-text-secondary break-all">{filePath}</p>
-                    </div>
-                )}
-
-                {status === 'available' && (
-                    <iframe
-                        src={filePath}
-                        className="flex-1 w-full min-h-0"
-                        title="PDF Viewer"
-                    />
-                )}
-            </DialogPopup>
-        );
-    }
 }
+
+interface PdfDialogProps {
+    filePath: string;
+    from?: DialogPopupProps['from'];
+    transition?: DialogPopupProps['transition'];
+    showCloseButton?: boolean;
+}
+
+function PdfDialog({ filePath, from = "top", transition = { type: 'spring', stiffness: 200, damping: 25 }, showCloseButton = true }: PdfDialogProps) {
+    
+    const [status, setStatus] = useState<'loading' | 'available' | 'missing'>('loading');
+
+    useEffect(() => {
+        let isActive = true;
+
+        fetch(filePath, { method: 'HEAD' })
+            .then((response) => {
+                if (!isActive) return;
+                setStatus(response.ok ? 'available' : 'missing');
+            })
+            .catch(() => {
+                if (!isActive) return;
+                setStatus('missing');
+            });
+
+        return () => {
+            isActive = false;
+        };
+    }, [filePath]);
+
+    return (
+        <DialogPopup
+            from={from}
+            showCloseButton={showCloseButton}
+            transition={transition}
+            className="bg-white w-[90vw] max-w-[90vw] sm:max-w-[90vw] h-[95vh] rounded-xl shadow-xl flex flex-col overflow-hidden"
+        >
+            <DialogHeader className="shrink-0">
+                <DialogTitle>Ver recurso</DialogTitle>
+            </DialogHeader>
+            {status === 'loading' && (
+                <div className="flex-1 w-full min-h-0 flex items-center justify-center text-text-secondary">
+                    <span>Cargando recurso…</span>
+                </div>
+            )}
+
+            {status === 'missing' && (
+                <div className="flex-1 w-full min-h-0 flex flex-col items-center justify-center text-center gap-3 px-6">
+                    <div className="text-lg font-semibold text-text">No se pudo cargar el recurso</div>
+                    <p className="text-text-secondary">
+                        Revisa que el archivo exista o que la ruta sea correcta.
+                    </p>
+                    <p className="text-sm text-text-secondary break-all">{filePath}</p>
+                </div>
+            )}
+
+            {status === 'available' && (
+                <iframe
+                    src={filePath}
+                    className="flex-1 w-full min-h-0"
+                    title="PDF Viewer"
+                />
+            )}
+        </DialogPopup>
+    );
+}
+
 
 interface ArticleNavigationVariantProps {
     href: string;
