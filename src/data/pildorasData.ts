@@ -90,7 +90,7 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
     "aritmetica-primeros-pasos": [
         {
             id: "conceptos-basicos",
-            title: "1. Conceptos básicos",
+            title: "Conceptos básicos",
             articles: [
                 {
                     id: "demo-article-components",
@@ -102,32 +102,37 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                     id: "mayor-menor",
                     title: "Mayor que / Menor que",
                     subtitle: "Aprende a comparar cantidades.",
+                    isHidden: true,
                 },
                 {
                     id: "izquierda-derecha",
                     title: "Izquierda - Derecha",
                     subtitle: "Orientación espacial básica.",
+                    isHidden: true,
                 },
                 {
                     id: "actividades-conceptos-basicos",
                     title: "Actividades Aritmética - Conceptos básicos",
                     subtitle: "Para practicar lo aprendido.",
+                    isHidden: true,
                 }
             ],
         },
         {
             id: "conteo",
-            title: "2. Conteo",
+            title: "Conteo",
             articles: [
                 {
                     id: "conteo-recitativo",
                     title: "Conteo Recitativo",
                     subtitle: "La secuencia numérica verbal.",
+                    isHidden: true,
                 },
                 {
                     id: "conteo-resultativo",
                     title: "Conteo Resultativo",
                     subtitle: "Contar para saber cuántos hay.",
+                    isHidden: true,
                 },
             ],
         },
@@ -154,8 +159,13 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
         },
         {
             id: "recta-numerica",
-            title: "1. Introducción a la Recta Numérica",
+            title: "Introducción a la Recta Numérica",
             articles: [
+                {
+                    id: "justificacion-recta",
+                    title: "¿Por qué construir la recta numérica?",
+                    subtitle: "Una herramienta sencilla que puede transformar el aprendizaje matemático.",
+                },
                 {
                     id: "descubriendo-recta",
                     title: "Descubriendo la Recta Numérica",
