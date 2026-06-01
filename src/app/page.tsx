@@ -27,7 +27,7 @@ export default function Home() {
                 priority
                 className="bg-white rounded-full"
               />
-              <span className="text-2xl md:text-3xl font-bold">MathEdu</span>
+              <span className="text-3xl md:text-4xl font-bold">MathEdu</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Domina las Matemáticas para Infantil y Primaria

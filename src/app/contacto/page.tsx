@@ -35,8 +35,8 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <h3 className="font-bold">Email</h3>
-                                    <p className="text-text-secondary">info@mathedu.es</p>
-                                    <p className="text-text-secondary">soporte@mathedu.es</p>
+                                    <p className="text-text-secondary">info@MathEdu.es</p>
+                                    <p className="text-text-secondary">soporte@MathEdu.es</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
