@@ -19,7 +19,7 @@ export default function ActividadesConceptosBasicosContent() {
             <ArticleHeader
                 title={article?.title || "Descubriendo la Recta Numérica"}
                 subtitle={article?.subtitle || "Fomentando el descubrimiento en lugar de la instrucción directa"}
-                description="Aprender a construir la recta numérica es fundamental para el desarrollo del sentido numérico en los niños y niñas. Hoy lo enseñamos de manera sencilla, utilizando una conversación guiada en el aula y material manipulativo."
+                description="En el artículo anterior, hemos visto que aprender a construir la recta numérica es fundamental para el desarrollo del sentido numérico en los niños y niñas. Hoy lo enseñamos de manera sencilla, utilizando una conversación guiada en el aula y material manipulativo."
                 category="Aritmética"
                 level="Primeros Pasos"
             />
