@@ -1,19 +1,13 @@
 import {
     ArticleHeader,
     ArticleSection,
-    KeyPoints,
-    DialogTeacherBubble,
-    DialogStudentBubble,
-    ConceptPopover,
-    InfoBox,
-    TipBox,
+    InfoBox
 } from "@/components/pildoras/ArticleComponents";
 
 import { findArticleById } from "@/data/pildorasData";
 
 export default function JustificacionRectaContent() {
     const article = findArticleById("justificacion-recta");
-    const videoUrl = "https://www.youtube.com/watch?v=j9EImcqgnE4&t=3559s";
     return (
         <>
             <ArticleHeader
@@ -43,7 +37,7 @@ export default function JustificacionRectaContent() {
                     </div>
                 </InfoBox>
 
-                <p>Os dejamos la entrevista completa a continuación. Puedes reproducirla desde desde este momento al darle al play. Aunque si tienes tiempo, merece la pena verla completa.</p>
+                <p>Os dejamos la entrevista completa a continuación. Puedes reproducirla desde este momento al darle al play. Aunque si tienes tiempo, merece la pena verla completa.</p>
 
                 <div className="mt-4 w-full overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm">
                     <div className="aspect-video w-full">
@@ -58,11 +52,6 @@ export default function JustificacionRectaContent() {
                     </div>
                 </div>
             </ArticleSection>
-
-
-            <TipBox>
-                <p>Cuanto más “físico” sea el recorrido (tableros, puzles, pasos en el suelo, fichas que avanzan), más fácil es que la intuición espacial se convierta en comprensión matemática.</p>
-            </TipBox>
         </>
     );
 
