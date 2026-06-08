@@ -169,6 +169,11 @@ export const COURSE_CONTENT: Record<string, Chapter[]> = {
                 {
                     id: "descubriendo-recta",
                     title: "Descubriendo la Recta Numérica",
+                    subtitle: "Ejemplo de actividad que favorece la construcción de la recta numérica manipulativa.",
+                },
+                {
+                    id: "introduccion-recta",
+                    title: "Introducción a la plantilla de la Recta Numérica",
                     subtitle: "Cómo crear una conversación en el aula para que los niños/as descubran el concepto",
                 }
             ],

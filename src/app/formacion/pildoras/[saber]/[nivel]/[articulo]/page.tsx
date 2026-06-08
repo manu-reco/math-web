@@ -10,6 +10,7 @@ import SubitizacionTarjetasPuntos1Content from "@/components/content/Subitizacio
 import SubitizacionTarjetasPuntos2Content from "@/components/content/SubitizacionTarjetasPuntos2Content";
 import SubitizacionTarjetasPuntos3Content from "@/components/content/SubitizacionTarjetasPuntos3Content";
 import JustificacionRectaContent from "@/components/content/JustificacionRectaContent";
+import IntroduccionRectaContent from "@/components/content/IntroduccionRectaContent";
 import ArticleSidebarNav from "@/components/pildoras/ArticleSidebarNav";
 import { ArticleNextButton, ArticlePreviousButton } from "@/components/pildoras/ArticleComponents";
 import { getCanonicalUrl } from "@/lib/siteUrl";
@@ -25,6 +26,7 @@ const CONTENT_REGISTRY: Record<string, React.ComponentType> = {
     "subitizacion-tarjetas-puntos-3": SubitizacionTarjetasPuntos3Content,
     "justificacion-recta": JustificacionRectaContent,
     "descubriendo-recta": DescubriendoRectaContent,
+    "introduccion-recta": IntroduccionRectaContent,
 };
 
 interface PageProps {
