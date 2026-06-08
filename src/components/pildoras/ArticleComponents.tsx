@@ -48,26 +48,9 @@ interface ArticleHeaderProps {
 }
 
 export function ArticleHeader({ title, subtitle, description, category, level }: ArticleHeaderProps) {
-    const saber = SABERES.find((item) => item.title.toLowerCase() === category.toLowerCase());
-    const nivel = NIVELES.find((item) => item.title.toLowerCase() === level.toLowerCase());
-    const temarioHref = saber && nivel
-        ? `/formacion/pildoras/${saber.id}/${nivel.id}`
-        : null;
-
     return (
         <header className="mb-12 border-b border-gray-100 pb-8">
-            {temarioHref ? (
-                <Link
-                    href={temarioHref}
-                    className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider underline underline-offset-4 hover:text-primary/80 transition-colors"
-                >
-                    <span>{category} • {level}</span>
-                </Link>
-            ) : (
-                <div className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider">
-                    <span>{category} • {level}</span>
-                </div>
-            )}
+            <Breadcrumbs category={category} level={level} />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
                 {title}
             </h1>
@@ -83,455 +66,480 @@ export function ArticleHeader({ title, subtitle, description, category, level }:
     );
 }
 
-export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
+interface BreadcrumbsProps {
+    category: string;
+    level: string;
+}
+
+export function Breadcrumbs({ category, level }: BreadcrumbsProps) {
+    const saber = SABERES.find((item) => item.title.toLowerCase() === category.toLowerCase());
+    const nivel = NIVELES.find((item) => item.title.toLowerCase() === level.toLowerCase());
+    const temarioHref = saber && nivel
+        ? `/formacion/pildoras/${saber.id}/${nivel.id}`
+        : null;
+
     return (
-        <section className="mb-12">
-            <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                {title}
-            </h3>
-            <div className="text-lg leading-relaxed space-y-6">
-                {children}
+        <nav className="flex gap-2 text-sm font-medium text-primary mb-4 uppercase tracking-wider underline underline-offset-4 hover:text-primary/80 transition-colors">
+            {temarioHref ? (
+                <Link href={temarioHref} className="hover:text-primary/80">
+                    {category} • {level}
+                </Link>
+            ) : (
+                <span>{category} • {level}</span>
+            )}
+        </nav>
+    )
+}
+
+    export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
+        return (
+            <section className="mb-12">
+                <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+                    {title}
+                </h3>
+                <div className="text-lg leading-relaxed space-y-6">
+                    {children}
+                </div>
+            </section>
+        );
+    }
+
+    type ArticleImagesProps = {
+        images: {
+            src: string;
+            alt: string;
+        }[];
+        maxHeight?: number;
+    };
+
+    /**
+     * Componente para mostrar una o varias imágenes con un diseño consistente y responsive.
+     * @param images Array de objetos con src y alt de cada imagen
+     * @param maxHeight Altura máxima de las imágenes en píxeles. Por defecto, 300px. La anchura se ajusta automáticamente para mantener la proporción. 
+     */
+    export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
+        // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con CSS
+        return (
+            <div className="flex flex-row flex-wrap gap-4 m-6 items-center justify-center">
+                {images.map((image, index) => (
+                    <div key={index} className="flex justify-center">
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={300} height={300}
+                            className={clsx(
+                                "h-auto w-auto max-w-full rounded-md shadow-md",
+                                maxHeight ? `max-h-[${maxHeight}px]` :
+                                    images.length === 1 ? "max-h-[300px]" : "max-h-[250px]"
+                            )}
+                        />
+                    </div>
+                ))}
             </div>
-        </section>
-    );
-}
+        );
+    }
 
-type ArticleImagesProps = {
-    images: {
-        src: string;
-        alt: string;
-    }[];
-    maxHeight?: number;
-};
-
-/**
- * Componente para mostrar una o varias imágenes con un diseño consistente y responsive.
- * @param images Array de objetos con src y alt de cada imagen
- * @param maxHeight Altura máxima de las imágenes en píxeles. Por defecto, 300px. La anchura se ajusta automáticamente para mantener la proporción. 
- */
-export function ArticleImages({ images, maxHeight }: ArticleImagesProps) {
-    // Como Image de Next es especialito, hay que darle un width y height cualquiera y luego sobrescribirlo con CSS
-    return (
-        <div className="flex flex-row flex-wrap gap-4 m-6 items-center justify-center">
-            {images.map((image, index) => (
-                <div key={index} className="flex justify-center">
-                    <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={300} height={300}
-                        className={clsx(
-                            "h-auto w-auto max-w-full rounded-md shadow-md",
-                            maxHeight ? `max-h-[${maxHeight}px]` :
-                                images.length === 1 ? "max-h-[300px]" : "max-h-[250px]"
-                        )}
-                    />
-                </div>
-            ))}
-        </div>
-    );
-}
-
-export function ActivityBox({ title, children }: { title?: string; children: React.ReactNode }) {
-    return (
-        <div className="my-8 bg-secondary/5 border-l-4 border-secondary rounded-r-xl p-6 md:p-8">
-            <div className="flex items-start gap-4">
-                <div className="p-2 bg-white rounded-lg shadow-sm text-secondary shrink-0">
-                    <Pencil size={24} />
-                </div>
-                <div>
-                    <h4 className="text-xl font-bold mb-3">
-                        {title || "Actividad Propuesta"}
-                    </h4>
-                    <div className="text-text-secondary space-y-4">
-                        {children}
+    export function ActivityBox({ title, children }: { title?: string; children: React.ReactNode }) {
+        return (
+            <div className="my-8 bg-secondary/5 border-l-4 border-secondary rounded-r-xl p-6 md:p-8">
+                <div className="flex items-start gap-4">
+                    <div className="p-2 bg-white rounded-lg shadow-sm text-secondary shrink-0">
+                        <Pencil size={24} />
+                    </div>
+                    <div>
+                        <h4 className="text-xl font-bold mb-3">
+                            {title || "Actividad Propuesta"}
+                        </h4>
+                        <div className="text-text-secondary space-y-4">
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
-
-export function TipBox({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="my-8 bg-amber-50 border border-amber-100 rounded-xl p-6 flex gap-4">
-            <Lightbulb className="text-secondary shrink-0" size={24} />
-            <div className="italic">
-                {children}
-            </div>
-        </div>
-    );
-}
-
-export function InfoBox({ title, children }: { title: string; children: React.ReactNode }) {
-    return (
-        <div className="my-8 bg-blue-50 rounded-xl p-6 md:p-8">
-            <h4 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
-                <Info size={20} />
-                {title}
-            </h4>
-            <div className="text-blue-800/80">
-                {children}
-            </div>
-        </div>
-    );
-}
-
-export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) {
-    return (
-        <ul className="grid gap-3 my-6">
-            {points.map((point, i) => (
-                <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
-                    <span className="text-text/85">{point}</span>
-                </li>
-            ))}
-        </ul>
-    );
-}
-
-type DialogColor = 'primary' | 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
-
-interface DialogBubbleVariantProps {
-    color?: DialogColor;
-    children: React.ReactNode;
-}
-
-const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
-    primary: { bg: 'bg-primary/10', text: 'text-primary' },
-    blue: { bg: 'bg-blue-50', text: 'text-blue-900' },
-    green: { bg: 'bg-green-50', text: 'text-green-900' },
-    purple: { bg: 'bg-purple-50', text: 'text-purple-900' },
-    orange: { bg: 'bg-orange-50', text: 'text-orange-900' },
-    pink: { bg: 'bg-pink-50', text: 'text-pink-900' },
-    gray: { bg: 'bg-gray-50', text: 'text-text' },
-};
-
-
-/**
- * Componente para mostrar un diálogo de un profesor, con un diseño de burbuja y un icono de gorro de graduación. Está alineado a la izquierda y la burbuja tiene la "cola" en la esquina superior izquierda.
- * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "orange". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
- * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
- */
-export function DialogTeacherBubble({ color = 'orange', children }: DialogBubbleVariantProps) {
-    const colors = colorClasses[color];
-
-    return (
-        <div className="my-4 flex items-start gap-3 flex-row">
-            <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
-                <GraduationCap size={20} />
-            </div>
-            <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm border border-opacity-20`}>
-                <span className="flex gap-1.5">{"—"}{children}</span>
-            </div>
-        </div>
-    );
-}
-
-/**
- *  Componente para mostrar un diálogo de un estudiante, con un diseño de burbuja y un icono de usuario. Está alineado a la derecha y la burbuja tiene la "cola" en la esquina superior derecha.
- * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "primary". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
- * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
- */
-export function DialogStudentBubble({ color = 'primary', children }: DialogBubbleVariantProps) {
-    const colors = colorClasses[color];
-
-    return (
-        <div className="my-4 flex items-start gap-3 flex-row-reverse">
-            <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
-                <User size={20} />
-            </div>
-            <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tr-sm px-5 py-4 shadow-sm border border-opacity-20`}>
-                <span className="flex gap-1.5">{"—"}{children}</span>
-            </div>
-        </div>
-    );
-}
-
-interface ConceptTooltipProps {
-    title: string;
-    description?: string;
-    side?: TooltipPanelProps['side'];
-    sideOffset?: TooltipPanelProps['sideOffset'];
-    align?: TooltipPanelProps['align'];
-    alignOffset?: TooltipPanelProps['alignOffset'];
-    followCursor?: boolean | 'x' | 'y';
-}
-
-
-export function ConceptTooltip({
-    title,
-    description,
-    side = 'top',
-    sideOffset = 8,
-    align = 'center',
-    alignOffset = 0,
-    followCursor = false
-}: ConceptTooltipProps) {
-
-    return (
-        <>
-            <Tooltip followCursor={followCursor} delay={100}>
-                <TooltipTrigger render={<span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none'
-                    aria-describedby={`tooltip-${title}`}>{title}</span>
-                } />
-                <TooltipPanel
-                    side={side}
-                    sideOffset={sideOffset}
-                    align={align}
-                    alignOffset={alignOffset}
-                    className="max-w-[200px] text-wrap wrap-break-word text-center"
-                >
-                    <p>{description}</p>
-                </TooltipPanel>
-            </Tooltip>
-        </>
-    );
-}
-
-/**
- * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
- * @param conceptId ID del concepto definido en concepts.json
- * @param text Texto opcional para mostrar en lugar del nombre del concepto
- * @param definition Definición opcional para mostrar en lugar de la definición del concepto
- */
-interface ConceptPopoverProps {
-    conceptId: string;
-    text?: string;
-    definition?: string;
-    side?: 'top' | 'bottom' | 'left' | 'right';
-    sideOffset?: number;
-    align?: 'start' | 'center' | 'end';
-    alignOffset?: number;
-}
-
-/**
- * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
- * @param conceptId ID del concepto definido en concepts.json
- * @param text Texto opcional para mostrar en lugar del nombre del concepto
- * @param definition Definición opcional para mostrar en lugar de la definición del concepto
- */
-export function ConceptPopover({
-    conceptId,
-    text,
-    definition,
-    side = 'top',
-    sideOffset = 8,
-    align = 'center',
-    alignOffset = 0,
-}: ConceptPopoverProps) {
-    const concept = conceptsData[conceptId as keyof typeof conceptsData];
-
-    if (!concept) {
-        console.warn(`Concepto "${conceptId}" no encontrado en concepts.json`);
-        return <span className='font-semibold'>{conceptId}</span>;
+        );
     }
 
-    return (
-        <>
-            <Popover>
-                <PopoverTrigger
-                    render={
-                        <span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none cursor-help' aria-describedby={`popover-${conceptId}`}>
-                            {text ?? concept.name}
-                        </span>
-                    }
-                    openOnHover={true}
-                    delay={100}
-                    closeDelay={50}
-                    nativeButton={false}
-                />
-                <PopoverPanel
-                    side={side}
-                    sideOffset={sideOffset}
-                    align={align}
-                    alignOffset={alignOffset}
-                    className="max-w-[200px] text-sm text-wrap wrap-break-word text-center"
-                >
-                    <p>{definition ?? concept.definition}</p>
-                </PopoverPanel>
-            </Popover>
-        </>
-    );
-}
+    export function TipBox({ children }: { children: React.ReactNode }) {
+        return (
+            <div className="my-8 bg-amber-50 border border-amber-100 rounded-xl p-6 flex gap-4">
+                <Lightbulb className="text-secondary shrink-0" size={24} />
+                <div className="italic">
+                    {children}
+                </div>
+            </div>
+        );
+    }
 
-interface DownloadButtonProps {
-    filePath: string;
-    label?: string;
-    variant?: ButtonProps['variant'];
-    size?: ButtonProps['size'];
-}
+    export function InfoBox({ title, children }: { title: string; children: React.ReactNode }) {
+        return (
+            <div className="my-8 bg-blue-50 rounded-xl p-6 md:p-8">
+                <h4 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+                    <Info size={20} />
+                    {title}
+                </h4>
+                <div className="text-blue-800/80">
+                    {children}
+                </div>
+            </div>
+        );
+    }
 
-/**
- * Componente de botón para descargar un archivo
- * @param filePath Ruta del archivo a descargar
- * @param label Texto del botón
- */
-export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
-    const resourceUrl = withBasePath(filePath);
+    export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) {
+        return (
+            <ul className="grid gap-3 my-6">
+                {points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                        <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
+                        <span className="text-text/85">{point}</span>
+                    </li>
+                ))}
+            </ul>
+        );
+    }
 
-    return (
-        <a href={resourceUrl} download>
-            <Button
-                variant={variant} size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
-            >
-                <Download size={20} className="group-hover:animate-bounce" />
-                {label}
-            </Button>
-        </a>
-    );
-}
+    type DialogColor = 'primary' | 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
 
-interface PdfButtonProps {
-    filePath: string;
-    label?: string;
-}
+    interface DialogBubbleVariantProps {
+        color?: DialogColor;
+        children: React.ReactNode;
+    }
 
-/**
- * Grupo de botones para visualizar un archivo PDF en un diálogo modal o descargarlo directamente 
- * @param filePath Ruta del archivo PDF
- * @param label Texto del botón de visualización
- */
-export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
-    const resourceUrl = withBasePath(filePath);
+    const colorClasses: Record<DialogColor, { bg: string; text: string }> = {
+        primary: { bg: 'bg-primary/10', text: 'text-primary' },
+        blue: { bg: 'bg-blue-50', text: 'text-blue-900' },
+        green: { bg: 'bg-green-50', text: 'text-green-900' },
+        purple: { bg: 'bg-purple-50', text: 'text-purple-900' },
+        orange: { bg: 'bg-orange-50', text: 'text-orange-900' },
+        pink: { bg: 'bg-pink-50', text: 'text-pink-900' },
+        gray: { bg: 'bg-gray-50', text: 'text-text' },
+    };
 
-    return (
-        <>
-            <Dialog>
-                <div className="inline-flex bg-primary/5 text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
-                    {/* Visualizar */}
-                    <DialogTrigger
+
+    /**
+     * Componente para mostrar un diálogo de un profesor, con un diseño de burbuja y un icono de gorro de graduación. Está alineado a la izquierda y la burbuja tiene la "cola" en la esquina superior izquierda.
+     * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "orange". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
+     * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
+     */
+    export function DialogTeacherBubble({ color = 'orange', children }: DialogBubbleVariantProps) {
+        const colors = colorClasses[color];
+
+        return (
+            <div className="my-4 flex items-start gap-3 flex-row">
+                <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
+                    <GraduationCap size={20} />
+                </div>
+                <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm border border-opacity-20`}>
+                    <span className="flex gap-1.5">{"—"}{children}</span>
+                </div>
+            </div>
+        );
+    }
+
+    /**
+     *  Componente para mostrar un diálogo de un estudiante, con un diseño de burbuja y un icono de usuario. Está alineado a la derecha y la burbuja tiene la "cola" en la esquina superior derecha.
+     * @param color Color del diálogo, que afecta al fondo y al texto. Por defecto, "primary". Puede ser "primary", "blue", "green", "purple", "orange", "pink" o "gray".
+     * @param children Contenido del diálogo, que se muestra dentro de la burbuja.
+     */
+    export function DialogStudentBubble({ color = 'primary', children }: DialogBubbleVariantProps) {
+        const colors = colorClasses[color];
+
+        return (
+            <div className="my-4 flex items-start gap-3 flex-row-reverse">
+                <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${colors.bg} ${colors.text} border-2 ${colors.bg.replace('bg-', 'border-')}`}>
+                    <User size={20} />
+                </div>
+                <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tr-sm px-5 py-4 shadow-sm border border-opacity-20`}>
+                    <span className="flex gap-1.5">{"—"}{children}</span>
+                </div>
+            </div>
+        );
+    }
+
+    interface ConceptTooltipProps {
+        title: string;
+        description?: string;
+        side?: TooltipPanelProps['side'];
+        sideOffset?: TooltipPanelProps['sideOffset'];
+        align?: TooltipPanelProps['align'];
+        alignOffset?: TooltipPanelProps['alignOffset'];
+        followCursor?: boolean | 'x' | 'y';
+    }
+
+
+    export function ConceptTooltip({
+        title,
+        description,
+        side = 'top',
+        sideOffset = 8,
+        align = 'center',
+        alignOffset = 0,
+        followCursor = false
+    }: ConceptTooltipProps) {
+
+        return (
+            <>
+                <Tooltip followCursor={followCursor} delay={100}>
+                    <TooltipTrigger render={<span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none'
+                        aria-describedby={`tooltip-${title}`}>{title}</span>
+                    } />
+                    <TooltipPanel
+                        side={side}
+                        sideOffset={sideOffset}
+                        align={align}
+                        alignOffset={alignOffset}
+                        className="max-w-[200px] text-wrap wrap-break-word text-center"
+                    >
+                        <p>{description}</p>
+                    </TooltipPanel>
+                </Tooltip>
+            </>
+        );
+    }
+
+    /**
+     * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
+     * @param conceptId ID del concepto definido en concepts.json
+     * @param text Texto opcional para mostrar en lugar del nombre del concepto
+     * @param definition Definición opcional para mostrar en lugar de la definición del concepto
+     */
+    interface ConceptPopoverProps {
+        conceptId: string;
+        text?: string;
+        definition?: string;
+        side?: 'top' | 'bottom' | 'left' | 'right';
+        sideOffset?: number;
+        align?: 'start' | 'center' | 'end';
+        alignOffset?: number;
+    }
+
+    /**
+     * Componente para mostrar un concepto con un popover que se activa al hacer hover o click
+     * @param conceptId ID del concepto definido en concepts.json
+     * @param text Texto opcional para mostrar en lugar del nombre del concepto
+     * @param definition Definición opcional para mostrar en lugar de la definición del concepto
+     */
+    export function ConceptPopover({
+        conceptId,
+        text,
+        definition,
+        side = 'top',
+        sideOffset = 8,
+        align = 'center',
+        alignOffset = 0,
+    }: ConceptPopoverProps) {
+        const concept = conceptsData[conceptId as keyof typeof conceptsData];
+
+        if (!concept) {
+            console.warn(`Concepto "${conceptId}" no encontrado en concepts.json`);
+            return <span className='font-semibold'>{conceptId}</span>;
+        }
+
+        return (
+            <>
+                <Popover>
+                    <PopoverTrigger
                         render={
-                            <button
-                                type="button"
-                                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
-                            >
-                                <FileSearchCorner size={20} />
-                                {label}
-                            </button>
+                            <span className='font-semibold border-b border-dotted border-gray-400 hover:border-blue-500 transition-colors select-none cursor-help' aria-describedby={`popover-${conceptId}`}>
+                                {text ?? concept.name}
+                            </span>
                         }
+                        openOnHover={true}
+                        delay={100}
+                        closeDelay={50}
+                        nativeButton={false}
                     />
-                    {/* Descargar */}
-                    <a href={resourceUrl} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
-                        <Download size={20} />
-                    </a>
-                </div>
+                    <PopoverPanel
+                        side={side}
+                        sideOffset={sideOffset}
+                        align={align}
+                        alignOffset={alignOffset}
+                        className="max-w-[200px] text-sm text-wrap wrap-break-word text-center"
+                    >
+                        <p>{definition ?? concept.definition}</p>
+                    </PopoverPanel>
+                </Popover>
+            </>
+        );
+    }
 
-                {/* Dialog / Modal */}
-                <PdfDialog filePath={resourceUrl} />
-            </Dialog>
-        </>
-    );
-}
+    interface DownloadButtonProps {
+        filePath: string;
+        label?: string;
+        variant?: ButtonProps['variant'];
+        size?: ButtonProps['size'];
+    }
 
-interface PdfDialogProps {
-    filePath: string;
-    from?: DialogPopupProps['from'];
-    transition?: DialogPopupProps['transition'];
-    showCloseButton?: boolean;
-}
+    /**
+     * Componente de botón para descargar un archivo
+     * @param filePath Ruta del archivo a descargar
+     * @param label Texto del botón
+     */
+    export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
+        const resourceUrl = withBasePath(filePath);
 
-function PdfDialog({ filePath, from = "top", transition = { type: 'spring', stiffness: 200, damping: 25 }, showCloseButton = true }: PdfDialogProps) {
-    
-    const [status, setStatus] = useState<'loading' | 'available' | 'missing'>('loading');
+        return (
+            <a href={resourceUrl} download>
+                <Button
+                    variant={variant} size={size}
+                    className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
+                >
+                    <Download size={20} className="group-hover:animate-bounce" />
+                    {label}
+                </Button>
+            </a>
+        );
+    }
 
-    useEffect(() => {
-        let isActive = true;
+    interface PdfButtonProps {
+        filePath: string;
+        label?: string;
+    }
 
-        fetch(filePath, { method: 'HEAD' })
-            .then((response) => {
-                if (!isActive) return;
-                setStatus(response.ok ? 'available' : 'missing');
-            })
-            .catch(() => {
-                if (!isActive) return;
-                setStatus('missing');
-            });
+    /**
+     * Grupo de botones para visualizar un archivo PDF en un diálogo modal o descargarlo directamente 
+     * @param filePath Ruta del archivo PDF
+     * @param label Texto del botón de visualización
+     */
+    export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
+        const resourceUrl = withBasePath(filePath);
 
-        return () => {
-            isActive = false;
-        };
-    }, [filePath]);
+        return (
+            <>
+                <Dialog>
+                    <div className="inline-flex bg-primary/5 text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
+                        {/* Visualizar */}
+                        <DialogTrigger
+                            render={
+                                <button
+                                    type="button"
+                                    className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
+                                >
+                                    <FileSearchCorner size={20} />
+                                    {label}
+                                </button>
+                            }
+                        />
+                        {/* Descargar */}
+                        <a href={resourceUrl} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+                            <Download size={20} />
+                        </a>
+                    </div>
 
-    return (
-        <DialogPopup
-            from={from}
-            showCloseButton={showCloseButton}
-            transition={transition}
-            className="bg-white w-[90vw] max-w-[90vw] sm:max-w-[90vw] h-[95vh] rounded-xl shadow-xl flex flex-col overflow-hidden"
-        >
-            <DialogHeader className="shrink-0">
-                <DialogTitle>Ver recurso</DialogTitle>
-            </DialogHeader>
-            {status === 'loading' && (
-                <div className="flex-1 w-full min-h-0 flex items-center justify-center text-text-secondary">
-                    <span>Cargando recurso…</span>
-                </div>
-            )}
+                    {/* Dialog / Modal */}
+                    <PdfDialog filePath={resourceUrl} />
+                </Dialog>
+            </>
+        );
+    }
 
-            {status === 'missing' && (
-                <div className="flex-1 w-full min-h-0 flex flex-col items-center justify-center text-center gap-3 px-6">
-                    <div className="text-lg font-semibold text-text">No se pudo cargar el recurso</div>
-                    <p className="text-text-secondary">
-                        Revisa que el archivo exista o que la ruta sea correcta.
-                    </p>
-                    <p className="text-sm text-text-secondary break-all">{filePath}</p>
-                </div>
-            )}
+    interface PdfDialogProps {
+        filePath: string;
+        from?: DialogPopupProps['from'];
+        transition?: DialogPopupProps['transition'];
+        showCloseButton?: boolean;
+    }
 
-            {status === 'available' && (
-                <iframe
-                    src={filePath}
-                    className="flex-1 w-full min-h-0"
-                    title="PDF Viewer"
-                />
-            )}
-        </DialogPopup>
-    );
-}
+    function PdfDialog({ filePath, from = "top", transition = { type: 'spring', stiffness: 200, damping: 25 }, showCloseButton = true }: PdfDialogProps) {
 
+        const [status, setStatus] = useState<'loading' | 'available' | 'missing'>('loading');
 
-interface ArticleNavigationVariantProps {
-    href: string;
-    label?: string;
-    size?: ButtonProps['size'];
-}
+        useEffect(() => {
+            let isActive = true;
 
+            fetch(filePath, { method: 'HEAD' })
+                .then((response) => {
+                    if (!isActive) return;
+                    setStatus(response.ok ? 'available' : 'missing');
+                })
+                .catch(() => {
+                    if (!isActive) return;
+                    setStatus('missing');
+                });
 
-/**
- * Botón para navegar al siguiente artículo, con una flecha a la derecha.
- * @param href Enlace al siguiente artículo
- * @param label Texto del botón
- */
-export function ArticleNextButton({ href, label = "Siguiente artículo", size = "lg" }: ArticleNavigationVariantProps) {
-    return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
+            return () => {
+                isActive = false;
+            };
+        }, [filePath]);
+
+        return (
+            <DialogPopup
+                from={from}
+                showCloseButton={showCloseButton}
+                transition={transition}
+                className="bg-white w-[90vw] max-w-[90vw] sm:max-w-[90vw] h-[95vh] rounded-xl shadow-xl flex flex-col overflow-hidden"
             >
-                {label}
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-        </Link>
-    );
-}
+                <DialogHeader className="shrink-0">
+                    <DialogTitle>Ver recurso</DialogTitle>
+                </DialogHeader>
+                {status === 'loading' && (
+                    <div className="flex-1 w-full min-h-0 flex items-center justify-center text-text-secondary">
+                        <span>Cargando recurso…</span>
+                    </div>
+                )}
 
-/**
- * Botón para navegar al artículo anterior, con una flecha a la izquierda.
- * @param href Enlace al artículo anterior
- * @param label Texto del botón
- */
-export function ArticlePreviousButton({ href, label = "Artículo anterior", size = "lg" }: ArticleNavigationVariantProps) {
-    return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
-                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                {label}
-            </Button>
-        </Link>
-    );
-}
+                {status === 'missing' && (
+                    <div className="flex-1 w-full min-h-0 flex flex-col items-center justify-center text-center gap-3 px-6">
+                        <div className="text-lg font-semibold text-text">No se pudo cargar el recurso</div>
+                        <p className="text-text-secondary">
+                            Revisa que el archivo exista o que la ruta sea correcta.
+                        </p>
+                        <p className="text-sm text-text-secondary break-all">{filePath}</p>
+                    </div>
+                )}
+
+                {status === 'available' && (
+                    <iframe
+                        src={filePath}
+                        className="flex-1 w-full min-h-0"
+                        title="PDF Viewer"
+                    />
+                )}
+            </DialogPopup>
+        );
+    }
+
+
+    interface ArticleNavigationVariantProps {
+        href: string;
+        label?: string;
+        size?: ButtonProps['size'];
+    }
+
+
+    /**
+     * Botón para navegar al siguiente artículo, con una flecha a la derecha.
+     * @param href Enlace al siguiente artículo
+     * @param label Texto del botón
+     */
+    export function ArticleNextButton({ href, label = "Siguiente artículo", size = "lg" }: ArticleNavigationVariantProps) {
+        return (
+            <Link href={href}>
+                <Button
+                    variant="default" size={size}
+                    className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
+                >
+                    {label}
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </Button>
+            </Link>
+        );
+    }
+
+    /**
+     * Botón para navegar al artículo anterior, con una flecha a la izquierda.
+     * @param href Enlace al artículo anterior
+     * @param label Texto del botón
+     */
+    export function ArticlePreviousButton({ href, label = "Artículo anterior", size = "lg" }: ArticleNavigationVariantProps) {
+        return (
+            <Link href={href}>
+                <Button
+                    variant="default" size={size}
+                    className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
+                >
+                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                    {label}
+                </Button>
+            </Link>
+        );
+    }
