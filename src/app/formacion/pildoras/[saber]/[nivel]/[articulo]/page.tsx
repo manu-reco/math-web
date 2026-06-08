@@ -12,7 +12,7 @@ import SubitizacionTarjetasPuntos3Content from "@/components/content/Subitizacio
 import JustificacionRectaContent from "@/components/content/JustificacionRectaContent";
 import IntroduccionRectaContent from "@/components/content/IntroduccionRectaContent";
 import ArticleSidebarNav from "@/components/pildoras/ArticleSidebarNav";
-import { ArticleNextButton, ArticlePreviousButton } from "@/components/pildoras/ArticleComponents";
+import { Breadcrumbs, ArticleNextButton, ArticlePreviousButton } from "@/components/pildoras/ArticleComponents";
 import { getCanonicalUrl } from "@/lib/siteUrl";
 
 // Registry of content components
@@ -149,6 +149,10 @@ export default async function ArticlePage({ params }: PageProps) {
 
                 {/* Article Content */}
                 <article className="min-w-0 max-w-4xl bg-white rounded-xl p-8 md:p-12 mt-6 lg:mt-2">
+                    <div className="flex justify-between items-center gap-2">
+                        <Breadcrumbs saberTitle={saber.title} nivelTitle={nivel.title} saberId={saberId} nivelId={nivelId} />
+                        {/* <PrevNextArticleArrows prevHref={previousArticleHref} nextHref={nextArticleHref} /> */}
+                    </div>
                     {ContentComponent ? (
                         <ContentComponent />
                     ) : (
@@ -167,16 +171,16 @@ export default async function ArticlePage({ params }: PageProps) {
                         </div>
                     )}
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                        {previousArticleHref ? (
+                        {previousArticleHref && (
                             <ArticlePreviousButton
                                 href={previousArticleHref}
                             />
-                        ) : null}
-                        {nextArticleHref ? (
+                        )}
+                        {nextArticleHref && (
                             <ArticleNextButton
                                 href={nextArticleHref}
                             />
-                        ) : null}
+                        )}
                     </div>
 
                     {!nextArticleHref && (

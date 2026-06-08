@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronLeft, Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, ArrowRight, ArrowLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, Lightbulb, Pencil, Info, CheckCircle2, GraduationCap, User, Download, FileSearchCorner, ArrowRight, ArrowLeft } from "lucide-react";
 
 import {
     Tooltip,
@@ -36,7 +36,6 @@ import {
 
 import conceptsData from '@/data/concepts.json';
 import { withBasePath } from "@/lib/assetPath";
-import { SABERES, NIVELES } from "@/data/pildorasData";
 import { clsx } from "clsx";
 
 interface ArticleHeaderProps {
@@ -47,10 +46,9 @@ interface ArticleHeaderProps {
     level: string;
 }
 
-export function ArticleHeader({ title, subtitle, description, category, level }: ArticleHeaderProps) {
+export function ArticleHeader({ title, subtitle, description }: ArticleHeaderProps) {
     return (
         <header className="mb-12 border-b border-gray-100 pb-8">
-            <Breadcrumbs category={category} level={level} />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
                 {title}
             </h1>
@@ -67,29 +65,54 @@ export function ArticleHeader({ title, subtitle, description, category, level }:
 }
 
 interface BreadcrumbsProps {
-    category: string;
-    level: string;
+    saberTitle: string;
+    nivelTitle: string;
+    saberId: string;
+    nivelId: string;
 }
 
-export function Breadcrumbs({ category, level }: BreadcrumbsProps) {
-    const saber = SABERES.find((item) => item.title.toLowerCase() === category.toLowerCase());
-    const nivel = NIVELES.find((item) => item.title.toLowerCase() === level.toLowerCase());
-    const temarioHref = saber && nivel
-        ? `/formacion/pildoras/${saber.id}/${nivel.id}`
-        : null;
+export function Breadcrumbs({ saberId, nivelId, saberTitle, nivelTitle }: BreadcrumbsProps) {
+    const temarioHref = `/formacion/pildoras/${saberId}/${nivelId}`;
 
     return (
         <nav className="flex gap-2 text-md font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
-            {temarioHref ? (
-                <Link href={temarioHref} className="flex gap-2 hover:text-primary/80" aria-label={`Volver al temario de ${category} - ${level}`}>
-                    <ChevronLeft size={26} strokeWidth={3} />
-                    {category} • {level}
-                </Link>
-            ) : (
-                <span>{category} • {level}</span>
-            )}
+            <Link 
+                href={temarioHref} 
+                className="flex gap-2 hover:text-primary/80" 
+                aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
+            >
+                <ChevronLeft size={26} strokeWidth={3} />
+                {saberTitle} • {nivelTitle}
+            </Link>
         </nav>
-    )
+    );
+}
+interface PrevNextArticleArrowsProps {
+    prevHref?: string;
+    nextHref?: string;
+}
+
+export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArrowsProps) {
+    return (
+        <div className="flex justify-between items-center my-8 gap-4">
+            {prevHref && (
+                <Link
+                    href={prevHref}
+                    className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
+                >
+                    <ChevronLeft size={26} strokeWidth={3} />
+                </Link>
+            )}
+            {nextHref && (
+                <Link
+                    href={nextHref}
+                    className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
+                >
+                    <ChevronRight size={26} strokeWidth={3} />
+                </Link>
+            )}
+        </div>
+    );
 }
 
 export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
