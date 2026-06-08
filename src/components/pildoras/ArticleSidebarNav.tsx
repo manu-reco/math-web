@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, SquareMenu, X } from "lucide-react";
+import { ChevronLeft, SquareMenu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type NavArticle = {
@@ -118,7 +118,7 @@ export default function ArticleSidebarNav({
                                     href={`/formacion/pildoras/${saberId}/${nivelId}`}
                                     className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
                                 >
-                                    <ArrowLeft size={20} className="mr-2" />
+                                    <ChevronLeft size={20} className="mr-2" />
                                     Volver al temario
                                 </Link>
                                 <button
@@ -141,7 +141,7 @@ export default function ArticleSidebarNav({
                     href={`/formacion/pildoras/${saberId}/${nivelId}`}
                     className="inline-flex items-center mb-4 text-sm text-text-secondary hover:text-primary transition-colors font-medium"
                 >
-                    <ArrowLeft size={20} className="mr-2" />
+                    <ChevronLeft size={20} className="mr-2" />
                     Volver al temario
                 </Link>
 
