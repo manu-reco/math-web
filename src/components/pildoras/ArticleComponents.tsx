@@ -57,7 +57,7 @@ export function ArticleHeader({ title, subtitle, description }: ArticleHeaderPro
                     {subtitle}
                 </h2>
             )}
-            <p className="text-lg text-text-secondary leading-relaxed max-w-3xl">
+            <p className="text-lg text-text-secondary text-justify leading-relaxed max-w-3xl">
                 {description}
             </p>
         </header>
@@ -76,9 +76,9 @@ export function Breadcrumbs({ saberId, nivelId, saberTitle, nivelTitle }: Breadc
 
     return (
         <nav className="flex gap-2 text-md font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
-            <Link 
-                href={temarioHref} 
-                className="flex gap-2 hover:text-primary/80" 
+            <Link
+                href={temarioHref}
+                className="flex gap-2 hover:text-primary/80"
                 aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
             >
                 <ChevronLeft size={26} strokeWidth={3} />
@@ -94,22 +94,36 @@ interface PrevNextArticleArrowsProps {
 
 export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArrowsProps) {
     return (
-        <div className="flex justify-between items-center my-8 gap-4">
+        <div className="flex justify-between items-center gap-4">
             {prevHref && (
-                <Link
-                    href={prevHref}
-                    className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                >
-                    <ChevronLeft size={26} strokeWidth={3} />
-                </Link>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Link
+                            href={prevHref}
+                            className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
+                        >
+                            <ChevronLeft size={26} strokeWidth={3} />
+                        </Link>
+                    </TooltipTrigger>
+                    <TooltipPanel>
+                        <p>Anterior</p>
+                    </TooltipPanel>
+                </Tooltip>
             )}
             {nextHref && (
-                <Link
-                    href={nextHref}
-                    className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                >
-                    <ChevronRight size={26} strokeWidth={3} />
-                </Link>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Link
+                            href={nextHref}
+                            className="flex items-center justify-center h-12 w-auto text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
+                        >
+                            <ChevronRight size={26} strokeWidth={3} />
+                        </Link>
+                    </TooltipTrigger>
+                    <TooltipPanel>
+                        <p>Siguiente</p>
+                    </TooltipPanel>
+                </Tooltip>
             )}
         </div>
     );
@@ -121,7 +135,7 @@ export function ArticleSection({ title, children }: { title: string; children: R
             <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
                 {title}
             </h3>
-            <div className="text-lg leading-relaxed space-y-6">
+            <div className="text-lg leading-relaxed space-y-6 text-justify">
                 {children}
             </div>
         </section>
