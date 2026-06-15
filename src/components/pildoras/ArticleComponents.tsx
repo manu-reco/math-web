@@ -34,6 +34,8 @@ import {
     type DialogPopupProps,
 } from '@/components/animate-ui/components/base/dialog';
 
+import { Highlighter } from "@/components/UnderlinedWords";
+
 import conceptsData from '@/data/concepts.json';
 import { withBasePath } from "@/lib/assetPath";
 import { clsx } from "clsx";
@@ -133,7 +135,7 @@ export function ArticleSection({ title, children }: { title: string; children: R
     return (
         <section className="mb-12">
             <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                {title}
+                <Highlighter>{title}</Highlighter>
             </h3>
             <div className="text-lg leading-relaxed space-y-6 text-justify">
                 {children}
