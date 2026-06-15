@@ -42,5 +42,13 @@
     "propiedad-asociativa-suma": {
         "name": "Propiedad asociativa de la suma",
         "definition": "Propiedad matemática que establece que la forma en que se agrupan los sumandos no afecta el resultado de la suma."
+    },
+    "sentido-numerico": {
+        "name": "Sentido numérico",
+        "definition": "Habilidad para comprender, interpretar y manipular números y sus relaciones en diferentes contextos."
+    },
+    "relacion-suma-resta": {
+        "name": "Relación entre suma y resta",
+        "definition": "Comprensión de cómo las operaciones de suma y resta están relacionadas y pueden usarse para resolver problemas."
     }
 }
