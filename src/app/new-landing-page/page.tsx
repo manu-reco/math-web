@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Brain, CheckCircle, Presentation, Sparkles, ToolCase, Users } from "lucide-react";
+import { ArrowRight, Brain, CheckCircle, Presentation, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = buildPageMetadata({
     title: "Inicio",
@@ -11,6 +12,25 @@ export const metadata: Metadata = buildPageMetadata({
         "Formacion de matematicas para docentes de Infantil y Primaria con cursos, recursos y actividades practicas.",
     path: "/",
 });
+
+interface featureCardProps {
+    icon: React.ReactNode;
+    iconClassName?: string;
+    title: string;
+    description: string;
+}
+
+function FeatureCard({ icon, iconClassName, title, description }: featureCardProps) {
+    return (
+        <div className="text-center rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+            <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
+                {icon}
+            </div>
+            <h3 className="text-xl font-bold text-text">{title}</h3>
+            <p className="mt-3 text-sm leading-7 text-text-secondary">{description}</p>
+        </div>
+    );
+}
 
 export default function NewLandingPage() {
     return (
@@ -30,17 +50,17 @@ export default function NewLandingPage() {
 
                         <div className="flex flex-col gap-4 sm:flex-row">
                             <Link
-                                href="/actividades"
+                                href="/formacion/online"
                                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                Explorar actividades
+                                Explora nuestros cursos
                                 <ArrowRight size={18} aria-hidden="true" />
                             </Link>
                             <Link
-                                href="/formacion/online"
+                                href="/formacion/pildoras"
                                 className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-bold text-primary shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                Ver demo
+                                Descubre las lecciones gratuitas
                             </Link>
                         </div>
                     </div>
@@ -63,35 +83,24 @@ export default function NewLandingPage() {
 
                 <section className="mt-14 md:mt-20">
                     <div className="grid gap-6 md:grid-cols-3">
-                        <div className="rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-                            <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                <Brain size={28} aria-hidden="true" />
-                            </div>
-                            <h3 className="text-xl font-bold text-text">Evidencia científica</h3>
-                            <p className="mt-3 text-sm leading-7 text-text-secondary">
-                                Metodologías respaldadas por estudios recientes en didáctica y neurociencia.
-                            </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-                            <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-                                <Presentation size={28} aria-hidden="true" />
-                            </div>
-                            <h3 className="text-xl font-bold text-text">Práctica viable</h3>
-                            <p className="mt-3 text-sm leading-7 text-text-secondary">
-                                Materiales y dinámicas pensadas para aplicarse fácilmente en el aula o en casa.
-                            </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-                            <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent/20 text-text">
-                                <ToolCase size={28} aria-hidden="true" />
-                            </div>
-                            <h3 className="text-xl font-bold text-text">Aprendizaje lúdico</h3>
-                            <p className="mt-3 text-sm leading-7 text-text-secondary">
-                                El juego estructurado como motor principal para la comprensión profunda.
-                            </p>
-                        </div>
+                        <FeatureCard
+                            icon={<Brain size={28} aria-hidden="true" />}
+                            iconClassName="bg-primary/10 text-primary"
+                            title="Evidencia científica"
+                            description="Metodología basada en estudios sobre didáctica y neurociencia. Pensada para razonar y comprender, no solo memorizar."
+                        />
+                        <FeatureCard
+                            icon={<Presentation size={28} aria-hidden="true" />}
+                            iconClassName="bg-secondary/10 text-secondary"
+                            title="Práctica viable"
+                            description="Materiales y dinámicas probadas en el aula. Llévate ideas listas para usar, adaptables a tu contexto."
+                        />
+                        <FeatureCard
+                            icon={<ToolCase size={28} aria-hidden="true" />}
+                            iconClassName="bg-blue-500/10 text-blue-500"
+                            title="Aprendizaje lúdico"
+                            description="El juego estructurado como motor principal para la comprensión profunda."
+                        />
                     </div>
                 </section>
 
