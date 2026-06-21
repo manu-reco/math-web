@@ -51,14 +51,14 @@ export default function NewLandingPage() {
                         <div className="flex flex-col gap-4 sm:flex-row">
                             <Link
                                 href="/formacion/online"
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00685e]/90 px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Explora nuestros cursos
                                 <ArrowRight size={18} aria-hidden="true" />
                             </Link>
                             <Link
                                 href="/formacion/pildoras"
-                                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-bold text-primary shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-bold text-[#00685e] shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Descubre las lecciones gratuitas
                             </Link>
@@ -106,22 +106,23 @@ export default function NewLandingPage() {
 
                 <section className="mt-14 md:mt-20">
                     <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-white to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
-                        <div>
-                            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
+                        <div className="space-y-4">
+                            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
                                 Qué encontrarás
                             </p>
                             <h2 className="text-3xl font-black tracking-tight text-text sm:text-4xl">
                                 Una ruta clara para enseñar matemáticas con más confianza.
                             </h2>
-                            <p className="mt-4 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
-                                Esta landing resume el enfoque de trabajo: ideas claras, materiales visuales y actividades que se pueden poner en marcha sin fricción.
-                            </p>
+                            <div className="space-y-2 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
+                                <p>Encontrarás artículos, actividades, recursos descargables y cursos para cada etapa educativa y área de las matemáticas que necesites.</p>
+                                <p>Todo pensado para transformar primero al docente y luego al estudiante. Para llegar a lo que quieres enseñar, pero con sentido.</p>
+                            </div>
 
                             <div className="mt-8 grid gap-4 sm:grid-cols-2">
                                 <div className="rounded-2xl bg-white/80 p-4 shadow-sm backdrop-blur">
                                     <div className="flex items-center gap-3 text-sm font-semibold text-text">
                                         <CheckCircle size={18} className="text-primary" aria-hidden="true" />
-                                        Recursos descargables
+                                        Recursos descargables y digitales
                                     </div>
                                     <p className="mt-2 text-sm text-text-secondary">Material listo para usar en el aula o en casa.</p>
                                 </div>
@@ -135,19 +136,19 @@ export default function NewLandingPage() {
                             </div>
                         </div>
 
-                        <div className="rounded-[1.75rem] bg-primary p-6 text-primary-foreground shadow-xl shadow-primary/20">
+                        <div className="rounded-[1.75rem] bg-[#00685e]/85 p-6 text-primary-foreground shadow-xl shadow-primary/20">
                             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground/80">
                                 Empieza aquí
                             </p>
-                            <h3 className="mt-3 text-2xl font-black">Explora las actividades más útiles</h3>
+                            <h3 className="mt-3 text-2xl font-black">Explora nuestros artículos y actividades</h3>
                             <p className="mt-4 text-sm leading-7 text-primary-foreground/90">
-                                Accede a propuestas prácticas, secuencias didácticas y contenidos pensados para acompañar el aprendizaje con sentido.
+                                Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
                             </p>
                             <Link
-                                href="/actividades"
-                                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                href="/formacion/pildoras/aritmetica/primeros-pasos"
+                                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#00685e] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                             >
-                                Ver actividades
+                                Ver píldoras de formación
                                 <ArrowRight size={18} aria-hidden="true" />
                             </Link>
                         </div>
