@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Brain, CheckCircle, Presentation, ToolCase, Users } from "lucide-react";
+import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils"
@@ -13,14 +13,14 @@ export const metadata: Metadata = buildPageMetadata({
     path: "/",
 });
 
-interface featureCardProps {
+interface FeatureCardProps {
     icon: React.ReactNode;
     iconClassName?: string;
     title: string;
     description: string;
 }
 
-function FeatureCard({ icon, iconClassName, title, description }: featureCardProps) {
+function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
     return (
         <div className="text-center rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
             <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
@@ -32,6 +32,47 @@ function FeatureCard({ icon, iconClassName, title, description }: featureCardPro
     );
 }
 
+interface CourseCardProps {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonIcon: React.ReactNode;
+    variant?: 'primary' | 'secondary';
+}
+
+const CourseCard: React.FC<CourseCardProps> = ({ icon, title, description, buttonText, buttonIcon, variant = 'primary' }) => {
+    const isPrimary = variant === 'primary';
+
+    return (
+        <div className="flex flex-col p-8 bg-white border rounded-2xl border-border shadow-md transition-transform duration-300 hover:-translate-y-1">
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
+                }`}>
+                <span className="text-3xl font-fill">
+                    {icon}
+                </span>
+            </div>
+
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                {title}
+            </h3>
+            <p className="text-base text-slate-600 mb-8 flex-1 leading-relaxed">
+                {description}
+            </p>
+
+            <button className={`w-full px-6 py-3 rounded-lg font-semibold shadow-sm flex items-center justify-center gap-2 min-h-11 transition-colors duration-200 text-primary-foreground ${isPrimary
+                ? 'bg-[#00685e]/90 hover:bg-primary-hover'
+                : 'bg-[#8e4e14] hover:bg-[#783d01]'
+                }`}>
+                {buttonText}
+                <span className="text-sm">
+                    {buttonIcon}
+                </span>
+            </button>
+        </div>
+    );
+};
+
 export default function NewLandingPage() {
     return (
         <div className="relative isolate overflow-hidden">
@@ -39,6 +80,7 @@ export default function NewLandingPage() {
             <div aria-hidden="true" className="absolute left-1/2 top-12 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-secondary/20 blur-3xl" />
 
             <div className="container-custom py-10 md:py-16 lg:py-20">
+                {/* Hero Section */}
                 <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                     <div className="space-y-8">
                         <div className="space-y-5">
@@ -80,7 +122,7 @@ export default function NewLandingPage() {
                         </figure>
                     </div>
                 </section>
-
+                {/* Características */}
                 <section className="mt-14 md:mt-20">
                     <div className="grid gap-6 md:grid-cols-3">
                         <FeatureCard
@@ -103,7 +145,7 @@ export default function NewLandingPage() {
                         />
                     </div>
                 </section>
-
+                {/* Qué encontrarás */}
                 <section className="mt-14 md:mt-20">
                     <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-white to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
                         <div className="space-y-4">
@@ -154,6 +196,38 @@ export default function NewLandingPage() {
                         </div>
                     </div>
                 </section>
+                {/* Nuestros Cursos */}
+                <section className="py-16 px-4 max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-950 mb-4 tracking-tight">
+                            Nuestros Cursos
+                        </h2>
+                        <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                            Formación especializada diseñada para transformar la enseñanza de las matemáticas a través de la pedagogía cálida.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <CourseCard
+                            icon={<GraduationCap size={28} aria-hidden="true" />}
+                            title="Para docentes"
+                            description="Cursos online con lecciones paso a paso, material audiovisual, recursos descargables y seguimiento. Perfectos para abrir tu mente, perfeccionar sobre un tema y llevar propuestas directamente a tu aula."
+                            buttonText="Visita nuestro catálogo"
+                            buttonIcon={<ArrowRight size={18} aria-hidden="true" />}
+                            variant="primary"
+                        />
+
+                        <CourseCard
+                            icon={<School size={28} aria-hidden="true" />}
+                            title="Para centros"
+                            description="Cursos presenciales para unir al equipo docente de tu centro y transformar la enseñanza en todos los niveles. Con visitas al colegio, sesiones especiales en el aula y asesoramiento al profesorado."
+                            buttonText="Consulta con nosotros"
+                            buttonIcon={<MessageSquare size={18} aria-hidden="true" />}
+                            variant="secondary"
+                        />
+                    </div>
+                </section>
+
             </div>
         </div>
     );
