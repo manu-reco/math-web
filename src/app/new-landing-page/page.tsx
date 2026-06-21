@@ -86,21 +86,21 @@ export default function NewLandingPage() {
                         <div className="space-y-5">
                             <h1 className="text-[60px] tracking-[-0.02em] font-bold text-[#00685e] leading-tight">Matemáticas con <DoubleUnderline colorClass="text-[#8e4e14]"><span className="text-[#8e4e14]">sentido</span></DoubleUnderline>, razonamiento y emoción</h1>
                             <p className="max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
-                                Descubre recursos y metodologías basadas en la evidencia científica para familias y docentes. Aprender matemáticas puede ser una experiencia lúdica y estructurada.
+                                Descubre recursos y metodologías basadas en la evidencia científica para familias y docentes. Vuelve a disfrutar enseñando y consigue que tus estudiantes razonen y usen las matemáticas para su vida diaria.
                             </p>
                         </div>
 
                         <div className="flex flex-col gap-4 sm:flex-row">
                             <Link
                                 href="/formacion/online"
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00685e]/90 px-6 py-3 text-sm font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00685e]/90 px-6 py-3 font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Explora nuestros cursos
                                 <ArrowRight size={18} aria-hidden="true" />
                             </Link>
                             <Link
                                 href="/formacion/pildoras"
-                                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-bold text-[#00685e] shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 font-bold text-[#00685e] shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Descubre las lecciones gratuitas
                             </Link>
@@ -188,7 +188,7 @@ export default function NewLandingPage() {
                             </p>
                             <Link
                                 href="/formacion/pildoras/aritmetica/primeros-pasos"
-                                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#00685e] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-md font-bold text-[#00685e] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                             >
                                 Ver píldoras de formación
                                 <ArrowRight size={18} aria-hidden="true" />
@@ -203,7 +203,7 @@ export default function NewLandingPage() {
                             Nuestros Cursos
                         </h2>
                         <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                            Formación especializada diseñada para transformar la enseñanza de las matemáticas a través de la pedagogía cálida.
+                            Formación especializada diseñada para transformar la forma de enseñar y dar alternativas mucho más efectivas a tus estudiantes.
                         </p>
                     </div>
 
