@@ -22,7 +22,7 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <div className="text-center rounded-2xl border border-border bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+    <div className="rounded-2xl border border-border bg-card p-6 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
       <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
         {icon}
       </div>
@@ -45,29 +45,21 @@ const CourseCard: React.FC<CourseCardProps> = ({ icon, title, description, butto
   const isPrimary = variant === 'primary';
 
   return (
-    <div className="flex flex-col p-8 bg-white border rounded-2xl border-border shadow-md transition-transform duration-300 hover:-translate-y-1">
-      <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
-        }`}>
-        <span className="text-3xl font-fill">
-          {icon}
-        </span>
+    <div className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
+      <div
+        className={`mb-6 flex h-16 w-16 items-center justify-center rounded-full ${isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'}`}
+      >
+        <span className="text-3xl">{icon}</span>
       </div>
 
-      <h3 className="text-2xl font-bold text-slate-900 mb-4">
-        {title}
-      </h3>
-      <p className="text-base text-slate-600 mb-8 flex-1 leading-relaxed">
-        {description}
-      </p>
+      <h3 className="mb-4 text-2xl font-bold text-text">{title}</h3>
+      <p className="mb-8 flex-1 text-base leading-relaxed text-text-secondary">{description}</p>
 
-      <button className={`w-full px-6 py-3 rounded-lg font-semibold shadow-sm flex items-center justify-center gap-2 min-h-11 transition-colors duration-200 text-primary-foreground ${isPrimary
-        ? 'bg-[#00685e]/90 hover:bg-primary-hover'
-        : 'bg-[#8e4e14] hover:bg-[#783d01]'
-        }`}>
+      <button
+        className={`flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-primary-foreground shadow-sm transition-colors duration-200 ${isPrimary ? 'bg-primary hover:bg-primary-hover' : 'bg-secondary hover:bg-secondary-hover'}`}
+      >
         {buttonText}
-        <span className="text-sm">
-          {buttonIcon}
-        </span>
+        <span className="text-sm">{buttonIcon}</span>
       </button>
     </div>
   );
@@ -76,15 +68,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ icon, title, description, butto
 export default function Home() {
   return (
     <div className="relative isolate overflow-hidden">
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-128 bg-linear-to-b from-primary/12 via-white to-white" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-128 bg-linear-to-b from-primary/12 via-background to-background" />
       <div aria-hidden="true" className="absolute left-1/2 top-12 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-secondary/20 blur-3xl" />
 
       <div className="container-custom py-10 md:py-16 lg:py-20">
-        {/* Hero Section */}
         <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="space-y-8">
             <div className="space-y-5">
-              <h1 className="text-[60px] tracking-[-0.02em] font-bold text-[#00685e] leading-tight">Matemáticas con <DoubleUnderline colorClass="text-[#8e4e14]"><span className="text-[#8e4e14]">sentido</span></DoubleUnderline>, razonamiento y emoción</h1>
+              <h1 className="text-[60px] font-bold tracking-[-0.02em] leading-tight text-primary">
+                Matemáticas con <DoubleUnderline colorClass="text-secondary"><span className="text-secondary">sentido</span></DoubleUnderline>, razonamiento y emoción
+              </h1>
               <p className="max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
                 Descubre recursos y metodologías basadas en la evidencia científica para familias y docentes. Vuelve a disfrutar enseñando y consigue que tus estudiantes razonen y usen las matemáticas para su vida diaria.
               </p>
@@ -93,14 +86,14 @@ export default function Home() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/formacion/online"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00685e]/90 px-6 py-3 font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 Explora nuestros cursos
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <Link
                 href="/formacion/pildoras"
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-white px-6 py-3 font-bold text-[#00685e] shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-card px-6 py-3 font-bold text-primary shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 Descubre las lecciones gratuitas
               </Link>
@@ -110,7 +103,7 @@ export default function Home() {
           <div className="relative group">
             <div aria-hidden="true" className="absolute -inset-4 rounded-4xl bg-secondary/10 transform -rotate-3 transition-transform duration-500 group-hover:rotate-0" />
             <div aria-hidden="true" className="absolute -inset-2 rounded-4xl bg-primary/10 transform rotate-2 transition-transform duration-500 group-hover:rotate-1" />
-            <figure className="relative overflow-hidden rounded-4xl border-4 border-white bg-white shadow-2xl shadow-primary/10">
+            <figure className="relative overflow-hidden rounded-4xl border-4 border-card bg-card shadow-2xl shadow-primary/10">
               <Image
                 alt="Ilustración de la experiencia de aprendizaje"
                 width={960}
@@ -122,7 +115,7 @@ export default function Home() {
             </figure>
           </div>
         </section>
-        {/* Características */}
+
         <section className="mt-14 md:mt-20">
           <div className="grid gap-6 md:grid-cols-3">
             <FeatureCard
@@ -139,15 +132,15 @@ export default function Home() {
             />
             <FeatureCard
               icon={<ToolCase size={28} aria-hidden="true" />}
-              iconClassName="bg-blue-500/10 text-blue-500"
+              iconClassName="bg-tertiary/10 text-tertiary"
               title="Aprendizaje lúdico"
               description="El juego estructurado como motor principal para la comprensión profunda."
             />
           </div>
         </section>
-        {/* Qué encontrarás */}
+
         <section className="mt-14 md:mt-20">
-          <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-white to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-card to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
                 Qué encontrarás
@@ -155,22 +148,22 @@ export default function Home() {
               <h2 className="text-3xl font-black tracking-tight text-text sm:text-4xl">
                 Una ruta clara para enseñar matemáticas con más confianza.
               </h2>
-              <div className="space-y-2 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
+              <div className="max-w-2xl space-y-2 text-base leading-7 text-text-secondary sm:text-lg">
                 <p>Encontrarás artículos, actividades, recursos descargables y cursos para cada etapa educativa y área de las matemáticas que necesites.</p>
                 <p>Todo pensado para transformar primero al docente y luego al estudiante. Para llegar a lo que quieres enseñar, pero con sentido.</p>
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl bg-white/80 p-4 shadow-sm backdrop-blur">
+                <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur">
                   <div className="flex items-center gap-3 text-sm font-semibold text-text">
                     <CheckCircle size={18} className="text-primary" aria-hidden="true" />
                     Recursos descargables y digitales
                   </div>
                   <p className="mt-2 text-sm text-text-secondary">Material listo para usar en el aula o en casa.</p>
                 </div>
-                <div className="rounded-2xl bg-white/80 p-4 shadow-sm backdrop-blur">
+                <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur">
                   <div className="flex items-center gap-3 text-sm font-semibold text-text">
-                    <Users size={18} className="text-secondary" aria-hidden="true" />
+                    <Users size={18} className="text-tertiary" aria-hidden="true" />
                     Comunidad docente
                   </div>
                   <p className="mt-2 text-sm text-text-secondary">Acompañamiento y experiencias compartidas.</p>
@@ -178,7 +171,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] bg-[#00685e]/85 p-6 text-primary-foreground shadow-xl shadow-primary/20">
+            <div className="rounded-[1.75rem] bg-primary p-6 text-primary-foreground shadow-xl shadow-primary/20">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground/80">
                 Empieza aquí
               </p>
@@ -188,7 +181,7 @@ export default function Home() {
               </p>
               <Link
                 href="/formacion/pildoras/aritmetica/primeros-pasos"
-                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-md font-bold text-[#00685e] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-card px-6 py-3 text-md font-bold text-primary transition hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-card"
               >
                 Ver píldoras de formación
                 <ArrowRight size={18} aria-hidden="true" />
@@ -196,13 +189,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* Nuestros Cursos */}
-        <section className="py-16 px-4 max-w-7xl mx-auto">
+
+        <section className="mt-14 px-4 py-16 md:px-8 lg:px-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-950 mb-4 tracking-tight">
+            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-text md:text-4xl">
               Nuestros Cursos
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary">
               Formación especializada diseñada para transformar la forma de enseñar y dar alternativas mucho más efectivas a tus estudiantes.
             </p>
           </div>
@@ -229,7 +222,7 @@ export default function Home() {
         </section>
       </div>
         {/* CTA Section */}
-        <section className="bg-gray-900 text-white py-20">
+        <section className="bg-gray-900 text-primary-foreground py-20">
           <div className="container-custom">
             <div className="flex flex-col md:flex-row items-center justify-between gap-10">
               <div className="md:w-1/2">
@@ -259,7 +252,7 @@ export default function Home() {
                 <p className="text-gray-400 mb-6">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
                 <Link
                   href="/register"
-                  className="block w-full bg-secondary hover:bg-secondary-hover text-text text-center py-3 rounded-lg font-bold transition-colors mb-4"
+                  className="block w-full bg-secondary hover:bg-secondary-hover text-center py-3 rounded-lg font-bold transition-colors mb-4"
                 >
                   Registrarme Gratis
                 </Link>
