@@ -19,7 +19,7 @@ const buttonVariants = cva(
         secondary: 
           'bg-secondary text-primary-foreground hover:bg-secondary-hover shadow-sm focus-visible:outline-secondary',
         outline: 
-          'border border-primary/35 border-2 bg-card text-primary hover:border-primary/50 hover:bg-card-primary focus-visible:outline-primary',
+          'border-2 border-primary/35 bg-card text-primary hover:border-primary/50 hover:bg-gradient-to-b hover:from-primary/5 hover:to-primary/5 focus-visible:outline-primary',
         white: 
           'bg-card text-primary hover:bg-muted focus-visible:outline-card',
         destructive:
