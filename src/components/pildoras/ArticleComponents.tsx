@@ -571,17 +571,23 @@ interface ArticleNavigationVariantProps {
  * @param href Enlace al siguiente artículo
  * @param label Texto del botón
  */
-export function ArticleNextButton({ href, label = "Siguiente artículo", size = "lg" }: ArticleNavigationVariantProps) {
+export function ArticleNextButton({
+    href,
+    label = "Siguiente artículo",
+    size = "md"
+}: ArticleNavigationVariantProps) {
     return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant="primary"
+            size={size}
+            className="gap-3 group" // Mantenemos solo el espaciado y el grupo para la animación del icono
+        >
+            <Link href={href}>
                 {label}
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-        </Link>
+            </Link>
+        </Button>
     );
 }
 
@@ -590,16 +596,22 @@ export function ArticleNextButton({ href, label = "Siguiente artículo", size = 
  * @param href Enlace al artículo anterior
  * @param label Texto del botón
  */
-export function ArticlePreviousButton({ href, label = "Artículo anterior", size = "lg" }: ArticleNavigationVariantProps) {
+export function ArticlePreviousButton({
+    href,
+    label = "Artículo anterior",
+    size = "md"
+}: ArticleNavigationVariantProps) {
     return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant="primary"
+            size={size}
+            className="gap-3 group"
+        >
+            <Link href={href}>
                 <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                 {label}
-            </Button>
-        </Link>
+            </Link>
+        </Button>
     );
 }

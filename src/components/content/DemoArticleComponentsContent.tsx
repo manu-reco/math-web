@@ -142,12 +142,10 @@ export default function DemoArticleComponentsContent() {
                     <ArticlePreviousButton
                         href="#"
                         label="Volver al índice"
-                        size="sm"
                     />
                     <ArticleNextButton
                         href="#"
                         label="Ir al siguiente artículo"
-                        size="sm"
                     />
                 </div>
             </ArticleSection>
