@@ -30,7 +30,7 @@ const buttonVariants = cva(
       },
       size: {
         md: 'min-h-11 px-5 py-2.5 text-base font-semibold',
-        lg: 'min-h-12 px-6 py-3 text-md font-medium',
+        lg: 'min-h-12 px-6 py-3 text-md font-bold',
         sm: 'min-h-10 px-4 py-2 text-sm font-semibold',
         icon: 'size-9',
         'icon-sm': 'size-8 rounded-md',
