@@ -414,19 +414,26 @@ interface DownloadButtonProps {
  * @param filePath Ruta del archivo a descargar
  * @param label Texto del botón
  */
-export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
+export function DownloadButton({
+    filePath,
+    label = "Descargar recurso",
+    variant = "outline",
+    size = "lg"
+}: DownloadButtonProps) {
     const resourceUrl = withBasePath(filePath);
 
     return (
-        <a href={resourceUrl} download>
-            <Button
-                variant={variant} size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant={variant}
+            size={size}
+            className="gap-3 group"
+        >
+            <a href={resourceUrl} download>
                 <Download size={20} className="group-hover:animate-bounce" />
                 {label}
-            </Button>
-        </a>
+            </a>
+        </Button>
     );
 }
 

@@ -121,12 +121,13 @@ export default function DemoArticleComponentsContent() {
                         filePath="/subitizacion/tarjetas-puntos-1-4-desord.png"
                         label="Descargar ejemplo PNG"
                         variant="outline"
+                        size="lg"
                     />
                     <DownloadButton
                         filePath="/subitizacion/juego-puntos-1-3-desorden.jpeg"
                         label="Descargar ejemplo JPEG"
-                        variant="default"
-                        size="sm"
+                        variant="primary"
+                        size="md"
                     />
                 </div>
 
