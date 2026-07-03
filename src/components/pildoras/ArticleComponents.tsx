@@ -443,7 +443,7 @@ interface PdfButtonProps {
 }
 
 /**
- * Grupo de botones para visualizar un archivo PDF en un diálogo modal o descargarlo directamente 
+ * Grupo de botones para visualizar un archivo PDF en un diálogo modal (sección izquierda) o descargarlo directamente en su dispositivo (sección derecha).
  * @param filePath Ruta del archivo PDF
  * @param label Texto del botón de visualización
  */
@@ -451,34 +451,47 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     const resourceUrl = withBasePath(filePath);
 
     return (
-        <>
-            <Dialog>
-                <div className="inline-flex bg-primary/5 text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
-                    {/* Visualizar */}
-                    <DialogTrigger
-                        render={
-                            <button
-                                type="button"
-                                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
-                            >
-                                <FileSearchCorner size={20} />
-                                {label}
-                            </button>
-                        }
-                    />
-                    {/* Descargar */}
-                    <a href={resourceUrl} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+        <Dialog>
+            {/* Contenedor del grupo con un poco de hover:scale extra */}
+            <div
+                className="inline-flex items-center duration-200 hover:scale-102 hover:shadow-md transition rounded-xl"
+                role="group"
+            >
+                {/* 1. Acción Izquierda: Visualizar */}
+                <DialogTrigger
+                    // Hay que usar render para evitar anidar un button dentro de otro button.
+                    render={
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            // Mantenemos solo las clases de acople (quitar redondeado derecho y borde)
+                            className="rounded-r-none border-r h-13 gap-2"
+                        >
+                            <FileSearchCorner size={20} />
+                            {label}
+                        </Button>
+                    }
+                />
+                {/* 2. Acción Derecha: Descargar */}
+                <Button
+                    asChild
+                    variant="outline"
+                    aria-label="Descargar PDF"
+                    // Hacer lo mismo que el botón izquierdo, pero para el borde izquierdo. Hace falta indicar la misma altura que el botón izquierdo para que se vea como un solo botón
+                    className="rounded-l-none border-l w-12 h-13 p-0 justify-center"
+                >
+                    <a href={resourceUrl} download title="Descargar PDF">
                         <Download size={20} />
                     </a>
-                </div>
+                </Button>
+            </div>
 
-                {/* Dialog / Modal */}
-                <PdfDialog filePath={resourceUrl} />
-            </Dialog>
-        </>
+            {/* Dialog / Modal */}
+            <PdfDialog filePath={resourceUrl} />
+        </Dialog>
     );
 }
-
 interface PdfDialogProps {
     filePath: string;
     from?: DialogPopupProps['from'];
