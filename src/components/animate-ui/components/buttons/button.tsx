@@ -36,20 +36,26 @@ const buttonVariants = cva(
         'icon-sm': 'size-8 rounded-md',
         'icon-lg': 'size-10 rounded-md',
       },
+      width: {
+        fit: 'w-fit',
+        full: 'w-full',
+        auto: '',
+      }
     },
     defaultVariants: {
       variant: 'primary',
       size: 'md',
+      width: 'fit',
     },
   },
 );
 
 type ButtonProps = ButtonPrimitiveProps & VariantProps<typeof buttonVariants>;
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+function Button({ className, variant, size, width, ...props }: ButtonProps) {
   return (
     <ButtonPrimitive
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, width, className }))}
       {...props}
     />
   );

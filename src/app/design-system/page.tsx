@@ -114,10 +114,38 @@ export default function DesignSystemPage() {
                         </div>
                     </div>
 
-                    {/* Bloque 4: Estados y Polimorfismo Semántico */}
+                    {/* Bloque 4: Ancho */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
-                            4. Estados Especiales y Enlaces Nativos
+                            4. Ancho (width)
+                        </h3>
+                        <div className="flex flex-wrap gap-6 items-end">
+                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
+                                <span className="text-xs text-text-secondary font-mono">width=&quot;fit&quot; (Por defecto)</span>
+                                <Button width="fit" variant="primary">
+                                    Ancho ajustado a contenido
+                                </Button>
+                            </div>
+                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center shadow-sm w-1/4">
+                                <span className="text-xs text-text-secondary font-mono">width=&quot;full&quot;</span>
+                                <Button width="full" variant="primary">
+                                    Ancho completo
+                                </Button>
+                            </div>
+                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
+                                <span className="text-xs text-text-secondary font-mono">width=&quot;auto&quot;</span>
+                                <Button width="auto" variant="primary">
+                                    Ancho automático
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/* Bloque 5: Estados y Polimorfismo Semántico */}
+                    <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
+                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                            5. Estados Especiales y Enlaces Nativos
                         </h3>
                         <div className="flex flex-wrap gap-6 items-center">
                             <div className="flex flex-col gap-1.5">
