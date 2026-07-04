@@ -161,7 +161,7 @@ export default function DesignSystemPage() {
                                 <Button asChild variant="primary">
                                     <Link href="/formacion/online">
                                         Explora nuestros cursos
-                                        <ArrowRight size={18} aria-hidden="true" />
+                                        <ArrowRight aria-hidden="true" />
                                     </Link>
                                 </Button>
                             </div>
@@ -169,7 +169,7 @@ export default function DesignSystemPage() {
                             <div className="flex flex-col gap-1.5">
                                 <span className="text-xs text-text-secondary font-mono">Solo Icono (size=&quot;icon&quot;)</span>
                                 <Button size="icon" variant="outline" aria-label="Descargar PDF">
-                                    <Download size={18} />
+                                    <Download />
                                 </Button>
                             </div>
                         </div>
