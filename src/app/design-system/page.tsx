@@ -116,7 +116,13 @@ export default function DesignSystemPage() {
                         </h3>
                         <div className="flex flex-wrap gap-6 items-end">
                             <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
-                                <span className="text-xs text-text-secondary font-mono">width=&quot;fit&quot; (Por defecto)</span>
+                                <span className="text-xs text-text-secondary font-mono">width=&quot;auto&quot; (Por defecto)</span>
+                                <Button width="auto" variant="primary">
+                                    Ancho automático
+                                </Button>
+                            </div>
+                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
+                                <span className="text-xs text-text-secondary font-mono">width=&quot;fit&quot;</span>
                                 <Button width="fit" variant="primary">
                                     Ancho ajustado a contenido
                                 </Button>
@@ -125,12 +131,6 @@ export default function DesignSystemPage() {
                                 <span className="text-xs text-text-secondary font-mono">width=&quot;full&quot;</span>
                                 <Button width="full" variant="primary">
                                     Ancho al 100% del contenedor
-                                </Button>
-                            </div>
-                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
-                                <span className="text-xs text-text-secondary font-mono">width=&quot;auto&quot;</span>
-                                <Button width="auto" variant="primary">
-                                    Ancho automático
                                 </Button>
                             </div>
                         </div>
