@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import confetti from "canvas-confetti";
 import { ArrowRight, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 
@@ -48,21 +49,25 @@ export default function StoryCompletionScreen({
 
                 <div className="flex flex-col gap-3 mb-8">
                     {hasNextChapter && (
-                        <button
+                        <Button
+                            variant="primary"
+                            size="lg"
+                            width="full"
                             onClick={onNextChapter}
-                            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium cursor-pointer"
                         >
                             <ArrowRight className="inline-block mr-2" />
                             Ir al capítulo {chapterIndex + 2}
-                        </button>
+                        </Button>
                     )}
-                    <button
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        width="full"
                         onClick={onRestart}
-                        className="bg-primary/10 text-primary px-6 py-3 rounded-lg hover:bg-primary/20 transition-colors font-medium cursor-pointer"
                     >
                         <RotateCcw className="inline-block mr-2" />
                         Volver a leer
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="text-left">
@@ -72,14 +77,13 @@ export default function StoryCompletionScreen({
                             const isCompleted = completedChapters[index];
                             const isCurrent = index === chapterIndex;
                             return (
-                                <button
+                                <Button
                                     key={index}
+                                    variant={isCurrent ? "outline" : "white"}
+                                    size="sm"
+                                    width="full"
+                                    className="justify-between"
                                     onClick={() => onSelectChapter(index)}
-                                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg border transition-colors cursor-pointer ${
-                                        isCurrent
-                                            ? "border-primary/40 bg-primary/5"
-                                            : "border-gray-100 hover:bg-gray-50"
-                                    }`}
                                 >
                                     <div className="flex items-center gap-2">
                                         {isCompleted ? (
@@ -94,7 +98,7 @@ export default function StoryCompletionScreen({
                                     <span className="text-xs text-gray-500 truncate max-w-40">
                                         {title || `Capítulo ${index + 1}`}
                                     </span>
-                                </button>
+                                </Button>
                             );
                         })}
                     </div>

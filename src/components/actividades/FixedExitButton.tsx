@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import Link from "next/link";
 
 interface FixedExitButtonProps {
@@ -8,13 +9,14 @@ interface FixedExitButtonProps {
 export default function FixedExitButton({ backHref }: FixedExitButtonProps) {
     return (
         <div className="relative">
-            <Link
-                href={backHref}
-                className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm text-text-secondary px-4 py-2 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all flex items-center gap-2 font-medium"
-            >
-                <ArrowLeft size={20} />
-                Salir
-            </Link>
+            <Button asChild variant="white" className="fixed top-20 left-4 z-50 text-text font-medium shadow-lg hover:shadow-xl">
+                <Link
+                    href={backHref}
+                >
+                    <ArrowLeft size={20} />
+                    Salir
+                </Link>
+            </Button>
         </div>
     );
 }

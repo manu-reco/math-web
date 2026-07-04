@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { subitizacionLevels } from "@/data/subitizacionLevels";
 import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import ActivityInstructionsModal from "@/components/actividades/ActivityInstructionsModal";
 import SubitizacionInstructionsContent from "@/components/actividades/subitizacion/SubitizacionInstructionsContent";
 import LevelSelector from "@/components/actividades/subitizacion/LevelSelector";
@@ -167,17 +168,20 @@ export default function SubitizacionPage() {
             <header className="bg-white shadow-sm border-b border-gray-100">
                 <div className="container-custom py-6">
                     {gameState === 'levelSelect' ? (
-                        <Link href="/actividades" className="text-primary hover:text-primary-hover font-medium mb-2 inline-block">
+                        <Button asChild variant="link" width="fit" className="p-0">
+                        <Link href="/actividades">
                             ← Volver a Actividades
                         </Link>
+                        </Button>
                     ) : (
-                        <button
-                            type="button"
+                        <Button
+                            variant="link"
+                            width="fit"
+                            className="p-0"
                             onClick={handleBack}
-                            className="text-primary hover:text-primary-hover font-medium mb-2 inline-block hover:cursor-pointer"
                         >
                             ← Volver a Selección de Nivel
-                        </button>
+                        </Button>
                     )}
                     <h1 className="text-4xl font-bold">
                         Subitización

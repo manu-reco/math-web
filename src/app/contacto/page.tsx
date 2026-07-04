@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 
 export const metadata: Metadata = buildPageMetadata({
     title: "Contacto",
@@ -163,13 +164,14 @@ export default function ContactPage() {
                                     placeholder="¿En qué podemos ayudarte?"
                                 ></textarea>
                             </div>
-                            <button
+                            <Button
                                 type="submit"
-                                className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-                            >
+                                variant="primary"
+                                size="lg"
+                                width="full">
                                 <Send size={18} />
                                 Enviar Mensaje
-                            </button>
+                            </Button>
                         </form>
                     </div>
                 </div>

@@ -77,15 +77,16 @@ export function Breadcrumbs({ saberId, nivelId, saberTitle, nivelTitle }: Breadc
     const temarioHref = `/formacion/pildoras/${saberId}/${nivelId}`;
 
     return (
-        <nav className="flex gap-2 text-md font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
-            <Link
-                href={temarioHref}
-                className="flex gap-2 hover:text-primary/80"
-                aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
-            >
-                <ChevronLeft size={26} strokeWidth={3} />
-                {saberTitle} • {nivelTitle}
-            </Link>
+        <nav className="font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
+            <Button asChild variant="link" size="lg" width="fit" className="p-0">
+                <Link
+                    href={temarioHref}
+                    aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
+                >
+                    <ChevronLeft className="size-6 stroke-3" />
+                    {saberTitle} • {nivelTitle}
+                </Link>
+            </Button> 
         </nav>
     );
 }
@@ -100,12 +101,13 @@ export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArr
             {prevHref && (
                 <Tooltip>
                     <TooltipTrigger>
-                        <Link
-                            href={prevHref}
-                            className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                        >
-                            <ChevronLeft size={26} strokeWidth={3} />
-                        </Link>
+                        <Button asChild variant="ghost" size="icon" animate={false} className="text-primary rounded-full hover:bg-primary/10 hover:text-primary">
+                            <Link
+                                href={prevHref}
+                            >
+                                <ChevronLeft className="size-6 stroke-3" />
+                            </Link>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipPanel>
                         <p>Anterior</p>
@@ -115,12 +117,13 @@ export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArr
             {nextHref && (
                 <Tooltip>
                     <TooltipTrigger>
-                        <Link
-                            href={nextHref}
-                            className="flex items-center justify-center h-12 w-auto text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                        >
-                            <ChevronRight size={26} strokeWidth={3} />
-                        </Link>
+                        <Button asChild variant="ghost" size="icon" animate={false} className="text-primary rounded-full hover:bg-primary/10 hover:text-primary">
+                            <Link
+                                href={nextHref}
+                            >
+                                <ChevronRight className="size-6 stroke-3" />
+                            </Link>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipPanel>
                         <p>Siguiente</p>
@@ -414,19 +417,26 @@ interface DownloadButtonProps {
  * @param filePath Ruta del archivo a descargar
  * @param label Texto del botón
  */
-export function DownloadButton({ filePath, label = "Descargar recurso", variant = "outline", size = "lg" }: DownloadButtonProps) {
+export function DownloadButton({
+    filePath,
+    label = "Descargar recurso",
+    variant = "outline",
+    size = "lg"
+}: DownloadButtonProps) {
     const resourceUrl = withBasePath(filePath);
 
     return (
-        <a href={resourceUrl} download>
-            <Button
-                variant={variant} size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg rounded-xl hover:bg-primary hover:text-white transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant={variant}
+            size={size}
+            className="gap-3 group"
+        >
+            <a href={resourceUrl} download>
                 <Download size={20} className="group-hover:animate-bounce" />
                 {label}
-            </Button>
-        </a>
+            </a>
+        </Button>
     );
 }
 
@@ -436,7 +446,7 @@ interface PdfButtonProps {
 }
 
 /**
- * Grupo de botones para visualizar un archivo PDF en un diálogo modal o descargarlo directamente 
+ * Grupo de botones para visualizar un archivo PDF en un diálogo modal (sección izquierda) o descargarlo directamente en su dispositivo (sección derecha).
  * @param filePath Ruta del archivo PDF
  * @param label Texto del botón de visualización
  */
@@ -444,34 +454,47 @@ export function PdfButton({ filePath, label = "Ver recurso" }: PdfButtonProps) {
     const resourceUrl = withBasePath(filePath);
 
     return (
-        <>
-            <Dialog>
-                <div className="inline-flex bg-primary/5 text-primary rounded-xl duration-200 h-12 hover:scale-105 hover:shadow-lg transition" role="group">
-                    {/* Visualizar */}
-                    <DialogTrigger
-                        render={
-                            <button
-                                type="button"
-                                className="inline-flex items-center text-body border-r border-2 border-primary hover:bg-primary hover:text-white focus:ring-2 font-medium leading-5 rounded-l-xl text-base px-3 gap-2 h-full focus:outline-none transition"
-                            >
-                                <FileSearchCorner size={20} />
-                                {label}
-                            </button>
-                        }
-                    />
-                    {/* Descargar */}
-                    <a href={resourceUrl} download className="inline-flex items-center justify-center border-2 border-l-0 border-primary hover:bg-primary hover:text-white focus:ring-2 focus:border-l-2 font-medium leading-5 rounded-r-xl text-sm w-12 h-full focus:outline-none transition">
+        <Dialog>
+            {/* Contenedor del grupo con un poco de hover:scale extra */}
+            <div
+                className="inline-flex items-center duration-200 hover:scale-102 hover:shadow-md transition rounded-xl"
+                role="group"
+            >
+                {/* 1. Acción Izquierda: Visualizar */}
+                <DialogTrigger
+                    // Hay que usar render para evitar anidar un button dentro de otro button.
+                    render={
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            // Mantenemos solo las clases de acople (quitar redondeado derecho y borde)
+                            className="rounded-r-none border-r h-13 gap-2"
+                        >
+                            <FileSearchCorner size={20} />
+                            {label}
+                        </Button>
+                    }
+                />
+                {/* 2. Acción Derecha: Descargar */}
+                <Button
+                    asChild
+                    variant="outline"
+                    aria-label="Descargar PDF"
+                    // Hacer lo mismo que el botón izquierdo, pero para el borde izquierdo. Hace falta indicar la misma altura que el botón izquierdo para que se vea como un solo botón
+                    className="rounded-l-none border-l w-12 h-13 p-0 justify-center"
+                >
+                    <a href={resourceUrl} download title="Descargar PDF">
                         <Download size={20} />
                     </a>
-                </div>
+                </Button>
+            </div>
 
-                {/* Dialog / Modal */}
-                <PdfDialog filePath={resourceUrl} />
-            </Dialog>
-        </>
+            {/* Dialog / Modal */}
+            <PdfDialog filePath={resourceUrl} />
+        </Dialog>
     );
 }
-
 interface PdfDialogProps {
     filePath: string;
     from?: DialogPopupProps['from'];
@@ -551,17 +574,23 @@ interface ArticleNavigationVariantProps {
  * @param href Enlace al siguiente artículo
  * @param label Texto del botón
  */
-export function ArticleNextButton({ href, label = "Siguiente artículo", size = "lg" }: ArticleNavigationVariantProps) {
+export function ArticleNextButton({
+    href,
+    label = "Siguiente artículo",
+    size = "md"
+}: ArticleNavigationVariantProps) {
     return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant="primary"
+            size={size}
+            className="gap-3 group" // Mantenemos solo el espaciado y el grupo para la animación del icono
+        >
+            <Link href={href}>
                 {label}
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Button>
-        </Link>
+            </Link>
+        </Button>
     );
 }
 
@@ -570,16 +599,22 @@ export function ArticleNextButton({ href, label = "Siguiente artículo", size = 
  * @param href Enlace al artículo anterior
  * @param label Texto del botón
  */
-export function ArticlePreviousButton({ href, label = "Artículo anterior", size = "lg" }: ArticleNavigationVariantProps) {
+export function ArticlePreviousButton({
+    href,
+    label = "Artículo anterior",
+    size = "md"
+}: ArticleNavigationVariantProps) {
     return (
-        <Link href={href}>
-            <Button
-                variant="default" size={size}
-                className="inline-flex items-center gap-3 px-6 py-7 border-2 border-primary text-lg text-primary-foreground rounded-xl transition-colors duration-200 group"
-            >
+        <Button
+            asChild
+            variant="primary"
+            size={size}
+            className="gap-3 group"
+        >
+            <Link href={href}>
                 <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                 {label}
-            </Button>
-        </Link>
+            </Link>
+        </Button>
     );
 }

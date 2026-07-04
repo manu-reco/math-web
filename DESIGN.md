@@ -148,7 +148,39 @@ The shape language is consistently **Rounded**, reinforcing the friendly and app
 - **Special Elements:** Quote bubbles use asymmetric rounding (e.g., `rounded-tl-none` or `rounded-tr-none`) to simulate speech direction.
 
 ## Components
-- **Buttons:** Primary buttons are solid `primary` with `on-primary` text. Secondary buttons use a transparent background with a 2px `primary/20` border. Large CTAs must maintain a minimum height of 44px for accessibility.
+- **Buttons:** DO NOT implement HTML `<button>` or create custom variants. ALWAYS use the global component `<Button />` imported from `@/components/animate-ui/components/buttons/button`. This component unifies the design tokens and injects micro-interactions via `motion/react` (Framer Motion). 
+  * **Visual Style:** Fixed variants only (`primary` (default), `secondary`, `outline`, `white`, `destructive`, `ghost`, `link`). To guarantee structural and aesthetic consistency, customizations must be done minimally using `className`, restricting adjustments to colors, layout margins, alignment or padding overrides (e.g., `p-0` for raw inline links).
+  * **Semantic Composition (`asChild`):** When the button needs to act as a Next.js navigation link (`<Link>`), the `asChild` prop MUST be provided. This delegates the rendering to the immediate child element (preventing invalid nesting of an `<a>` tag inside a `<button>`), cleanly merging the styling classes, Tailwind v4 variants, and `motion/react` animation events directly onto the `<Link>` component.
+  * **Sizing Rules:** Use `size` values: `sm`, `md` (default), `lg`, `xl`. Buttons containing exclusively an icon must use `size="icon"`, `size="icon-sm"`, or `size="icon-lg"`.
+  * **Width Constraints:** Use `width="fit"` to avoid container deformation (`stretch`) inside flex/grid containers. Use `width="full"` for fluid block layouts. `width="auto"` (default) add no additional class, and it's convenient when using size="icon" or its variants.
+  * **Icons inside Buttons:** Any Lucide SVG element nested inside must use Tailwind utility sizing classes (e.g., `className="size-5"`) instead of the size prop, which will be ignored. This prevents conflicts with the internal CSS reset constraints of the component.
+  * **Animations:** The components include scale fluid micro-interactions (`whileHover={{ scale: 1.02}}` and `whileTap={{ scale: 0.98}}`,). It can be disabled when necessary (e.g., loading states or list actions) by passing `animate={false}`.
+  * **Disabled States:** Do NOT append manual styles or opacity utilities for disabled states via `className`. Simply apply the native HTML `disabled` attribute; the component's base styles automatically handle states using Tailwind's native `disabled:` modifiers (e.g., handling opacity resets and locking pointer events).
+
+  ### Button Implementation Examples
+
+```tsx
+// 1. Standard Button (Native action with default values)
+<Button>
+  Guardar cambios
+</Button>
+
+// 2. Navigation link styled as a button (Mandatory use of asChild)
+<Button asChild variant="secondary">
+  <Link href="/">
+    Ir al Inicio
+  </Link>
+</Button>
+
+// 3. Link with an integrated icon (asChild + icon with implicit size reset)
+<Button asChild variant="outline">
+  <Link href="/formacion/online">
+    Explora nuestros cursos
+    <ArrowRight aria-hidden="true" />
+  </Link>
+</Button>
+```
+
 - **Cards:** White backgrounds with subtle borders. Header cards use a 4px top or left "accent border" in the primary or secondary color to denote category.
 - **Badges:** Small, pill-shaped indicators using `label-caps` typography. Often paired with a small icon (16px).
 - **Icons:** Use "Lucide Icons". In feature sections, icons are placed inside 64px circular containers with a 10-20% opacity fill of their respective category color.

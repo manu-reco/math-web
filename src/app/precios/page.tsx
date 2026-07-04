@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 
+import { Button } from "@/components/animate-ui/components/buttons/button";
+
 export const metadata: Metadata = buildPageMetadata({
     title: "Precios",
     description:
@@ -105,15 +107,11 @@ export default function PricingPage() {
                                 </ul>
                             </div>
                             <div className="p-8 bg-gray-50 border-t border-gray-100">
-                                <Link
-                                    href={plan.href}
-                                    className={`block w-full text-center py-3 rounded-lg font-bold transition-colors ${plan.popular
-                                            ? "bg-secondary hover:bg-secondary-hover"
-                                            : "bg-primary hover:bg-primary-hover text-white"
-                                        }`}
-                                >
-                                    {plan.cta}
-                                </Link>
+                                <Button asChild variant={plan.popular ? "secondary" : "primary"} size="lg" width="full">
+                                    <Link href={plan.href} >
+                                        {plan.cta}
+                                    </Link>
+                                </Button>
                             </div>
                         </div>
                     ))}
