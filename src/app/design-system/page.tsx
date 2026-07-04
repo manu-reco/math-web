@@ -66,29 +66,24 @@ export default function DesignSystemPage() {
                                 <span className="text-xs text-text-secondary font-mono">variant=&quot;ghost&quot;</span>
                                 <Button variant="ghost">Cancelar</Button>
                             </div>
-                        </div>
-                    </div>
 
-                    {/* Bloque 2: Variantes sobre Fondo Oscuro (Para el CTA) */}
-                    <div className="rounded-2xl bg-gray-900 p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">
-                            2. Variante de Alto Contraste (Para Secciones Oscuras / CTA)
-                        </h3>
-                        <div className="flex flex-wrap gap-4 items-center">
                             <div className="flex flex-col gap-1.5">
-                                <span className="text-xs text-gray-500 font-mono">variant=&quot;white&quot;</span>
-                                <Button variant="white">
-                                    Registrarme Gratis
-                                    <ArrowRight size={16} />
-                                </Button>
+                                <span className="text-xs text-text-secondary font-mono">variant=&quot;link&quot;</span>
+                                <Button variant="link">Ver más información</Button>
                             </div>
+
+                            <div className="flex flex-col gap-1.5 bg-gray-900 rounded-lg p-4">
+                                <span className="text-xs text-gray-400 font-mono">variant=&quot;white&quot;</span>
+                                <Button variant="white">Regístrate ya</Button>
+                            </div>
+
                         </div>
                     </div>
 
-                    {/* Bloque 3: Tamaños */}
+                    {/* Bloque 2: Tamaños */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
-                            3. Escala de Tamaños
+                            2. Escala de Tamaños
                         </h3>
                         <div className="flex flex-wrap gap-6 items-end">
                             <div className="flex flex-col gap-1.5">
@@ -114,10 +109,10 @@ export default function DesignSystemPage() {
                         </div>
                     </div>
 
-                    {/* Bloque 4: Ancho */}
+                    {/* Bloque 3: Ancho */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
-                            4. Ancho (width)
+                            3. Ancho (width)
                         </h3>
                         <div className="flex flex-wrap gap-6 items-end">
                             <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
@@ -126,10 +121,10 @@ export default function DesignSystemPage() {
                                     Ancho ajustado a contenido
                                 </Button>
                             </div>
-                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center shadow-sm w-1/4">
+                            <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center shadow-sm w-1/3">
                                 <span className="text-xs text-text-secondary font-mono">width=&quot;full&quot;</span>
                                 <Button width="full" variant="primary">
-                                    Ancho completo
+                                    Ancho al 100% del contenedor
                                 </Button>
                             </div>
                             <div className="flex flex-col rounded-2xl border border-border bg-card p-6 text-center items-center shadow-sm w-1/4">
@@ -141,11 +136,10 @@ export default function DesignSystemPage() {
                         </div>
                     </div>
 
-
-                    {/* Bloque 5: Estados y Polimorfismo Semántico */}
+                    {/* Bloque 4: Estados y Polimorfismo Semántico */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
-                            5. Estados Especiales y Enlaces Nativos
+                            4. Estados Especiales y Enlaces Nativos
                         </h3>
                         <div className="flex flex-wrap gap-6 items-center">
                             <div className="flex flex-col gap-1.5">
@@ -176,6 +170,28 @@ export default function DesignSystemPage() {
                                 <span className="text-xs text-text-secondary font-mono">Solo Icono (size=&quot;icon&quot;)</span>
                                 <Button size="icon" variant="outline" aria-label="Descargar PDF">
                                     <Download size={18} />
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    {/* Bloque 5: Animación activada/desactivada */}
+                    <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
+                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                            5. Animación activada/desactivada
+                        </h3>
+                        <div className="flex flex-wrap gap-6 items-center">
+                            <div className="flex flex-col gap-1.5">
+                                <span className="text-xs text-text-secondary font-mono">animate=true (Por defecto)</span>
+                                <Button animate={true} variant="primary">
+                                    Guardar cambios
+                                </Button>
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                                <span className="text-xs text-text-secondary font-mono">animate=false</span>
+                                <Button animate={false} variant="primary">
+                                    Guardar cambios
                                 </Button>
                             </div>
                         </div>
