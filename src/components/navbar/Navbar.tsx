@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import NavDropdownDesktop from "./NavDropdownDesktop";
 import NavDropdownMobile from "./NavDropdownMobile";
 import type { DropdownItem } from "./NavDropdown.types";
@@ -127,15 +128,12 @@ export default function Navbar() {
                     </div>
 
                     {/* Login Button */}
-                    <div className="hidden md:flex items-center">
-                        <Link
-                            href="/login"
-                            className="bg-secondary hover:bg-secondary-hover text-secondary-foreground px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-colors"
-                        >
+                    <Button asChild variant="secondary" size="sm" className="hidden md:flex items-center gap-2">
+                        <Link href="/login">
                             <User size={18} />
                             Iniciar Sesión
                         </Link>
-                    </div>
+                    </Button>
 
                     {/* Mobile menu button */}
                     <div className="md:hidden flex items-center">
@@ -195,15 +193,16 @@ export default function Navbar() {
                                 }}
                             />
 
+                            <Button asChild variant="secondary" size="sm" width="full">
                             <Link
                                 href="/login"
-                                className="block w-full text-center bg-secondary hover:bg-secondary-hover text-white px-4 py-3 rounded-md text-base font-medium mt-4"
                                 onClick={() => {
                                     closeAll();
                                 }}
                             >
                                 Iniciar Sesión
                             </Link>
+                            </Button>
                         </div>
                     </motion.div>
                 )}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils";
 
@@ -53,16 +54,14 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
       <h3 className="mb-4 text-2xl font-bold text-text">{title}</h3>
       <p className="mb-8 flex-1 text-base leading-relaxed text-text-secondary">{description}</p>
 
-      <Link
-        href={href}
-        className={cn(
-          "flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-primary-foreground shadow-sm transition-colors duration-200",
-          isPrimary ? 'bg-primary hover:bg-primary-hover' : 'bg-secondary hover:bg-secondary-hover'
-        )}
-      >
-        {buttonText}
-        <span className="text-sm">{buttonIcon}</span>
-      </Link>
+      <Button asChild variant={isPrimary ? 'primary' : 'secondary'} size="md" width="full">
+        <Link
+          href={href}
+        >
+          {buttonText}
+          <span className="text-sm">{buttonIcon}</span>
+        </Link>
+      </Button>
     </article>
   );
 }
@@ -88,19 +87,21 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/formacion/online"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground shadow-sm transition hover:bg-primary-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Explora nuestros cursos
-                <ArrowRight size={18} aria-hidden="true" />
-              </Link>
-              <Link
-                href="/formacion/pildoras"
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary/20 bg-card px-6 py-3 font-bold text-primary shadow-sm transition hover:border-primary/35 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Descubre las lecciones gratuitas
-              </Link>
+              <Button asChild size="lg" className="group">
+                <Link
+                  href="/formacion/online"
+                >
+                  Explora nuestros cursos
+                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link
+                  href="/formacion/pildoras"
+                >
+                  Descubre las lecciones gratuitas
+                </Link>
+              </Button>
             </div>
           </div>
 
@@ -126,21 +127,21 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             <FeatureCard
               icon={<Brain size={28} aria-hidden="true" />}
-            iconClassName="bg-primary/10 text-primary"
-            title="Evidencia científica"
-            description="Metodología basada en estudios sobre didáctica y neurociencia. Pensada para razonar y comprender, no solo memorizar."
+              iconClassName="bg-primary/10 text-primary"
+              title="Evidencia científica"
+              description="Metodología basada en estudios sobre didáctica y neurociencia. Pensada para razonar y comprender, no solo memorizar."
             />
             <FeatureCard
               icon={<Presentation size={28} aria-hidden="true" />}
-            iconClassName="bg-secondary/10 text-secondary"
-            title="Práctica viable"
-            description="Materiales y dinámicas probadas en el aula. Llévate ideas listas para usar, adaptables a tu contexto."
+              iconClassName="bg-secondary/10 text-secondary"
+              title="Práctica viable"
+              description="Materiales y dinámicas probadas en el aula. Llévate ideas listas para usar, adaptables a tu contexto."
             />
             <FeatureCard
               icon={<ToolCase size={28} aria-hidden="true" />}
-            iconClassName="bg-tertiary/10 text-tertiary"
-            title="Aprendizaje lúdico"
-            description="El juego estructurado como motor principal para la comprensión profunda."
+              iconClassName="bg-tertiary/10 text-tertiary"
+              title="Aprendizaje lúdico"
+              description="El juego estructurado como motor principal para la comprensión profunda."
             />
           </div>
         </section>
@@ -153,7 +154,7 @@ export default function Home() {
                 Qué encontrarás
               </p>
               <h2 className="text-3xl font-black tracking-tight text-text sm:text-4xl">
-                Una ruta clara para levantar torres de conocimiento matemático.
+                Una ruta clara para enseñar matemáticas con más confianza.
               </h2>
               <div className="max-w-2xl space-y-2 text-base leading-7 text-text-secondary sm:text-lg">
                 <p>Encontrarás artículos, actividades, recursos descargables y cursos para cada etapa educativa y área de las matemáticas que necesites.</p>
@@ -186,13 +187,14 @@ export default function Home() {
               <p className="mt-4 text-sm leading-7 text-primary-foreground/90">
                 Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
               </p>
-              <Link
-                href="/formacion/pildoras/aritmetica/primeros-pasos"
-                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-card px-6 py-3 text-md font-bold text-primary transition hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-card"
-              >
-                Ver píldoras de formación
-                <ArrowRight size={18} aria-hidden="true" />
-              </Link>
+              <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
+                <Link
+                  href="/formacion/pildoras/aritmetica/primeros-pasos"
+                >
+                  Ver píldoras de formación
+                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -261,12 +263,13 @@ export default function Home() {
             <div className="md:w-1/3 bg-gray-800 p-8 rounded-2xl border border-gray-700">
               <h3 className="text-2xl font-bold mb-2">Empieza hoy mismo</h3>
               <p className="text-gray-400 mb-6">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
-              <Link
-                href="/register"
-                className="block w-full bg-secondary hover:bg-secondary-hover text-center py-3 rounded-lg font-bold transition-colors mb-4"
-              >
-                Registrarme Gratis
-              </Link>
+              <Button asChild variant="secondary" size="lg" width="full">
+                <Link
+                  href="/register"
+                >
+                  Registrarme Gratis
+                </Link>
+              </Button>
               <p className="text-xs text-center text-gray-500">
                 No se requiere tarjeta de crédito.
               </p>

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 
+import { Button } from "@/components/animate-ui/components/buttons/button";
+
 export const metadata: Metadata = buildPageMetadata({
     title: "Iniciar sesion",
     description: "Accede a tu cuenta de MathEdu para continuar tu formacion y gestionar tus recursos.",
@@ -10,13 +12,12 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 /*
-  RECOMENDACIÓN DE SISTEMA DE AUTH:
-  Para una aplicación moderna en Next.js, recomiendo usar una de las siguientes opciones:
-  
-  1. Clerk (https://clerk.com/): Muy fácil de integrar con Next.js, maneja sesiones, perfiles, 2FA, etc.
-  2. NextAuth.js (Auth.js): La solución nativa. Flexible, permite usar cualquier proveedor (Google, GitHub, Email).
-  3. Supabase Auth: Si usas Supabase como backend, su auth es excelente y gratuito hasta cierto punto.
-  4. Firebase Auth: Clásico, robusto, pero a veces más complejo de integrar con SSR en Next.js.
+    RECOMENDACIÓN DE SISTEMA DE AUTH:
+    Para una aplicación moderna en Next.js, recomiendo usar una de las siguientes opciones:
+    1. Clerk (https://clerk.com/): Muy fácil de integrar con Next.js, maneja sesiones, perfiles, 2FA, etc.
+    2. NextAuth.js (Auth.js): La solución nativa. Flexible, permite usar cualquier proveedor (Google, GitHub, Email).
+    3. Supabase Auth: Si usas Supabase como backend, su auth es excelente y gratuito hasta cierto punto.
+    4. Firebase Auth: Clásico, robusto, pero a veces más complejo de integrar con SSR en Next.js.
 */
 
 export default function LoginPage() {
@@ -106,15 +107,17 @@ export default function LoginPage() {
                     </div>
 
                     <div>
-                        <button
+                        <Button
                             type="submit"
-                            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-                        >
+                            variant="primary"
+                            size="sm"
+                            width="full"
+                            className="relative">
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <ArrowRight className="h-5 w-5 text-blue-300 group-hover:text-blue-200" />
+                                <ArrowRight />
                             </span>
                             Entrar
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>
