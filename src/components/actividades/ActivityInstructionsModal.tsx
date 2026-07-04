@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useId, useState } from "react";
 import { CircleHelp, X } from "lucide-react";
+import { Button } from "../animate-ui/components/buttons/button";
 import ExpandingFab from "../ExpandingFab";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -49,7 +50,7 @@ export default function ActivityInstructionsModal({
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="fixed inset-0 top-10 z-40 flex items-center justify-center bg-black/45 p-4 sm:p-6"
+                        className="fixed inset-0 top-0 z-55 flex items-center justify-center bg-black/45 p-4 sm:p-6"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby={titleId}
@@ -65,14 +66,15 @@ export default function ActivityInstructionsModal({
                             exit={{ opacity: 0, y: 16, scale: 0.98 }}
                             transition={{ duration: 0.25, ease: "easeOut" }}
                         >
-                            <button
-                                type="button"
+                            <Button
+                                variant="outline"
+                                size="icon-sm"
                                 onClick={() => setIsOpen(false)}
-                                className="absolute top-2 right-2 rounded-md p-2 text-text-secondary hover:bg-gray-100 transition-colors"
+                                className="absolute top-2 right-2 border-0 text-text bg-transparent"
                                 aria-label="Cerrar instrucciones"
                             >
-                                <X size={18} />
-                            </button>
+                                <X />
+                            </Button>
                             <div className="w-full max-w-4xl max-h-[75vh] overflow-y-auto p-6">
                                 <div className="pr-10">
                                     <h2 id={titleId} className="text-2xl sm:text-3xl font-bold mb-6">
@@ -84,12 +86,14 @@ export default function ActivityInstructionsModal({
                                 </div>
 
                                 <div className="mt-8 flex justify-end">
-                                    <button
-                                        className="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+                                    <Button
+                                        variant="primary"
+                                        size="xl"
+                                        width="fit"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         Entendido
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </motion.div>

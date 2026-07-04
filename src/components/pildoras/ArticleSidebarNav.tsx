@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronLeft, SquareMenu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { Button } from "@/components/animate-ui/components/buttons/button";
+
 type NavArticle = {
     id: string;
     title: string;
@@ -114,13 +116,15 @@ export default function ArticleSidebarNav({
                             onClick={(event) => event.stopPropagation()}
                         >
                             <div className="mb-4 text-sm flex items-center justify-between">
-                                <Link
-                                    href={`/formacion/pildoras/${saberId}/${nivelId}`}
-                                    className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
-                                >
-                                    <ChevronLeft size={20} className="mr-2" />
-                                    Volver al temario
-                                </Link>
+                                <Button asChild variant="link" size="sm" className="p-0 text-text">
+                                    <Link
+                                        href={`/formacion/pildoras/${saberId}/${nivelId}`}
+                                        className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
+                                    >
+                                        <ChevronLeft size={20} />
+                                        Volver al temario
+                                    </Link>
+                                </Button>
                                 <button
                                     type="button"
                                     className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 text-text-secondary"
@@ -136,14 +140,13 @@ export default function ArticleSidebarNav({
                 )}
             </AnimatePresence>
 
-            <aside className="sticky top-20 hidden h-[calc(100vh-6rem)] rounded-xl border border-gray-100 bg-white p-4 lg:flex lg:flex-col">
-                <Link
-                    href={`/formacion/pildoras/${saberId}/${nivelId}`}
-                    className="inline-flex items-center mb-4 text-sm text-text-secondary hover:text-primary transition-colors font-medium"
-                >
-                    <ChevronLeft size={20} className="mr-2" />
-                    Volver al temario
-                </Link>
+            <aside className="sticky top-20 hidden h-[calc(100vh-6rem)] rounded-xl border border-gray-100 bg-white p-4 pt-3 lg:flex lg:flex-col">
+                <Button asChild variant="link" size="sm" width="fit" className="p-0 text-text-secondary mt-0 mb-1">
+                    <Link href={`/formacion/pildoras/${saberId}/${nivelId}`} >
+                        <ChevronLeft />
+                        Volver al temario
+                    </Link>
+                </Button>
 
                 <div className="min-h-0 text-md flex-1 overflow-y-auto pr-1">
                     {renderNav()}

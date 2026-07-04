@@ -194,14 +194,14 @@ export default function Navbar() {
                             />
 
                             <Button asChild variant="secondary" size="sm" width="full">
-                            <Link
-                                href="/login"
-                                onClick={() => {
-                                    closeAll();
-                                }}
-                            >
-                                Iniciar Sesión
-                            </Link>
+                                <Link
+                                    href="/login"
+                                    onClick={() => {
+                                        closeAll();
+                                    }}
+                                >
+                                    Iniciar Sesión
+                                </Link>
                             </Button>
                         </div>
                     </motion.div>

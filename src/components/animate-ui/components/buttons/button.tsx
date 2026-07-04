@@ -26,14 +26,15 @@ const buttonVariants = cva(
           'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:outline-destructive',
         ghost:
           'hover:bg-primary hover:text-primary-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'text-primary underline-offset-4 hover:underline decoration-1',
       },
       size: {
         md: 'min-h-11 px-5 py-2.5 text-base font-semibold',
-        lg: 'min-h-12 px-6 py-3 text-md font-bold',
         sm: 'min-h-10 px-4 py-2 text-sm font-semibold',
+        lg: 'min-h-12 px-6 py-3 text-md font-bold',
+        xl: 'min-h-14 px-8 py-4 text-lg font-bold',
         icon: 'size-9',
-        'icon-sm': 'size-8 rounded-md',
+        'icon-sm': 'size-7 rounded-md',
         'icon-lg': 'size-10 rounded-md',
       },
       width: {

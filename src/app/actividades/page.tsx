@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/data/actividades";
+import { Button } from "@/components/animate-ui/components/buttons/button";
 import GamesGrid from "@/components/actividades/GamesGrid";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -18,9 +19,11 @@ export default function ActividadesPage() {
             <header className="bg-white shadow-sm border-b border-gray-100">
                 <div className="container-custom py-12">
                     <nav aria-label="Breadcrumb">
-                        <Link href="/" className="text-primary hover:text-primary-hover font-medium mb-4 inline-block">
-                            ← Volver al inicio
-                        </Link>
+                        <Button asChild variant="link" className="p-0">
+                            <Link href="/" className="text-primary hover:text-primary-hover font-medium mb-4 inline-block">
+                                ← Volver al inicio
+                            </Link>
+                        </Button>
                     </nav>                    
                     <h1 className="text-5xl font-bold mb-4">
                         Actividades Educativas

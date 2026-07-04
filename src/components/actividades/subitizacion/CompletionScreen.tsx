@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { Button } from "@/components/animate-ui/components/buttons/button";
+
 import confetti from "canvas-confetti";
 
 interface CompletionPrimaryAction {
@@ -45,22 +47,22 @@ export default function CompletionScreen({
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 {primaryAction && (
-                    <button
-                        type="button"
+                    <Button
+                        variant="primary"
+                        size="xl"
                         onClick={primaryAction.onClick}
-                        className="px-8 py-4 bg-primary hover:bg-primary-hover text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
                     >
                         {primaryAction.label}
-                    </button>
+                    </Button>
                 )}
 
-                <button
-                    type="button"
+                <Button
+                    variant="outline"
+                    size="xl"
                     onClick={onRestart}
-                    className="px-8 py-4 bg-white hover:bg-gray-50 text-primary border-2 border-primary font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
                 >
                     Volver al inicio
-                </button>
+                </Button>
             </div>
         </div>
     );

@@ -1,3 +1,5 @@
+import { Button } from "@/components/animate-ui/components/buttons/button";
+
 interface ProgressNavigatorProps {
     currentStep: number;
     totalSteps: number;
@@ -29,33 +31,35 @@ export default function ProgressNavigator({
 
     return (
         <div className={`${basePositionClass} z-30 bg-black/50 text-white px-3 py-2 rounded-full text-sm flex items-center gap-3`}>
-            <button
-                type="button"
+            <Button
+                variant="ghost"
+                size="icon-sm"
                 onClick={onPrevious}
                 disabled={isPreviousDisabled}
-                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                className="hover:bg-primary/20"
                 aria-label={previousAriaLabel}
             >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-            </button>
+            </Button>
 
             <span className="min-w-12 text-center">
                 {displayStep} / {totalSteps}
             </span>
 
-            <button
-                type="button"
+            <Button
+                variant="ghost"
+                size="icon-sm"
                 onClick={onNext}
                 disabled={isNextDisabled}
-                className="hover:scale-110 transition-transform disabled:opacity-30 disabled:cursor-not-allowed"
+                className="hover:bg-primary/20"
                 aria-label={nextAriaLabel}
             >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-            </button>
+            </Button>
         </div>
     );
 }

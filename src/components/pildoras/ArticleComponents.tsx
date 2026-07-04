@@ -77,15 +77,16 @@ export function Breadcrumbs({ saberId, nivelId, saberTitle, nivelTitle }: Breadc
     const temarioHref = `/formacion/pildoras/${saberId}/${nivelId}`;
 
     return (
-        <nav className="flex gap-2 text-md font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
-            <Link
-                href={temarioHref}
-                className="flex gap-2 hover:text-primary/80"
-                aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
-            >
-                <ChevronLeft size={26} strokeWidth={3} />
-                {saberTitle} • {nivelTitle}
-            </Link>
+        <nav className="font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
+            <Button asChild variant="link" size="lg" width="fit" className="p-0">
+                <Link
+                    href={temarioHref}
+                    aria-label={`Volver al temario de ${saberTitle} - ${nivelTitle}`}
+                >
+                    <ChevronLeft className="size-6 stroke-3" />
+                    {saberTitle} • {nivelTitle}
+                </Link>
+            </Button> 
         </nav>
     );
 }
@@ -100,12 +101,13 @@ export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArr
             {prevHref && (
                 <Tooltip>
                     <TooltipTrigger>
-                        <Link
-                            href={prevHref}
-                            className="flex items-center justify-center h-8 w-8 text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                        >
-                            <ChevronLeft size={26} strokeWidth={3} />
-                        </Link>
+                        <Button asChild variant="ghost" size="icon" animate={false} className="text-primary rounded-full hover:bg-primary/10 hover:text-primary">
+                            <Link
+                                href={prevHref}
+                            >
+                                <ChevronLeft className="size-6 stroke-3" />
+                            </Link>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipPanel>
                         <p>Anterior</p>
@@ -115,12 +117,13 @@ export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArr
             {nextHref && (
                 <Tooltip>
                     <TooltipTrigger>
-                        <Link
-                            href={nextHref}
-                            className="flex items-center justify-center h-12 w-auto text-primary hover:text-primary/80 hover:bg-primary/10 rounded-full transition-colors"
-                        >
-                            <ChevronRight size={26} strokeWidth={3} />
-                        </Link>
+                        <Button asChild variant="ghost" size="icon" animate={false} className="text-primary rounded-full hover:bg-primary/10 hover:text-primary">
+                            <Link
+                                href={nextHref}
+                            >
+                                <ChevronRight className="size-6 stroke-3" />
+                            </Link>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipPanel>
                         <p>Siguiente</p>
