@@ -1,32 +1,32 @@
 name: Eurekma! Warm Pedagogy
 colors:
-  primary: '#004e46'
-  on-primary: '#fafafa'
-  primary-container: '#00685e'
-  on-primary-container: '#93e4d7'
+  primary: '#308479'
+  primary-foreground: '#fafafa'
+  primary-container: '#056a60'
+  primary-foreground-container: '#93e4d7'
   inverse-primary: '#85d5c8'
   secondary: '#8e4e14'
-  on-secondary: '#ffffff'
+  secondary-foreground: '#ffffff'
   secondary-container: '#fca867'
-  on-secondary-container: '#763b00'
+  secondary-foreground-container: '#763b00'
   tertiary: '#004d4f'
-  on-tertiary: '#ffffff'
+  tertiary-foreground: '#ffffff'
   tertiary-container: '#00676a'
-  on-tertiary-container: '#95e2e5'
+  tertiary-foreground-container: '#95e2e5'
   accent: '#f4a462'
-  canvas: '#f1f8f6'
-  surface: '#f4fbf9'
-  surface-primary: '#e8efed'
-  on-surface: '#161d1c'
-  on-surface-variant: '#3e4947'
-  inverse-surface: '#2b3231'
-  inverse-on-surface: '#ebf2f0'
+  background: '#f1f8f6'
+  card: '#f4fbf9'
+  card-primary: '#e8efed'
+  card-foreground: '#161d1c'
+  card-foreground-variant: '#3e4947'
+  inverse-card: '#2b3231'
+  inverse-card-foreground: '#ebf2f0'
   outline: '#6e7977'
   outline-variant: '#bec9c6'
-  error: '#ba1a1a'
-  on-error: '#ffffff'
-  error-container: '#ffdad6'
-  on-error-container: '#93000a'
+  destructive: '#ba1a1a'
+  destructive-foreground: '#ffffff'
+  destructive-container: '#ffdad6'
+  destructive-foreground-container: '#93000a'
   arithmetic: '#2563eb'
   geometry: '#16a34a'
   problems: '#9333ea'
@@ -88,11 +88,13 @@ typography:
     lineHeight: 16px
     letterSpacing: 0.05em
 rounded:
-  sm: 0.25rem
-  DEFAULT: 0.5rem
-  md: 0.75rem
-  lg: 1rem
-  xl: 1.5rem
+  sm: 0.375rem
+  md: 0.5rem
+  DEFAULT: 0.625rem
+  lg: 0.625rem
+  xl: 0.875rem
+  2xl: 1rem
+  4xl: 2rem
   full: 9999px
 spacing:
   xs: 4px
@@ -107,9 +109,47 @@ spacing:
 ---
 
 ## Brand & Style
-Eurekma! embodies a brand personality that is intellectually stimulating yet emotionally nurturing. It target educators and families with a "Warm Pedagogy" (Pedagogía Cálida) approach—bridging the gap between rigorous scientific evidence and the joyful, ludic nature of learning.
+Eurekma! is an educational platform dedicated to improving the teaching and learning of mathematics for children in Early Childhood and Primary Education.
 
-The design style is **Modern Tactile**. It utilizes a sophisticated "Canvas Warm" background to avoid the sterile coldness of pure white, paired with soft, organic overlapping shapes (the rotating background plates in the hero section) and gentle elevation. The aesthetic is clean and organized like a modern SaaS platform but infused with friendly, rounded geometry and a rich, nature-inspired palette that feels accessible and human.
+Rather than providing isolated activities or worksheets, Eurekma! promotes a way of teaching mathematics grounded in scientific evidence, active learning and mathematical reasoning. The platform helps teachers and families create meaningful learning experiences where children understand, discuss, manipulate and enjoy mathematics instead of memorizing procedures.
+
+The brand should always communicate warmth, curiosity and trust. Every interaction should reinforce the idea that mathematics can be taught differently.
+
+The visual identity combines the clarity of a modern educational platform with the friendliness of carefully designed classroom materials. Interfaces should feel calm, approachable and inspiring rather than technical or corporate.
+
+The overall aesthetic is **Modern Tactile**: soft colours, generous spacing, rounded geometry and subtle paper-like layers create an environment that feels human, organised and welcoming.
+
+### Mission
+Help teachers and families teach mathematics through understanding, reasoning and play, using methodologies supported by educational research. Children should not simply learn to calculate. They should learn to think mathematically.
+
+### Audience
+The primary audience consists of teachers working in Early Childhood and Primary Education. The secondary audience consists of families who actively participate in their children's mathematical learning.
+
+These users usually:
+- feel that traditional teaching focuses too much on memorisation;
+- want children to understand what they are doing;
+- seek practical classroom activities they can immediately apply;
+- want greater student participation;
+- aspire to become more confident and effective educators;
+- value research but need it translated into practical teaching strategies.
+
+The interface should respect their professionalism while remaining accessible and encouraging.
+
+### Illustration Style
+Illustrations should feel editorial and educational instead of corporate.
+Use compositions inspired by real classroom materials:
+
+- sticky notes
+- arrows connecting ideas
+- base-ten blocks
+- number lines
+- geometric shapes
+- pattern blocks
+- dice
+- activity cards
+- teacher annotations
+
+These elements may gently overlap and float over soft paper-like backgrounds.
 
 ## Colors
 The color strategy employs a deep "Teal Forest" primary to represent stability and depth of knowledge, contrasted with a "Vibrant Ochre" secondary (#AC662b) that adds a brighter, more energetic warmth and emotional resonance.
@@ -135,7 +175,7 @@ The layout follows a **Fixed-Fluid Hybrid Grid** (max-width: 1280px / 7xl) with 
 Depth is conveyed through a mix of **Tonal Layers** and **Subtle Ambient Shadows**.
 
 - **Level 0 (Base):** `canvas-warm` background.
-- **Level 1 (Cards):** White (`surface-container-lowest`) with a `shadow-sm` and a 1px border of `surface-variant`.
+- **Level 1 (Cards):** White (`card`) with a `shadow-sm` and a 1px border of `surface-variant`.
 - **Level 2 (Interaction):** On hover, cards use a `lift-hover` effect—a transition that shifts the element -4px on the Y-axis and applies a deeper `shadow-md` or `shadow-xl`.
 - **Decorative Depth:** Background plates use rotation (-3 to +2 degrees) and 30% opacity fills to create a "layered paper" effect in the hero area without using traditional drop shadows.
 
@@ -148,6 +188,7 @@ The shape language is consistently **Rounded**, reinforcing the friendly and app
 - **Special Elements:** Quote bubbles use asymmetric rounding (e.g., `rounded-tl-none` or `rounded-tr-none`) to simulate speech direction.
 
 ## Components
+Reusing components is key to achieving better visual consistency and shorter, more readable code. Whenever possible, use components that have already been created:
 - **Buttons:** DO NOT implement HTML `<button>` or create custom variants. ALWAYS use the global component `<Button />` imported from `@/components/animate-ui/components/buttons/button`. This component unifies the design tokens and injects micro-interactions via `motion/react` (Framer Motion). 
   * **Visual Style:** Fixed variants only (`primary` (default), `secondary`, `outline`, `white`, `destructive`, `ghost`, `link`). To guarantee structural and aesthetic consistency, customizations must be done minimally using `className`, restricting adjustments to colors, layout margins, alignment or padding overrides (e.g., `p-0` for raw inline links).
   * **Semantic Composition (`asChild`):** When the button needs to act as a Next.js navigation link (`<Link>`), the `asChild` prop MUST be provided. This delegates the rendering to the immediate child element (preventing invalid nesting of an `<a>` tag inside a `<button>`), cleanly merging the styling classes, Tailwind v4 variants, and `motion/react` animation events directly onto the `<Link>` component.
