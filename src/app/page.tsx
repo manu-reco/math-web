@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils";
 
@@ -22,13 +23,25 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <article className="rounded-2xl border border-border bg-card p-6 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-      <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold text-text">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-text-secondary">{description}</p>
-    </article>
+    <Card className="text-center transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <CardHeader className="pb-2">
+        <div className={cn(
+          "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full text-primary",
+          iconClassName
+        )}>
+          {icon}
+        </div>
+        <CardTitle level={3} className="text-xl">
+          {title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        <CardDescription className="mt-1 text-sm leading-7">
+          {description}
+        </CardDescription>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -46,23 +59,41 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
   const isPrimary = variant === 'primary';
 
   return (
-    <article className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
-      <div className={cn("mb-6 flex h-16 w-16 items-center justify-center rounded-full text-3xl", isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary')}>
-        {icon}
-      </div>
-
-      <h3 className="mb-4 text-2xl font-bold text-text">{title}</h3>
-      <p className="mb-8 flex-1 text-base leading-relaxed text-text-secondary">{description}</p>
-
-      <Button asChild variant={isPrimary ? 'primary' : 'secondary'} size="md" width="full">
-        <Link
-          href={href}
+    <Card className="shadow-md transition-transform duration-300 hover:-translate-y-1">
+      <CardHeader className="p-8 pb-4">
+        <div
+          className={cn(
+            "mb-2 flex h-16 w-16 items-center justify-center rounded-full text-3xl",
+            isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
+          )}
         >
-          {buttonText}
-          <span className="text-sm">{buttonIcon}</span>
-        </Link>
-      </Button>
-    </article>
+          {icon}
+        </div>
+        <CardTitle level={3} className="text-2xl mt-2">
+          {title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="p-8 pt-0">
+        <CardDescription className="text-base leading-relaxed text-text-secondary">
+          {description}
+        </CardDescription>
+      </CardContent>
+
+      <CardFooter className="p-8 pt-0 w-full">
+        <Button
+          asChild
+          variant={isPrimary ? 'primary' : 'secondary'}
+          size="md"
+          width="full"
+        >
+          <Link href={href}>
+            {buttonText}
+            <span className="text-sm flex items-center">{buttonIcon}</span>
+          </Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
 

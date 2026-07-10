@@ -168,7 +168,7 @@ The system relies exclusively on **Inter** to maintain a clean, systematic feel 
 The layout follows a **Fixed-Fluid Hybrid Grid** (max-width: 1280px / 7xl) with a 12-column logic for desktop. 
 
 - **Vertical Rhythm:** Sections are separated by `2xl` (48px) or `xl` (32px) padding to provide breathing room.
-- **Bento Logic:** Content modules are grouped into cards using a Bento-box style layout on the "Módulos y Actividades" section, allowing for variable-height components that still feel unified.
+- **Bento Logic:** Content modules can be grouped into cards using a Bento-box style layout, allowing for variable-height components that still feel unified.
 - **Breakpoints:** Transitions from a single-column stack on mobile to multi-column layouts at the `md` (768px) and `lg` (1024px) markers.
 
 ## Elevation & Depth
