@@ -24,23 +24,20 @@ interface FeatureCardProps {
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
     <Card className="text-center transition duration-200 hover:-translate-y-1 hover:shadow-lg">
-      <CardHeader className="pb-2">
+      <CardHeader>
         <div className={cn(
           "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full text-primary",
           iconClassName
         )}>
           {icon}
         </div>
-        <CardTitle level={3} className="text-xl">
+        <CardTitle>
           {title}
         </CardTitle>
-      </CardHeader>
-
-      <CardContent>
-        <CardDescription className="mt-1 text-sm leading-7">
+        <CardDescription className="leading-7 mt-2">
           {description}
         </CardDescription>
-      </CardContent>
+      </CardHeader>
     </Card>
   );
 }
@@ -60,27 +57,27 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
 
   return (
     <Card className="shadow-md transition-transform duration-300 hover:-translate-y-1">
-      <CardHeader className="p-8 pb-4">
+      <CardHeader>
         <div
           className={cn(
-            "mb-2 flex h-16 w-16 items-center justify-center rounded-full text-3xl",
+            "flex h-16 w-16 items-center justify-center rounded-full text-3xl",
             isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
           )}
         >
           {icon}
         </div>
-        <CardTitle level={3} className="text-2xl mt-2">
+        <CardTitle className="text-2xl">
           {title}
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="p-8 pt-0">
-        <CardDescription className="text-base leading-relaxed text-text-secondary">
+      <CardContent>
+        <p className="leading-relaxed text-text-secondary">
           {description}
-        </CardDescription>
+          </p>
       </CardContent>
 
-      <CardFooter className="p-8 pt-0 w-full">
+      <CardFooter className="py-4">
         <Button
           asChild
           variant={isPrimary ? 'primary' : 'secondary'}
