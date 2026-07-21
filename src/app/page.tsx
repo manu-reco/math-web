@@ -22,7 +22,7 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <article className="rounded-2xl border border-border bg-card p-6 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+    <article className="rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
       <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
         {icon}
       </div>
@@ -91,7 +91,7 @@ export default function Home() {
                 <Link
                   href="/formacion/online"
                 >
-                  Explora nuestros cursos
+                  Explora nuestras formaciones
                   <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -99,7 +99,7 @@ export default function Home() {
                 <Link
                   href="/formacion/pildoras"
                 >
-                  Descubre las lecciones gratuitas
+                  Descubre las actividades gratuitas
                 </Link>
               </Button>
             </div>
@@ -129,7 +129,7 @@ export default function Home() {
               icon={<Brain size={28} aria-hidden="true" />}
               iconClassName="bg-primary/10 text-primary"
               title="Evidencia científica"
-              description="Metodología basada en estudios sobre didáctica y neurociencia. Pensada para razonar y comprender, no solo memorizar."
+              description="Metodología basada en estudios sobre didáctica y neurociencia. Pensada para razonar y comprender."
             />
             <FeatureCard
               icon={<Presentation size={28} aria-hidden="true" />}
@@ -157,19 +157,19 @@ export default function Home() {
                 Una ruta clara para enseñar matemáticas con más confianza.
               </h2>
               <div className="max-w-2xl space-y-2 text-base leading-7 text-text-secondary sm:text-lg">
-                <p>Encontrarás artículos, actividades, recursos descargables y cursos para cada etapa educativa y área de las matemáticas que necesites.</p>
-                <p>Todo pensado para transformar primero al docente y luego al estudiante. Para llegar a lo que quieres enseñar, pero con sentido.</p>
+                <p>Encontrarás artículos, actividades, recursos descargables y formación para cada etapa educativa, siguiendo una secuenciación coherente en cada ámbito matemático.</p>
+                <p>Te ayudamos a llegar a lo que quieres que tu alumnado aprenda, con sentido.</p>
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur">
+                <div className="p-4">
                   <div className="flex items-center gap-3 text-sm font-semibold text-text">
                     <CheckCircle size={18} className="text-primary" aria-hidden="true" />
                     Recursos descargables y digitales
                   </div>
                   <p className="mt-2 text-sm text-text-secondary">Material listo para usar en el aula o en casa.</p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur">
+                <div className="p-4">
                   <div className="flex items-center gap-3 text-sm font-semibold text-text">
                     <Users size={18} className="text-tertiary" aria-hidden="true" />
                     Comunidad docente
@@ -185,13 +185,13 @@ export default function Home() {
               </p>
               <h2 className="mt-3 text-2xl font-black">Explora nuestros artículos y actividades</h2> {/* Ajustado a H2 por semántica */}
               <p className="mt-4 text-sm leading-7 text-primary-foreground/90">
-                Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
+                Un vistazo rápido a nuestra propuesta, con artículos, actividades y recursos descargables para tu aula.
               </p>
               <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
                 <Link
                   href="/formacion/pildoras/aritmetica/primeros-pasos"
                 >
-                  Ver píldoras de formación
+                  Ver
                   <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -203,19 +203,16 @@ export default function Home() {
         <section className="mt-14 px-4 py-16 md:px-8 lg:px-10">
           <div className="text-center mb-12">
             <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-text md:text-4xl">
-              Nuestros Cursos
+              Nuestra Formación
             </h2>
-            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary">
-              Formación especializada diseñada para transformar la forma de enseñar y dar alternativas mucho más efectivas a tus estudiantes.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <CourseCard
               icon={<GraduationCap size={28} aria-hidden="true" />}
               title="Para docentes"
-              description="Cursos online con lecciones paso a paso, material audiovisual, recursos descargables y seguimiento. Perfectos para abrir tu mente, perfeccionar sobre un tema y llevar propuestas directamente a tu aula."
-              buttonText="Visita nuestro catálogo"
+              description="Cursos online con lecciones paso a paso, material audiovisual y recursos descargables. Con o sin seguimiento. Te ayudamos a descubrir nuevas estrategias para un aprendizaje más eficiente, y te ofrecemos actividades que puedes implementar inmediatamente en tu aula."
+              buttonText="Echa un vistazo a nuestra oferta"
               buttonIcon={<ArrowRight size={18} aria-hidden="true" />}
               href="/formacion/online"
               variant="primary"
@@ -224,7 +221,7 @@ export default function Home() {
             <CourseCard
               icon={<School size={28} aria-hidden="true" />}
               title="Para centros"
-              description="Cursos presenciales para unir al equipo docente de tu centro y transformar la enseñanza en todos los niveles. Con visitas al colegio, sesiones especiales en el aula y asesoramiento al profesorado."
+              description="Formaciones presenciales u online destinada a equipos docentes que sientan la necesidad de transformar la metodología en sus aulas. Puede incluir visitas al colegio, sesiones especiales en el aula y asesoramiento al profesorado."
               buttonText="Consulta con nosotros"
               buttonIcon={<MessageSquare size={18} aria-hidden="true" />}
               href="/contacto"
@@ -233,6 +230,10 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Para añadir nueva sección: nueva tarjeta que diga: 
+      Esta página está viva: en esta web iremos incrementando las propuestas con actividades, material y formaciones cada dos semanas.
+      Regístrate para estar al día de las últimas novedades */}
 
       {/* CTA Section */}
       <section className="bg-gray-900 text-primary-foreground py-20">
