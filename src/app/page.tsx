@@ -74,7 +74,7 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
       <CardContent>
         <p className="leading-relaxed text-text-secondary">
           {description}
-          </p>
+        </p>
       </CardContent>
 
       <CardFooter className="py-4">
@@ -115,12 +115,12 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg" className="group">
-                <Link
-                  href="/formacion/online"
-                >
-                  Explora nuestros cursos
-                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+              <Button asChild size="lg">
+                <Link href="/formacion/online">
+                  <span className="flex items-center gap-2">
+                    Explora nuestros cursos
+                    <ArrowRight />
+                  </span>
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">

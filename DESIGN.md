@@ -191,7 +191,7 @@ The shape language is consistently **Rounded**, reinforcing the friendly and app
 Reusing components is key to achieving better visual consistency and shorter, more readable code. Whenever possible, use components that have already been created:
 - **Buttons:** DO NOT implement HTML `<button>` or create custom variants. ALWAYS use the global component `<Button />` imported from `@/components/animate-ui/components/buttons/button`. This component unifies the design tokens and injects micro-interactions via `motion/react` (Framer Motion). 
   * **Visual Style:** Fixed variants only (`primary` (default), `secondary`, `outline`, `white`, `destructive`, `ghost`, `link`). To guarantee structural and aesthetic consistency, customizations must be done minimally using `className`, restricting adjustments to colors, layout margins, alignment or padding overrides (e.g., `p-0` for raw inline links).
-  * **Semantic Composition (`asChild`):** When the button needs to act as a Next.js navigation link (`<Link>`), the `asChild` prop MUST be provided. This delegates the rendering to the immediate child element (preventing invalid nesting of an `<a>` tag inside a `<button>`), cleanly merging the styling classes, Tailwind v4 variants, and `motion/react` animation events directly onto the `<Link>` component.
+  * **Semantic Composition (`asChild`):** When the button needs to act as a Next.js navigation link (`<Link>`), the `asChild` prop MUST be provided. This delegates the rendering to the immediate child element (preventing invalid nesting of an `<a>` tag inside a `<button>`), cleanly merging the styling classes, Tailwind v4 variants, and `motion/react` animation events directly onto the `<Link>` component. When the link contains both text and icons, wrap them inside a single inline element (e.g., `<span className="inline-flex items-center gap-2">...</span>`) to ensure stable SSR hydration.
   * **Sizing Rules:** Use `size` values: `sm`, `md` (default), `lg`, `xl`. Buttons containing exclusively an icon must use `size="icon"`, `size="icon-sm"`, or `size="icon-lg"`.
   * **Width Constraints:** Use `width="fit"` to avoid container deformation (`stretch`) inside flex/grid containers. Use `width="full"` for fluid block layouts. `width="auto"` (default) add no additional class, and it's convenient when using size="icon" or its variants.
   * **Icons inside Buttons:** Any Lucide SVG element nested inside must use Tailwind utility sizing classes (e.g., `className="size-5"`) instead of the size prop, which will be ignored. This prevents conflicts with the internal CSS reset constraints of the component.
@@ -213,11 +213,13 @@ Reusing components is key to achieving better visual consistency and shorter, mo
   </Link>
 </Button>
 
-// 3. Link with an integrated icon (asChild + icon with implicit size reset)
+// 3. Link with an integrated icon (recommended structure: asChild + <Link> with <span> child + icon with implicit size reset)
 <Button asChild variant="outline">
   <Link href="/formacion/online">
-    Explora nuestros cursos
-    <ArrowRight aria-hidden="true" />
+    <span className="inline-flex items-center gap-2">
+      Explora nuestros cursos
+      <ArrowRight aria-hidden="true" />
+    </span>
   </Link>
 </Button>
 ```
