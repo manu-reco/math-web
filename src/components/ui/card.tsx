@@ -53,6 +53,19 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function CardOverline({ className, ...props }: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot="card-overline"
+      className={cn(
+        "text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
 /**
  * The CardTitle component is used for the card title.
  * It has a bigger font size (xl) and a bold font weight.
@@ -139,9 +152,10 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 export {
   Card,
   CardHeader,
-  CardFooter,
+  CardOverline,
   CardTitle,
-  CardAction,
   CardDescription,
+  CardAction,
   CardContent,
+  CardFooter,
 }

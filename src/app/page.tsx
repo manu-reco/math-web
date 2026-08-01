@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { Button } from "@/components/animate-ui/components/buttons/button";
-import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardOverline, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ function FeatureCard({ icon, iconClassName, title, description }: FeatureCardPro
     <Card className="text-center transition duration-200 hover:-translate-y-1 hover:shadow-lg">
       <CardHeader>
         <div className={cn(
-          "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full text-primary",
+          "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full",
           iconClassName
         )}>
           {icon}
@@ -60,7 +60,7 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
       <CardHeader>
         <div
           className={cn(
-            "flex h-16 w-16 items-center justify-center rounded-full text-3xl",
+            "flex h-16 w-16 items-center justify-center rounded-full",
             isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
           )}
         >
@@ -176,7 +176,7 @@ export default function Home() {
 
         {/* Info & Core Path Section */}
         <section className="mt-14 md:mt-20">
-          <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-card to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
                 Qué encontrarás
@@ -207,23 +207,31 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] bg-primary p-6 text-primary-foreground shadow-xl shadow-primary/20">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground/80">
-                Empieza aquí
-              </p>
-              <h2 className="mt-3 text-2xl font-black">Explora nuestros artículos y actividades</h2> {/* Ajustado a H2 por semántica */}
-              <p className="mt-4 text-sm leading-7 text-primary-foreground/90">
-                Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
-              </p>
-              <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
-                <Link
-                  href="/formacion/pildoras/aritmetica/primeros-pasos"
-                >
-                  Ver píldoras de formación
-                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-            </div>
+            <Card className="bg-primary p-6 text-primary-foreground shadow-primary/20">
+              <CardHeader className="px-0">
+                <CardOverline className="text-primary-foreground/80">
+                  Empieza aquí
+                </CardOverline>
+                <CardTitle>
+                  <h3 className="text-2xl text-primary-foreground">
+                    Explora nuestros artículos y actividades
+                  </h3>
+                </CardTitle>
+                <CardDescription className="leading-7 text-primary-foreground/90">
+                  Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="px-0">
+                <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
+                  <Link
+                    href="/formacion/pildoras/aritmetica/primeros-pasos"
+                  >
+                    Ver píldoras de formación
+                    <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
