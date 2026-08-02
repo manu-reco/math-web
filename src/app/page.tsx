@@ -296,20 +296,26 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="md:w-1/3 bg-gray-800 p-8 rounded-2xl border border-gray-700">
-              <h3 className="text-2xl font-bold mb-2">Empieza hoy mismo</h3>
-              <p className="text-gray-400 mb-6">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
-              <Button asChild variant="secondary" size="lg" width="full">
-                <Link
-                  href="/register"
-                >
-                  Registrarme Gratis
-                </Link>
-              </Button>
-              <p className="text-xs text-center text-gray-500">
-                No se requiere tarjeta de crédito.
-              </p>
-            </div>
+            <Card className="md:w-1/3 bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-primary-foreground">
+                  <h3 className="text-2xl">Empieza hoy mismo</h3>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-gray-400">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
+                <Button asChild variant="secondary" size="lg" width="full">
+                  <Link
+                    href="/register"
+                  >
+                    Registrarme Gratis
+                  </Link>
+                </Button>
+                <p className="text-xs text-center text-gray-500">
+                  No se requiere tarjeta de crédito.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
