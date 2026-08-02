@@ -182,8 +182,8 @@ Depth is conveyed through a mix of **Tonal Layers** and **Subtle Ambient Shadows
 ## Shapes
 The shape language is consistently **Rounded**, reinforcing the friendly and approachable nature of the brand.
 
-- **Standard Buttons & Inputs:** 0.5rem (8px) corner radius.
-- **Content Cards:** 1rem (16px) or 1.5rem (24px) for larger bento-style items.
+- **Standard Buttons & Inputs:** `rounded-md` (0.375rem / 6px).
+- **Content Cards:** `rounded-2xl` (1rem / 16px) for standard panels and `rounded-4xl` (2rem / 32px) for larger bento-style items.
 - **Badges/Chips:** Full pill-shaped (9999px).
 - **Special Elements:** Quote bubbles use asymmetric rounding (e.g., `rounded-tl-none` or `rounded-tr-none`) to simulate speech direction.
 
@@ -197,6 +197,12 @@ Reusing components is key to achieving better visual consistency and shorter, mo
   * **Icons inside Buttons:** Any Lucide SVG element nested inside must use Tailwind utility sizing classes (e.g., `className="size-5"`) instead of the size prop, which will be ignored. This prevents conflicts with the internal CSS reset constraints of the component.
   * **Animations:** The components include scale fluid micro-interactions (`whileHover={{ scale: 1.02}}` and `whileTap={{ scale: 0.98}}`,). It can be disabled when necessary (e.g., loading states or list actions) by passing `animate={false}`.
   * **Disabled States:** Do NOT append manual styles or opacity utilities for disabled states via `className`. Simply apply the native HTML `disabled` attribute; the component's base styles automatically handle states using Tailwind's native `disabled:` modifiers (e.g., handling opacity resets and locking pointer events).
+
+- **Cards:** Use `<Card />` for self-contained content blocks, feature tiles and course panels. It already gives you the baseline panel treatment: rounded corners, border, subtle shadow, card background and vertical spacing. Keep extra `className` only for layout or one-off visual intent; avoid piling on padding, borders or shadows that the base already provides.
+  * **Composition:** Build cards with `<CardHeader />`, `<CardContent />` and `<CardFooter />`. Use `<CardTitle />` and `<CardDescription />` for the main hierarchy, plus `<CardOverline />` for small section labels and `<CardAction />` when you need a top-right action in the header.
+  * **Spacing Rules:** Prefer the defaults (`px-6`, `py-6`, `gap-6`), which map to the `lg` spacing token (24px). Override with `px-0` or `py-0` only when the layout needs edge-to-edge content, as in bento-style cards or cards that contain media bleed.
+  * **Styling Rules:** Use `className` sparingly for alignment, `text-center`, hover lift or a single accent background. Avoid duplicating base utilities such as `flex`, `rounded-2xl`, `border`, `bg-card`, `shadow-sm` or repeated padding unless you are intentionally replacing the default look.
+  * **Card Titles:** Keep `CardTitle` as the semantic title element and avoid wrapping another heading inside it unless you explicitly need a custom semantic structure. Prefer setting size through the component className instead of nesting extra typographic wrappers.
 
   ### Button Implementation Examples
 
@@ -224,7 +230,39 @@ Reusing components is key to achieving better visual consistency and shorter, mo
 </Button>
 ```
 
-- **Cards:** White backgrounds with subtle borders. Header cards use a 4px top or left "accent border" in the primary or secondary color to denote category.
+  ### Card Implementation Examples
+
+```tsx
+// 1. Feature card
+<Card className="text-center hover:-translate-y-1 hover:shadow-lg">
+  <CardHeader>
+    <div className="mx-auto mb-3 inline-flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+      <Brain aria-hidden="true" className="size-7" />
+    </div>
+    <CardTitle>Evidencia científica</CardTitle>
+    <CardDescription className="mt-2 leading-7">
+      Metodología basada en estudios y razonamiento.
+    </CardDescription>
+  </CardHeader>
+</Card>
+
+// 2. Card con contenido y acción
+<Card className="bg-primary text-primary-foreground">
+  <CardHeader className="px-0">
+    <CardOverline className="text-primary-foreground/80">Empieza aquí</CardOverline>
+    <CardTitle className="text-2xl text-primary-foreground">Explora los recursos</CardTitle>
+    <CardDescription className="text-primary-foreground/90">
+      Una ruta rápida para entrar en la plataforma.
+    </CardDescription>
+  </CardHeader>
+  <CardContent className="px-0">
+    <Button asChild variant="white" size="lg" width="full">
+      <Link href="/formacion/pildoras">Ver píldoras de formación</Link>
+    </Button>
+  </CardContent>
+</Card>
+```
+
 - **Badges:** Small, pill-shaped indicators using `label-caps` typography. Often paired with a small icon (16px).
 - **Icons:** Use "Lucide Icons". In feature sections, icons are placed inside 64px circular containers with a 10-20% opacity fill of their respective category color.
 - **Input Fields:** 12px vertical padding, 16px horizontal, using `body-base` font and a `primary` focus ring.
