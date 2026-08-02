@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Card, CardHeader, CardOverline, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils";
 
@@ -22,13 +23,22 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <article className="rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
-      <div className={cn("mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary", iconClassName)}>
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold text-text">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-text-secondary">{description}</p>
-    </article>
+    <Card className="text-center transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <CardHeader>
+        <div className={cn(
+          "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full",
+          iconClassName
+        )}>
+          {icon}
+        </div>
+        <CardTitle>
+          {title}
+        </CardTitle>
+        <CardDescription className="leading-7 mt-2">
+          {description}
+        </CardDescription>
+      </CardHeader>
+    </Card>
   );
 }
 
@@ -46,23 +56,41 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
   const isPrimary = variant === 'primary';
 
   return (
-    <article className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
-      <div className={cn("mb-6 flex h-16 w-16 items-center justify-center rounded-full text-3xl", isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary')}>
-        {icon}
-      </div>
-
-      <h3 className="mb-4 text-2xl font-bold text-text">{title}</h3>
-      <p className="mb-8 flex-1 text-base leading-relaxed text-text-secondary">{description}</p>
-
-      <Button asChild variant={isPrimary ? 'primary' : 'secondary'} size="md" width="full">
-        <Link
-          href={href}
+    <Card className="shadow-md transition-transform duration-300 hover:-translate-y-1">
+      <CardHeader>
+        <div
+          className={cn(
+            "flex h-16 w-16 items-center justify-center rounded-full",
+            isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
+          )}
         >
-          {buttonText}
-          <span className="text-sm">{buttonIcon}</span>
-        </Link>
-      </Button>
-    </article>
+          {icon}
+        </div>
+        <CardTitle className="text-2xl">
+          {title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        <p className="leading-relaxed text-text-secondary">
+          {description}
+        </p>
+      </CardContent>
+
+      <CardFooter className="py-4">
+        <Button
+          asChild
+          variant={isPrimary ? 'primary' : 'secondary'}
+          size="md"
+          width="full"
+        >
+          <Link href={href}>
+            {buttonText}
+            <span className="text-sm flex items-center">{buttonIcon}</span>
+          </Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
 
@@ -87,12 +115,12 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg" className="group">
-                <Link
-                  href="/formacion/online"
-                >
-                  Explora nuestras formaciones
-                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+              <Button asChild size="lg">
+                <Link href="/formacion/online">
+                  <span className="flex items-center gap-2">
+                    Explora nuestros cursos
+                    <ArrowRight />
+                  </span>
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -148,7 +176,7 @@ export default function Home() {
 
         {/* Info & Core Path Section */}
         <section className="mt-14 md:mt-20">
-          <div className="grid gap-8 rounded-4xl border border-primary/10 bg-linear-to-br from-card to-muted p-6 shadow-lg md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
                 Qué encontrarás
@@ -179,23 +207,31 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] bg-primary p-6 text-primary-foreground shadow-xl shadow-primary/20">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground/80">
-                Empieza aquí
-              </p>
-              <h2 className="mt-3 text-2xl font-black">Explora nuestros artículos y actividades</h2> {/* Ajustado a H2 por semántica */}
-              <p className="mt-4 text-sm leading-7 text-primary-foreground/90">
-                Un vistazo rápido a nuestra propuesta, con artículos, actividades y recursos descargables para tu aula.
-              </p>
-              <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
-                <Link
-                  href="/formacion/pildoras/aritmetica/primeros-pasos"
-                >
-                  Ver
-                  <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-            </div>
+            <Card className="bg-primary p-6 text-primary-foreground shadow-primary/20">
+              <CardHeader className="px-0">
+                <CardOverline className="text-primary-foreground/80">
+                  Empieza aquí
+                </CardOverline>
+                <CardTitle>
+                  <h3 className="text-2xl text-primary-foreground">
+                    Explora nuestros artículos y actividades
+                  </h3>
+                </CardTitle>
+                <CardDescription className="leading-7 text-primary-foreground/90">
+                  Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="px-0">
+                <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
+                  <Link
+                    href="/formacion/pildoras/aritmetica/primeros-pasos"
+                  >
+                    Ver píldoras de formación
+                    <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -261,20 +297,26 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="md:w-1/3 bg-gray-800 p-8 rounded-2xl border border-gray-700">
-              <h3 className="text-2xl font-bold mb-2">Empieza hoy mismo</h3>
-              <p className="text-gray-400 mb-6">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
-              <Button asChild variant="secondary" size="lg" width="full">
-                <Link
-                  href="/register"
-                >
-                  Registrarme Gratis
-                </Link>
-              </Button>
-              <p className="text-xs text-center text-gray-500">
-                No se requiere tarjeta de crédito.
-              </p>
-            </div>
+            <Card className="md:w-1/3 bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-primary-foreground">
+                  <h3 className="text-2xl">Empieza hoy mismo</h3>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-gray-400">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
+                <Button asChild variant="secondary" size="lg" width="full">
+                  <Link
+                    href="/register"
+                  >
+                    Registrarme Gratis
+                  </Link>
+                </Button>
+                <p className="text-xs text-center text-gray-500">
+                  No se requiere tarjeta de crédito.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

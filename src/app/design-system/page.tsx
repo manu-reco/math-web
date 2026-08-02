@@ -1,8 +1,10 @@
 'use client';
 
 import Link from "next/link";
-import { ArrowRight, Download, Mail, Plus } from "lucide-react";
+import { ArrowRight, Brain, Download, GraduationCap, Mail, Plus } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Highlighter } from "@/components/UnderlinedWords"
 
 // Validamos si estamos en producción para "ocultar" la página por completo en el futuro
@@ -29,12 +31,91 @@ export default function DesignSystemPage() {
             </header>
 
             <div className="space-y-16">
+                {/* ================= SECCIÓN: CARDS ================= */}
+                <section className="space-y-6">
+                    <Highlighter colorClass="text-secondary">
+                        <h2 className="text-2xl font-bold text-text">Componente: Card y subcomponentes</h2>
+                    </Highlighter>
+
+                    {/* Grid de Pruebas de Composición */}
+                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+                        {/* 1. Card de Ventaja / Feature */}
+                        <div className="space-y-2">
+                            <span className="text-xs text-text-secondary font-mono">
+                                Caso 1: Composición Básica (Feature) <br />
+                                Subcomponentes: CardHeader (con icono, CardTitle y CardDescription)
+                            </span>
+                            <Card className="text-center transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                                <CardHeader>
+                                    <div className="mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                        <Brain size={24} aria-hidden="true" />
+                                    </div>
+                                    <CardTitle>
+                                        Evidencia Científica
+                                    </CardTitle>
+                                    {/* Movido aquí: CardDescription ahora pertenece al Header */}
+                                    <CardDescription className="leading-7 mt-2">
+                                        Metodología basada en los últimos avances de la didáctica matemática. Pensada para razonar y no solo memorizar.
+                                    </CardDescription>
+                                </CardHeader>
+                            </Card>
+                        </div>
+
+                        {/* 2. Card de Curso (Estructura Avanzada Horizontal con Imagen a Sangre) */}
+                        <div className="space-y-2 lg:col-span-2">
+                            <span className="text-xs text-text-secondary font-mono">
+                                Caso 2: Tarjeta de Curso (Estructura Avanzada) <br />
+                                Subcomponentes: CardHeader (con CardAction, CardTitle y CardDescription), CardContent y CardFooter (con acciones)
+                            </span>
+
+                            <Card className="py-0 gap-0 lg:flex-row transition duration-300 hover:shadow-lg">
+                                <div className="bg-linear-to-br from-primary/20 to-secondary/20 w-full lg:w-48 h-48 lg:h-auto shrink-0 flex items-center justify-center text-primary-hover">
+                                    <GraduationCap size={48} aria-hidden="true" />
+                                </div>
+
+                                <div className="py-6 flex flex-col flex-1 gap-4">
+                                    <CardHeader className="gap-1">
+                                        <CardAction>
+                                            <Badge variant="secondary">Nuevo</Badge>
+                                        </CardAction>
+                                        <div className="text-xs font-bold uppercase tracking-wider text-secondary">Online • Infantil y Primaria</div>
+                                        <CardTitle className="text-2xl">Didáctica del Sentido Numérico</CardTitle>
+                                        {/* Movido aquí: Ahora el Header tiene su estructura semántica completa */}
+                                        <CardDescription className="mt-1">
+                                            Aprende a secuenciar correctamente los contenidos de conteo y las primeras operaciones utilizando materiales manipulativos estructurales.
+                                        </CardDescription>
+                                    </CardHeader>
+
+                                    {/* CardContent ahora queda libre para elementos hijos extra (ej: temario, duración, etc.) */}
+                                    <CardContent>
+                                        <ul className="space-y-1 text-text-secondary">
+                                            <li>• 40 horas de formación acreditada</li>
+                                            <li>• Materiales descargables listos para el aula</li>
+                                        </ul>
+                                    </CardContent>
+
+                                    <CardFooter className="justify-between gap-4">
+                                        <span className="text-xl font-black text-text">149€</span>
+                                        <Button asChild variant="primary" size="sm">
+                                            <Link href="/formacion/online">
+                                                Más detalles <ArrowRight size={14} />
+                                            </Link>
+                                        </Button>
+                                    </CardFooter>
+                                </div>
+                            </Card>
+                        </div>
+
+                    </div>
+                </section>
+
                 {/* ================= SECCIÓN: BOTONES ================= */}
                 <section className="space-y-6">
                     <Highlighter colorClass="text-primary">
                         <h2 className="text-2xl font-bold text-text">Componente: Button</h2>
                     </Highlighter>
-                    
+
 
                     {/* Bloque 1: Variantes Estándar */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
@@ -175,7 +256,7 @@ export default function DesignSystemPage() {
                         </div>
                     </div>
 
-                    
+
                     {/* Bloque 5: Animación activada/desactivada */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
@@ -196,13 +277,6 @@ export default function DesignSystemPage() {
                             </div>
                         </div>
                     </div>
-                </section>
-
-                {/* NOTA: Próximamente añadiremos aquí la sección de Cards */}
-                <section className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/30">
-                    <p className="text-sm font-medium text-text-secondary">
-                        Próximo módulo del catálogo: Estructuras Compuestas (`Card`, `CardTitle`, `IconBadge`).
-                    </p>
                 </section>
             </div>
         </div>
