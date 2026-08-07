@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 
 import confetti from "canvas-confetti";
 

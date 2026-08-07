@@ -23,7 +23,7 @@ import {
 import {
     Button,
     type ButtonProps
-} from '@/components/animate-ui/components/buttons/button';
+} from '@/components/ui/button';
 
 import {
     Dialog,

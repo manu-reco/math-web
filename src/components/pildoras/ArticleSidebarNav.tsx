@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronLeft, SquareMenu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 
 type NavArticle = {
     id: string;

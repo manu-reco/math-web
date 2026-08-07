@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import confetti from "canvas-confetti";
 import { ArrowRight, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 

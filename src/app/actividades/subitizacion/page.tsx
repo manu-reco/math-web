@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { subitizacionLevels } from "@/data/subitizacionLevels";
 import { shuffleArray, buildLevelPatterns, Level, Pattern } from "@/data/subitizacionPatterns";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import ActivityInstructionsModal from "@/components/actividades/ActivityInstructionsModal";
 import SubitizacionInstructionsContent from "@/components/actividades/subitizacion/SubitizacionInstructionsContent";
 import LevelSelector from "@/components/actividades/subitizacion/LevelSelector";

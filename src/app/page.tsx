@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Brain, CheckCircle, GraduationCap, MessageSquare, Presentation, School, ToolCase, Users } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardOverline, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import { cn } from "@/lib/utils";

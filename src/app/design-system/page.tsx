@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Brain, Download, GraduationCap, Mail, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Highlighter } from "@/components/UnderlinedWords"
 

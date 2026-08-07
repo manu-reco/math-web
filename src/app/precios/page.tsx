@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
 
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = buildPageMetadata({
     title: "Precios",

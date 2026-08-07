@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/data/actividades";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import GamesGrid from "@/components/actividades/GamesGrid";
 import { buildPageMetadata } from "@/lib/seo";
 

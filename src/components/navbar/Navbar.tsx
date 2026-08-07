@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 import NavDropdownDesktop from "./NavDropdownDesktop";
 import NavDropdownMobile from "./NavDropdownMobile";
 import type { DropdownItem } from "./NavDropdown.types";

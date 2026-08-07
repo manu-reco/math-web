@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useId, useState } from "react";
 import { CircleHelp, X } from "lucide-react";
-import { Button } from "../animate-ui/components/buttons/button";
+import { Button } from "../ui/button";
 import ExpandingFab from "../ExpandingFab";
 import { AnimatePresence, motion } from "motion/react";
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo";
-import { Button } from "@/components/animate-ui/components/buttons/button";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = buildPageMetadata({
     title: "Contacto",
