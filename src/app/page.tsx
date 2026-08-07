@@ -8,6 +8,7 @@ import { Card, CardHeader, CardOverline, CardTitle, CardDescription, CardContent
 import { DoubleUnderline } from "@/components/UnderlinedWords";
 import GameCard from "@/components/actividades/GameCard";
 import { games } from "@/data/actividades";
+import * as motion from "motion/react-client"
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -15,6 +16,40 @@ export const metadata: Metadata = buildPageMetadata({
   description: "Formación de matemáticas para docentes de Infantil y Primaria con cursos, recursos y actividades prácticas.",
   path: "/",
 });
+
+// 1. Definimos el contenedor que orquesta los tiempos
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15, // Tiempo de espera entre cada hijo
+      delayChildren: 0.1,    // Retraso inicial antes de arrancar
+    },
+  },
+}
+
+// 2. Variante para cada elemento individual (fade-in + translateY)
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 24 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.215, 0.61, 0.355, 1] as const, // Cubic bezier para un acabado suave
+    },
+  },
+}
+
+export const sectionAnimationProps = {
+  variants: containerVariants,
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true },
+  transition: { duration: 0.8 },
+}
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -25,22 +60,24 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <Card className="text-center">
-      <CardHeader>
-        <div className={cn(
-          "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full",
-          iconClassName
-        )}>
-          {icon}
-        </div>
-        <CardTitle>
-          {title}
-        </CardTitle>
-        <CardDescription className="leading-7 mt-2">
-          {description}
-        </CardDescription>
-      </CardHeader>
-    </Card>
+    <motion.div variants={itemVariants}>
+      <Card className="text-center">
+        <CardHeader>
+          <div className={cn(
+            "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full",
+            iconClassName
+          )}>
+            {icon}
+          </div>
+          <CardTitle>
+            {title}
+          </CardTitle>
+          <CardDescription className="leading-7 mt-2">
+            {description}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </motion.div>
   );
 }
 
@@ -58,41 +95,43 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
   const isPrimary = variant === 'primary';
 
   return (
-    <Card className="shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <CardHeader>
-        <div
-          className={cn(
-            "flex h-16 w-16 items-center justify-center rounded-full",
-            isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
-          )}
-        >
-          {icon}
-        </div>
-        <CardTitle className="text-2xl">
-          {title}
-        </CardTitle>
-      </CardHeader>
+    <motion.div className="h-full" variants={itemVariants}>
+      <Card className="h-full flex flex-col justify-between shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+        <CardHeader>
+          <div
+            className={cn(
+              "flex h-16 w-16 items-center justify-center rounded-full",
+              isPrimary ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'
+            )}
+          >
+            {icon}
+          </div>
+          <CardTitle className="text-2xl">
+            {title}
+          </CardTitle>
+        </CardHeader>
 
-      <CardContent>
-        <p className="leading-relaxed text-text-secondary">
-          {description}
-        </p>
-      </CardContent>
+        <CardContent>
+          <p className="leading-relaxed text-text-secondary">
+            {description}
+          </p>
+        </CardContent>
 
-      <CardFooter className="py-4">
-        <Button
-          asChild
-          variant={isPrimary ? 'primary' : 'secondary'}
-          size="md"
-          width="full"
-        >
-          <Link href={href}>
-            {buttonText}
-            <span className="text-sm flex items-center">{buttonIcon}</span>
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+        <CardFooter className="py-4">
+          <Button
+            asChild
+            variant={isPrimary ? 'primary' : 'secondary'}
+            size="md"
+            width="full"
+          >
+            <Link href={href}>
+              {buttonText}
+              <span className="text-sm flex items-center">{buttonIcon}</span>
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
+    </motion.div>
   );
 }
 
@@ -105,18 +144,30 @@ export default function Home() {
 
       <div className="container-custom py-10 md:py-16 lg:py-20">
         {/* Hero Section */}
-        <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div className="space-y-8">
-            <div className="space-y-5">
+        <motion.section
+          className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
+          {...sectionAnimationProps}
+        >
+          <div
+            className="space-y-8"
+          >
+            <motion.div
+              className="space-y-5"
+              variants={itemVariants}
+
+            >
               <h1 className="text-[60px] font-bold tracking-[-0.02em] leading-tight text-primary">
                 Matemáticas con <DoubleUnderline colorClass="text-secondary"><span className="text-secondary">sentido</span></DoubleUnderline>, razonamiento y emoción
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
                 Descubre recursos y metodologías basadas en la evidencia científica para familias y docentes. Vuelve a disfrutar enseñando y consigue que tus estudiantes razonen y usen las matemáticas para su vida diaria.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <motion.div
+              className="flex flex-col gap-4 sm:flex-row"
+              variants={itemVariants}
+            >
               <Button asChild size="lg">
                 <Link href="/formacion/online">
                   <span className="flex items-center gap-2">
@@ -132,10 +183,13 @@ export default function Home() {
                   Descubre las actividades gratuitas
                 </Link>
               </Button>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="relative group">
+          <motion.div
+            className="relative group"
+            variants={itemVariants}
+          >
             <div aria-hidden="true" className="absolute -inset-4 rounded-4xl bg-secondary/10 transform -rotate-3 transition-transform duration-500 group-hover:rotate-0" />
             <div aria-hidden="true" className="absolute -inset-2 rounded-4xl bg-primary/10 transform rotate-2 transition-transform duration-500 group-hover:rotate-1" />
             <figure className="relative overflow-hidden rounded-4xl border-4 border-card bg-card shadow-2xl shadow-primary/10">
@@ -148,11 +202,14 @@ export default function Home() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX6CJrtSFGVD7JmDGrWNyZ8jIDYMKLAZ9_03XSCcFqRXHNvJyWw9c2Hojpar8aTfLWuVlt0aWym-KF0LLGMis30OTKRfB48DRaa4DRFuhKaXgyZmSi50o7WsLAyJwOg_SLNgDamGN50mIrIZWsAGYu7vjbLe0OI4sDxazonw2iKsf0z-W5A8DAzuO39daESD-hOslJnk35CKQR_TvQhZqFqWPZsPjSLw7GDNiDrd6aoiNkYinlkAq375btUQR2TBKt0eLvYB7yLq0"
               />
             </figure>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Features Section */}
-        <section className="mt-14 md:mt-20">
+        <motion.section
+          className="mt-14 md:mt-20"
+          {...sectionAnimationProps}
+        >
           <h2 className="sr-only">Nuestras ventajas metodológicas</h2>
           <div className="grid gap-6 md:grid-cols-3">
             <FeatureCard
@@ -174,12 +231,20 @@ export default function Home() {
               description="El juego estructurado como motor principal para la comprensión profunda."
             />
           </div>
-        </section>
+        </motion.section>
 
         {/* Info & Core Path Section */}
-        <section className="mt-14 md:mt-20">
-          <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="space-y-4">
+        <motion.section
+          className="mt-14 md:mt-20"
+          {...sectionAnimationProps}
+        >
+          <div
+            className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.15fr_0.85fr]"
+          >
+            <motion.div
+              className="space-y-4"
+              variants={itemVariants}
+            >
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
                 Qué encontrarás
               </p>
@@ -207,82 +272,98 @@ export default function Home() {
                   <p className="mt-2 text-sm text-text-secondary">Acompañamiento y experiencias compartidas.</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <Card className="bg-primary p-6 text-primary-foreground shadow-primary/20">
-              <CardHeader className="px-0">
-                <CardOverline className="text-primary-foreground/80">
-                  Empieza aquí
-                </CardOverline>
-                <CardTitle>
-                  <h3 className="text-2xl text-primary-foreground">
-                    Explora nuestros artículos y actividades
-                  </h3>
-                </CardTitle>
-                <CardDescription className="leading-7 text-primary-foreground/90">
-                  Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="px-0">
-                <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
-                  <Link
-                    href="/formacion/pildoras/aritmetica/primeros-pasos"
-                  >
-                    Ver píldoras de formación
-                    <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+            <motion.div variants={itemVariants}>
+              <Card className="bg-primary p-6 text-primary-foreground shadow-primary/20">
+                <CardHeader className="px-0">
+                  <CardOverline className="text-primary-foreground/80">
+                    Empieza aquí
+                  </CardOverline>
+                  <CardTitle>
+                    <h3 className="text-2xl text-primary-foreground">
+                      Explora nuestros artículos y actividades
+                    </h3>
+                  </CardTitle>
+                  <CardDescription className="leading-7 text-primary-foreground/90">
+                    Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="px-0">
+                  <Button asChild variant="white" size="lg" width="full" className="mt-6 group">
+                    <Link
+                      href="/formacion/pildoras/aritmetica/primeros-pasos"
+                    >
+                      Ver píldoras de formación
+                      <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Courses Catalog Section */}
-        <section className="mt-14 px-4 py-16 md:px-8 lg:px-10">
-          <div className="text-center mb-12">
+        <motion.section
+          className="mt-14 px-4 py-16 md:px-8 lg:px-10"
+          {...sectionAnimationProps}
+        >
+          <motion.div className="text-center mb-12" variants={itemVariants}>
             <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-text md:text-4xl">
               Nuestra Formación
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <CourseCard
-              icon={<GraduationCap size={28} aria-hidden="true" />}
-              title="Para docentes"
-              description="Cursos online con lecciones paso a paso, material audiovisual y recursos descargables. Con o sin seguimiento. Te ayudamos a descubrir nuevas estrategias para un aprendizaje más eficiente, y te ofrecemos actividades que puedes implementar inmediatamente en tu aula."
-              buttonText="Echa un vistazo a nuestra oferta"
-              buttonIcon={<ArrowRight size={18} aria-hidden="true" />}
-              href="/formacion/online"
-              variant="primary"
-            />
+            <motion.div variants={itemVariants} className="h-full">
+              <CourseCard
+                icon={<GraduationCap size={28} aria-hidden="true" />}
+                title="Para docentes"
+                description="Cursos online con lecciones paso a paso, material audiovisual y recursos descargables. Con o sin seguimiento. Te ayudamos a descubrir nuevas estrategias para un aprendizaje más eficiente, y te ofrecemos actividades que puedes implementar inmediatamente en tu aula."
+                buttonText="Echa un vistazo a nuestra oferta"
+                buttonIcon={<ArrowRight size={18} aria-hidden="true" />}
+                href="/formacion/online"
+                variant="primary"
+              />
+            </motion.div>
 
-            <CourseCard
-              icon={<School size={28} aria-hidden="true" />}
-              title="Para centros"
-              description="Formaciones presenciales u online destinada a equipos docentes que sientan la necesidad de transformar la metodología en sus aulas. Puede incluir visitas al colegio, sesiones especiales en el aula y asesoramiento al profesorado."
-              buttonText="Consulta con nosotros"
-              buttonIcon={<MessageSquare size={18} aria-hidden="true" />}
-              href="/contacto"
-              variant="secondary"
-            />
+            <motion.div variants={itemVariants} className="h-full">
+              <CourseCard
+                icon={<School size={28} aria-hidden="true" />}
+                title="Para centros"
+                description="Formaciones presenciales u online destinada a equipos docentes que sientan la necesidad de transformar la metodología en sus aulas. Puede incluir visitas al colegio, sesiones especiales en el aula y asesoramiento al profesorado."
+                buttonText="Consulta con nosotros"
+                buttonIcon={<MessageSquare size={18} aria-hidden="true" />}
+                href="/contacto"
+                variant="secondary"
+              />
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="mt-14 px-4 py-16 md:px-8 lg:px-10">
-          <div className="lg:col-span-12 mt-2xl">
-            <h2 className="mb-6 text-3xl text-center font-extrabold tracking-tight text-text md:text-4xl">
+        <motion.section
+          className="mt-14 px-4 py-16 md:px-8 lg:px-10"
+          {...sectionAnimationProps}
+        >
+          <div className="lg:col-span-12 mt-2xl" >
+            <motion.h2 className="mb-6 text-3xl text-center font-extrabold tracking-tight text-text md:text-4xl" variants={itemVariants}>
               Actividades interactivas
-            </h2>
-            <p className="text-center text-lg text-text-secondary mb-12">
+            </motion.h2>
+            <motion.p className="text-center text-lg text-text-secondary mb-12" variants={itemVariants}>
               Explora algunas de nuestras actividades interactivas para trabajar matemáticas en Infantil y Primaria de forma divertida y guiada, con fundamento pedagógico.
-            </p>
+            </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <GameCard game={games[0]} />
-              <GameCard game={games[1]} />
+              <motion.div variants={itemVariants}>
+                <GameCard game={games[0]} />
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <GameCard game={games[1]} />
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
         {/* Para añadir nueva sección: nueva tarjeta que diga: 
       Esta página está viva: en esta web iremos incrementando las propuestas con actividades, material y formaciones cada dos semanas.
       Regístrate para estar al día de las últimas novedades */}
