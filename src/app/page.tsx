@@ -6,6 +6,8 @@ import { buildPageMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardOverline, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { DoubleUnderline } from "@/components/UnderlinedWords";
+import GameCard from "@/components/actividades/GameCard";
+import { games } from "@/data/actividades";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -265,11 +267,26 @@ export default function Home() {
             />
           </div>
         </section>
-      </div>
 
-      {/* Para añadir nueva sección: nueva tarjeta que diga: 
+        <section className="mt-14 px-4 py-16 md:px-8 lg:px-10">
+          <div className="lg:col-span-12 mt-2xl">
+            <h2 className="mb-6 text-3xl text-center font-extrabold tracking-tight text-text md:text-4xl">
+              Actividades interactivas
+            </h2>
+            <p className="text-center text-lg text-text-secondary mb-12">
+              Explora algunas de nuestras actividades interactivas para trabajar matemáticas en Infantil y Primaria de forma divertida y guiada, con fundamento pedagógico.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <GameCard game={games[0]} />
+              <GameCard game={games[1]} />
+            </div>
+          </div>
+        </section>
+        {/* Para añadir nueva sección: nueva tarjeta que diga: 
       Esta página está viva: en esta web iremos incrementando las propuestas con actividades, material y formaciones cada dos semanas.
       Regístrate para estar al día de las últimas novedades */}
+      </div>
 
       {/* CTA Section */}
       <section className="bg-gray-900 text-primary-foreground py-20">
