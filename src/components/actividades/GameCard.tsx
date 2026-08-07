@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Game } from '@/data/actividades';
 import Link from "next/link";
 import Image from "next/image";
@@ -9,76 +11,75 @@ interface GameCardProps {
 }
 
 export default function GameCard({ game }: GameCardProps) {
+    const isAvailable = game.isAvailable;
+
     return (
         <article
-            className={`group ${!game.isAvailable ? 'pointer-events-none' : ''}`}
+            className={`group ${!isAvailable ? 'pointer-events-none' : ''}`}
             role="listitem"
         >
             <Link
-                href={game.isAvailable ? game.path : "#"}
-                aria-label={`${game.title}${!game.isAvailable ? ' - Próximamente' : ''}`}
-                aria-disabled={!game.isAvailable}
-                className={`
-                    bg-white rounded-2xl shadow-lg overflow-hidden 
-                    transition-all duration-300 h-full flex flex-col
-                    ${game.isAvailable
-                        ? 'hover:shadow-2xl hover:-translate-y-1 cursor-pointer'
-                        : 'opacity-60 cursor-not-allowed'
-                    }
-                `}
+                href={isAvailable ? game.path : "#"}
+                aria-label={`${game.title}${!isAvailable ? ' - Próximamente' : ''}`}
+                aria-disabled={!isAvailable}
+                className="block h-full"
             >
-                {/* Imagen de portada */}
-                <figure className="relative w-full h-64 bg-linear-to-br from-primary/10 to-secondary/10">
-                    <Image
-                        src={game.image}
-                        alt={`Portada del juego ${game.title}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    {!game.isAvailable && (
-                        <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center" role="status">
-                            <span className="text-white text-2xl font-bold">
-                                Próximamente
-                            </span>
+                <Card
+                    className={`pt-0 h-full transition-all duration-300 ${isAvailable
+                        ? 'hover:-translate-y-1 hover:shadow-lg'
+                        : 'opacity-60'
+                    }`}
+                >
+                    <figure className="relative h-64 w-full bg-linear-to-br from-primary/10 to-secondary/10">
+                        <Image
+                            src={game.image}
+                            alt={`Portada del juego ${game.title}`}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        {!isAvailable && (
+                            <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center" role="status">
+                                <span className="text-white text-2xl font-bold">
+                                    Próximamente
+                                </span>
+                            </div>
+                        )}
+                    </figure>
+
+                    <CardHeader className="gap-3">
+                        <div className="flex flex-wrap gap-2">
+                            <Badge size="lg" className="text-primary bg-primary/10">
+                                {game.area}
+                            </Badge>
+                            <Badge size="lg" className="text-secondary bg-secondary/10">
+                                {game.level}
+                            </Badge>
                         </div>
-                    )}
-                </figure>
 
-                {/* Contenido */}
-                <div className="p-6 flex flex-col grow">
-                    {/* Saber y nivel */}
-                    <div className="mb-3">
-                        <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
-                            {game.area}
-                        </span>
-                        <span className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-semibold rounded-full ml-2">
-                            {game.level}
-                        </span>
-                    </div>
+                        <CardTitle className="text-2xl font-bold text-text transition-colors group-hover:text-primary">
+                            {game.title}
+                        </CardTitle>
+                    </CardHeader>
 
-                    {/* Título */}
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                        {game.title}
-                    </h3>
+                    <CardContent className="flex flex-col gap-4">
+                        <CardDescription className="grow text-text-secondary">
+                            {game.description}
+                        </CardDescription>
 
-                    {/* Descripción */}
-                    <p className="text-text-secondary mb-4 grow">
-                        {game.description}
-                    </p>
-
-                    {/* Habilidades */}
-                    <footer className="flex flex-wrap gap-2">
-                        {game.skills.map((habilidad, idx) => (
-                            <span
-                                key={idx}
-                                className="px-3 py-1 bg-gray-100 text-text-secondary text-xs rounded-full border border-gray-200"
-                            >
-                                {habilidad}
-                            </span>
-                        ))}
-                    </footer>
-                </div>
+                        <CardFooter className="flex-wrap gap-2 px-0 pt-0">
+                            {game.skills.map((habilidad, idx) => (
+                                <Badge
+                                    key={idx}
+                                    variant="outline"
+                                    className="text-text-secondary font-normal bg-gray-100"
+                                >
+                                    {habilidad}
+                                </Badge>
+                            ))}
+                        </CardFooter>
+                    </CardContent>
+                </Card>
             </Link>
         </article>
     );
