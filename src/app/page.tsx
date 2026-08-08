@@ -17,14 +17,14 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/",
 });
 
-// 1. Definimos el contenedor que orquesta los tiempos
+// 1. Variantes para el contenedor principal
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Tiempo de espera entre cada hijo
-      delayChildren: 0.1,    // Retraso inicial antes de arrancar
+      staggerChildren: 0.25, // Tiempo de espera entre cada hijo
+      delayChildren: 0.2,    // Retraso inicial antes de arrancar
     },
   },
 }
