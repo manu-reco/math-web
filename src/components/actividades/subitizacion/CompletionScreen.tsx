@@ -31,17 +31,17 @@ export default function CompletionScreen({
         <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
             <div className="text-6xl mb-6">🎉</div>
 
-            <h2 className="text-4xl font-bold mb-4">
+            <h2 className="heading-lg mb-4">
                 ¡Felicidades!
             </h2>
 
-            <p className="text-xl text-text-secondary mb-8">
+            <p className="subtitle-lg text-text-secondary mb-8">
                 Has completado el <strong>{levelName}</strong>
             </p>
 
             <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded mb-8">
                 <p className="text-green-900 text-lg">
-                    ¡Excelente trabajo! Has practicado el reconocimiento visual de cantidades.
+                    ¡Excelente trabajo!
                 </p>
             </div>
 

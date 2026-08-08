@@ -25,7 +25,7 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             >
                 <div className="text-center">
                     <div className={`
-                        text-4xl font-bold mb-3
+                        heading-md mb-3
                         ${isAvailable ? 'text-primary' : 'text-muted-foreground'}
                     `}>
                         Nivel {level.id}
@@ -33,7 +33,7 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
                     <h3 className="font-semibold mb-2">
                         {level.name}
                     </h3>
-                    <p className="text-sm text-text-secondary mb-3">
+                    <p className="body-sm text-text-secondary mb-3">
                         {level.description}
                     </p>
                     {isAvailable && (
@@ -56,9 +56,9 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             {/* Sección Concreto */}
             <section>
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold mb-2">Concreto (Búhos)</h2>
+                    <h2 className="heading-md text-3xl mb-2">Concreto (Búhos)</h2>
 
-                    <p className="text-text-secondary">
+                    <p className="subtitle-md text-text-secondary">
                         Reconoce cantidades con búhos de colores
                     </p>
                 </div>
@@ -70,10 +70,10 @@ export default function LevelSelector({ concreteLevels, abstractLevels, onSelect
             {/* Sección Abstracto */}
             <section>
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold mb-2">
+                    <h2 className="heading-md text-3xl mb-2">
                         Abstracto (Puntos)
                     </h2>
-                    <p className="text-text-secondary">
+                    <p className="subtitle-md text-text-secondary">
                         Reconoce cantidades con representación abstracta
                     </p>
                 </div>

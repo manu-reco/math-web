@@ -1,5 +1,7 @@
 "use client";
 
+import { Highlighter } from "../UnderlinedWords";
+
 export default function ActivityControlsText() {
     const isTouchDevice = typeof window !== "undefined" && (
         ("ontouchstart" in window) ||
@@ -10,14 +12,14 @@ export default function ActivityControlsText() {
     return (
         <>
             <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                Controles
+                <Highlighter>Controles</Highlighter>
             </h3>
             {isTouchDevice ? (
-                <p className="text-text-secondary text-lg">
+                <p className="body-md text-text-secondary">
                     <span className="font-semibold">Toca la pantalla</span> para avanzar
                 </p>
             ) : (
-                <div className="text-text-secondary text-lg space-y-2">
+                <div className="body-md text-text-secondary space-y-2">
                     <p>
                         Pulsa <kbd className="px-3 py-1 bg-gray-100 border border-gray-300 rounded text-sm font-mono mx-1">Espacio</kbd> o <span className="font-semibold">toca la pantalla</span> para avanzar.
                     </p>

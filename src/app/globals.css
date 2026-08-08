@@ -171,6 +171,11 @@
   text-shadow: var(--stroke-shadow, 0 0 0 transparent);
 }
 
+/*
+  Typography scale used across the app.
+  Prefer these semantic utilities in most screens and allow exceptions only in
+  pieces with their own editorial or brand personality.
+*/
 @utility display-xl {
   font-size: 3.75rem;
   line-height: 1.25;
@@ -179,7 +184,7 @@
 }
 
 @utility display-lg {
-  font-size: clamp(3rem, 5vw, 3.75rem);
+  font-size: 3rem;
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.025em;

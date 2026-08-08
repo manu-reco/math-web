@@ -38,12 +38,12 @@ export default function StoryCompletionScreen({
         <div className="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
             <div className="bg-white p-8 md:p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
                 <div className="text-6xl mb-6">🎉</div>
-                <h1 className="text-3xl font-bold mb-2">
+                <h1 className="heading-md font-bold mb-2">
                     {hasNextChapter
                         ? `¡Capítulo ${chapterIndex + 1} completado!`
                         : "¡Cuento completado!"}
                 </h1>
-                <p className="text-text-secondary mb-8">
+                <p className="subtitle-md text-base text-text-secondary mb-8">
                     Has terminado el capítulo {chapterIndex + 1} de {chapterCount}.
                 </p>
 

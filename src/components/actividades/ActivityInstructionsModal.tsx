@@ -77,10 +77,10 @@ export default function ActivityInstructionsModal({
                             </Button>
                             <div className="w-full max-w-4xl max-h-[75vh] overflow-y-auto p-6">
                                 <div className="pr-10">
-                                    <h2 id={titleId} className="text-2xl sm:text-3xl font-bold mb-6">
+                                    <h2 id={titleId} className="heading-md text-3xl mb-6">
                                         {title || "Instrucciones"}
                                     </h2>
-                                    <div className="space-y-6 text-base sm:text-lg">
+                                    <div className="space-y-6 body-md">
                                         {children}
                                     </div>
                                 </div>
