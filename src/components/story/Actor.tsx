@@ -59,7 +59,7 @@ export default function Actor({ actorState, updateActor, viewportScale, subtitle
         : baseScale;
 
     const renderPosition = isSubtitle
-        ? { x: 50, y: 90 }
+        ? { x: 50, y: 85 }
         : currentPosition;
 
     const subtitleDefaults = {

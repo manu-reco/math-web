@@ -57,13 +57,10 @@ export default function StoryPlayer({ story, onComplete, subtitlesEnabled = true
 
         story.actors.forEach(actorDef => {
             if (!initialActors.has(actorDef.id)) {
-                const basePosition = actorDef.type === "subtitle"
-                    ? { x: 50, y: 90 }
-                    : { x: actorDef.x, y: actorDef.y };
                 initialActors.set(actorDef.id, {
                     id: actorDef.id,
                     definition: actorDef,
-                    currentPosition: basePosition,
+                    currentPosition: { x: actorDef.x, y: actorDef.y },
                     visible: false,
                     isDragging: false,
                     isAnimating: false,
