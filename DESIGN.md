@@ -36,57 +36,73 @@ colors:
   level-mid: '#0369a1'
   level-high: '#4338ca'
 typography:
-  display-2xl:
+  display-xl:
     fontFamily: Inter
     fontSize: 60px
-    fontWeight: '700'
-    lineHeight: 72px
+    fontWeight: '800'
+    lineHeight: 75px
     letterSpacing: -0.02em
-  display-xl:
+  display-lg:
     fontFamily: Inter
     fontSize: 48px
     fontWeight: '800'
-    lineHeight: 56px
+    lineHeight: 100%
+    letterSpacing: -0.025em
+  heading-lg:
+    fontFamily: Inter
+    fontSize: 48px
+    fontWeight: '900'
+    lineHeight: 53.33px
     letterSpacing: -0.02em
-  headline-xl:
+  heading-md:
     fontFamily: Inter
     fontSize: 36px
-    fontWeight: '700'
-    lineHeight: 44px
-    letterSpacing: -0.01em
-  headline-lg:
+    fontWeight: '900'
+    lineHeight: 43.2px
+    letterSpacing: -0.025em
+  heading-sm:
     fontFamily: Inter
     fontSize: 24px
     fontWeight: '700'
-    lineHeight: 32px
-    letterSpacing: -0.01em
-  headline-lg-mobile:
+    lineHeight: 30px
+    letterSpacing: -0.031em
+  subtitle-lg:
     fontFamily: Inter
     fontSize: 20px
-    fontWeight: '700'
+    fontWeight: '500'
+    lineHeight: 32px
+  subtitle-md:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: '500'
     lineHeight: 28px
-    letterSpacing: -0.01em
-  body-lg:
+  subtitle-sm:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 24px
+  body-md:
     fontFamily: Inter
     fontSize: 18px
     fontWeight: '400'
-    lineHeight: 32px
-  body-base:
+    lineHeight: 28px
+  body-sm:
     fontFamily: Inter
-    fontSize: 16px
+    fontSize: 14px
     fontWeight: '400'
     lineHeight: 24px
-  body-bold:
+  body-sm-bold:
     fontFamily: Inter
-    fontSize: 16px
+    fontSize: 14px
     fontWeight: '600'
     lineHeight: 24px
   label-caps:
     fontFamily: Inter
-    fontSize: 12px
-    fontWeight: '700'
+    fontSize: 14px
+    fontWeight: '600'
     lineHeight: 16px
-    letterSpacing: 0.05em
+    letterSpacing: 0.2em
+    textTransform: uppercase
 rounded:
   sm: 0.375rem
   md: 0.5rem
@@ -157,12 +173,14 @@ The color strategy employs a deep "Teal Forest" primary to represent stability a
 The system uses a functional "Categorical Palette" for different mathematical branches (e.g., Green for Geometry, Blue for Arithmetic) to aid navigation. Backgrounds are grounded in "Canvas" (#f1f8f6) to reduce eye strain and create a premium, paper-like feel. Accents utilize light tints of the primary and secondary colors (Fixed variants) for background fills in quotes and highlights.
 
 ## Typography
-The system relies exclusively on **Inter** to maintain a clean, systematic feel that balances the organic shapes of the layout. 
+This design system utilizes **Inter** for its clean, systematic forms and exceptional legibility. It maintains a crisp, contemporary look while ensuring the entire interface remains perfectly structured and easy to scan.
 
-- **Display levels** use heavy weights (700-800) and tight letter-spacing to create a strong visual anchor for hero statements.
-- **Body text** is optimized for readability with a generous 1.5x line-height. 
-- **Labels** use uppercase styling with increased letter-spacing (0.05em) to differentiate metadata from instructional content.
-- **Interactive elements** (navigation, buttons) use `body-bold` to ensure clear clickability.
+- **Headlines**: Scale utilities from `display-xl` to `heading-sm` create a predictable hierarchy across heroes, section headings, and card titles to guide the eye quickly to key information, with big sizes and bold weights.
+- **Subtitles**: Utilities from `subtitle-lg` to `subtitle-sm` provide a comfortable bridge between titles and body text, utilizing a medium or regular weight to group information elegantly.
+- **Body**: Balanced line heights are applied to `body-md` and `body-sm` variants to maintain the clean feel, reserving exceptions only for editorial pieces, unique articles, or branded moments.
+- **Labels**: The `label-caps` style can be used for navigation metadata and supporting context, to remain distinct even at small scales without competing with main content.
+- Use these styles across the majority of the site for heroes, section headings, card titles, body copy, metadata and navigation so the hierarchy stays predictable.
+- Keep exceptions only in pieces with their own personality or editorial intent, such as a specific hero treatment, a one-off article composition or a branded callout.
 
 ## Layout & Spacing
 The layout follows a **Fixed-Fluid Hybrid Grid** (max-width: 1280px / 7xl) with a 12-column logic for desktop. 
