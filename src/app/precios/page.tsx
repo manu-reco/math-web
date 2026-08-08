@@ -66,10 +66,10 @@ export default function PricingPage() {
         <div className="bg-gray-50 py-20 text-text">
             <div className="container-custom">
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl font-bold mb-4">
+                    <h1 className="heading-lg mb-4">
                         Planes de Precios
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="subtitle-lg text-text-secondary max-w-2xl mx-auto">
                         Elige el plan que mejor se adapte a tus necesidades educativas. Sin permanencia, cancela cuando quieras.
                     </p>
                 </div>
@@ -82,26 +82,26 @@ export default function PricingPage() {
                                 } flex flex-col`}
                         >
                             {plan.popular && (
-                                <div className="bg-secondary text-center py-2 text-sm font-bold uppercase tracking-wide">
+                                <div className="bg-secondary text-center py-2 label-caps text-secondary-foreground">
                                     Más Popular
                                 </div>
                             )}
                             <div className="p-8 grow">
-                                <h3 className="text-2xl font-bold mb-2">
+                                <h3 className="heading-sm mb-2">
                                     {plan.name}
                                 </h3>
-                                <p className="mb-6">{plan.description}</p>
+                                <p className="mb-6 subtitle-sm">{plan.description}</p>
                                 <div className="flex items-baseline mb-8">
-                                    <span className="text-4xl font-extrabold">
+                                    <span className="heading-md font-extrabold">
                                         {plan.price}
                                     </span>
-                                    <span className="ml-1">{plan.period}</span>
+                                    <span className="ml-1 body-md">{plan.period}</span>
                                 </div>
-                                <ul className="space-y-4 mb-8">
+                                <ul className="space-y-4 mb-8 body-sm">
                                     {plan.features.map((feature) => (
                                         <li key={feature} className="flex items-start">
                                             <Check className="h-5 w-5 text-green-500 mr-2 shrink-0" />
-                                            <span className="text-gray-600 text-sm">{feature}</span>
+                                            <span className="text-gray-600">{feature}</span>
                                         </li>
                                     ))}
                                 </ul>

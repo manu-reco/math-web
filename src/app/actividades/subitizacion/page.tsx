@@ -169,9 +169,9 @@ export default function SubitizacionPage() {
                 <div className="container-custom py-6">
                     {gameState === 'levelSelect' ? (
                         <Button asChild variant="link" width="fit" className="p-0">
-                        <Link href="/actividades">
-                            ← Volver a Actividades
-                        </Link>
+                            <Link href="/actividades">
+                                ← Volver a Actividades
+                            </Link>
                         </Button>
                     ) : (
                         <Button

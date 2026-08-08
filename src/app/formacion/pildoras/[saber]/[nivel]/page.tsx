@@ -2,11 +2,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-    ArrowLeft,
-    BookOpen,
-    ChevronRight
-} from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SABERES, NIVELES, getVisibleTrackData } from "@/data/pildorasData";
 import { clsx } from "clsx";
 import { getCanonicalUrl } from "@/lib/siteUrl";
@@ -88,13 +85,12 @@ export default async function SaberPage({ params }: PageProps) {
             {/* Toma el color del saber para usarlo como fondo, con un matiz más claro y sin cambiar el color del texto */}
             <div className={clsx("w-full py-8 md:py-12 px-6 sm:px-8 lg:px-12 shadow-sm", saber.color.replace("100", "50").replace(/text-[^\s]+/g, ""))}>
                 <div className="max-w-5xl mx-auto">
-                    <Link
-                        href="/formacion/pildoras"
-                        className="inline-flex items-center text-text-secondary hover:text-text mb-6 transition-colors"
-                    >
-                        <ArrowLeft size={20} className="mr-2" />
-                        Volver a la selección
-                    </Link>
+                    <Button asChild variant="link" width="fit" className="text-text-secondary p-0 mb-6">
+                        <Link href="/formacion/pildoras">
+                            <ArrowLeft size={20} className="mr-2" />
+                            Volver a la selección
+                        </Link>
+                    </Button>
 
                     <div className="flex items-start md:items-center gap-6 flex-col md:flex-row">
                         <div className={clsx("p-4 rounded-2xl bg-white shadow-sm text-primary", saber.color)}>
@@ -108,10 +104,10 @@ export default async function SaberPage({ params }: PageProps) {
                                 <span className="text-gray-400">•</span>
                                 <span className="text-text-secondary text-sm">{visibleChapters ? `${visibleChapters.length} Capítulos` : "Próximamente"}</span>
                             </div>
-                            <h1 className="text-4xl font-extrabold text-text mb-2">
+                            <h1 className="heading-md mb-2">
                                 {saber.title}
                             </h1>
-                            <p className="text-lg text-text-secondary max-w-2xl">
+                            <p className="subtitle-lg text-text-secondary max-w-2xl">
                                 {saber.description}
                             </p>
                         </div>
@@ -143,8 +139,8 @@ export default async function SaberPage({ params }: PageProps) {
                         {visibleChapters.map((chapter, index) => (
                             <div key={chapter.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="p-4 md:p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
-                                    <h2 className="text-xl font-bold text-text flex items-center gap-3">
-                                        <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold">
+                                    <h2 className="heading-sm flex items-center gap-3">
+                                        <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-base font-bold">
                                             {index + 1}
                                         </span>
                                         {chapter.title.replace(/^\d+\.\s*/, '')} {/* Remove number prefix if present in title */}
@@ -159,10 +155,10 @@ export default async function SaberPage({ params }: PageProps) {
                                         >
                                             <div className="flex justify-between items-center gap-3">
                                                 <div className="flex-1">
-                                                    <h3 className="text-base md:text-lg font-semibold text-text group-hover:text-primary transition-colors mb-1">
+                                                    <h3 className="body-md font-semibold text-text group-hover:text-primary transition-colors mb-1">
                                                         {article.title}
                                                     </h3>
-                                                    <p className="text-text-secondary text-sm">
+                                                    <p className="subtitle-sm text-text-secondary leading-relaxed">
                                                         {article.subtitle}
                                                     </p>
                                                 </div>

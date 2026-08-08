@@ -15,10 +15,10 @@ export default function ContactPage() {
         <div className="bg-gray-50 py-20">
             <div className="container-custom">
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl font-bold mb-4">
+                    <h1 className="heading-lg mb-4">
                         Contacta con Nosotros
                     </h1>
-                    <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                    <p className="subtitle-lg text-text-secondary max-w-2xl mx-auto">
                         ¿Tienes dudas sobre nuestros cursos? ¿Quieres colaborar? Estamos aquí para ayudarte.
                     </p>
                 </div>
@@ -26,7 +26,7 @@ export default function ContactPage() {
                 <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {/* Contact Info */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full">
-                        <h2 className="text-2xl font-bold mb-8">
+                        <h2 className="heading-sm font-bold mb-8">
                             Información de Contacto
                         </h2>
                         <div className="space-y-8">
@@ -85,7 +85,7 @@ export default function ContactPage() {
 
                     {/* Contact Form */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                        <h2 className="text-2xl font-bold mb-8">
+                        <h2 className="heading-sm font-bold mb-8">
                             Envíanos un mensaje
                         </h2>
                         <form className="space-y-6">

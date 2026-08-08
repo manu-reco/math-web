@@ -25,10 +25,10 @@ export default function ActividadesPage() {
                             </Link>
                         </Button>
                     </nav>                    
-                    <h1 className="text-5xl font-bold mb-4">
+                    <h1 className="heading-lg mb-4">
                         Actividades Educativas
                     </h1>
-                    <p className="text-xl text-text-secondary max-w-3xl">
+                    <p className="subtitle-lg max-w-3xl">
                         Aprende matemáticas de forma divertida e interactiva con nuestras actividades interactivas.
                     </p>
                 </div>

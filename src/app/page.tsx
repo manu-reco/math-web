@@ -60,8 +60,8 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, iconClassName, title, description }: FeatureCardProps) {
   return (
-    <motion.div variants={itemVariants}>
-      <Card className="text-center">
+    <motion.div className="h-full" variants={itemVariants}>
+      <Card className="h-full text-center">
         <CardHeader>
           <div className={cn(
             "mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full",
@@ -69,7 +69,7 @@ function FeatureCard({ icon, iconClassName, title, description }: FeatureCardPro
           )}>
             {icon}
           </div>
-          <CardTitle>
+          <CardTitle className="text-xl">
             {title}
           </CardTitle>
           <CardDescription className="mt-2">
@@ -96,7 +96,7 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
 
   return (
     <motion.div className="h-full" variants={itemVariants}>
-      <Card className="h-full flex flex-col justify-between shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Card className="h-full flex flex-col shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-lg">
         <CardHeader>
           <div
             className={cn(

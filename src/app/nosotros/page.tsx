@@ -15,8 +15,8 @@ export default function AboutPage() {
             {/* Hero Section */}
             <section className="bg-linear-to-r from-primary to-primary-hover text-white py-20">
                 <div className="container-custom text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Sobre Nosotros</h1>
-                    <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+                    <h1 className="heading-lg mb-6">Sobre Nosotros</h1>
+                    <p className="subtitle-lg text-blue-100 max-w-2xl mx-auto">
                         Somos un equipo apasionado por transformar la enseñanza de las matemáticas en España.
                     </p>
                 </div>
@@ -27,28 +27,28 @@ export default function AboutPage() {
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-3xl font-bold mb-6">
+                            <h2 className="heading-md font-bold mb-6">
                                 Nuestra Misión
                             </h2>
-                            <p className="text-text-secondary text-lg mb-6 leading-relaxed">
+                            <p className="text-text-secondary body-md mb-6 leading-relaxed">
                                 Creemos que las matemáticas no tienen por qué ser aburridas o difíciles. Nuestro objetivo es empoderar a los profesores de Educación Infantil y Primaria con las herramientas, la formación y la confianza necesarias para inspirar a sus alumnos.
                             </p>
-                            <p className="text-text-secondary text-lg leading-relaxed">
+                            <p className="text-text-secondary body-md leading-relaxed">
                                 Combinamos metodologías innovadoras con recursos prácticos que se pueden aplicar directamente en el aula, fomentando el pensamiento lógico y la resolución de problemas desde una edad temprana.
                             </p>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-blue-50 p-6 rounded-xl text-center">
+                        <div className="grid grid-cols-2 gap-4 font-bold">
+                            <div className="bg-primary/10 p-6 rounded-xl text-center">
                                 <Target className="w-10 h-10 text-primary mx-auto mb-4" />
-                                <h3 className="font-bold">Innovación</h3>
+                                <h3>Innovación</h3>
                             </div>
-                            <div className="bg-orange-50 p-6 rounded-xl text-center">
+                            <div className="bg-secondary/10 p-6 rounded-xl text-center">
                                 <Heart className="w-10 h-10 text-secondary mx-auto mb-4" />
-                                <h3 className="font-bold">Pasión</h3>
+                                <h3>Pasión</h3>
                             </div>
-                            <div className="bg-teal-50 p-6 rounded-xl text-center col-span-2">
-                                <Users className="w-10 h-10 text-teal-600 mx-auto mb-4" />
-                                <h3 className="font-bold">Comunidad</h3>
+                            <div className="bg-tertiary/10 p-6 rounded-xl text-center col-span-2">
+                                <Users className="w-10 h-10 text-tertiary mx-auto mb-4" />
+                                <h3>Comunidad</h3>
                             </div>
                         </div>
                     </div>
@@ -65,9 +65,9 @@ export default function AboutPage() {
                         {[1, 2, 3].map((i) => (
                             <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
                                 <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-                                <h3 className="text-xl font-bold">Miembro del Equipo</h3>
-                                <p className="text-primary font-medium mb-2">Cargo / Especialidad</p>
-                                <p className="text-text-secondary text-sm">
+                                <h3 className="heading-sm text-xl">Miembro del Equipo</h3>
+                                <p className="subtitle-sm text-primary font-medium mb-2">Cargo / Especialidad</p>
+                                <p className="body-sm text-text-secondary">
                                     Breve descripción de la experiencia y pasión por las matemáticas.
                                 </p>
                             </div>

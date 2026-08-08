@@ -40,7 +40,7 @@ export default function GameCard({ game }: GameCardProps) {
                         />
                         {!isAvailable && (
                             <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center" role="status">
-                                <span className="text-white text-2xl font-bold">
+                                <span className="heading-sm text-white">
                                     Próximamente
                                 </span>
                             </div>
@@ -57,7 +57,7 @@ export default function GameCard({ game }: GameCardProps) {
                             </Badge>
                         </div>
 
-                        <CardTitle className="text-2xl font-bold text-text transition-colors group-hover:text-primary">
+                        <CardTitle className="text-2xl transition-colors group-hover:text-primary">
                             {game.title}
                         </CardTitle>
                     </CardHeader>

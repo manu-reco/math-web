@@ -67,8 +67,8 @@ export default function PildorasPageClient() {
 
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl font-extrabold mb-4">Píldoras de Formación</h1>
-                    <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                    <h1 className="heading-lg mb-4">Píldoras de Formación</h1>
+                    <p className="subtitle-lg text-text-secondary max-w-2xl mx-auto">
                         Pequeñas dosis de conocimiento para grandes maestros. Personaliza tu ruta de aprendizaje eligiendo el área y el nivel.
                     </p>
                 </div>

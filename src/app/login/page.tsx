@@ -25,10 +25,10 @@ export default function LoginPage() {
         <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
                 <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-extrabold">
+                    <h2 className="mt-6 heading-md">
                         Iniciar Sesión
                     </h2>
-                    <p className="mt-2 text-sm text-text-secondary">
+                    <p className="mt-2 body-md text-text-secondary">
                         ¿No tienes cuenta?{" "}
                         <Link
                             href="/register"
@@ -110,7 +110,6 @@ export default function LoginPage() {
                         <Button
                             type="submit"
                             variant="primary"
-                            size="sm"
                             width="full"
                             className="relative">
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
