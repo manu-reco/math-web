@@ -50,7 +50,7 @@ export default function NotFound() {
                         </div>
 
                         <div className="w-full max-w-md rounded-2xl border border-primary/15 bg-white p-4 shadow-lg shadow-primary/5">
-                            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">
+                            <p className="mb-3 label-caps text-text-secondary">
                                 Navegación rápida
                             </p>
                             <nav aria-label="Secciones principales" className="grid grid-cols-1 gap-2 sm:grid-cols-2">

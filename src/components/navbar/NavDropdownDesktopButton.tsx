@@ -16,7 +16,7 @@ export default function NavDropdownDesktopButton({
     return (
         <button
             type="button"
-            className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium flex items-center gap-1 box-border border-2 border-transparent rounded-md hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
+            className="body-sm-bold text-gray-700 hover:text-primary px-3 py-2 flex items-center gap-1 box-border border-2 border-transparent rounded-md hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
             onClick={onClick}
             aria-expanded={isOpen}
             aria-controls={controlsId}

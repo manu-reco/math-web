@@ -51,15 +51,15 @@ interface ArticleHeaderProps {
 export function ArticleHeader({ title, subtitle, description }: ArticleHeaderProps) {
     return (
         <header className="mb-12 border-b border-gray-100 pb-8">
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+            <h1 className="heading-lg mb-4 text-text">
                 {title}
             </h1>
             {subtitle && (
-                <h2 className="text-xl text-text-secondary font-medium mb-6">
+                <h2 className="subtitle-lg mb-6 text-text-secondary">
                     {subtitle}
                 </h2>
             )}
-            <p className="text-lg text-text-secondary text-justify leading-relaxed max-w-3xl">
+            <p className="body-md max-w-3xl text-justify text-text-secondary">
                 {description}
             </p>
         </header>
@@ -77,7 +77,7 @@ export function Breadcrumbs({ saberId, nivelId, saberTitle, nivelTitle }: Breadc
     const temarioHref = `/formacion/pildoras/${saberId}/${nivelId}`;
 
     return (
-        <nav className="font-bold text-primary mb-4 tracking-wider hover:text-primary/80 transition-colors">
+        <nav className="body-sm-bold mb-4 text-primary hover:text-primary/80 transition-colors">
             <Button asChild variant="link" size="lg" width="fit" className="p-0">
                 <Link
                     href={temarioHref}
@@ -137,10 +137,10 @@ export function PrevNextArticleArrows({ prevHref, nextHref }: PrevNextArticleArr
 export function ArticleSection({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <section className="mb-12">
-            <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+            <h3 className="heading-sm text-primary mb-6 flex items-center gap-3">
                 <Highlighter>{title}</Highlighter>
             </h3>
-            <div className="text-lg leading-relaxed space-y-6 text-justify">
+            <div className="body-md space-y-6 text-justify">
                 {children}
             </div>
         </section>
@@ -190,10 +190,10 @@ export function ActivityBox({ title, children }: { title?: string; children: Rea
                     <Pencil size={24} />
                 </div>
                 <div>
-                    <h4 className="text-xl font-bold mb-3">
+                    <h4 className="heading-sm mb-3 text-text">
                         {title || "Actividad Propuesta"}
                     </h4>
-                    <div className="text-text-secondary space-y-4">
+                    <div className="body-md space-y-4 text-text-secondary">
                         {children}
                     </div>
                 </div>
@@ -206,7 +206,7 @@ export function TipBox({ children }: { children: React.ReactNode }) {
     return (
         <div className="my-8 bg-amber-50 border border-amber-100 rounded-xl p-6 flex gap-4">
             <Lightbulb className="text-secondary shrink-0" size={24} />
-            <div className="italic">
+            <div className="body-md italic">
                 {children}
             </div>
         </div>
@@ -216,7 +216,7 @@ export function TipBox({ children }: { children: React.ReactNode }) {
 export function InfoBox({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <div className="my-8 bg-blue-50 rounded-xl p-6 md:p-8">
-            <h4 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+            <h4 className="subtitle-md font-bold mb-3 flex items-center gap-2 text-blue-900">
                 <Info size={20} />
                 {title}
             </h4>
@@ -233,7 +233,7 @@ export function KeyPoints({ points }: { points: (string | React.ReactNode)[] }) 
             {points.map((point, i) => (
                 <li key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
-                    <span className="text-text/85">{point}</span>
+                    <span className="body-md text-text/85">{point}</span>
                 </li>
             ))}
         </ul>
@@ -272,7 +272,7 @@ export function DialogTeacherBubble({ color = 'orange', children }: DialogBubble
                 <GraduationCap size={20} />
             </div>
             <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tl-sm px-5 py-4 shadow-sm border border-opacity-20`}>
-                <span className="flex gap-1.5">{"—"}{children}</span>
+                <span className="body-md flex gap-1.5">{"—"}{children}</span>
             </div>
         </div>
     );
@@ -292,7 +292,7 @@ export function DialogStudentBubble({ color = 'primary', children }: DialogBubbl
                 <User size={20} />
             </div>
             <div className={`max-w-[90%] md:max-w-[85%] ${colors.bg} ${colors.text} rounded-2xl rounded-tr-sm px-5 py-4 shadow-sm border border-opacity-20`}>
-                <span className="flex gap-1.5">{"—"}{children}</span>
+                <span className="body-md flex gap-1.5">{"—"}{children}</span>
             </div>
         </div>
     );
@@ -374,7 +374,7 @@ export function ConceptPopover({
 
     if (!concept) {
         console.warn(`Concepto "${conceptId}" no encontrado en concepts.json`);
-        return <span className='font-semibold'>{conceptId}</span>;
+        return <span className='body-sm-bold'>{conceptId}</span>;
     }
 
     return (

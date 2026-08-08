@@ -52,10 +52,10 @@ export default function ArticleSidebarNav({
     }, [isDrawerOpen]);
 
     const renderNav = () => (
-        <nav aria-label="Temario de artículos" className="space-y-6 text-md">
+        <nav aria-label="Temario de artículos" className="space-y-6 body-md">
             {chapters.map((chapter) => (
                 <section key={chapter.id} className="space-y-2">
-                    <h3 className="text-lg font-semibold text-text-primary">
+                    <h3 className="text-lg font-bold text-text-primary">
                         {chapter.title}
                     </h3>
                     <ul className="space-y-1">
@@ -68,8 +68,8 @@ export default function ArticleSidebarNav({
                                         href={`/formacion/pildoras/${saberId}/${nivelId}/${article.id}`}
                                         onClick={() => setIsDrawerOpen(false)}
                                         className={`block rounded-md px-3 py-2 transition-colors ${isActive
-                                            ? "bg-primary/10 text-primary font-medium"
-                                            : "text-text-secondary hover:bg-gray-50 hover:text-text-primary"
+                                            ? "bg-primary/10 text-primary body-sm-bold"
+                                            : "body-sm text-text-secondary hover:bg-gray-50 hover:text-text"
                                             }`}
                                         aria-current={isActive ? "page" : undefined}
                                     >
@@ -119,7 +119,7 @@ export default function ArticleSidebarNav({
                                 <Button asChild variant="link" size="sm" className="p-0 text-text">
                                     <Link
                                         href={`/formacion/pildoras/${saberId}/${nivelId}`}
-                                        className="inline-flex items-center text-text-secondary hover:text-primary transition-colors font-medium"
+                                        className="inline-flex items-center body-sm-bold text-text-secondary hover:text-primary transition-colors"
                                     >
                                         <ChevronLeft size={20} />
                                         Volver al temario
@@ -148,7 +148,7 @@ export default function ArticleSidebarNav({
                     </Link>
                 </Button>
 
-                <div className="min-h-0 text-md flex-1 overflow-y-auto pr-1">
+                <div className="min-h-0 body-md flex-1 overflow-y-auto pr-1">
                     {renderNav()}
                 </div>
             </aside>

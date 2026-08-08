@@ -58,7 +58,7 @@ function CardOverline({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="card-overline"
       className={cn(
-        "text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary",
+        "label-caps text-text-secondary",
         className
       )}
       {...props}
@@ -76,7 +76,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("text-text text-xl font-bold leading-none tracking-tight", className)}
+      className={cn("heading-sm text-xl text-text", className)}
       {...props}
     />
   )
@@ -92,7 +92,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-sm leading-relaxed text-text-secondary", className)}
+      className={cn("body-sm text-text-secondary", className)}
       {...props}
     />
   )

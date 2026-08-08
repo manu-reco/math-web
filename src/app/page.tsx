@@ -72,7 +72,7 @@ function FeatureCard({ icon, iconClassName, title, description }: FeatureCardPro
           <CardTitle>
             {title}
           </CardTitle>
-          <CardDescription className="leading-7 mt-2">
+          <CardDescription className="mt-2">
             {description}
           </CardDescription>
         </CardHeader>
@@ -106,13 +106,13 @@ function CourseCard({ icon, title, description, buttonText, buttonIcon, href, va
           >
             {icon}
           </div>
-          <CardTitle className="text-2xl">
+          <CardTitle className="heading-md">
             {title}
           </CardTitle>
         </CardHeader>
 
         <CardContent>
-          <p className="leading-relaxed text-text-secondary">
+          <p className="subtitle-sm text-text-secondary">
             {description}
           </p>
         </CardContent>
@@ -156,10 +156,10 @@ export default function Home() {
               variants={itemVariants}
 
             >
-              <h1 className="text-[60px] font-bold tracking-[-0.02em] leading-tight text-primary">
+              <h1 className="display-xl text-primary">
                 Matemáticas con <DoubleUnderline colorClass="text-secondary"><span className="text-secondary">sentido</span></DoubleUnderline>, razonamiento y emoción
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
+              <p className="max-w-2xl subtitle-lg text-text-secondary font-normal leading-8">
                 Descubre recursos y metodologías basadas en la evidencia científica para familias y docentes. Vuelve a disfrutar enseñando y consigue que tus estudiantes razonen y usen las matemáticas para su vida diaria.
               </p>
             </motion.div>
@@ -245,31 +245,31 @@ export default function Home() {
               className="space-y-4"
               variants={itemVariants}
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-text-secondary">
+              <p className="label-caps text-text-secondary">
                 Qué encontrarás
               </p>
-              <h2 className="text-3xl font-black tracking-tight text-text sm:text-4xl">
+              <h2 className="heading-md text-text">
                 Una ruta clara para enseñar matemáticas con más confianza.
               </h2>
-              <div className="max-w-2xl space-y-2 text-base leading-7 text-text-secondary sm:text-lg">
+              <div className="max-w-2xl space-y-2 body-md text-text-secondary">
                 <p>Encontrarás artículos, actividades, recursos descargables y formación para cada etapa educativa, siguiendo una secuenciación coherente en cada ámbito matemático.</p>
                 <p>Te ayudamos a llegar a lo que quieres que tu alumnado aprenda, con sentido.</p>
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="p-4">
-                  <div className="flex items-center gap-3 text-sm font-semibold text-text">
+                  <div className="flex items-center gap-3 body-sm-bold text-text">
                     <CheckCircle size={18} className="text-primary" aria-hidden="true" />
                     Recursos descargables y digitales
                   </div>
-                  <p className="mt-2 text-sm text-text-secondary">Material listo para usar en el aula o en casa.</p>
+                  <p className="mt-2 body-sm text-text-secondary">Material listo para usar en el aula o en casa.</p>
                 </div>
                 <div className="p-4">
-                  <div className="flex items-center gap-3 text-sm font-semibold text-text">
+                  <div className="flex items-center gap-3 body-sm-bold text-text">
                     <Users size={18} className="text-tertiary" aria-hidden="true" />
                     Comunidad docente
                   </div>
-                  <p className="mt-2 text-sm text-text-secondary">Acompañamiento y experiencias compartidas.</p>
+                  <p className="mt-2 body-sm text-text-secondary">Acompañamiento y experiencias compartidas.</p>
                 </div>
               </div>
             </motion.div>
@@ -281,11 +281,11 @@ export default function Home() {
                     Empieza aquí
                   </CardOverline>
                   <CardTitle>
-                    <h3 className="text-2xl text-primary-foreground">
+                    <h3 className="heading-sm text-primary-foreground">
                       Explora nuestros artículos y actividades
                     </h3>
                   </CardTitle>
-                  <CardDescription className="leading-7 text-primary-foreground/90">
+                  <CardDescription className="body-md text-primary-foreground/90">
                     Un vistazo rápido a nuestra secuenciación de contenidos, con artículos, actividades y recursos descargables para tu aula.
                   </CardDescription>
                 </CardHeader>
@@ -310,7 +310,7 @@ export default function Home() {
           {...sectionAnimationProps}
         >
           <motion.div className="text-center mb-12" variants={itemVariants}>
-            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-text md:text-4xl">
+            <h2 className="mb-4 heading-md text-text">
               Nuestra Formación
             </h2>
           </motion.div>
@@ -347,10 +347,10 @@ export default function Home() {
           {...sectionAnimationProps}
         >
           <div className="lg:col-span-12 mt-2xl" >
-            <motion.h2 className="mb-6 text-3xl text-center font-extrabold tracking-tight text-text md:text-4xl" variants={itemVariants}>
+            <motion.h2 className="mb-6 heading-md text-center text-text" variants={itemVariants}>
               Actividades interactivas
             </motion.h2>
-            <motion.p className="text-center text-lg text-text-secondary mb-12" variants={itemVariants}>
+            <motion.p className="body-md text-center text-text-secondary mb-12" variants={itemVariants}>
               Explora algunas de nuestras actividades interactivas para trabajar matemáticas en Infantil y Primaria de forma divertida y guiada, con fundamento pedagógico.
             </motion.p>
 
@@ -374,10 +374,10 @@ export default function Home() {
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10">
             <div className="md:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="heading-md mb-6 text-primary-foreground">
                 ¿Listo para transformar tus clases?
               </h2>
-              <p className="text-gray-400 text-lg mb-8">
+              <p className="subtitle-lg mb-8 text-gray-400">
                 Únete a más de 1000 profesores que ya están mejorando la enseñanza de las matemáticas en España.
               </p>
               <ul className="space-y-4 mb-8">
@@ -398,11 +398,11 @@ export default function Home() {
             <Card className="md:w-1/3 bg-gray-800 border-gray-700">
               <CardHeader>
                 <CardTitle className="text-primary-foreground">
-                  <h3 className="text-2xl">Empieza hoy mismo</h3>
+                  <h3 className="heading-sm">Empieza hoy mismo</h3>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-gray-400">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
+                <p className="body-md text-gray-400">Crea tu cuenta gratuita y accede a las primeras lecciones.</p>
                 <Button asChild variant="secondary" size="lg" width="full">
                   <Link
                     href="/register"
@@ -410,7 +410,7 @@ export default function Home() {
                     Registrarme Gratis
                   </Link>
                 </Button>
-                <p className="text-xs text-center text-gray-500">
+                <p className="body-sm text-center text-gray-500">
                   No se requiere tarjeta de crédito.
                 </p>
               </CardContent>

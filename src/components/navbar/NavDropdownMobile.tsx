@@ -42,7 +42,7 @@ export default function NavDropdownMobile({
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50"
+                                className="block px-3 py-2 rounded-md body-sm-bold text-gray-600 hover:text-primary hover:bg-gray-50"
                                 onClick={onItemClick}
                             >
                                 {item.label}

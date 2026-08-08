@@ -86,7 +86,7 @@ export default function Navbar() {
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
                     <div className="shrink-0 flex items-center">
-                        <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
+                        <Link href="/" className="flex items-center gap-2 heading-sm text-primary">
                             <Image
                                 src="/logo-buho-circulo-color.svg"
                                 alt="MathEdu Logo"
@@ -112,7 +112,7 @@ export default function Navbar() {
                         {/* Actividades */}
                         <Link
                             href="/actividades"
-                            className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium box-border border-2 border-transparent rounded-md hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
+                            className="body-sm-bold text-gray-700 hover:text-primary px-3 py-2 box-border border-2 border-transparent rounded-md hover:border-primary focus:outline-none transition-all ease-in-out duration-100"
                         >
                             Actividades
                         </Link>
@@ -175,7 +175,7 @@ export default function Navbar() {
 
                             <Link
                                 href="/actividades"
-                                className="block text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
+                                className="block body-sm-bold text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-md"
                                 onClick={() => {
                                     closeAll();
                                 }}

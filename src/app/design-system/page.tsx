@@ -19,13 +19,13 @@ export default function DesignSystemPage() {
         <div className="min-h-screen bg-background p-8 md:p-16">
             {/* Cabecera del Sistema de Diseño */}
             <header className="mb-12 border-b border-border pb-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-secondary">
+                <p className="label-caps text-secondary">
                     Entorno de Desarrollo
                 </p>
-                <h1 className="mt-2 text-4xl font-black tracking-tight text-text">
+                <h1 className="mt-2 heading-lg text-text">
                     Guía de Componentes & Estilos
                 </h1>
-                <p className="mt-2 text-text-secondary">
+                <p className="mt-2 body-md text-text-secondary">
                     Espacio reservado para visualizar, testear y asegurar la consistencia visual de los componentes de la plataforma.
                 </p>
             </header>
@@ -34,7 +34,7 @@ export default function DesignSystemPage() {
                 {/* ================= SECCIÓN: CARDS ================= */}
                 <section className="space-y-6">
                     <Highlighter colorClass="text-secondary">
-                        <h2 className="text-2xl font-bold text-text">Componente: Card y subcomponentes</h2>
+                        <h2 className="heading-md text-text">Componente: Card y subcomponentes</h2>
                     </Highlighter>
 
                     {/* Grid de Pruebas de Composición */}
@@ -42,7 +42,7 @@ export default function DesignSystemPage() {
 
                         {/* 1. Card de Ventaja / Feature */}
                         <div className="space-y-2">
-                            <span className="text-xs text-text-secondary font-mono">
+                            <span className="body-sm text-text-secondary font-mono">
                                 Caso 1: Composición Básica (Feature) <br />
                                 Subcomponentes: CardHeader (con icono, CardTitle y CardDescription)
                             </span>
@@ -55,7 +55,7 @@ export default function DesignSystemPage() {
                                         Evidencia Científica
                                     </CardTitle>
                                     {/* Movido aquí: CardDescription ahora pertenece al Header */}
-                                    <CardDescription className="leading-7 mt-2">
+                                    <CardDescription className="subtitle-md mt-2">
                                         Metodología basada en los últimos avances de la didáctica matemática. Pensada para razonar y no solo memorizar.
                                     </CardDescription>
                                 </CardHeader>
@@ -64,7 +64,7 @@ export default function DesignSystemPage() {
 
                         {/* 2. Card de Curso (Estructura Avanzada Horizontal con Imagen a Sangre) */}
                         <div className="space-y-2 lg:col-span-2">
-                            <span className="text-xs text-text-secondary font-mono">
+                            <span className="body-sm text-text-secondary font-mono">
                                 Caso 2: Tarjeta de Curso (Estructura Avanzada) <br />
                                 Subcomponentes: CardHeader (con CardAction, CardTitle y CardDescription), CardContent y CardFooter (con acciones)
                             </span>
@@ -79,10 +79,10 @@ export default function DesignSystemPage() {
                                         <CardAction>
                                             <Badge variant="secondary">Nuevo</Badge>
                                         </CardAction>
-                                        <div className="text-xs font-bold uppercase tracking-wider text-secondary">Online • Infantil y Primaria</div>
-                                        <CardTitle className="text-2xl">Didáctica del Sentido Numérico</CardTitle>
+                                        <div className="label-caps text-secondary">Online • Infantil y Primaria</div>
+                                        <CardTitle>Didáctica del Sentido Numérico</CardTitle>
                                         {/* Movido aquí: Ahora el Header tiene su estructura semántica completa */}
-                                        <CardDescription className="mt-1">
+                                        <CardDescription className="body-md mt-1">
                                             Aprende a secuenciar correctamente los contenidos de conteo y las primeras operaciones utilizando materiales manipulativos estructurales.
                                         </CardDescription>
                                     </CardHeader>
@@ -96,7 +96,7 @@ export default function DesignSystemPage() {
                                     </CardContent>
 
                                     <CardFooter className="justify-between gap-4">
-                                        <span className="text-xl font-black text-text">149€</span>
+                                        <span className="heading-sm text-text">149€</span>
                                         <Button asChild variant="primary" size="sm">
                                             <Link href="/formacion/online">
                                                 Más detalles <ArrowRight size={14} />
@@ -113,13 +113,13 @@ export default function DesignSystemPage() {
                 {/* ================= SECCIÓN: BOTONES ================= */}
                 <section className="space-y-6">
                     <Highlighter colorClass="text-primary">
-                        <h2 className="text-2xl font-bold text-text">Componente: Button</h2>
+                        <h2 className="heading-md text-text">Componente: Button</h2>
                     </Highlighter>
 
 
                     {/* Bloque 1: Variantes Estándar */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                        <h3 className="label-caps text-text-secondary">
                             1. Variantes de Estilo (Tamaño MD por defecto)
                         </h3>
                         <div className="flex flex-wrap gap-4 items-center">
@@ -163,7 +163,7 @@ export default function DesignSystemPage() {
 
                     {/* Bloque 2: Tamaños */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                        <h3 className="label-caps text-text-secondary">
                             2. Escala de Tamaños
                         </h3>
                         <div className="flex flex-wrap gap-6 items-end">
@@ -192,7 +192,7 @@ export default function DesignSystemPage() {
 
                     {/* Bloque 3: Ancho */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                        <h3 className="label-caps text-text-secondary">
                             3. Ancho (width)
                         </h3>
                         <div className="flex flex-wrap gap-6 items-end">
@@ -219,7 +219,7 @@ export default function DesignSystemPage() {
 
                     {/* Bloque 4: Estados y Polimorfismo Semántico */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                        <h3 className="label-caps text-text-secondary">
                             4. Estados Especiales y Enlaces Nativos
                         </h3>
                         <div className="flex flex-wrap gap-6 items-center">
@@ -259,7 +259,7 @@ export default function DesignSystemPage() {
 
                     {/* Bloque 5: Animación activada/desactivada */}
                     <div className="rounded-2xl border border-border bg-card p-6 md:p-8 space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary">
+                        <h3 className="label-caps text-text-secondary">
                             5. Animación activada/desactivada
                         </h3>
                         <div className="flex flex-wrap gap-6 items-center">
